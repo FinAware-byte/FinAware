@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: finaware-config
+  namespace: finaware
+data:
+  OPENAI_MODEL: "gpt-4.1-mini"
+  PROVIDER_WHATSAPP_NUMBER: "27670298265"
+  SUPPORT_PHONE: "+27 11 555 0142"
+  SUPPORT_EMAIL: "support@finaware.demo"
+  SESSION_COOKIE_NAME: "finaware_session"
+  SESSION_COOKIE_SECURE: "false"
+  AUTH_SERVICE_URL: "http://finaware-auth:4101"
+  DASHBOARD_SERVICE_URL: "http://finaware-dashboard:4102"
+  IDENTITY_SERVICE_URL: "http://finaware-identity:4103"
+  DEBTS_SERVICE_URL: "http://finaware-debts:4104"
+  REHAB_SERVICE_URL: "http://finaware-rehab:4105"
+  HELP_SERVICE_URL: "http://finaware-help:4106"
+  PDF_SERVICE_URL: "http://finaware-pdf:4107"
+  AUTH_SERVICE_PORT: "4101"
+  DASHBOARD_SERVICE_PORT: "4102"
+  IDENTITY_SERVICE_PORT: "4103"
+  DEBTS_SERVICE_PORT: "4104"
+  REHAB_SERVICE_PORT: "4105"
+  HELP_SERVICE_PORT: "4106"
+  PDF_SERVICE_PORT: "4107"

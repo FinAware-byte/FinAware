@@ -1,0 +1,186 @@
+services:
+  db-init:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: sh -c "npx prisma db push"
+    env_file:
+      - .env
+    environment:
+      NODE_ENV: production
+      DATABASE_URL: file:./prisma/dev.db
+    volumes:
+      - sqlite_data:/app/prisma
+    restart: "no"
+
+  auth:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: npm run service:auth
+    env_file:
+      - .env
+    environment:
+      NODE_ENV: production
+      DATABASE_URL: file:./prisma/dev.db
+      AUTH_SERVICE_PORT: "4101"
+    depends_on:
+      db-init:
+        condition: service_completed_successfully
+    ports:
+      - "4101:4101"
+    volumes:
+      - sqlite_data:/app/prisma
+    restart: unless-stopped
+
+  dashboard:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: npm run service:dashboard
+    env_file:
+      - .env
+    environment:
+      NODE_ENV: production
+      DATABASE_URL: file:./prisma/dev.db
+      DASHBOARD_SERVICE_PORT: "4102"
+    depends_on:
+      db-init:
+        condition: service_completed_successfully
+    ports:
+      - "4102:4102"
+    volumes:
+      - sqlite_data:/app/prisma
+    restart: unless-stopped
+
+  identity:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: npm run service:identity
+    env_file:
+      - .env
+    environment:
+      NODE_ENV: production
+      DATABASE_URL: file:./prisma/dev.db
+      IDENTITY_SERVICE_PORT: "4103"
+    depends_on:
+      db-init:
+        condition: service_completed_successfully
+    ports:
+      - "4103:4103"
+    volumes:
+      - sqlite_data:/app/prisma
+    restart: unless-stopped
+
+  debts:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: npm run service:debts
+    env_file:
+      - .env
+    environment:
+      NODE_ENV: production
+      DATABASE_URL: file:./prisma/dev.db
+      DEBTS_SERVICE_PORT: "4104"
+    depends_on:
+      db-init:
+        condition: service_completed_successfully
+    ports:
+      - "4104:4104"
+    volumes:
+      - sqlite_data:/app/prisma
+    restart: unless-stopped
+
+  rehab:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: npm run service:rehab
+    env_file:
+      - .env
+    environment:
+      NODE_ENV: production
+      DATABASE_URL: file:./prisma/dev.db
+      REHAB_SERVICE_PORT: "4105"
+    depends_on:
+      db-init:
+        condition: service_completed_successfully
+    ports:
+      - "4105:4105"
+    volumes:
+      - sqlite_data:/app/prisma
+    restart: unless-stopped
+
+  help:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: npm run service:help
+    env_file:
+      - .env
+    environment:
+      NODE_ENV: production
+      DATABASE_URL: file:./prisma/dev.db
+      HELP_SERVICE_PORT: "4106"
+    depends_on:
+      db-init:
+        condition: service_completed_successfully
+    ports:
+      - "4106:4106"
+    volumes:
+      - sqlite_data:/app/prisma
+    restart: unless-stopped
+
+  pdf:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: npm run service:pdf
+    env_file:
+      - .env
+    environment:
+      NODE_ENV: production
+      DATABASE_URL: file:./prisma/dev.db
+      PDF_SERVICE_PORT: "4107"
+    depends_on:
+      db-init:
+        condition: service_completed_successfully
+    ports:
+      - "4107:4107"
+    volumes:
+      - sqlite_data:/app/prisma
+    restart: unless-stopped
+
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: npm run start
+    env_file:
+      - .env
+    environment:
+      NODE_ENV: production
+      PORT: "30005"
+      AUTH_SERVICE_URL: http://auth:4101
+      DASHBOARD_SERVICE_URL: http://dashboard:4102
+      IDENTITY_SERVICE_URL: http://identity:4103
+      DEBTS_SERVICE_URL: http://debts:4104
+      REHAB_SERVICE_URL: http://rehab:4105
+      HELP_SERVICE_URL: http://help:4106
+      PDF_SERVICE_URL: http://pdf:4107
+    depends_on:
+      - auth
+      - dashboard
+      - identity
+      - debts
+      - rehab
+      - help
+      - pdf
+    ports:
+      - "30005:30005"
+    restart: unless-stopped
+
+volumes:
+  sqlite_data:

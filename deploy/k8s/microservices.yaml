@@ -1,0 +1,433 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: finaware-auth
+  namespace: finaware
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: finaware-auth
+  template:
+    metadata:
+      labels:
+        app: finaware-auth
+    spec:
+      containers:
+        - name: finaware-auth
+          image: finaware:latest
+          imagePullPolicy: IfNotPresent
+          command: ["sh", "-c", "npx prisma db push && npm run service:auth"]
+          ports:
+            - containerPort: 4101
+          envFrom:
+            - configMapRef:
+                name: finaware-config
+            - secretRef:
+                name: finaware-secret
+          readinessProbe:
+            httpGet:
+              path: /health/ready
+              port: 4101
+            initialDelaySeconds: 8
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /health/live
+              port: 4101
+            initialDelaySeconds: 15
+            periodSeconds: 20
+          volumeMounts:
+            - name: sqlite-data
+              mountPath: /app/prisma
+      volumes:
+        - name: sqlite-data
+          persistentVolumeClaim:
+            claimName: finaware-sqlite-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: finaware-auth
+  namespace: finaware
+spec:
+  selector:
+    app: finaware-auth
+  ports:
+    - name: http
+      port: 4101
+      targetPort: 4101
+      protocol: TCP
+  type: ClusterIP
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: finaware-dashboard
+  namespace: finaware
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: finaware-dashboard
+  template:
+    metadata:
+      labels:
+        app: finaware-dashboard
+    spec:
+      containers:
+        - name: finaware-dashboard
+          image: finaware:latest
+          imagePullPolicy: IfNotPresent
+          command: ["sh", "-c", "npx prisma db push && npm run service:dashboard"]
+          ports:
+            - containerPort: 4102
+          envFrom:
+            - configMapRef:
+                name: finaware-config
+            - secretRef:
+                name: finaware-secret
+          readinessProbe:
+            httpGet:
+              path: /health/ready
+              port: 4102
+            initialDelaySeconds: 8
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /health/live
+              port: 4102
+            initialDelaySeconds: 15
+            periodSeconds: 20
+          volumeMounts:
+            - name: sqlite-data
+              mountPath: /app/prisma
+      volumes:
+        - name: sqlite-data
+          persistentVolumeClaim:
+            claimName: finaware-sqlite-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: finaware-dashboard
+  namespace: finaware
+spec:
+  selector:
+    app: finaware-dashboard
+  ports:
+    - name: http
+      port: 4102
+      targetPort: 4102
+      protocol: TCP
+  type: ClusterIP
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: finaware-identity
+  namespace: finaware
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: finaware-identity
+  template:
+    metadata:
+      labels:
+        app: finaware-identity
+    spec:
+      containers:
+        - name: finaware-identity
+          image: finaware:latest
+          imagePullPolicy: IfNotPresent
+          command: ["sh", "-c", "npx prisma db push && npm run service:identity"]
+          ports:
+            - containerPort: 4103
+          envFrom:
+            - configMapRef:
+                name: finaware-config
+            - secretRef:
+                name: finaware-secret
+          readinessProbe:
+            httpGet:
+              path: /health/ready
+              port: 4103
+            initialDelaySeconds: 8
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /health/live
+              port: 4103
+            initialDelaySeconds: 15
+            periodSeconds: 20
+          volumeMounts:
+            - name: sqlite-data
+              mountPath: /app/prisma
+      volumes:
+        - name: sqlite-data
+          persistentVolumeClaim:
+            claimName: finaware-sqlite-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: finaware-identity
+  namespace: finaware
+spec:
+  selector:
+    app: finaware-identity
+  ports:
+    - name: http
+      port: 4103
+      targetPort: 4103
+      protocol: TCP
+  type: ClusterIP
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: finaware-debts
+  namespace: finaware
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: finaware-debts
+  template:
+    metadata:
+      labels:
+        app: finaware-debts
+    spec:
+      containers:
+        - name: finaware-debts
+          image: finaware:latest
+          imagePullPolicy: IfNotPresent
+          command: ["sh", "-c", "npx prisma db push && npm run service:debts"]
+          ports:
+            - containerPort: 4104
+          envFrom:
+            - configMapRef:
+                name: finaware-config
+            - secretRef:
+                name: finaware-secret
+          readinessProbe:
+            httpGet:
+              path: /health/ready
+              port: 4104
+            initialDelaySeconds: 8
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /health/live
+              port: 4104
+            initialDelaySeconds: 15
+            periodSeconds: 20
+          volumeMounts:
+            - name: sqlite-data
+              mountPath: /app/prisma
+      volumes:
+        - name: sqlite-data
+          persistentVolumeClaim:
+            claimName: finaware-sqlite-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: finaware-debts
+  namespace: finaware
+spec:
+  selector:
+    app: finaware-debts
+  ports:
+    - name: http
+      port: 4104
+      targetPort: 4104
+      protocol: TCP
+  type: ClusterIP
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: finaware-rehab
+  namespace: finaware
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: finaware-rehab
+  template:
+    metadata:
+      labels:
+        app: finaware-rehab
+    spec:
+      containers:
+        - name: finaware-rehab
+          image: finaware:latest
+          imagePullPolicy: IfNotPresent
+          command: ["sh", "-c", "npx prisma db push && npm run service:rehab"]
+          ports:
+            - containerPort: 4105
+          envFrom:
+            - configMapRef:
+                name: finaware-config
+            - secretRef:
+                name: finaware-secret
+          readinessProbe:
+            httpGet:
+              path: /health/ready
+              port: 4105
+            initialDelaySeconds: 8
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /health/live
+              port: 4105
+            initialDelaySeconds: 15
+            periodSeconds: 20
+          volumeMounts:
+            - name: sqlite-data
+              mountPath: /app/prisma
+      volumes:
+        - name: sqlite-data
+          persistentVolumeClaim:
+            claimName: finaware-sqlite-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: finaware-rehab
+  namespace: finaware
+spec:
+  selector:
+    app: finaware-rehab
+  ports:
+    - name: http
+      port: 4105
+      targetPort: 4105
+      protocol: TCP
+  type: ClusterIP
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: finaware-help
+  namespace: finaware
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: finaware-help
+  template:
+    metadata:
+      labels:
+        app: finaware-help
+    spec:
+      containers:
+        - name: finaware-help
+          image: finaware:latest
+          imagePullPolicy: IfNotPresent
+          command: ["sh", "-c", "npx prisma db push && npm run service:help"]
+          ports:
+            - containerPort: 4106
+          envFrom:
+            - configMapRef:
+                name: finaware-config
+            - secretRef:
+                name: finaware-secret
+          readinessProbe:
+            httpGet:
+              path: /health/ready
+              port: 4106
+            initialDelaySeconds: 8
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /health/live
+              port: 4106
+            initialDelaySeconds: 15
+            periodSeconds: 20
+          volumeMounts:
+            - name: sqlite-data
+              mountPath: /app/prisma
+      volumes:
+        - name: sqlite-data
+          persistentVolumeClaim:
+            claimName: finaware-sqlite-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: finaware-help
+  namespace: finaware
+spec:
+  selector:
+    app: finaware-help
+  ports:
+    - name: http
+      port: 4106
+      targetPort: 4106
+      protocol: TCP
+  type: ClusterIP
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: finaware-pdf
+  namespace: finaware
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: finaware-pdf
+  template:
+    metadata:
+      labels:
+        app: finaware-pdf
+    spec:
+      containers:
+        - name: finaware-pdf
+          image: finaware:latest
+          imagePullPolicy: IfNotPresent
+          command: ["sh", "-c", "npx prisma db push && npm run service:pdf"]
+          ports:
+            - containerPort: 4107
+          envFrom:
+            - configMapRef:
+                name: finaware-config
+            - secretRef:
+                name: finaware-secret
+          readinessProbe:
+            httpGet:
+              path: /health/ready
+              port: 4107
+            initialDelaySeconds: 8
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /health/live
+              port: 4107
+            initialDelaySeconds: 15
+            periodSeconds: 20
+          volumeMounts:
+            - name: sqlite-data
+              mountPath: /app/prisma
+      volumes:
+        - name: sqlite-data
+          persistentVolumeClaim:
+            claimName: finaware-sqlite-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: finaware-pdf
+  namespace: finaware
+spec:
+  selector:
+    app: finaware-pdf
+  ports:
+    - name: http
+      port: 4107
+      targetPort: 4107
+      protocol: TCP
+  type: ClusterIP

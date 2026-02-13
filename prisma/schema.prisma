@@ -1,0 +1,114 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Users {
+  user_id                 Int            @id @default(autoincrement())
+  id_number               String         @unique
+  name                    String
+  surname                 String
+  employment_status       String
+  monthly_income          Float
+  risk_level              String
+  real_age                Int            @default(30)
+  bank_account_number     String?
+  download_password_hash  String?
+  created_at              DateTime       @default(now())
+  updated_at              DateTime       @updatedAt
+
+  credit_profile          CreditProfile?
+  debts                   Debts[]
+  legal_records           LegalRecords[]
+  expert_requests         ExpertRequests[]
+
+  @@map("Users")
+}
+
+model CreditProfile {
+  profile_id            Int      @id @default(autoincrement())
+  user_id               Int      @unique
+  credit_score          Int
+  total_debt            Float
+  monthly_obligations   Float
+
+  user Users @relation(fields: [user_id], references: [user_id], onDelete: Cascade)
+
+  @@map("Credit_Profile")
+}
+
+model Debts {
+  debt_id          Int            @id @default(autoincrement())
+  user_id          Int
+  creditor_name    String
+  debt_type        String
+  interest_rate    Float
+  balance          Float
+  status           String
+  created_at       DateTime       @default(now())
+  updated_at       DateTime       @updatedAt
+
+  user Users @relation(fields: [user_id], references: [user_id], onDelete: Cascade)
+  payment_history PaymentHistory[]
+
+  @@index([user_id])
+  @@map("Debts")
+}
+
+model PaymentHistory {
+  payment_id       Int       @id @default(autoincrement())
+  debt_id          Int
+  due_date         DateTime
+  paid             Boolean
+  missed           Boolean
+
+  debt Debts @relation(fields: [debt_id], references: [debt_id], onDelete: Cascade)
+
+  @@index([debt_id])
+  @@map("Payment_History")
+}
+
+model LegalRecords {
+  legal_id         Int      @id @default(autoincrement())
+  user_id          Int
+  record_type      String
+  description      String
+
+  user Users @relation(fields: [user_id], references: [user_id], onDelete: Cascade)
+
+  @@index([user_id])
+  @@map("Legal_Records")
+}
+
+model AiRecommendations {
+  recommendation_id    Int      @id @default(autoincrement())
+  risk_level           String
+  recommendation_text  String
+
+  @@map("AI_Recommendations")
+}
+
+model ExpertRequests {
+  request_id        Int      @id @default(autoincrement())
+  user_id           Int
+  advisor_type      String
+  message           String
+  request_date      DateTime
+
+  user Users @relation(fields: [user_id], references: [user_id], onDelete: Cascade)
+
+  @@index([user_id])
+  @@map("Expert_Requests")
+}
+
+model Providers {
+  provider_id        Int     @id @default(autoincrement())
+  provider_type      String  @unique
+  whatsapp_number    String
+
+  @@map("Providers")
+}

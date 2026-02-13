@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: finaware-web
+  namespace: finaware
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: finaware-web
+  template:
+    metadata:
+      labels:
+        app: finaware-web
+    spec:
+      containers:
+        - name: finaware-web
+          image: finaware:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 3000
+          envFrom:
+            - configMapRef:
+                name: finaware-config
+            - secretRef:
+                name: finaware-secret
+          readinessProbe:
+            httpGet:
+              path: /api/health/ready
+              port: 3000
+            initialDelaySeconds: 10
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /api/health/live
+              port: 3000
+            initialDelaySeconds: 20
+            periodSeconds: 20
+          volumeMounts:
+            - name: sqlite-data
+              mountPath: /app/prisma
+      volumes:
+        - name: sqlite-data
+          persistentVolumeClaim:
+            claimName: finaware-sqlite-pvc

@@ -1,0 +1,62 @@
+{
+  "name": "finaware",
+  "version": "0.1.0",
+  "private": true,
+  "prisma": {
+    "seed": "tsx prisma/seed.ts"
+  },
+  "scripts": {
+    "predev": "prisma generate && prisma db push",
+    "dev": "next dev",
+    "dev:web": "next dev --port 30005",
+    "prisma:sync": "prisma generate && prisma db push",
+    "dev:microservices": "npm run prisma:sync && concurrently -k -n auth,dashboard,identity,debts,rehab,help,pdf \"npm run service:auth\" \"npm run service:dashboard\" \"npm run service:identity\" \"npm run service:debts\" \"npm run service:rehab\" \"npm run service:help\" \"npm run service:pdf\"",
+    "dev:stack": "npm run prisma:sync && concurrently -k -n web,auth,dashboard,identity,debts,rehab,help,pdf \"npm run dev:web\" \"npm run service:auth\" \"npm run service:dashboard\" \"npm run service:identity\" \"npm run service:debts\" \"npm run service:rehab\" \"npm run service:help\" \"npm run service:pdf\"",
+    "prebuild": "prisma generate",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "typecheck": "tsc --noEmit",
+    "seed": "prisma db seed",
+    "format": "prettier --check .",
+    "format:write": "prettier --write .",
+    "service:auth": "tsx services/auth/src/server.ts",
+    "service:dashboard": "tsx services/dashboard/src/server.ts",
+    "service:identity": "tsx services/identity/src/server.ts",
+    "service:debts": "tsx services/debts/src/server.ts",
+    "service:rehab": "tsx services/rehab/src/server.ts",
+    "service:help": "tsx services/help/src/server.ts",
+    "service:pdf": "tsx services/pdf/src/server.ts"
+  },
+  "dependencies": {
+    "@prisma/client": "^5.20.0",
+    "clsx": "^2.1.1",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "next": "^14.2.35",
+    "openai": "^4.56.0",
+    "pdf-lib": "^1.17.1",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "recharts": "^2.12.7",
+    "tailwind-merge": "^2.5.2",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.23",
+    "@types/node": "^20.14.14",
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
+    "autoprefixer": "^10.4.19",
+    "concurrently": "^9.2.1",
+    "eslint": "^8.57.0",
+    "eslint-config-next": "^14.2.35",
+    "postcss": "^8.4.39",
+    "prettier": "^3.3.3",
+    "prettier-plugin-tailwindcss": "^0.6.6",
+    "prisma": "^5.20.0",
+    "tailwindcss": "^3.4.10",
+    "tsx": "^4.21.0",
+    "typescript": "^5.5.4"
+  }
+}
