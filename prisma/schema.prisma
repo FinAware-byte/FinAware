@@ -10,13 +10,20 @@ datasource db {
 model Users {
   user_id                 Int            @id @default(autoincrement())
   id_number               String         @unique
+  document_type           String         @default("SA_ID")
+  passport_country        String?
   name                    String
   surname                 String
   employment_status       String
   monthly_income          Float
   risk_level              String
+  wealth_segment          String         @default("STANDARD")
+  estimated_net_worth     Float          @default(0)
   real_age                Int            @default(30)
   bank_account_number     String?
+  is_fica_verified        Boolean        @default(false)
+  fica_verified_at        DateTime?
+  fica_documents_json     String?
   download_password_hash  String?
   created_at              DateTime       @default(now())
   updated_at              DateTime       @updatedAt
@@ -25,8 +32,25 @@ model Users {
   debts                   Debts[]
   legal_records           LegalRecords[]
   expert_requests         ExpertRequests[]
+  wealth_assets           WealthAssets[]
 
   @@map("Users")
+}
+
+model WealthAssets {
+  asset_id               Int      @id @default(autoincrement())
+  user_id                Int
+  asset_type             String
+  asset_name             String
+  estimated_value        Float
+  ownership_percentage   Float    @default(100)
+  created_at             DateTime @default(now())
+  updated_at             DateTime @updatedAt
+
+  user Users @relation(fields: [user_id], references: [user_id], onDelete: Cascade)
+
+  @@index([user_id])
+  @@map("Wealth_Assets")
 }
 
 model CreditProfile {

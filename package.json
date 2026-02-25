@@ -18,6 +18,7 @@
     "lint": "next lint",
     "typecheck": "tsc --noEmit",
     "seed": "prisma db seed",
+    "validate:login-identifiers": "tsx scripts/validate-login-identifiers.ts",
     "format": "prettier --check .",
     "format:write": "prettier --write .",
     "service:auth": "tsx services/auth/src/server.ts",
@@ -26,7 +27,16 @@
     "service:debts": "tsx services/debts/src/server.ts",
     "service:rehab": "tsx services/rehab/src/server.ts",
     "service:help": "tsx services/help/src/server.ts",
-    "service:pdf": "tsx services/pdf/src/server.ts"
+    "service:pdf": "tsx services/pdf/src/server.ts",
+    "helm:lint": "helm lint deploy/helm/finaware",
+    "helm:template:dev": "helm template finaware deploy/helm/finaware -n finaware -f deploy/helm/finaware/values-dev.yaml",
+    "helm:template:stag": "helm template finaware deploy/helm/finaware -n finaware -f deploy/helm/finaware/values-stag.yaml",
+    "helm:template:prod": "helm template finaware deploy/helm/finaware -n finaware -f deploy/helm/finaware/values-prod.yaml",
+    "helm:install:dev": "helm upgrade --install finaware deploy/helm/finaware --namespace finaware --create-namespace -f deploy/helm/finaware/values-dev.yaml",
+    "helm:install:stag": "helm upgrade --install finaware deploy/helm/finaware --namespace finaware --create-namespace -f deploy/helm/finaware/values-stag.yaml",
+    "helm:install:prod": "helm upgrade --install finaware deploy/helm/finaware --namespace finaware --create-namespace -f deploy/helm/finaware/values-prod.yaml",
+    "tls:selfsigned:generate": "bash scripts/tls/generate-self-signed.sh",
+    "tls:selfsigned:k8s-secret": "bash scripts/tls/apply-k8s-self-signed.sh"
   },
   "dependencies": {
     "@prisma/client": "^5.20.0",

@@ -19,8 +19,17 @@ export default async function RehabPage() {
     body: JSON.stringify({})
   });
 
+  if (result.status === 401 || result.status === 404) {
+    redirect("/login");
+  }
+
   if (result.status < 200 || result.status >= 300) {
-    return <p className="text-sm text-slate-500">Unable to load rehabilitation plan.</p>;
+    const payload = result.payload as { message?: string };
+    return (
+      <p className="text-sm text-slate-500">
+        Unable to load rehabilitation plan. {payload.message ? `(${payload.message})` : ""}
+      </p>
+    );
   }
   const plan = result.payload as RehabPlanPayload;
 

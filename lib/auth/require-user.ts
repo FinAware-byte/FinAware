@@ -10,10 +10,10 @@ type SessionUser = {
 
 export async function requireSessionUser() {
   const userId = getSessionUserId();
-  if (!userId) redirect("/");
+  if (!userId) redirect("/login");
 
   const result = await callServiceJson("auth", `/auth/users/${userId}`, { method: "GET" });
-  if (result.status < 200 || result.status >= 300) redirect("/");
+  if (result.status < 200 || result.status >= 300) redirect("/login");
 
   return result.payload as SessionUser;
 }

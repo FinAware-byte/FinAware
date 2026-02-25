@@ -8,9 +8,9 @@ services:
       - .env
     environment:
       NODE_ENV: production
-      DATABASE_URL: file:./prisma/dev.db
+      DATABASE_URL: file:/data/dev.db
     volumes:
-      - sqlite_data:/app/prisma
+      - sqlite_data:/data
     restart: "no"
 
   auth:
@@ -22,7 +22,7 @@ services:
       - .env
     environment:
       NODE_ENV: production
-      DATABASE_URL: file:./prisma/dev.db
+      DATABASE_URL: file:/data/dev.db
       AUTH_SERVICE_PORT: "4101"
     depends_on:
       db-init:
@@ -30,7 +30,7 @@ services:
     ports:
       - "4101:4101"
     volumes:
-      - sqlite_data:/app/prisma
+      - sqlite_data:/data
     restart: unless-stopped
 
   dashboard:
@@ -42,7 +42,7 @@ services:
       - .env
     environment:
       NODE_ENV: production
-      DATABASE_URL: file:./prisma/dev.db
+      DATABASE_URL: file:/data/dev.db
       DASHBOARD_SERVICE_PORT: "4102"
     depends_on:
       db-init:
@@ -50,7 +50,7 @@ services:
     ports:
       - "4102:4102"
     volumes:
-      - sqlite_data:/app/prisma
+      - sqlite_data:/data
     restart: unless-stopped
 
   identity:
@@ -62,7 +62,7 @@ services:
       - .env
     environment:
       NODE_ENV: production
-      DATABASE_URL: file:./prisma/dev.db
+      DATABASE_URL: file:/data/dev.db
       IDENTITY_SERVICE_PORT: "4103"
     depends_on:
       db-init:
@@ -70,7 +70,7 @@ services:
     ports:
       - "4103:4103"
     volumes:
-      - sqlite_data:/app/prisma
+      - sqlite_data:/data
     restart: unless-stopped
 
   debts:
@@ -82,7 +82,7 @@ services:
       - .env
     environment:
       NODE_ENV: production
-      DATABASE_URL: file:./prisma/dev.db
+      DATABASE_URL: file:/data/dev.db
       DEBTS_SERVICE_PORT: "4104"
     depends_on:
       db-init:
@@ -90,7 +90,7 @@ services:
     ports:
       - "4104:4104"
     volumes:
-      - sqlite_data:/app/prisma
+      - sqlite_data:/data
     restart: unless-stopped
 
   rehab:
@@ -102,7 +102,7 @@ services:
       - .env
     environment:
       NODE_ENV: production
-      DATABASE_URL: file:./prisma/dev.db
+      DATABASE_URL: file:/data/dev.db
       REHAB_SERVICE_PORT: "4105"
     depends_on:
       db-init:
@@ -110,7 +110,7 @@ services:
     ports:
       - "4105:4105"
     volumes:
-      - sqlite_data:/app/prisma
+      - sqlite_data:/data
     restart: unless-stopped
 
   help:
@@ -122,7 +122,7 @@ services:
       - .env
     environment:
       NODE_ENV: production
-      DATABASE_URL: file:./prisma/dev.db
+      DATABASE_URL: file:/data/dev.db
       HELP_SERVICE_PORT: "4106"
     depends_on:
       db-init:
@@ -130,7 +130,7 @@ services:
     ports:
       - "4106:4106"
     volumes:
-      - sqlite_data:/app/prisma
+      - sqlite_data:/data
     restart: unless-stopped
 
   pdf:
@@ -142,7 +142,7 @@ services:
       - .env
     environment:
       NODE_ENV: production
-      DATABASE_URL: file:./prisma/dev.db
+      DATABASE_URL: file:/data/dev.db
       PDF_SERVICE_PORT: "4107"
     depends_on:
       db-init:
@@ -150,7 +150,7 @@ services:
     ports:
       - "4107:4107"
     volumes:
-      - sqlite_data:/app/prisma
+      - sqlite_data:/data
     restart: unless-stopped
 
   web:
@@ -163,6 +163,7 @@ services:
     environment:
       NODE_ENV: production
       PORT: "30005"
+      DATABASE_URL: file:/data/dev.db
       AUTH_SERVICE_URL: http://auth:4101
       DASHBOARD_SERVICE_URL: http://dashboard:4102
       IDENTITY_SERVICE_URL: http://identity:4103
@@ -180,6 +181,8 @@ services:
       - pdf
     ports:
       - "30005:30005"
+    volumes:
+      - sqlite_data:/data
     restart: unless-stopped
 
 volumes:

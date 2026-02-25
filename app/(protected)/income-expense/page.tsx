@@ -25,12 +25,28 @@ export default async function IncomeExpensePage() {
   ]);
 
   if (
+    profileResult.status === 401 ||
+    profileResult.status === 404 ||
+    debtsResult.status === 401 ||
+    debtsResult.status === 404
+  ) {
+    redirect("/login");
+  }
+
+  if (
     profileResult.status < 200 ||
     profileResult.status >= 300 ||
     debtsResult.status < 200 ||
     debtsResult.status >= 300
   ) {
-    return <p className="text-sm text-slate-500">Unable to load income and expense data.</p>;
+    const profilePayload = profileResult.payload as { message?: string };
+    const debtsPayload = debtsResult.payload as { message?: string };
+    const detail = profilePayload.message ?? debtsPayload.message ?? "";
+    return (
+      <p className="text-sm text-slate-500">
+        Unable to load income and expense data. {detail ? `(${detail})` : ""}
+      </p>
+    );
   }
 
   const user = profileResult.payload as IdentityProfilePayload;

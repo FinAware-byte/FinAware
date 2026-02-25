@@ -1,0 +1,18 @@
+config:
+  environment: stag
+  sessionCookieSecure: "true"
+
+ingress:
+  host: stag.finaware.io
+  tls:
+    enabled: true
+    secretName: finaware-stag-tls
+    clusterIssuer: letsencrypt-prod
+
+certManager:
+  clusterIssuer:
+    create: true
+    name: letsencrypt-prod
+    email: security@finaware.io
+    server: https://acme-v02.api.letsencrypt.org/directory
+    privateKeySecretName: letsencrypt-prod-account-key

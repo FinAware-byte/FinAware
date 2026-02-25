@@ -1,5 +1,13 @@
 import { prisma } from "@/lib/db/prisma";
-import { type AppUser, toEmploymentStatus, toRiskStatus } from "@/lib/domain";
+import {
+  type AppUser,
+  type IdentificationType,
+  type PassportCountry,
+  toDocumentType,
+  toEmploymentStatus,
+  toPassportCountry,
+  toRiskStatus
+} from "@/lib/domain";
 import { estimateMonthlyObligation, generateProfileAndDebts } from "@/lib/simulation/generator";
 
 function parseUserId(userId: string): number | null {
@@ -11,6 +19,8 @@ function parseUserId(userId: string): number | null {
 function mapDbUserToAppUser(user: {
   user_id: number;
   id_number: string;
+  document_type: string;
+  passport_country: string | null;
   name: string;
   surname: string;
   employment_status: string;
@@ -18,6 +28,9 @@ function mapDbUserToAppUser(user: {
   risk_level: string;
   real_age: number;
   bank_account_number: string | null;
+  is_fica_verified: boolean;
+  fica_verified_at: Date | null;
+  fica_documents_json: string | null;
   download_password_hash: string | null;
   credit_profile: {
     credit_score: number;
@@ -36,6 +49,8 @@ function mapDbUserToAppUser(user: {
     name: user.name,
     surname: user.surname,
     idNumberOrPassport: user.id_number,
+    documentType: toDocumentType(user.document_type),
+    passportCountry: toPassportCountry(user.passport_country),
     bankAccountNumber: user.bank_account_number,
     employmentStatus: toEmploymentStatus(user.employment_status),
     monthlyIncome: user.monthly_income,
@@ -44,6 +59,9 @@ function mapDbUserToAppUser(user: {
     totalDebt,
     monthlyObligations,
     riskStatus: toRiskStatus(user.risk_level),
+    isFicaVerified: user.is_fica_verified,
+    ficaVerifiedAt: user.fica_verified_at,
+    ficaDocumentsJson: user.fica_documents_json,
     downloadPasswordHash: user.download_password_hash
   };
 }
@@ -84,16 +102,24 @@ export async function findUserByIdentifier(idNumberOrPassport: string): Promise<
   return mapDbUserToAppUser(row);
 }
 
-export async function ensureUserByIdentifier(idNumberOrPassport: string): Promise<AppUser> {
-  const existing = await findUserByIdentifier(idNumberOrPassport);
+type EnsureUserInput = {
+  idNumberOrPassport: string;
+  documentType: IdentificationType;
+  passportCountry: PassportCountry | null;
+};
+
+export async function ensureUserByIdentifier(input: EnsureUserInput): Promise<AppUser> {
+  const existing = await findUserByIdentifier(input.idNumberOrPassport);
   if (existing) return existing;
 
-  const simulated = generateProfileAndDebts(idNumberOrPassport);
+  const simulated = generateProfileAndDebts(input.idNumberOrPassport);
 
   const createdUser = await prisma.$transaction(async (tx) => {
     const user = await tx.users.create({
       data: {
         id_number: simulated.user.idNumber,
+        document_type: input.documentType,
+        passport_country: input.documentType === "PASSPORT" ? input.passportCountry : null,
         name: simulated.user.name,
         surname: simulated.user.surname,
         employment_status: simulated.user.employmentStatus,
@@ -101,6 +127,9 @@ export async function ensureUserByIdentifier(idNumberOrPassport: string): Promis
         risk_level: simulated.user.riskLevel,
         real_age: simulated.user.realAge,
         bank_account_number: null,
+        is_fica_verified: false,
+        fica_verified_at: null,
+        fica_documents_json: null,
         download_password_hash: null
       }
     });
@@ -208,4 +237,24 @@ export async function getUserById(userId: string): Promise<AppUser | null> {
 
   if (!row) return null;
   return mapDbUserToAppUser(row);
+}
+
+export async function markUserAsFicaVerified(
+  userId: string,
+  documentsJson: string
+): Promise<AppUser | null> {
+  const parsed = parseUserId(userId);
+  if (!parsed) return null;
+
+  const updated = await prisma.users.update({
+    where: { user_id: parsed },
+    data: {
+      is_fica_verified: true,
+      fica_verified_at: new Date(),
+      fica_documents_json: documentsJson
+    },
+    include: { credit_profile: true }
+  });
+
+  return mapDbUserToAppUser(updated);
 }

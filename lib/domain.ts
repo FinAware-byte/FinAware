@@ -1,3 +1,10 @@
+import {
+  identificationTypeValues,
+  passportCountryValues,
+  type IdentificationType,
+  type PassportCountry
+} from "@/lib/identification/rules";
+
 export const RiskStatus = {
   HIGH: "HIGH",
   MEDIUM: "MEDIUM",
@@ -99,6 +106,24 @@ export function toConsultationStatus(value: string): ConsultationStatus {
     : ConsultationStatus.PENDING;
 }
 
+export const documentTypeValues = identificationTypeValues;
+export { type IdentificationType };
+export function toDocumentType(value: string): IdentificationType {
+  return identificationTypeValues.includes(value as IdentificationType)
+    ? (value as IdentificationType)
+    : "SA_ID";
+}
+
+export const passportCountryCodeValues = passportCountryValues;
+export { type PassportCountry };
+export function toPassportCountry(value: string | null): PassportCountry | null {
+  if (!value) return null;
+  const normalized = value.trim().toUpperCase();
+  return passportCountryValues.includes(normalized as PassportCountry)
+    ? (normalized as PassportCountry)
+    : null;
+}
+
 export type AppUser = {
   id: string;
   userId: number;
@@ -106,6 +131,8 @@ export type AppUser = {
   name: string;
   surname: string;
   idNumberOrPassport: string;
+  documentType: IdentificationType;
+  passportCountry: PassportCountry | null;
   bankAccountNumber: string | null;
   employmentStatus: EmploymentStatus;
   monthlyIncome: number;
@@ -114,6 +141,9 @@ export type AppUser = {
   totalDebt: number;
   monthlyObligations: number;
   riskStatus: RiskStatus;
+  isFicaVerified: boolean;
+  ficaVerifiedAt: Date | null;
+  ficaDocumentsJson: string | null;
   downloadPasswordHash: string | null;
 };
 

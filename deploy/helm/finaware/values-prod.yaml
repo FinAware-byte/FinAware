@@ -1,0 +1,31 @@
+config:
+  environment: prod
+  sessionCookieSecure: "true"
+
+ingress:
+  host: prod.finaware.io
+  tls:
+    enabled: true
+    secretName: finaware-prod-tls
+    clusterIssuer: letsencrypt-prod
+
+certManager:
+  clusterIssuer:
+    create: true
+    name: letsencrypt-prod
+    email: security@finaware.io
+    server: https://acme-v02.api.letsencrypt.org/directory
+    privateKeySecretName: letsencrypt-prod-account-key
+
+# Production scale-up requires Postgres before running multi-replica pods.
+secret:
+  databaseUrl: "postgresql://finaware:change-me@postgres-rw:5432/finaware?schema=public"
+
+services:
+  web:
+    replicaCount: 2
+    hpa:
+      enabled: true
+      minReplicas: 2
+      maxReplicas: 5
+      targetCPUUtilizationPercentage: 70

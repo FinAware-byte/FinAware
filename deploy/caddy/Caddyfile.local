@@ -1,0 +1,37 @@
+{
+  servers {
+    protocols h1 h2 h3
+  }
+}
+
+(finaware_security_headers) {
+  encode zstd gzip
+  header {
+    Strict-Transport-Security "max-age=63072000; includeSubDomains; preload"
+    X-Content-Type-Options "nosniff"
+    X-Frame-Options "DENY"
+    Referrer-Policy "strict-origin-when-cross-origin"
+    Permissions-Policy "accelerometer=(), autoplay=(), camera=(), geolocation=(), gyroscope=(), microphone=(), payment=(), usb=()"
+    Cross-Origin-Opener-Policy "same-origin"
+    Cross-Origin-Resource-Policy "same-site"
+    -Server
+  }
+}
+
+localhost, dev.finaware.io, stag.finaware.io, prod.finaware.io {
+  tls /certs/finaware.local.crt /certs/finaware.local.key
+  import finaware_security_headers
+  reverse_proxy web:30005
+}
+
+www.dev.finaware.io {
+  redir https://dev.finaware.io{uri} permanent
+}
+
+www.stag.finaware.io {
+  redir https://stag.finaware.io{uri} permanent
+}
+
+www.prod.finaware.io {
+  redir https://prod.finaware.io{uri} permanent
+}

@@ -12,6 +12,14 @@ type EmploymentStatus =
   | "Self-Employed"
   | "Student"
   | "Pensioner";
+type WealthSegment = "STANDARD" | "RICH" | "ECONOMY_MOVER" | "SUPER_RICH";
+
+type WealthAssetSeed = {
+  assetType: "Shares" | "Company Equity" | "Residential House" | "Commercial House";
+  assetName: string;
+  estimatedValue: number;
+  ownershipPercentage?: number;
+};
 
 type DebtBlueprint = {
   creditorName: string;
@@ -50,6 +58,26 @@ type PaymentRow = {
   missed: boolean;
 };
 
+type WealthProfile = {
+  tier: Exclude<WealthSegment, "STANDARD">;
+  name: string;
+  surname: string;
+  risk: RiskLevel;
+  employmentStatus: EmploymentStatus;
+  monthlyIncome: number;
+  realAge: number;
+  estimatedNetWorth: number;
+  assets: WealthAssetSeed[];
+  debts: Array<{
+    creditorName: string;
+    debtType: string;
+    balance: number;
+    interestRate: number;
+    status: DebtStatus;
+  }>;
+  advisorMessage: string;
+};
+
 function createRng(seed: number): () => number {
   let state = seed >>> 0;
   return () => {
@@ -81,6 +109,50 @@ function formatCurrency(value: number): string {
     minimumFractionDigits: 2,
     maximumFractionDigits: 2
   });
+}
+
+function luhnCheck(numericValue: string): boolean {
+  let sum = 0;
+  let shouldDouble = false;
+
+  for (let i = numericValue.length - 1; i >= 0; i -= 1) {
+    let digit = Number(numericValue[i]);
+    if (shouldDouble) {
+      digit *= 2;
+      if (digit > 9) digit -= 9;
+    }
+    sum += digit;
+    shouldDouble = !shouldDouble;
+  }
+
+  return sum % 10 === 0;
+}
+
+function validCalendarDate(year: number, month: number, day: number): boolean {
+  const date = new Date(Date.UTC(year, month - 1, day));
+  return (
+    date.getUTCFullYear() === year &&
+    date.getUTCMonth() === month - 1 &&
+    date.getUTCDate() === day
+  );
+}
+
+function isValidSouthAfricanId(idNumber: string): boolean {
+  if (!/^[0-9]{13}$/.test(idNumber)) return false;
+  const yy = Number(idNumber.slice(0, 2));
+  const month = Number(idNumber.slice(2, 4));
+  const day = Number(idNumber.slice(4, 6));
+  const validDob =
+    validCalendarDate(1900 + yy, month, day) || validCalendarDate(2000 + yy, month, day);
+  if (!validDob) return false;
+  return luhnCheck(idNumber);
+}
+
+function computeLuhnCheckDigit(prefix12: string): number {
+  for (let digit = 0; digit <= 9; digit += 1) {
+    if (luhnCheck(`${prefix12}${digit}`)) return digit;
+  }
+  throw new Error("Unable to compute Luhn check digit");
 }
 
 // Required helper: suffix-based risk rule.
@@ -148,16 +220,49 @@ function monthlyObligationEstimator(debtType: string, balance: number): number {
   return roundCurrency(Math.max(minimum, balance * factor));
 }
 
-function generateIdNumber(index: number, risk: RiskLevel): string {
-  const prefix = String(1000000000 + index * 739).padStart(10, "0").slice(0, 10);
+function seedDobPrefix(index: number): string {
+  const year = 1960 + ((index * 7) % 40);
+  const month = ((index * 5) % 12) + 1;
+  const day = ((index * 11) % 28) + 1;
+  return `${String(year).slice(2)}${String(month).padStart(2, "0")}${String(day).padStart(2, "0")}`;
+}
 
-  if (risk === "High") return `${prefix}999`;
-  if (risk === "Medium") return `${prefix}555`;
-
+function generateIdNumber(index: number, risk: RiskLevel, usedIds: Set<string>): string {
   const lowSuffixes = ["123", "321", "741", "864", "432", "678", "246", "808", "187", "654"];
-  let suffix = lowSuffixes[index % lowSuffixes.length];
-  if (suffix === "999" || suffix === "555") suffix = "123";
-  return `${prefix}${suffix}`;
+  const targetSuffixes = risk === "High" ? ["999"] : risk === "Medium" ? ["555"] : lowSuffixes;
+
+  for (let attempt = 0; attempt < 25000; attempt += 1) {
+    const suffix = targetSuffixes[(index + attempt) % targetSuffixes.length];
+    const dobPrefix = seedDobPrefix(index + attempt);
+    const sequence = String(((index + 31) * 173 + attempt * 47) % 10000).padStart(4, "0");
+    const prefix12 = `${dobPrefix}${sequence}${suffix.slice(0, 2)}`;
+    const expectedCheckDigit = Number(suffix[2]);
+    const computedCheckDigit = computeLuhnCheckDigit(prefix12);
+    if (computedCheckDigit !== expectedCheckDigit) continue;
+
+    const idNumber = `${prefix12}${computedCheckDigit}`;
+    if (!isValidSouthAfricanId(idNumber)) continue;
+    if (riskFromId(idNumber) !== risk) continue;
+    if (usedIds.has(idNumber)) continue;
+
+    usedIds.add(idNumber);
+    return idNumber;
+  }
+
+  throw new Error(`Failed to generate valid ID for risk ${risk} at index ${index}`);
+}
+
+function assertSeedIdValidity(idNumber: string, expectedRisk: RiskLevel): void {
+  if (!/^[0-9]{13}$/.test(idNumber)) {
+    throw new Error(`Seed ID must be exactly 13 digits: ${idNumber}`);
+  }
+  if (!isValidSouthAfricanId(idNumber)) {
+    throw new Error(`Seed ID failed SA validation checks: ${idNumber}`);
+  }
+  const derivedRisk = riskFromId(idNumber);
+  if (derivedRisk !== expectedRisk) {
+    throw new Error(`Risk mismatch for generated id ${idNumber}. Expected ${expectedRisk}, got ${derivedRisk}.`);
+  }
 }
 
 function debtTemplate(
@@ -824,6 +929,199 @@ function buildExtraScenarios(total: number): Scenario[] {
   return list;
 }
 
+const wealthProfiles: WealthProfile[] = [
+  {
+    tier: "SUPER_RICH",
+    name: "Akhona",
+    surname: "Dlamini",
+    risk: "Low",
+    employmentStatus: "Self-Employed",
+    monthlyIncome: 1450000,
+    realAge: 48,
+    estimatedNetWorth: 8950000000,
+    assets: [
+      { assetType: "Shares", assetName: "JSE Top 40 Strategic Basket", estimatedValue: 1520000000 },
+      { assetType: "Company Equity", assetName: "Dlamini Infrastructure Holdings", estimatedValue: 3950000000, ownershipPercentage: 62 },
+      { assetType: "Residential House", assetName: "Sandhurst Primary Estate", estimatedValue: 118000000 },
+      { assetType: "Commercial House", assetName: "Rosebank Office Precinct", estimatedValue: 980000000 }
+    ],
+    debts: [
+      { creditorName: "Nedbank CIB", debtType: "Commercial Property Facility", balance: 280000000, interestRate: 10.2, status: "Active" },
+      { creditorName: "Standard Bank", debtType: "Lombard Facility", balance: 95000000, interestRate: 9.4, status: "Active" }
+    ],
+    advisorMessage: "Need strategic wealth structuring and tax-efficient financing for listed and private holdings."
+  },
+  {
+    tier: "SUPER_RICH",
+    name: "Karima",
+    surname: "Patel",
+    risk: "Low",
+    employmentStatus: "Self-Employed",
+    monthlyIncome: 1120000,
+    realAge: 45,
+    estimatedNetWorth: 6410000000,
+    assets: [
+      { assetType: "Shares", assetName: "SA Banking and Telco Portfolio", estimatedValue: 930000000 },
+      { assetType: "Company Equity", assetName: "Patel Consumer Ventures", estimatedValue: 2680000000, ownershipPercentage: 55 },
+      { assetType: "Residential House", assetName: "Bishopscourt Residence", estimatedValue: 86000000 },
+      { assetType: "Commercial House", assetName: "Durban Retail Hub", estimatedValue: 720000000 }
+    ],
+    debts: [
+      { creditorName: "ABSA Private", debtType: "Commercial Mortgage", balance: 165000000, interestRate: 10.6, status: "Active" },
+      { creditorName: "FNB RMB", debtType: "Corporate Overdraft", balance: 74000000, interestRate: 11.8, status: "Active" }
+    ],
+    advisorMessage: "Seeking expansion finance while keeping leverage below internal family-office thresholds."
+  },
+  {
+    tier: "SUPER_RICH",
+    name: "Mpho",
+    surname: "Van Rensburg",
+    risk: "Medium",
+    employmentStatus: "Self-Employed",
+    monthlyIncome: 980000,
+    realAge: 52,
+    estimatedNetWorth: 5120000000,
+    assets: [
+      { assetType: "Shares", assetName: "JSE Industrial and Resources Fund", estimatedValue: 840000000 },
+      { assetType: "Company Equity", assetName: "Van Rensburg Logistics Group", estimatedValue: 2150000000, ownershipPercentage: 58 },
+      { assetType: "Residential House", assetName: "Zimbali Coastal Estate Home", estimatedValue: 74000000 },
+      { assetType: "Commercial House", assetName: "Gauteng Warehousing Portfolio", estimatedValue: 690000000 }
+    ],
+    debts: [
+      { creditorName: "Investec", debtType: "Acquisition Bridge Loan", balance: 210000000, interestRate: 12.8, status: "Re-considered" },
+      { creditorName: "Standard Bank", debtType: "Commercial Mortgage", balance: 135000000, interestRate: 11.4, status: "Active" },
+      { creditorName: "Nedbank CIB", debtType: "Equipment Finance", balance: 48000000, interestRate: 13.2, status: "Active" }
+    ],
+    advisorMessage: "Need debt-optimization and restructuring path after acquisition-cycle leverage increased."
+  },
+  {
+    tier: "ECONOMY_MOVER",
+    name: "Sanele",
+    surname: "Mkhize",
+    risk: "Low",
+    employmentStatus: "Self-Employed",
+    monthlyIncome: 420000,
+    realAge: 41,
+    estimatedNetWorth: 1680000000,
+    assets: [
+      { assetType: "Shares", assetName: "Mid-cap Growth Portfolio", estimatedValue: 240000000 },
+      { assetType: "Company Equity", assetName: "Mkhize Transport and Fuel", estimatedValue: 620000000, ownershipPercentage: 64 },
+      { assetType: "Residential House", assetName: "Waterfall Country Estate Home", estimatedValue: 38500000 },
+      { assetType: "Commercial House", assetName: "N3 Freight Park Property", estimatedValue: 210000000 }
+    ],
+    debts: [
+      { creditorName: "FNB Business", debtType: "Business Loan", balance: 42000000, interestRate: 12.1, status: "Active" },
+      { creditorName: "WesBank", debtType: "Fleet Finance", balance: 27500000, interestRate: 11.3, status: "Active" }
+    ],
+    advisorMessage: "Need runway planning for expansion while preserving strong personal credit quality."
+  },
+  {
+    tier: "ECONOMY_MOVER",
+    name: "Noluthando",
+    surname: "Petersen",
+    risk: "Medium",
+    employmentStatus: "Self-Employed",
+    monthlyIncome: 355000,
+    realAge: 39,
+    estimatedNetWorth: 1220000000,
+    assets: [
+      { assetType: "Shares", assetName: "Income and Dividend Strategy", estimatedValue: 175000000 },
+      { assetType: "Company Equity", assetName: "Petersen Food Processing", estimatedValue: 510000000, ownershipPercentage: 49 },
+      { assetType: "Residential House", assetName: "Constantia Family Home", estimatedValue: 42000000 },
+      { assetType: "Commercial House", assetName: "Cape Industrial Unit Cluster", estimatedValue: 188000000 }
+    ],
+    debts: [
+      { creditorName: "ABSA Corporate", debtType: "Working Capital Facility", balance: 68000000, interestRate: 13.6, status: "Re-considered" },
+      { creditorName: "Nedbank", debtType: "Commercial Mortgage", balance: 51000000, interestRate: 12.2, status: "Active" }
+    ],
+    advisorMessage: "Need improved cash-cycle management and covenant-safe debt scheduling."
+  },
+  {
+    tier: "ECONOMY_MOVER",
+    name: "Themba",
+    surname: "Modise",
+    risk: "Low",
+    employmentStatus: "Employed",
+    monthlyIncome: 280000,
+    realAge: 44,
+    estimatedNetWorth: 860000000,
+    assets: [
+      { assetType: "Shares", assetName: "Large-cap Core Portfolio", estimatedValue: 120000000 },
+      { assetType: "Company Equity", assetName: "Modise Renewable Services", estimatedValue: 340000000, ownershipPercentage: 31 },
+      { assetType: "Residential House", assetName: "Bryanston Family House", estimatedValue: 23000000 },
+      { assetType: "Commercial House", assetName: "Pretoria Mixed-use Block", estimatedValue: 146000000 }
+    ],
+    debts: [
+      { creditorName: "Standard Bank", debtType: "Commercial Property Loan", balance: 36000000, interestRate: 11.9, status: "Active" },
+      { creditorName: "FNB", debtType: "Mortgage", balance: 14500000, interestRate: 10.3, status: "Active" }
+    ],
+    advisorMessage: "Need portfolio balancing between listed equity growth and property cashflow resilience."
+  },
+  {
+    tier: "RICH",
+    name: "Lerato",
+    surname: "Khosa",
+    risk: "Low",
+    employmentStatus: "Employed",
+    monthlyIncome: 185000,
+    realAge: 37,
+    estimatedNetWorth: 255000000,
+    assets: [
+      { assetType: "Shares", assetName: "Balanced Equity and ETF Basket", estimatedValue: 54000000 },
+      { assetType: "Company Equity", assetName: "Khosa Design Studio", estimatedValue: 72000000, ownershipPercentage: 75 },
+      { assetType: "Residential House", assetName: "Midrand Home", estimatedValue: 9200000 },
+      { assetType: "Commercial House", assetName: "Sandton Medical Suites Unit", estimatedValue: 36000000 }
+    ],
+    debts: [
+      { creditorName: "ABSA Private", debtType: "Mortgage", balance: 6800000, interestRate: 10.1, status: "Active" },
+      { creditorName: "Nedbank", debtType: "Commercial Mortgage", balance: 12400000, interestRate: 11.4, status: "Active" }
+    ],
+    advisorMessage: "Need structured plan to convert surplus cash into long-term diversified holdings."
+  },
+  {
+    tier: "RICH",
+    name: "Yusuf",
+    surname: "Ismail",
+    risk: "Medium",
+    employmentStatus: "Self-Employed",
+    monthlyIncome: 210000,
+    realAge: 40,
+    estimatedNetWorth: 334000000,
+    assets: [
+      { assetType: "Shares", assetName: "High-yield Dividend Portfolio", estimatedValue: 76000000 },
+      { assetType: "Company Equity", assetName: "Ismail Engineering Services", estimatedValue: 98000000, ownershipPercentage: 52 },
+      { assetType: "Residential House", assetName: "Umhlanga Main Residence", estimatedValue: 15500000 },
+      { assetType: "Commercial House", assetName: "Durban Logistics Warehouse", estimatedValue: 68000000 }
+    ],
+    debts: [
+      { creditorName: "Investec", debtType: "Business Expansion Loan", balance: 27800000, interestRate: 13.4, status: "Re-considered" },
+      { creditorName: "FNB Business", debtType: "Commercial Property Loan", balance: 19500000, interestRate: 12.3, status: "Active" }
+    ],
+    advisorMessage: "Need debt-cost reduction and repayment sequencing while maintaining growth capital."
+  },
+  {
+    tier: "RICH",
+    name: "Bianca",
+    surname: "Fourie",
+    risk: "Low",
+    employmentStatus: "Employed",
+    monthlyIncome: 165000,
+    realAge: 35,
+    estimatedNetWorth: 192000000,
+    assets: [
+      { assetType: "Shares", assetName: "Global Equity Wrap", estimatedValue: 48000000 },
+      { assetType: "Company Equity", assetName: "Fourie Health Ventures", estimatedValue: 51000000, ownershipPercentage: 44 },
+      { assetType: "Residential House", assetName: "Claremont Residence", estimatedValue: 11200000 },
+      { assetType: "Commercial House", assetName: "Century City Office Unit", estimatedValue: 29400000 }
+    ],
+    debts: [
+      { creditorName: "Standard Bank", debtType: "Mortgage", balance: 5900000, interestRate: 10.0, status: "Active" },
+      { creditorName: "Nedbank", debtType: "Commercial Mortgage", balance: 8400000, interestRate: 11.2, status: "Active" }
+    ],
+    advisorMessage: "Need asset-liability alignment to accelerate net-worth growth with manageable leverage."
+  }
+];
+
 function defaultDebtCountRange(risk: RiskLevel): [number, number] {
   if (risk === "High") return [4, 8];
   if (risk === "Medium") return [3, 5];
@@ -1083,7 +1381,19 @@ function recommendationRowsForRisk(risk: RiskLevel): string[] {
   ];
 }
 
+function estimateStandardNetWorth(args: {
+  monthlyIncome: number;
+  totalDebt: number;
+  risk: RiskLevel;
+  rng: () => number;
+}): number {
+  const incomeFactor = args.risk === "Low" ? randomFloat(16, 42, args.rng) : args.risk === "Medium" ? randomFloat(10, 28, args.rng) : randomFloat(4, 16, args.rng);
+  const debtDrag = args.risk === "Low" ? randomFloat(0.15, 0.45, args.rng) : args.risk === "Medium" ? randomFloat(0.35, 0.75, args.rng) : randomFloat(0.65, 1.25, args.rng);
+  return roundCurrency(Math.max(0, args.monthlyIncome * incomeFactor - args.totalDebt * debtDrag));
+}
+
 async function clearDemoData() {
+  await prisma.wealthAssets.deleteMany();
   await prisma.paymentHistory.deleteMany();
   await prisma.expertRequests.deleteMany();
   await prisma.legalRecords.deleteMany();
@@ -1118,16 +1428,13 @@ async function seedAiRecommendations() {
 async function seedUsersAndRelations() {
   const rng = createRng(20260209);
   const allScenarios = [...mandatoryScenarios, ...buildExtraScenarios(20)];
+  const usedIds = new Set<string>();
   const summaryRows: string[] = [];
 
   for (let index = 0; index < allScenarios.length; index += 1) {
     const scenario = allScenarios[index];
-    const idNumber = generateIdNumber(index + 1, scenario.risk);
-    const derivedRisk = riskFromId(idNumber);
-
-    if (derivedRisk !== scenario.risk) {
-      throw new Error(`Risk mismatch for generated id ${idNumber}. Expected ${scenario.risk}, got ${derivedRisk}.`);
-    }
+    const idNumber = generateIdNumber(index + 1, scenario.risk, usedIds);
+    assertSeedIdValidity(idNumber, scenario.risk);
 
     const monthlyIncome = roundCurrency(randomFloat(scenario.incomeRange[0], scenario.incomeRange[1], rng));
 
@@ -1139,6 +1446,8 @@ async function seedUsersAndRelations() {
         employment_status: scenario.employmentStatus,
         monthly_income: monthlyIncome,
         risk_level: scenario.risk,
+        wealth_segment: "STANDARD",
+        estimated_net_worth: 0,
         real_age: randomInt(20, 68, rng)
       }
     });
@@ -1228,8 +1537,120 @@ async function seedUsersAndRelations() {
       }
     });
 
+    const estimatedNetWorth = estimateStandardNetWorth({
+      monthlyIncome,
+      totalDebt,
+      risk: scenario.risk,
+      rng
+    });
+    await prisma.users.update({
+      where: { user_id: user.user_id },
+      data: { estimated_net_worth: estimatedNetWorth }
+    });
+
     summaryRows.push(
-      `${user.name} ${user.surname} | ${scenario.risk} | ${creditScore} | #Debts ${createdDebts.length} | TotalDebt R${formatCurrency(totalDebt)} | MonthlyObligations R${formatCurrency(monthlyObligations)} | #Requests ${requestCount} | #LegalRecords ${legalRows.length}`
+      `${user.name} ${user.surname} | STANDARD | NetWorth R${formatCurrency(estimatedNetWorth)} | ${scenario.risk} | ${creditScore} | #Debts ${createdDebts.length} | TotalDebt R${formatCurrency(totalDebt)} | MonthlyObligations R${formatCurrency(monthlyObligations)} | #Requests ${requestCount} | #LegalRecords ${legalRows.length}`
+    );
+  }
+
+  for (let index = 0; index < wealthProfiles.length; index += 1) {
+    const profile = wealthProfiles[index];
+    const idNumber = generateIdNumber(allScenarios.length + index + 1, profile.risk, usedIds);
+    assertSeedIdValidity(idNumber, profile.risk);
+
+    const user = await prisma.users.create({
+      data: {
+        id_number: idNumber,
+        name: profile.name,
+        surname: profile.surname,
+        employment_status: profile.employmentStatus,
+        monthly_income: profile.monthlyIncome,
+        risk_level: profile.risk,
+        wealth_segment: profile.tier,
+        estimated_net_worth: roundCurrency(profile.estimatedNetWorth),
+        real_age: profile.realAge
+      }
+    });
+
+    const createdDebts: CreatedDebt[] = [];
+    for (const debt of profile.debts) {
+      const created = await prisma.debts.create({
+        data: {
+          user_id: user.user_id,
+          creditor_name: debt.creditorName,
+          debt_type: debt.debtType,
+          interest_rate: debt.interestRate,
+          balance: roundCurrency(debt.balance),
+          status: debt.status
+        }
+      });
+
+      createdDebts.push({
+        debtId: created.debt_id,
+        creditorName: created.creditor_name,
+        debtType: created.debt_type,
+        interestRate: created.interest_rate,
+        balance: created.balance,
+        status: created.status as DebtStatus
+      });
+    }
+
+    const paymentRows = paymentHistoryGenerator({
+      debts: createdDebts.map((debt) => ({ debtId: debt.debtId, status: debt.status })),
+      risk: profile.risk,
+      rng
+    });
+    await prisma.paymentHistory.createMany({ data: paymentRows });
+
+    if (profile.risk === "Medium") {
+      await prisma.legalRecords.create({
+        data: {
+          user_id: user.user_id,
+          record_type: "Reconsideration",
+          description: "Leveraged portfolio facilities under active reconsideration."
+        }
+      });
+    }
+
+    await prisma.wealthAssets.createMany({
+      data: profile.assets.map((asset) => ({
+        user_id: user.user_id,
+        asset_type: asset.assetType,
+        asset_name: asset.assetName,
+        estimated_value: roundCurrency(asset.estimatedValue),
+        ownership_percentage: asset.ownershipPercentage ?? 100
+      }))
+    });
+
+    await prisma.expertRequests.create({
+      data: {
+        user_id: user.user_id,
+        advisor_type: "Financial",
+        message: profile.advisorMessage,
+        request_date: randomDateInLastDays(14, rng)
+      }
+    });
+
+    const totalDebt = roundCurrency(createdDebts.reduce((sum, debt) => sum + debt.balance, 0));
+    const monthlyObligations = roundCurrency(
+      createdDebts.reduce(
+        (sum, debt) => sum + monthlyObligationEstimator(debt.debtType, debt.balance),
+        0
+      )
+    );
+    const creditScore = creditScoreForRisk(profile.risk, rng);
+
+    await prisma.creditProfile.create({
+      data: {
+        user_id: user.user_id,
+        credit_score: creditScore,
+        total_debt: totalDebt,
+        monthly_obligations: monthlyObligations
+      }
+    });
+
+    summaryRows.push(
+      `${user.name} ${user.surname} | ${profile.tier} | NetWorth R${formatCurrency(profile.estimatedNetWorth)} | ${profile.risk} | ${creditScore} | #Assets ${profile.assets.length} | #Debts ${createdDebts.length} | TotalDebt R${formatCurrency(totalDebt)}`
     );
   }
 

@@ -1,0 +1,13 @@
+1. FinAware has been deployed with release {{ .Release.Name }}.
+
+2. Check workloads:
+   kubectl -n {{ .Release.Namespace }} get deploy,svc,ingress
+
+3. Web ingress host:
+   {{ .Values.ingress.host }}
+
+4. TLS issuer:
+   {{ .Values.ingress.tls.clusterIssuer }}
+
+5. Local quick access (if ingress is not configured yet):
+   kubectl -n {{ .Release.Namespace }} port-forward svc/{{ include "finaware.serviceFullname" (dict "context" . "name" "web") }} 30005:{{ (index .Values.services "web").servicePort }}

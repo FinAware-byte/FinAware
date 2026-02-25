@@ -1,0 +1,17 @@
+apiVersion: v2
+name: finaware
+description: FinAware full-stack microservices deployment chart
+version: 0.1.0
+appVersion: "0.1.0"
+type: application
+keywords:
+  - finaware
+  - finance
+  - microservices
+  - nextjs
+  - prisma
+home: https://finaware.io
+sources:
+  - https://finaware.io
+maintainers:
+  - name: FinAware Platform Team

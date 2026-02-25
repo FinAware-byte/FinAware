@@ -1,0 +1,231 @@
+nameOverride: ""
+fullnameOverride: ""
+
+image:
+  repository: finaware
+  tag: latest
+  pullPolicy: IfNotPresent
+
+persistence:
+  enabled: true
+  accessMode: ReadWriteOnce
+  size: 2Gi
+  storageClassName: ""
+  mountPath: /app/prisma
+
+config:
+  environment: dev
+  openaiModel: gpt-4.1-mini
+  providerWhatsAppNumber: "27670298265"
+  providerWhatsAppNumberFinancial: "27670298265"
+  providerWhatsAppNumberDebt: "27670298265"
+  providerWhatsAppNumberLegal: "27670298265"
+  supportPhone: "+27 11 555 0142"
+  supportEmail: support@finaware.demo
+  sessionCookieName: finaware_session
+  sessionCookieSecure: "false"
+  ficaVerifiedCookieName: finaware_fica_verified
+  ficaRequiredCookieName: finaware_fica_required
+
+secret:
+  databaseUrl: file:/app/prisma/dev.db
+  openaiApiKey: ""
+
+ingress:
+  enabled: true
+  className: nginx
+  host: dev.finaware.io
+  path: /
+  pathType: Prefix
+  annotations: {}
+  tls:
+    enabled: true
+    secretName: finaware-tls
+    clusterIssuer: letsencrypt-staging
+    annotationsEnabled: true
+
+certManager:
+  enabled: true
+  clusterIssuer:
+    create: true
+    name: letsencrypt-staging
+    email: security@finaware.io
+    server: https://acme-staging-v02.api.letsencrypt.org/directory
+    privateKeySecretName: letsencrypt-staging-account-key
+
+services:
+  web:
+    enabled: true
+    replicaCount: 1
+    port: 30005
+    servicePort: 80
+    command:
+      - sh
+      - -c
+      - npm run start -- -p 30005
+    probe:
+      readinessPath: /api/health/ready
+      livenessPath: /api/health/live
+      readinessInitialDelaySeconds: 10
+      livenessInitialDelaySeconds: 20
+      periodSeconds: 10
+    hpa:
+      enabled: false
+      minReplicas: 2
+      maxReplicas: 5
+      targetCPUUtilizationPercentage: 70
+    resources: {}
+
+  auth:
+    enabled: true
+    replicaCount: 1
+    port: 4101
+    servicePort: 4101
+    command:
+      - sh
+      - -c
+      - npx prisma db push && npm run service:auth
+    probe:
+      readinessPath: /health/ready
+      livenessPath: /health/live
+      readinessInitialDelaySeconds: 8
+      livenessInitialDelaySeconds: 15
+      periodSeconds: 10
+    hpa:
+      enabled: false
+      minReplicas: 1
+      maxReplicas: 3
+      targetCPUUtilizationPercentage: 70
+    resources: {}
+
+  dashboard:
+    enabled: true
+    replicaCount: 1
+    port: 4102
+    servicePort: 4102
+    command:
+      - sh
+      - -c
+      - npx prisma db push && npm run service:dashboard
+    probe:
+      readinessPath: /health/ready
+      livenessPath: /health/live
+      readinessInitialDelaySeconds: 8
+      livenessInitialDelaySeconds: 15
+      periodSeconds: 10
+    hpa:
+      enabled: false
+      minReplicas: 1
+      maxReplicas: 3
+      targetCPUUtilizationPercentage: 70
+    resources: {}
+
+  identity:
+    enabled: true
+    replicaCount: 1
+    port: 4103
+    servicePort: 4103
+    command:
+      - sh
+      - -c
+      - npx prisma db push && npm run service:identity
+    probe:
+      readinessPath: /health/ready
+      livenessPath: /health/live
+      readinessInitialDelaySeconds: 8
+      livenessInitialDelaySeconds: 15
+      periodSeconds: 10
+    hpa:
+      enabled: false
+      minReplicas: 1
+      maxReplicas: 3
+      targetCPUUtilizationPercentage: 70
+    resources: {}
+
+  debts:
+    enabled: true
+    replicaCount: 1
+    port: 4104
+    servicePort: 4104
+    command:
+      - sh
+      - -c
+      - npx prisma db push && npm run service:debts
+    probe:
+      readinessPath: /health/ready
+      livenessPath: /health/live
+      readinessInitialDelaySeconds: 8
+      livenessInitialDelaySeconds: 15
+      periodSeconds: 10
+    hpa:
+      enabled: false
+      minReplicas: 1
+      maxReplicas: 3
+      targetCPUUtilizationPercentage: 70
+    resources: {}
+
+  rehab:
+    enabled: true
+    replicaCount: 1
+    port: 4105
+    servicePort: 4105
+    command:
+      - sh
+      - -c
+      - npx prisma db push && npm run service:rehab
+    probe:
+      readinessPath: /health/ready
+      livenessPath: /health/live
+      readinessInitialDelaySeconds: 8
+      livenessInitialDelaySeconds: 15
+      periodSeconds: 10
+    hpa:
+      enabled: false
+      minReplicas: 1
+      maxReplicas: 3
+      targetCPUUtilizationPercentage: 70
+    resources: {}
+
+  help:
+    enabled: true
+    replicaCount: 1
+    port: 4106
+    servicePort: 4106
+    command:
+      - sh
+      - -c
+      - npx prisma db push && npm run service:help
+    probe:
+      readinessPath: /health/ready
+      livenessPath: /health/live
+      readinessInitialDelaySeconds: 8
+      livenessInitialDelaySeconds: 15
+      periodSeconds: 10
+    hpa:
+      enabled: false
+      minReplicas: 1
+      maxReplicas: 3
+      targetCPUUtilizationPercentage: 70
+    resources: {}
+
+  pdf:
+    enabled: true
+    replicaCount: 1
+    port: 4107
+    servicePort: 4107
+    command:
+      - sh
+      - -c
+      - npx prisma db push && npm run service:pdf
+    probe:
+      readinessPath: /health/ready
+      livenessPath: /health/live
+      readinessInitialDelaySeconds: 8
+      livenessInitialDelaySeconds: 15
+      periodSeconds: 10
+    hpa:
+      enabled: false
+      minReplicas: 1
+      maxReplicas: 3
+      targetCPUUtilizationPercentage: 70
+    resources: {}

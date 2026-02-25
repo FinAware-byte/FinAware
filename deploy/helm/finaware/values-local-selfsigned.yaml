@@ -1,0 +1,17 @@
+config:
+  environment: dev
+  sessionCookieSecure: "true"
+
+ingress:
+  host: dev.finaware.io
+  tls:
+    enabled: true
+    secretName: finaware-selfsigned-tls
+    annotationsEnabled: false
+
+certManager:
+  enabled: false
+
+services:
+  web:
+    replicaCount: 2

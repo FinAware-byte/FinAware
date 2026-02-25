@@ -1,0 +1,71 @@
+{{- $root := . -}}
+{{- range $name, $svc := .Values.services }}
+{{- if $svc.enabled }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "finaware.serviceFullname" (dict "context" $root "name" $name) }}
+  labels:
+    {{- include "finaware.labels" $root | nindent 4 }}
+    app.kubernetes.io/component: {{ $name }}
+spec:
+  replicas: {{ $svc.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "finaware.selectorLabels" $root | nindent 6 }}
+      app.kubernetes.io/component: {{ $name }}
+  template:
+    metadata:
+      labels:
+        {{- include "finaware.selectorLabels" $root | nindent 8 }}
+        app.kubernetes.io/component: {{ $name }}
+    spec:
+      containers:
+        - name: {{ $name }}
+          image: "{{ $root.Values.image.repository }}:{{ $root.Values.image.tag }}"
+          imagePullPolicy: {{ $root.Values.image.pullPolicy }}
+          {{- if $svc.command }}
+          command:
+            {{- range $svc.command }}
+            - {{ . | quote }}
+            {{- end }}
+          {{- end }}
+          ports:
+            - name: http
+              containerPort: {{ $svc.port }}
+              protocol: TCP
+          envFrom:
+            - configMapRef:
+                name: {{ include "finaware.fullname" $root }}-config
+            - secretRef:
+                name: {{ include "finaware.fullname" $root }}-secret
+          readinessProbe:
+            httpGet:
+              path: {{ $svc.probe.readinessPath }}
+              port: http
+            initialDelaySeconds: {{ $svc.probe.readinessInitialDelaySeconds }}
+            periodSeconds: {{ $svc.probe.periodSeconds }}
+          livenessProbe:
+            httpGet:
+              path: {{ $svc.probe.livenessPath }}
+              port: http
+            initialDelaySeconds: {{ $svc.probe.livenessInitialDelaySeconds }}
+            periodSeconds: {{ $svc.probe.periodSeconds }}
+          {{- with $svc.resources }}
+          resources:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- if $root.Values.persistence.enabled }}
+          volumeMounts:
+            - name: sqlite-data
+              mountPath: {{ $root.Values.persistence.mountPath }}
+          {{- end }}
+      {{- if $root.Values.persistence.enabled }}
+      volumes:
+        - name: sqlite-data
+          persistentVolumeClaim:
+            claimName: {{ include "finaware.fullname" $root }}-sqlite-pvc
+      {{- end }}
+---
+{{- end }}
+{{- end }}

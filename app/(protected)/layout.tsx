@@ -1,7 +1,10 @@
 import { AppSidebar } from "@/components/sidebar/app-sidebar";
 import { MainTabs } from "@/components/sidebar/main-tabs";
+import { requireSessionUser } from "@/lib/auth/require-user";
 
-export default function ProtectedLayout({ children }: { children: React.ReactNode }) {
+export default async function ProtectedLayout({ children }: { children: React.ReactNode }) {
+  await requireSessionUser();
+
   return (
     <div className="min-h-screen md:flex">
       <AppSidebar />

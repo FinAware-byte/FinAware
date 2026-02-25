@@ -1,0 +1,18 @@
+services:
+  edge:
+    image: caddy:2.8.4-alpine
+    depends_on:
+      - web
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./deploy/caddy/Caddyfile.local:/etc/caddy/Caddyfile:ro
+      - ./deploy/caddy/certs:/certs:ro
+      - caddy_local_data:/data
+      - caddy_local_config:/config
+    restart: unless-stopped
+
+volumes:
+  caddy_local_data:
+  caddy_local_config:

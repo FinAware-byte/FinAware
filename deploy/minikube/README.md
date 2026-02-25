@@ -1,52 +1,116 @@
-# Minikube Deployment Runbook
+# Minikube Full-Stack Runbook (Helm 3 + Ingress + cert-manager)
+
+This runbook deploys every FinAware service as process-isolated Kubernetes workloads:
+- web
+- auth
+- dashboard
+- identity
+- debts
+- rehab
+- help
+- pdf
 
 ## Prerequisites
-- Minikube installed
-- Docker daemon running
-- NGINX ingress addon enabled
+- Minikube v1.33+
+- kubectl
+- Helm 3
+- Docker
+- `finaware` image built locally
 
-## Commands
-1. Start cluster:
-   ```bash
-   minikube start
-   minikube addons enable ingress
-   ```
-2. Build image in Minikube Docker environment:
-   ```bash
-   eval $(minikube docker-env)
-   docker build -t finaware:latest .
-   ```
-3. Apply manifests (web + process-isolated microservices):
-   ```bash
-   kubectl apply -f deploy/k8s/namespace.yaml
-   kubectl apply -f deploy/k8s/configmap.yaml
-   kubectl apply -f deploy/k8s/secret.example.yaml
-   kubectl apply -f deploy/k8s/pvc.yaml
-   kubectl apply -f deploy/k8s/microservices.yaml
-   kubectl apply -f deploy/k8s/deployment.yaml
-   kubectl apply -f deploy/k8s/service.yaml
-   kubectl apply -f deploy/k8s/ingress.yaml
-   kubectl apply -f deploy/k8s/hpa.yaml
-   ```
-4. Verify service deployments:
-   ```bash
-   kubectl -n finaware get deploy
-   kubectl -n finaware get svc
-   ```
-   Expected deployments:
-   - `finaware-web`
-   - `finaware-auth`
-   - `finaware-dashboard`
-   - `finaware-identity`
-   - `finaware-debts`
-   - `finaware-rehab`
-   - `finaware-help`
-5. Access web service:
-   ```bash
-   kubectl -n finaware port-forward svc/finaware-web 3000:80
-   ```
-   Open http://localhost:3000
+## 1) Start cluster and ingress
 
-## Notes
-- SQLite mode is single-replica per service domain in this prototype and uses one shared PVC.
-- Move to managed Postgres before enabling horizontal scale.
+```bash
+minikube start --cpus=4 --memory=8192
+minikube addons enable ingress
+```
+
+## 2) Build app image in Minikube Docker daemon
+
+```bash
+eval "$(minikube docker-env)"
+docker build -t finaware:latest .
+```
+
+## 3) Choose TLS mode
+
+### Option A: Let's Encrypt (public DNS/80/443 required)
+
+Install cert-manager:
+
+```bash
+kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.16.2/cert-manager.yaml
+kubectl wait --for=condition=Available deployment/cert-manager -n cert-manager --timeout=180s
+kubectl wait --for=condition=Available deployment/cert-manager-webhook -n cert-manager --timeout=180s
+kubectl wait --for=condition=Available deployment/cert-manager-cainjector -n cert-manager --timeout=180s
+```
+
+Deploy:
+
+```bash
+helm upgrade --install finaware deploy/helm/finaware \
+  --namespace finaware \
+  --create-namespace \
+  -f deploy/helm/finaware/values-dev.yaml \
+  --set-string secret.databaseUrl="file:/app/prisma/dev.db" \
+  --set-string secret.openaiApiKey="${OPENAI_API_KEY:-}"
+```
+
+### Option B: Local self-signed TLS (recommended for local Minikube)
+
+Generate cert + key:
+
+```bash
+bash scripts/tls/generate-self-signed.sh
+```
+
+Create/update Kubernetes TLS secret:
+
+```bash
+bash scripts/tls/apply-k8s-self-signed.sh
+```
+
+Optional: trust the cert on macOS to remove browser warnings:
+
+```bash
+sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain deploy/caddy/certs/finaware-selfsigned.crt
+```
+
+Deploy with self-signed overrides:
+
+```bash
+helm upgrade --install finaware deploy/helm/finaware \
+  --namespace finaware \
+  --create-namespace \
+  -f deploy/helm/finaware/values-dev.yaml \
+  -f deploy/helm/finaware/values-local-selfsigned.yaml \
+  --set-string secret.databaseUrl="file:/app/prisma/dev.db" \
+  --set-string secret.openaiApiKey="${OPENAI_API_KEY:-}"
+```
+
+## 4) Point local host entry (for testing ingress)
+
+```bash
+minikube ip
+# Add to /etc/hosts using the Minikube IP:
+# <minikube-ip> dev.finaware.io
+```
+
+## 5) Verify
+
+```bash
+kubectl -n finaware get deploy,svc,ingress,pods
+kubectl -n finaware get pvc
+```
+
+## 6) Open app
+
+```text
+https://dev.finaware.io
+```
+
+## Cleanup
+
+```bash
+helm uninstall finaware -n finaware
+kubectl delete namespace finaware
+```

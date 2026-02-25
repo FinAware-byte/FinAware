@@ -1,77 +1,75 @@
 # FinAware ID Numbers and Credit Scenarios
 
-This file lists all current ID/Passport values in the demo database and their mapped credit scenario.
+This file lists all current demo profiles with ID numbers, risk scenario mapping, and wealth segment metadata.
 
 ## Scenario Rule
 - IDs ending with `999` => **High Risk** (`Urgent Intervention`)
 - IDs ending with `555` => **Medium Risk** (`Stabilize & Repair`)
 - All other IDs => **Low Risk** (`Maintenance & Growth`)
 
-## Scenario Legend
-- **High Risk - Urgent Intervention**: severe debt pressure, legal/garnishee risk, intensive rehabilitation required.
-- **Medium Risk - Stabilize & Repair**: moderate pressure, payment consistency and utilization reduction needed.
-- **Low Risk - Maintenance & Growth**: healthier profile, maintain discipline and optimize credit terms.
-
 ## Scenario Counts
 
-| Scenario | Count |
+| Risk | Count |
 |---|---:|
-| High Risk - Urgent Intervention | 13 |
-| Low Risk - Maintenance & Growth | 8 |
-| Medium Risk - Stabilize & Repair | 30 |
+| High | 11 |
+| Medium | 30 |
+| Low | 13 |
 
 ## Full ID-to-Scenario Mapping
 
-| User ID | ID Number / Passport | Rule-Derived Risk | Stored Risk | Scenario | Rule Match |
-|---:|---|---|---|---|---|
-| 1 | 1000000739321 | LOW | LOW | Low Risk - Maintenance & Growth | Yes |
-| 2 | 1000001478555 | MEDIUM | MEDIUM | Medium Risk - Stabilize & Repair | Yes |
-| 3 | 1000002217555 | MEDIUM | MEDIUM | Medium Risk - Stabilize & Repair | Yes |
-| 4 | 1000002956999 | HIGH | HIGH | High Risk - Urgent Intervention | Yes |
-| 5 | 1000003695999 | HIGH | HIGH | High Risk - Urgent Intervention | Yes |
-| 6 | 1000004434555 | MEDIUM | MEDIUM | Medium Risk - Stabilize & Repair | Yes |
-| 7 | 1000005173555 | MEDIUM | MEDIUM | Medium Risk - Stabilize & Repair | Yes |
-| 8 | 1000005912555 | MEDIUM | MEDIUM | Medium Risk - Stabilize & Repair | Yes |
-| 9 | 1000006651555 | MEDIUM | MEDIUM | Medium Risk - Stabilize & Repair | Yes |
-| 10 | 1000007390555 | MEDIUM | MEDIUM | Medium Risk - Stabilize & Repair | Yes |
-| 11 | 1000008129999 | HIGH | HIGH | High Risk - Urgent Intervention | Yes |
-| 12 | 1000008868555 | MEDIUM | MEDIUM | Medium Risk - Stabilize & Repair | Yes |
-| 13 | 1000009607555 | MEDIUM | MEDIUM | Medium Risk - Stabilize & Repair | Yes |
-| 14 | 1000010346555 | MEDIUM | MEDIUM | Medium Risk - Stabilize & Repair | Yes |
-| 15 | 1000011085999 | HIGH | HIGH | High Risk - Urgent Intervention | Yes |
-| 16 | 1000011824999 | HIGH | HIGH | High Risk - Urgent Intervention | Yes |
-| 17 | 1000012563999 | HIGH | HIGH | High Risk - Urgent Intervention | Yes |
-| 18 | 1000013302555 | MEDIUM | MEDIUM | Medium Risk - Stabilize & Repair | Yes |
-| 19 | 1000014041555 | MEDIUM | MEDIUM | Medium Risk - Stabilize & Repair | Yes |
-| 20 | 1000014780555 | MEDIUM | MEDIUM | Medium Risk - Stabilize & Repair | Yes |
-| 21 | 1000015519321 | LOW | LOW | Low Risk - Maintenance & Growth | Yes |
-| 22 | 1000016258999 | HIGH | HIGH | High Risk - Urgent Intervention | Yes |
-| 23 | 1000016997555 | MEDIUM | MEDIUM | Medium Risk - Stabilize & Repair | Yes |
-| 24 | 1000017736999 | HIGH | HIGH | High Risk - Urgent Intervention | Yes |
-| 25 | 1000018475999 | HIGH | HIGH | High Risk - Urgent Intervention | Yes |
-| 26 | 1000019214555 | MEDIUM | MEDIUM | Medium Risk - Stabilize & Repair | Yes |
-| 27 | 1000019953808 | LOW | LOW | Low Risk - Maintenance & Growth | Yes |
-| 28 | 1000020692555 | MEDIUM | MEDIUM | Medium Risk - Stabilize & Repair | Yes |
-| 29 | 1000021431555 | MEDIUM | MEDIUM | Medium Risk - Stabilize & Repair | Yes |
-| 30 | 1000022170999 | HIGH | HIGH | High Risk - Urgent Intervention | Yes |
-| 31 | 1000022909321 | LOW | LOW | Low Risk - Maintenance & Growth | Yes |
-| 32 | 1000023648555 | MEDIUM | MEDIUM | Medium Risk - Stabilize & Repair | Yes |
-| 33 | 1000024387555 | MEDIUM | MEDIUM | Medium Risk - Stabilize & Repair | Yes |
-| 34 | 1000025126555 | MEDIUM | MEDIUM | Medium Risk - Stabilize & Repair | Yes |
-| 35 | 1000025865678 | LOW | LOW | Low Risk - Maintenance & Growth | Yes |
-| 36 | 1000026604555 | MEDIUM | MEDIUM | Medium Risk - Stabilize & Repair | Yes |
-| 37 | 1000027343555 | MEDIUM | MEDIUM | Medium Risk - Stabilize & Repair | Yes |
-| 38 | 1000028082999 | HIGH | HIGH | High Risk - Urgent Intervention | Yes |
-| 39 | 1000028821654 | LOW | LOW | Low Risk - Maintenance & Growth | Yes |
-| 40 | 1000029560555 | MEDIUM | MEDIUM | Medium Risk - Stabilize & Repair | Yes |
-| 41 | 1000030299555 | MEDIUM | MEDIUM | Medium Risk - Stabilize & Repair | Yes |
-| 42 | 1000031038555 | MEDIUM | MEDIUM | Medium Risk - Stabilize & Repair | Yes |
-| 43 | 1000031777864 | LOW | LOW | Low Risk - Maintenance & Growth | Yes |
-| 44 | 1000032516555 | MEDIUM | MEDIUM | Medium Risk - Stabilize & Repair | Yes |
-| 45 | 1000033255555 | MEDIUM | MEDIUM | Medium Risk - Stabilize & Repair | Yes |
-| 46 | 9001015009087 | LOW | LOW | Low Risk - Maintenance & Growth | Yes |
-| 47 | 900101500999 | HIGH | HIGH | High Risk - Urgent Intervention | Yes |
-| 48 | 8001015009555 | MEDIUM | MEDIUM | Medium Risk - Stabilize & Repair | Yes |
-| 49 | 9901015009555 | MEDIUM | MEDIUM | Medium Risk - Stabilize & Repair | Yes |
-| 50 | 9001015009999 | HIGH | HIGH | High Risk - Urgent Intervention | Yes |
-| 51 | 9001015009555 | MEDIUM | MEDIUM | Medium Risk - Stabilize & Repair | Yes |
+| User ID | Full Name | ID Number | Rule Risk | Stored Risk | Wealth Segment | Net Worth (R) | Employment | Monthly Income (R) | Scenario | Rule Match |
+|---:|---|---|---|---|---|---:|---|---:|---|---|
+| 99 | Sibusiso Mthembu | 8211076711246 | Low | Low | STANDARD | 463950.75 | Employed | 73652.25 | Maintenance & Growth | Yes |
+| 100 | Thandi Nkosi | 8104065756555 | Medium | Medium | STANDARD | 156520.67 | Employed | 12371.87 | Stabilize & Repair | Yes |
+| 101 | Kagiso Molefe | 6912226070555 | Medium | Medium | STANDARD | 411610.18 | Employed | 25584.11 | Stabilize & Repair | Yes |
+| 102 | Ayanda Dlamini | 7007237277999 | High | High | STANDARD | 0.00 | Employed | 23581.79 | Urgent Intervention | Yes |
+| 103 | Lebo Matlala | 7506247168999 | High | High | STANDARD | 0.00 | Self-Employed | 6949.75 | Urgent Intervention | Yes |
+| 104 | Nomfundo Cele | 7312147012555 | Medium | Medium | STANDARD | 122432.49 | Student | 8688.70 | Stabilize & Repair | Yes |
+| 105 | Mpho Radebe | 8710087232555 | Medium | Medium | STANDARD | 413680.41 | Employed | 32606.53 | Stabilize & Repair | Yes |
+| 106 | Tebogo Sekgobela | 6401216935555 | Medium | Medium | STANDARD | 42846.97 | Self-Employed | 9560.11 | Stabilize & Repair | Yes |
+| 107 | Zanele Mkhize | 7312147390555 | Medium | Medium | STANDARD | 241301.22 | Employed | 14556.89 | Stabilize & Repair | Yes |
+| 108 | Pieter Van Wyk | 7312147516555 | Medium | Medium | STANDARD | 739869.62 | Self-Employed | 58520.13 | Stabilize & Repair | Yes |
+| 109 | Lindiwe Pillay | 9902207548999 | High | High | STANDARD | 0.00 | Unemployed | 3040.95 | Urgent Intervention | Yes |
+| 110 | Johannes Mokoena | 9902207674555 | Medium | Medium | STANDARD | 324816.45 | Pensioner | 18716.11 | Stabilize & Repair | Yes |
+| 111 | Nokuthula Ndlovu | 6108028082555 | Medium | Medium | STANDARD | 0.00 | Employed | 24868.21 | Stabilize & Repair | Yes |
+| 112 | Tshepo Mabaso | 6607037973555 | Medium | Medium | STANDARD | 295105.04 | Employed | 19891.65 | Stabilize & Repair | Yes |
+| 113 | Karabo Motsamai | 7007238663999 | High | High | STANDARD | 0.00 | Employed | 24351.96 | Urgent Intervention | Yes |
+| 114 | Amukelani Khoza | 7506248554999 | High | High | STANDARD | 40977.24 | Employed | 134586.82 | Urgent Intervention | Yes |
+| 115 | Boitumelo Maseko | 8005258445999 | High | High | STANDARD | 0.00 | Employed | 22039.11 | Urgent Intervention | Yes |
+| 116 | Rethabile Mahlangu | 6801138759555 | Medium | Medium | STANDARD | 207679.25 | Employed | 19132.51 | Stabilize & Repair | Yes |
+| 117 | Aphiwe Mabena | 6009219637555 | Medium | Medium | STANDARD | 0.00 | Student | 3003.80 | Stabilize & Repair | Yes |
+| 118 | Jabulani Masinga | 7712069340555 | Medium | Medium | STANDARD | 285374.17 | Self-Employed | 22651.03 | Stabilize & Repair | Yes |
+| 119 | Chantelle Naidoo | 8611279795187 | Low | Low | STANDARD | 1460672.86 | Employed | 51689.57 | Maintenance & Growth | Yes |
+| 120 | Mlondi Sithole | 7712069592999 | High | High | STANDARD | 0.00 | Unemployed | 2448.44 | Urgent Intervention | Yes |
+| 121 | Bongiwe Khumalo | 9510200376555 | Medium | Medium | STANDARD | 419877.10 | Employed | 17218.51 | Stabilize & Repair | Yes |
+| 122 | Stephan Botha | 8904189656999 | High | High | STANDARD | 0.00 | Employed | 36459.65 | Urgent Intervention | Yes |
+| 123 | Kea Molefi | 8611270299999 | High | High | STANDARD | 0.00 | Employed | 19605.22 | Urgent Intervention | Yes |
+| 124 | Siphesihle Gumede | 8112260660555 | Medium | Medium | STANDARD | 275338.32 | Employed | 23959.45 | Stabilize & Repair | Yes |
+| 125 | Anele Mabizela | 8904180034808 | Low | Low | STANDARD | 918037.32 | Employed | 47209.55 | Maintenance & Growth | Yes |
+| 126 | Ntobeko Sebola | 8405170395555 | Medium | Medium | STANDARD | 146393.82 | Employed | 13042.65 | Stabilize & Repair | Yes |
+| 127 | Refilwe Ramaphosa | 6603231743555 | Medium | Medium | STANDARD | 475549.77 | Employed | 37925.11 | Stabilize & Repair | Yes |
+| 128 | Gugulethu Nkomo | 7712060600999 | High | High | STANDARD | 0.00 | Self-Employed | 6905.11 | Urgent Intervention | Yes |
+| 129 | Khanyisa Khumalo | 6908141478808 | Low | Low | STANDARD | 1656789.20 | Employed | 43386.66 | Maintenance & Growth | Yes |
+| 130 | Mandla Mbatha | 9803110993555 | Medium | Medium | STANDARD | 34434.54 | Self-Employed | 14425.50 | Stabilize & Repair | Yes |
+| 131 | Vuyokazi Ngwenya | 9011191871555 | Medium | Medium | STANDARD | 155414.21 | Pensioner | 15674.57 | Stabilize & Repair | Yes |
+| 132 | Sinazo Sibiya | 8611271433555 | Medium | Medium | STANDARD | 555016.68 | Employed | 29486.71 | Stabilize & Repair | Yes |
+| 133 | Banele Mahlangu | 6405054097741 | Low | Low | STANDARD | 2442351.64 | Employed | 92419.97 | Maintenance & Growth | Yes |
+| 134 | Phindile Van Der Merwe | 7308062672555 | Medium | Medium | STANDARD | 57523.22 | Employed | 12100.66 | Stabilize & Repair | Yes |
+| 135 | Nandi Pietersen | 8112262046555 | Medium | Medium | STANDARD | 409047.41 | Employed | 21543.58 | Stabilize & Repair | Yes |
+| 136 | Xolani Singh | 6409132595999 | High | High | STANDARD | 0.00 | Self-Employed | 9407.57 | Urgent Intervention | Yes |
+| 137 | Andile Govender | 9304102110654 | Low | Low | STANDARD | 1720067.61 | Employed | 47860.41 | Maintenance & Growth | Yes |
+| 138 | Itumeleng Mokwena | 6009212283555 | Medium | Medium | STANDARD | 294848.29 | Self-Employed | 26983.55 | Stabilize & Repair | Yes |
+| 139 | Lesego Rasmeni | 9205013161555 | Medium | Medium | STANDARD | 128397.62 | Pensioner | 10722.45 | Stabilize & Repair | Yes |
+| 140 | Nhlanhla Qwabe | 7601252911555 | Medium | Medium | STANDARD | 463601.08 | Employed | 24098.74 | Stabilize & Repair | Yes |
+| 141 | Palesa Jali | 9011193131123 | Low | Low | STANDARD | 1485240.24 | Employed | 51213.51 | Maintenance & Growth | Yes |
+| 142 | Lerato Mthethwa | 9011193257555 | Medium | Medium | STANDARD | 360358.67 | Employed | 19423.46 | Stabilize & Repair | Yes |
+| 143 | Tumisang Maduna | 9510203148555 | Medium | Medium | STANDARD | 203425.62 | Employed | 34155.12 | Stabilize & Repair | Yes |
+| 144 | Akhona Dlamini | 9910123838808 | Low | Low | SUPER_RICH | 8950000000.00 | Self-Employed | 1450000.00 | Maintenance & Growth | Yes |
+| 145 | Karima Patel | 7601253541187 | Low | Low | SUPER_RICH | 6410000000.00 | Self-Employed | 1120000.00 | Maintenance & Growth | Yes |
+| 146 | Mpho Van Rensburg | 7102243902555 | Medium | Medium | SUPER_RICH | 5120000000.00 | Self-Employed | 980000.00 | Stabilize & Repair | Yes |
+| 147 | Sanele Mkhize | 9605214733187 | Low | Low | ECONOMY_MOVER | 1680000000.00 | Self-Employed | 420000.00 | Maintenance & Growth | Yes |
+| 148 | Noluthando Petersen | 6104224624555 | Medium | Medium | ECONOMY_MOVER | 1220000000.00 | Self-Employed | 355000.00 | Stabilize & Repair | Yes |
+| 149 | Themba Modise | 8001174609123 | Low | Low | ECONOMY_MOVER | 860000000.00 | Employed | 280000.00 | Maintenance & Growth | Yes |
+| 150 | Lerato Khosa | 6409134359741 | Low | Low | RICH | 255000000.00 | Employed | 185000.00 | Maintenance & Growth | Yes |
+| 151 | Yusuf Ismail | 8912105190555 | Medium | Medium | RICH | 334000000.00 | Self-Employed | 210000.00 | Stabilize & Repair | Yes |
+| 152 | Bianca Fourie | 8001174987123 | Low | Low | RICH | 192000000.00 | Employed | 165000.00 | Maintenance & Growth | Yes |

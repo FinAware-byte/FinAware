@@ -1,0 +1,22 @@
+config:
+  environment: dev
+  sessionCookieSecure: "false"
+
+ingress:
+  host: dev.finaware.io
+  tls:
+    enabled: true
+    secretName: finaware-dev-tls
+    clusterIssuer: letsencrypt-staging
+
+certManager:
+  clusterIssuer:
+    create: true
+    name: letsencrypt-staging
+    email: security@finaware.io
+    server: https://acme-staging-v02.api.letsencrypt.org/directory
+    privateKeySecretName: letsencrypt-staging-account-key
+
+services:
+  web:
+    replicaCount: 2

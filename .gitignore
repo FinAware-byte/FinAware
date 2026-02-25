@@ -34,3 +34,7 @@ pnpm-debug.log*
 # prisma db
 *.db
 *.db-journal
+
+# local macOS TLS certs
+deploy/caddy/certs/*
+!deploy/caddy/certs/.gitkeep

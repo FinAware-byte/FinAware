@@ -2,19 +2,43 @@ import { z } from "zod";
 import {
   assistanceTypeValues,
   debtStatusValues,
+  documentTypeValues,
   debtTypeValues,
   employmentStatusValues,
+  passportCountryCodeValues,
   type AssistanceType,
   type DebtStatus,
   type DebtType,
-  type EmploymentStatus
+  type EmploymentStatus,
+  type IdentificationType,
+  type PassportCountry
 } from "@/lib/domain";
 
-export const idOrPassportSchema = z
-  .string()
-  .min(6, "ID/Passport must be at least 6 characters")
-  .max(20, "ID/Passport must be 20 characters or fewer")
-  .regex(/^[a-zA-Z0-9\-]+$/, "Only letters, numbers, and hyphens are allowed");
+export const idOrPassportSchema = z.string().trim().min(1, "ID/Passport is required");
+
+const documentTypeEnumValues = [...documentTypeValues] as [
+  IdentificationType,
+  ...IdentificationType[]
+];
+const passportCountryEnumValues = [...passportCountryCodeValues] as [
+  PassportCountry,
+  ...PassportCountry[]
+];
+
+export const authLoginSchema = z
+  .object({
+    idNumberOrPassport: idOrPassportSchema,
+    documentType: z.enum(documentTypeEnumValues).default("SA_ID"),
+    passportCountry: z.enum(passportCountryEnumValues).optional().nullable()
+  })
+  .transform((value) => ({
+    ...value,
+    idNumberOrPassport:
+      value.documentType === "PASSPORT"
+        ? value.idNumberOrPassport.toUpperCase()
+        : value.idNumberOrPassport,
+    passportCountry: value.passportCountry ?? null
+  }));
 
 export const identityUpdateSchema = z.object({
   fullName: z.string().min(2, "Full name is required"),
@@ -48,4 +72,22 @@ export const consultationSchema = z.object({
 
 export const pdfPasswordSchema = z.object({
   password: z.string().min(1, "Password is required")
+});
+
+const fileMetaSchema = z.object({
+  fileName: z.string().min(1),
+  mimeType: z.string().min(1),
+  sizeBytes: z.number().int().positive()
+});
+
+export const ficaVerificationSchema = z.object({
+  consentAccepted: z.literal(true, {
+    errorMap: () => ({
+      message: "You must provide consent to complete FICA verification."
+    })
+  }),
+  useDemoPlaceholder: z.boolean().optional().default(false),
+  identityDocument: fileMetaSchema,
+  proofOfAddress: fileMetaSchema,
+  bankStatement: fileMetaSchema.optional().nullable()
 });

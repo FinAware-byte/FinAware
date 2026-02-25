@@ -1,0 +1,40 @@
+{{- $authName := include "finaware.serviceFullname" (dict "context" . "name" "auth") -}}
+{{- $dashboardName := include "finaware.serviceFullname" (dict "context" . "name" "dashboard") -}}
+{{- $identityName := include "finaware.serviceFullname" (dict "context" . "name" "identity") -}}
+{{- $debtsName := include "finaware.serviceFullname" (dict "context" . "name" "debts") -}}
+{{- $rehabName := include "finaware.serviceFullname" (dict "context" . "name" "rehab") -}}
+{{- $helpName := include "finaware.serviceFullname" (dict "context" . "name" "help") -}}
+{{- $pdfName := include "finaware.serviceFullname" (dict "context" . "name" "pdf") -}}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "finaware.fullname" . }}-config
+  labels:
+    {{- include "finaware.labels" . | nindent 4 }}
+data:
+  ENVIRONMENT: {{ .Values.config.environment | quote }}
+  OPENAI_MODEL: {{ .Values.config.openaiModel | quote }}
+  PROVIDER_WHATSAPP_NUMBER: {{ .Values.config.providerWhatsAppNumber | quote }}
+  PROVIDER_WHATSAPP_NUMBER_FINANCIAL: {{ .Values.config.providerWhatsAppNumberFinancial | quote }}
+  PROVIDER_WHATSAPP_NUMBER_DEBT: {{ .Values.config.providerWhatsAppNumberDebt | quote }}
+  PROVIDER_WHATSAPP_NUMBER_LEGAL: {{ .Values.config.providerWhatsAppNumberLegal | quote }}
+  SUPPORT_PHONE: {{ .Values.config.supportPhone | quote }}
+  SUPPORT_EMAIL: {{ .Values.config.supportEmail | quote }}
+  SESSION_COOKIE_NAME: {{ .Values.config.sessionCookieName | quote }}
+  SESSION_COOKIE_SECURE: {{ .Values.config.sessionCookieSecure | quote }}
+  FICA_VERIFIED_COOKIE_NAME: {{ .Values.config.ficaVerifiedCookieName | quote }}
+  FICA_REQUIRED_COOKIE_NAME: {{ .Values.config.ficaRequiredCookieName | quote }}
+  AUTH_SERVICE_PORT: {{ (index .Values.services "auth").port | quote }}
+  DASHBOARD_SERVICE_PORT: {{ (index .Values.services "dashboard").port | quote }}
+  IDENTITY_SERVICE_PORT: {{ (index .Values.services "identity").port | quote }}
+  DEBTS_SERVICE_PORT: {{ (index .Values.services "debts").port | quote }}
+  REHAB_SERVICE_PORT: {{ (index .Values.services "rehab").port | quote }}
+  HELP_SERVICE_PORT: {{ (index .Values.services "help").port | quote }}
+  PDF_SERVICE_PORT: {{ (index .Values.services "pdf").port | quote }}
+  AUTH_SERVICE_URL: {{ printf "http://%s:%v" $authName (index .Values.services "auth").servicePort | quote }}
+  DASHBOARD_SERVICE_URL: {{ printf "http://%s:%v" $dashboardName (index .Values.services "dashboard").servicePort | quote }}
+  IDENTITY_SERVICE_URL: {{ printf "http://%s:%v" $identityName (index .Values.services "identity").servicePort | quote }}
+  DEBTS_SERVICE_URL: {{ printf "http://%s:%v" $debtsName (index .Values.services "debts").servicePort | quote }}
+  REHAB_SERVICE_URL: {{ printf "http://%s:%v" $rehabName (index .Values.services "rehab").servicePort | quote }}
+  HELP_SERVICE_URL: {{ printf "http://%s:%v" $helpName (index .Values.services "help").servicePort | quote }}
+  PDF_SERVICE_URL: {{ printf "http://%s:%v" $pdfName (index .Values.services "pdf").servicePort | quote }}

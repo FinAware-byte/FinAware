@@ -1,0 +1,21 @@
+services:
+  edge:
+    image: caddy:2.8.4-alpine
+    depends_on:
+      - web
+    ports:
+      - "80:80"
+      - "443:443"
+    environment:
+      DOMAIN: ${DOMAIN:-${ENVIRONMENT:-dev}.finaware.io}
+      LETSENCRYPT_EMAIL: ${LETSENCRYPT_EMAIL:-security@finaware.io}
+      LETSENCRYPT_CA: ${LETSENCRYPT_CA:-https://acme-v02.api.letsencrypt.org/directory}
+    volumes:
+      - ./deploy/caddy/Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    restart: unless-stopped
+
+volumes:
+  caddy_data:
+  caddy_config:
