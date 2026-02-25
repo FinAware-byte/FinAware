@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Architecture Diagram</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 100%; height: 100%; overflow: auto; background: #f8fafc; }
+  .container { width: 100vw; min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 16px; }
+  svg { width: 100%; height: auto; max-width: 100vw; }
+</style>
+</head>
+<body>
+<div class="container">
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 1600 1100" font-family="'Segoe UI', Arial, sans-serif">
+  <defs>
+    <linearGradient id="g1" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#dbeafe"/><stop offset="100%" stop-color="#bfdbfe"/></linearGradient>
+    <linearGradient id="g2" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#c7d2fe"/><stop offset="100%" stop-color="#a5b4fc"/></linearGradient>
+    <linearGradient id="g3" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#fde68a"/><stop offset="100%" stop-color="#fbbf24"/></linearGradient>
+    <linearGradient id="g4" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#fed7aa"/><stop offset="100%" stop-color="#fdba74"/></linearGradient>
+    <linearGradient id="g5" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#bbf7d0"/><stop offset="100%" stop-color="#86efac"/></linearGradient>
+    <linearGradient id="g6" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#fecaca"/><stop offset="100%" stop-color="#fca5a5"/></linearGradient>
+    <linearGradient id="g7" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#e9d5ff"/><stop offset="100%" stop-color="#d8b4fe"/></linearGradient>
+    <linearGradient id="g8" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#ccfbf1"/><stop offset="100%" stop-color="#99f6e4"/></linearGradient>
+    <filter id="s"><feDropShadow dx="0" dy="2" stdDeviation="2" flood-opacity="0.12"/></filter>
+    <marker id="a" viewBox="0 0 10 10" refX="5" refY="10" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L5 10L10 0" fill="#475569"/></marker>
+  </defs>
+
+  <rect width="1600" height="1100" fill="#f8fafc" rx="8"/>
+  <text x="800" y="32" text-anchor="middle" font-size="22" font-weight="700" fill="#0f172a">FinAware — System Architecture</text>
+  <text x="800" y="50" text-anchor="middle" font-size="10" fill="#64748b">Process-Isolated Microservices | Next.js 14 + Express + Prisma + SQLite</text>
+
+  <!-- L1: CLIENT -->
+  <rect x="10" y="60" width="1580" height="72" rx="6" fill="url(#g1)" stroke="#93c5fd" stroke-width="1.2" filter="url(#s)"/>
+  <text x="24" y="80" font-size="11" font-weight="700" fill="#1e40af">CLIENT</text>
+  <rect x="24" y="88" width="180" height="34" rx="5" fill="#fff" stroke="#60a5fa" stroke-width=".8"/>
+  <text x="114" y="103" text-anchor="middle" font-size="10" font-weight="600" fill="#1e3a5f">Web Browser</text>
+  <text x="114" y="116" text-anchor="middle" font-size="8" fill="#64748b">React 18 CSR + SSR</text>
+  <rect x="216" y="88" width="180" height="34" rx="5" fill="#fff" stroke="#60a5fa" stroke-width=".8"/>
+  <text x="306" y="103" text-anchor="middle" font-size="10" font-weight="600" fill="#1e3a5f">Session Cookies</text>
+  <text x="306" y="116" text-anchor="middle" font-size="8" fill="#64748b">httpOnly, SameSite=lax</text>
+  <rect x="408" y="88" width="180" height="34" rx="5" fill="#fff" stroke="#60a5fa" stroke-width=".8"/>
+  <text x="498" y="103" text-anchor="middle" font-size="10" font-weight="600" fill="#1e3a5f">Tailwind CSS</text>
+  <text x="498" y="116" text-anchor="middle" font-size="8" fill="#64748b">Responsive UI</text>
+  <rect x="600" y="88" width="180" height="34" rx="5" fill="#fff" stroke="#60a5fa" stroke-width=".8"/>
+  <text x="690" y="103" text-anchor="middle" font-size="10" font-weight="600" fill="#1e3a5f">Recharts</text>
+  <text x="690" y="116" text-anchor="middle" font-size="8" fill="#64748b">Data Visualization</text>
+  <rect x="792" y="88" width="180" height="34" rx="5" fill="#fff" stroke="#60a5fa" stroke-width=".8"/>
+  <text x="882" y="103" text-anchor="middle" font-size="10" font-weight="600" fill="#1e3a5f">Zod Validation</text>
+  <text x="882" y="116" text-anchor="middle" font-size="8" fill="#64748b">Runtime Type Safety</text>
+  <rect x="984" y="88" width="180" height="34" rx="5" fill="#fff" stroke="#60a5fa" stroke-width=".8"/>
+  <text x="1074" y="103" text-anchor="middle" font-size="10" font-weight="600" fill="#1e3a5f">Client State</text>
+  <text x="1074" y="116" text-anchor="middle" font-size="8" fill="#64748b">useState / useEffect</text>
+
+  <line x1="800" y1="132" x2="800" y2="148" stroke="#475569" stroke-width="1.2" stroke-dasharray="4,2" marker-end="url(#a)"/>
+
+  <!-- L2: FRONTEND -->
+  <rect x="10" y="152" width="1580" height="110" rx="6" fill="url(#g2)" stroke="#818cf8" stroke-width="1.2" filter="url(#s)"/>
+  <text x="24" y="172" font-size="11" font-weight="700" fill="#3730a3">FRONTEND — Next.js 14 App Router (Port 30005)</text>
+  <text x="24" y="190" font-size="9" font-weight="600" fill="#4338ca">Pages:</text>
+  <rect x="70" y="181" width="90" height="22" rx="4" fill="#fff" stroke="#818cf8" stroke-width=".7"/>
+  <text x="115" y="196" text-anchor="middle" font-size="9" fill="#4338ca">/login</text>
+  <rect x="165" y="181" width="90" height="22" rx="4" fill="#fff" stroke="#818cf8" stroke-width=".7"/>
+  <text x="210" y="196" text-anchor="middle" font-size="9" fill="#4338ca">/join</text>
+  <rect x="260" y="181" width="120" height="22" rx="4" fill="#fff" stroke="#818cf8" stroke-width=".7"/>
+  <text x="320" y="196" text-anchor="middle" font-size="9" fill="#4338ca">/fica-verification</text>
+  <rect x="385" y="181" width="100" height="22" rx="4" fill="#fff" stroke="#818cf8" stroke-width=".7"/>
+  <text x="435" y="196" text-anchor="middle" font-size="9" fill="#4338ca">/dashboard</text>
+  <rect x="490" y="181" width="90" height="22" rx="4" fill="#fff" stroke="#818cf8" stroke-width=".7"/>
+  <text x="535" y="196" text-anchor="middle" font-size="9" fill="#4338ca">/identity</text>
+  <rect x="585" y="181" width="90" height="22" rx="4" fill="#fff" stroke="#818cf8" stroke-width=".7"/>
+  <text x="630" y="196" text-anchor="middle" font-size="9" fill="#4338ca">/debts</text>
+  <rect x="680" y="181" width="120" height="22" rx="4" fill="#fff" stroke="#818cf8" stroke-width=".7"/>
+  <text x="740" y="196" text-anchor="middle" font-size="9" fill="#4338ca">/income-expense</text>
+  <rect x="805" y="181" width="90" height="22" rx="4" fill="#fff" stroke="#818cf8" stroke-width=".7"/>
+  <text x="850" y="196" text-anchor="middle" font-size="9" fill="#4338ca">/rehab</text>
+  <rect x="900" y="181" width="90" height="22" rx="4" fill="#fff" stroke="#818cf8" stroke-width=".7"/>
+  <text x="945" y="196" text-anchor="middle" font-size="9" fill="#4338ca">/help</text>
+
+  <text x="24" y="226" font-size="9" font-weight="600" fill="#4338ca">Components:</text>
+  <rect x="100" y="216" width="160" height="20" rx="4" fill="#eef2ff" stroke="#a5b4fc" stroke-width=".6"/>
+  <text x="180" y="230" text-anchor="middle" font-size="8" fill="#4338ca">Sidebar, MetricCard, RiskBadge</text>
+  <rect x="268" y="216" width="160" height="20" rx="4" fill="#eef2ff" stroke="#a5b4fc" stroke-width=".6"/>
+  <text x="348" y="230" text-anchor="middle" font-size="8" fill="#4338ca">LandingForm, DebtsManager</text>
+  <rect x="436" y="216" width="160" height="20" rx="4" fill="#eef2ff" stroke="#a5b4fc" stroke-width=".6"/>
+  <text x="516" y="230" text-anchor="middle" font-size="8" fill="#4338ca">Donut + Line Charts</text>
+  <rect x="604" y="216" width="170" height="20" rx="4" fill="#eef2ff" stroke="#a5b4fc" stroke-width=".6"/>
+  <text x="689" y="230" text-anchor="middle" font-size="8" fill="#4338ca">IdentityForm, HelpRequestForm</text>
+  <rect x="782" y="216" width="160" height="20" rx="4" fill="#eef2ff" stroke="#a5b4fc" stroke-width=".6"/>
+  <text x="862" y="230" text-anchor="middle" font-size="8" fill="#4338ca">IncomeExpensePlanner</text>
+  <rect x="950" y="216" width="170" height="20" rx="4" fill="#eef2ff" stroke="#a5b4fc" stroke-width=".6"/>
+  <text x="1035" y="230" text-anchor="middle" font-size="8" fill="#4338ca">AiRecommendationsCard</text>
+  <rect x="1128" y="216" width="170" height="20" rx="4" fill="#eef2ff" stroke="#a5b4fc" stroke-width=".6"/>
+  <text x="1213" y="230" text-anchor="middle" font-size="8" fill="#4338ca">DownloadOverviewButton</text>
+
+  <line x1="800" y1="262" x2="800" y2="276" stroke="#475569" stroke-width="1.2" stroke-dasharray="4,2" marker-end="url(#a)"/>
+
+  <!-- L3: MIDDLEWARE -->
+  <rect x="10" y="280" width="1580" height="60" rx="6" fill="url(#g3)" stroke="#f59e0b" stroke-width="1.2" filter="url(#s)"/>
+  <text x="24" y="300" font-size="11" font-weight="700" fill="#92400e">MIDDLEWARE &amp; API ROUTES</text>
+  <rect x="24" y="308" width="320" height="24" rx="4" fill="#fff" stroke="#f59e0b" stroke-width=".8"/>
+  <text x="184" y="324" text-anchor="middle" font-size="9" font-weight="600" fill="#92400e">middleware.ts — Auth guard, FICA redirect, Route protection</text>
+  <rect x="356" y="308" width="400" height="24" rx="4" fill="#fff" stroke="#f59e0b" stroke-width=".8"/>
+  <text x="556" y="324" text-anchor="middle" font-size="9" font-weight="600" fill="#92400e">API Handlers: /api/microservices/*, /api/ai-recommendations, /api/pdf, /api/health</text>
+  <rect x="768" y="308" width="280" height="24" rx="4" fill="#fff" stroke="#f59e0b" stroke-width=".8"/>
+  <text x="908" y="324" text-anchor="middle" font-size="9" font-weight="600" fill="#92400e">Session: getSessionUserId(), cookie ops (httpOnly)</text>
+  <rect x="1060" y="308" width="280" height="24" rx="4" fill="#fff" stroke="#f59e0b" stroke-width=".8"/>
+  <text x="1200" y="324" text-anchor="middle" font-size="9" font-weight="600" fill="#92400e">Zod: authLogin, createDebt, consultation, pdfPassword</text>
+
+  <line x1="800" y1="340" x2="800" y2="354" stroke="#475569" stroke-width="1.2" stroke-dasharray="4,2" marker-end="url(#a)"/>
+
+  <!-- L4: PROXY -->
+  <rect x="10" y="358" width="1580" height="38" rx="6" fill="url(#g4)" stroke="#f97316" stroke-width="1.2" filter="url(#s)"/>
+  <text x="24" y="377" font-size="11" font-weight="700" fill="#9a3412">SERVICE PROXY</text>
+  <rect x="200" y="365" width="500" height="24" rx="4" fill="#fff" stroke="#f97316" stroke-width=".8"/>
+  <text x="450" y="381" text-anchor="middle" font-size="9" font-weight="600" fill="#9a3412">lib/microservices/proxy.ts — callService() / callServiceJson() — HTTP fetch to localhost:41xx</text>
+  <rect x="720" y="365" width="500" height="24" rx="4" fill="#fff" stroke="#f97316" stroke-width=".8"/>
+  <text x="970" y="381" text-anchor="middle" font-size="9" font-weight="600" fill="#9a3412">Service Discovery: AUTH_SERVICE_URL, DASHBOARD_SERVICE_URL, IDENTITY/DEBTS/REHAB/HELP/PDF_SERVICE_URL</text>
+
+  <line x1="800" y1="396" x2="800" y2="412" stroke="#475569" stroke-width="1.2" stroke-dasharray="4,2" marker-end="url(#a)"/>
+
+  <!-- L5: MICROSERVICES -->
+  <rect x="10" y="416" width="1580" height="300" rx="6" fill="url(#g5)" stroke="#4ade80" stroke-width="1.2" filter="url(#s)"/>
+  <text x="24" y="436" font-size="11" font-weight="700" fill="#166534">MICROSERVICES — 7 Independent Express Processes</text>
+
+  <!-- Auth -->
+  <rect x="18" y="446" width="215" height="260" rx="6" fill="#fff" stroke="#22c55e" stroke-width="1" filter="url(#s)"/>
+  <rect x="18" y="446" width="215" height="24" rx="6" fill="#dcfce7"/>
+  <text x="125" y="462" text-anchor="middle" font-size="10" font-weight="700" fill="#166534">Auth Service :4101</text>
+  <text x="26" y="486" font-size="8.5" fill="#374151">POST /auth/login</text>
+  <text x="26" y="500" font-size="8.5" fill="#374151">GET  /auth/users/:id</text>
+  <text x="26" y="514" font-size="8.5" fill="#374151">POST /auth/fica/verify</text>
+  <line x1="26" y1="522" x2="225" y2="522" stroke="#e2e8f0" stroke-width=".6"/>
+  <text x="26" y="536" font-size="7.5" fill="#6b7280">loginOrCreateUser()</text>
+  <text x="26" y="550" font-size="7.5" fill="#6b7280">Simulated Profile Generation</text>
+  <text x="26" y="564" font-size="7.5" fill="#6b7280">SA ID Validation (Luhn)</text>
+  <text x="26" y="578" font-size="7.5" fill="#6b7280">Passport (11 countries)</text>
+  <text x="26" y="592" font-size="7.5" fill="#6b7280">Risk: ID suffix → Level</text>
+  <line x1="26" y1="600" x2="225" y2="600" stroke="#e2e8f0" stroke-width=".6"/>
+  <text x="26" y="614" font-size="7" font-weight="600" fill="#b45309">W: Users, CreditProfile, Debts</text>
+  <text x="26" y="626" font-size="7" font-weight="600" fill="#b45309">   PaymentHistory, LegalRecords</text>
+  <text x="26" y="640" font-size="7" font-weight="600" fill="#b45309">   Providers</text>
+  <text x="26" y="656" font-size="7" font-weight="600" fill="#2563eb">R: Users</text>
+
+  <!-- Dashboard -->
+  <rect x="241" y="446" width="215" height="260" rx="6" fill="#fff" stroke="#22c55e" stroke-width="1" filter="url(#s)"/>
+  <rect x="241" y="446" width="215" height="24" rx="6" fill="#dcfce7"/>
+  <text x="348" y="462" text-anchor="middle" font-size="10" font-weight="700" fill="#166534">Dashboard Svc :4102</text>
+  <text x="249" y="486" font-size="8.5" fill="#374151">GET /dashboard/</text>
+  <text x="249" y="500" font-size="8.5" fill="#374151">    overview/:userId</text>
+  <line x1="249" y1="508" x2="448" y2="508" stroke="#e2e8f0" stroke-width=".6"/>
+  <text x="249" y="522" font-size="7.5" fill="#6b7280">calculateDashboardMetrics()</text>
+  <text x="249" y="536" font-size="7.5" fill="#6b7280">getFinancialAgeDetails()</text>
+  <text x="249" y="550" font-size="7.5" fill="#6b7280">getRiskFactors()</text>
+  <text x="249" y="564" font-size="7.5" fill="#6b7280">buildScoreProjection()</text>
+  <text x="249" y="578" font-size="7.5" fill="#6b7280">Debt Composition Map</text>
+  <text x="249" y="592" font-size="7.5" fill="#6b7280">Chart Data (6-month)</text>
+  <line x1="249" y1="600" x2="448" y2="600" stroke="#e2e8f0" stroke-width=".6"/>
+  <text x="249" y="614" font-size="7" font-weight="600" fill="#2563eb">R: Users, Debts</text>
+
+  <!-- Identity -->
+  <rect x="464" y="446" width="215" height="260" rx="6" fill="#fff" stroke="#22c55e" stroke-width="1" filter="url(#s)"/>
+  <rect x="464" y="446" width="215" height="24" rx="6" fill="#dcfce7"/>
+  <text x="571" y="462" text-anchor="middle" font-size="10" font-weight="700" fill="#166534">Identity Svc :4103</text>
+  <text x="472" y="486" font-size="8.5" fill="#374151">GET  /identity/profile/:id</text>
+  <text x="472" y="500" font-size="8.5" fill="#374151">PATCH /identity/profile/:id</text>
+  <line x1="472" y1="508" x2="671" y2="508" stroke="#e2e8f0" stroke-width=".6"/>
+  <text x="472" y="522" font-size="7.5" fill="#6b7280">Profile Read/Update</text>
+  <text x="472" y="536" font-size="7.5" fill="#6b7280">Download Password Hash</text>
+  <text x="472" y="550" font-size="7.5" fill="#6b7280">Immutable: ID/Passport</text>
+  <text x="472" y="564" font-size="7.5" fill="#6b7280">identityUpdateSchema</text>
+  <line x1="472" y1="574" x2="671" y2="574" stroke="#e2e8f0" stroke-width=".6"/>
+  <text x="472" y="588" font-size="7" font-weight="600" fill="#16a34a">R/W: Users</text>
+
+  <!-- Debts -->
+  <rect x="687" y="446" width="215" height="260" rx="6" fill="#fff" stroke="#22c55e" stroke-width="1" filter="url(#s)"/>
+  <rect x="687" y="446" width="215" height="24" rx="6" fill="#dcfce7"/>
+  <text x="794" y="462" text-anchor="middle" font-size="10" font-weight="700" fill="#166534">Debts Service :4104</text>
+  <text x="695" y="486" font-size="8.5" fill="#374151">GET   /debts/:userId</text>
+  <text x="695" y="500" font-size="8.5" fill="#374151">POST  /debts/:userId</text>
+  <text x="695" y="514" font-size="8.5" fill="#374151">PATCH /debts/:id</text>
+  <line x1="695" y1="522" x2="894" y2="522" stroke="#e2e8f0" stroke-width=".6"/>
+  <text x="695" y="536" font-size="7.5" fill="#6b7280">CRUD (no delete — history)</text>
+  <text x="695" y="550" font-size="7.5" fill="#6b7280">refreshCreditProfileTotals()</text>
+  <text x="695" y="564" font-size="7.5" fill="#6b7280">GARNISHED → LegalRecord</text>
+  <text x="695" y="578" font-size="7.5" fill="#6b7280">Payment History Tracking</text>
+  <line x1="695" y1="588" x2="894" y2="588" stroke="#e2e8f0" stroke-width=".6"/>
+  <text x="695" y="602" font-size="7" font-weight="600" fill="#db2777">R/W: Debts, CreditProfile</text>
+  <text x="695" y="614" font-size="7" font-weight="600" fill="#db2777">   LegalRecords, PaymentHistory</text>
+
+  <!-- Rehab -->
+  <rect x="910" y="446" width="215" height="260" rx="6" fill="#fff" stroke="#22c55e" stroke-width="1" filter="url(#s)"/>
+  <rect x="910" y="446" width="215" height="24" rx="6" fill="#dcfce7"/>
+  <text x="1017" y="462" text-anchor="middle" font-size="10" font-weight="700" fill="#166534">Rehab Service :4105</text>
+  <text x="918" y="486" font-size="8.5" fill="#374151">POST /rehab/plan/:userId</text>
+  <line x1="918" y1="494" x2="1117" y2="494" stroke="#e2e8f0" stroke-width=".6"/>
+  <text x="918" y="508" font-size="7.5" fill="#6b7280">Strategy by Risk Level:</text>
+  <text x="918" y="522" font-size="7.5" fill="#6b7280">  HIGH → Urgent Intervention</text>
+  <text x="918" y="536" font-size="7.5" fill="#6b7280">  MED  → Stabilize &amp; Repair</text>
+  <text x="918" y="550" font-size="7.5" fill="#6b7280">  LOW  → Maintenance &amp; Growth</text>
+  <text x="918" y="564" font-size="7.5" fill="#6b7280">AI 4-Week Action Plan</text>
+  <text x="918" y="578" font-size="7.5" fill="#6b7280">Fallback: deterministic recs</text>
+  <line x1="918" y1="588" x2="1117" y2="588" stroke="#e2e8f0" stroke-width=".6"/>
+  <text x="918" y="602" font-size="7" font-weight="600" fill="#7c3aed">R: Users, Debts</text>
+  <text x="918" y="614" font-size="7" font-weight="600" fill="#7c3aed">W: AiRecommendations</text>
+
+  <!-- Help -->
+  <rect x="1133" y="446" width="215" height="260" rx="6" fill="#fff" stroke="#22c55e" stroke-width="1" filter="url(#s)"/>
+  <rect x="1133" y="446" width="215" height="24" rx="6" fill="#dcfce7"/>
+  <text x="1240" y="462" text-anchor="middle" font-size="10" font-weight="700" fill="#166534">Help Service :4106</text>
+  <text x="1141" y="486" font-size="8.5" fill="#374151">GET  /help/requests/:id</text>
+  <text x="1141" y="500" font-size="8.5" fill="#374151">POST /help/requests/:id</text>
+  <line x1="1141" y1="508" x2="1340" y2="508" stroke="#e2e8f0" stroke-width=".6"/>
+  <text x="1141" y="522" font-size="7.5" fill="#6b7280">Consultation Requests</text>
+  <text x="1141" y="536" font-size="7.5" fill="#6b7280">WhatsApp Click-to-Chat</text>
+  <text x="1141" y="550" font-size="7.5" fill="#6b7280">Provider Lookup</text>
+  <text x="1141" y="564" font-size="7.5" fill="#6b7280">Advisor: Financial/Debt/Legal</text>
+  <line x1="1141" y1="574" x2="1340" y2="574" stroke="#e2e8f0" stroke-width=".6"/>
+  <text x="1141" y="588" font-size="7" font-weight="600" fill="#0d9488">R/W: ExpertRequests, Providers</text>
+
+  <!-- PDF -->
+  <rect x="1356" y="446" width="215" height="260" rx="6" fill="#fff" stroke="#22c55e" stroke-width="1" filter="url(#s)"/>
+  <rect x="1356" y="446" width="215" height="24" rx="6" fill="#dcfce7"/>
+  <text x="1463" y="462" text-anchor="middle" font-size="10" font-weight="700" fill="#166534">PDF Service :4107</text>
+  <text x="1364" y="486" font-size="8.5" fill="#374151">POST /pdf/overview/:id</text>
+  <line x1="1364" y1="494" x2="1563" y2="494" stroke="#e2e8f0" stroke-width=".6"/>
+  <text x="1364" y="508" font-size="7.5" fill="#6b7280">Password Gate (ID or hash)</text>
+  <text x="1364" y="522" font-size="7.5" fill="#6b7280">pdf-lib Generation</text>
+  <text x="1364" y="536" font-size="7.5" fill="#6b7280">Watermark Overlay (-30deg)</text>
+  <text x="1364" y="550" font-size="7.5" fill="#6b7280">Protected PDF Export</text>
+  <text x="1364" y="564" font-size="7.5" fill="#6b7280">User Profile + All Metrics</text>
+  <line x1="1364" y1="574" x2="1563" y2="574" stroke="#e2e8f0" stroke-width=".6"/>
+  <text x="1364" y="588" font-size="7" font-weight="600" fill="#ea580c">R: Users, CreditProfile, Debts</text>
+
+  <line x1="800" y1="716" x2="800" y2="732" stroke="#475569" stroke-width="1.2" stroke-dasharray="4,2" marker-end="url(#a)"/>
+  <text x="830" y="728" font-size="8" fill="#64748b">Prisma ORM</text>
+
+  <!-- L6: DATA + EXTERNAL -->
+  <rect x="10" y="736" width="780" height="240" rx="6" fill="url(#g6)" stroke="#f87171" stroke-width="1.2" filter="url(#s)"/>
+  <text x="24" y="756" font-size="11" font-weight="700" fill="#991b1b">DATABASE — Prisma + SQLite</text>
+  <rect x="24" y="766" width="170" height="55" rx="5" fill="#fff" stroke="#ef4444" stroke-width=".8"/>
+  <text x="109" y="785" text-anchor="middle" font-size="9" font-weight="600" fill="#991b1b">Users</text>
+  <text x="109" y="798" text-anchor="middle" font-size="7" fill="#6b7280">Identity, Income, Risk</text>
+  <text x="109" y="810" text-anchor="middle" font-size="7" fill="#6b7280">FICA, Employment</text>
+  <rect x="204" y="766" width="170" height="55" rx="5" fill="#fff" stroke="#ef4444" stroke-width=".8"/>
+  <text x="289" y="785" text-anchor="middle" font-size="9" font-weight="600" fill="#991b1b">CreditProfile</text>
+  <text x="289" y="798" text-anchor="middle" font-size="7" fill="#6b7280">Score, Total Debt</text>
+  <text x="289" y="810" text-anchor="middle" font-size="7" fill="#6b7280">Monthly Obligations</text>
+  <rect x="384" y="766" width="170" height="55" rx="5" fill="#fff" stroke="#ef4444" stroke-width=".8"/>
+  <text x="469" y="785" text-anchor="middle" font-size="9" font-weight="600" fill="#991b1b">Debts</text>
+  <text x="469" y="798" text-anchor="middle" font-size="7" fill="#6b7280">Creditor, Type, Balance</text>
+  <text x="469" y="810" text-anchor="middle" font-size="7" fill="#6b7280">Interest Rate, Status</text>
+  <rect x="564" y="766" width="170" height="55" rx="5" fill="#fff" stroke="#ef4444" stroke-width=".8"/>
+  <text x="649" y="785" text-anchor="middle" font-size="9" font-weight="600" fill="#991b1b">PaymentHistory</text>
+  <text x="649" y="798" text-anchor="middle" font-size="7" fill="#6b7280">Due Date, Paid</text>
+  <text x="649" y="810" text-anchor="middle" font-size="7" fill="#6b7280">Missed Tracking</text>
+  <rect x="24" y="832" width="170" height="55" rx="5" fill="#fff" stroke="#ef4444" stroke-width=".8"/>
+  <text x="109" y="851" text-anchor="middle" font-size="9" font-weight="600" fill="#991b1b">LegalRecords</text>
+  <text x="109" y="864" text-anchor="middle" font-size="7" fill="#6b7280">Judgments, Garnishee</text>
+  <text x="109" y="876" text-anchor="middle" font-size="7" fill="#6b7280">Orders, Descriptions</text>
+  <rect x="204" y="832" width="170" height="55" rx="5" fill="#fff" stroke="#ef4444" stroke-width=".8"/>
+  <text x="289" y="851" text-anchor="middle" font-size="9" font-weight="600" fill="#991b1b">ExpertRequests</text>
+  <text x="289" y="864" text-anchor="middle" font-size="7" fill="#6b7280">Advisor Type, Message</text>
+  <text x="289" y="876" text-anchor="middle" font-size="7" fill="#6b7280">Consultation Log</text>
+  <rect x="384" y="832" width="170" height="55" rx="5" fill="#fff" stroke="#ef4444" stroke-width=".8"/>
+  <text x="469" y="851" text-anchor="middle" font-size="9" font-weight="600" fill="#991b1b">AiRecommendations</text>
+  <text x="469" y="864" text-anchor="middle" font-size="7" fill="#6b7280">Risk Level</text>
+  <text x="469" y="876" text-anchor="middle" font-size="7" fill="#6b7280">JSON Snapshots</text>
+  <rect x="564" y="832" width="170" height="55" rx="5" fill="#fff" stroke="#ef4444" stroke-width=".8"/>
+  <text x="649" y="851" text-anchor="middle" font-size="9" font-weight="600" fill="#991b1b">Providers</text>
+  <text x="649" y="864" text-anchor="middle" font-size="7" fill="#6b7280">WhatsApp Numbers</text>
+  <text x="649" y="876" text-anchor="middle" font-size="7" fill="#6b7280">Provider Types</text>
+  <text x="400" y="920" text-anchor="middle" font-size="8" font-weight="600" fill="#991b1b">Users 1→* Debts | Users 1→1 CreditProfile | Users 1→* LegalRecords | Debts 1→* PaymentHistory | Users 1→* ExpertRequests</text>
+  <text x="400" y="934" text-anchor="middle" font-size="8" font-weight="600" fill="#991b1b">Users 1→* WealthAssets</text>
+
+  <!-- External -->
+  <rect x="810" y="736" width="780" height="240" rx="6" fill="url(#g7)" stroke="#a855f7" stroke-width="1.2" filter="url(#s)"/>
+  <text x="824" y="756" font-size="11" font-weight="700" fill="#6b21a8">EXTERNAL SERVICES</text>
+  <rect x="824" y="766" width="360" height="55" rx="5" fill="#fff" stroke="#a855f7" stroke-width=".8"/>
+  <text x="1004" y="786" text-anchor="middle" font-size="10" font-weight="600" fill="#6b21a8">OpenAI API (gpt-4.1-mini)</text>
+  <text x="1004" y="800" text-anchor="middle" font-size="7.5" fill="#6b7280">Structured JSON Schema | AI Recommendations</text>
+  <text x="1004" y="812" text-anchor="middle" font-size="7.5" fill="#7c3aed">Summary, Actions, 4-Week Plan, Warnings</text>
+  <rect x="1196" y="766" width="360" height="55" rx="5" fill="#fff" stroke="#a855f7" stroke-width=".8"/>
+  <text x="1376" y="786" text-anchor="middle" font-size="10" font-weight="600" fill="#6b21a8">WhatsApp (Click-to-Chat)</text>
+  <text x="1376" y="800" text-anchor="middle" font-size="7.5" fill="#6b7280">External redirect to wa.me/{number}</text>
+  <text x="1376" y="812" text-anchor="middle" font-size="7.5" fill="#0d9488">Financial Advisor / Debt Counsellor / Legal</text>
+  <rect x="824" y="832" width="360" height="55" rx="5" fill="#fff" stroke="#a855f7" stroke-width=".8"/>
+  <text x="1004" y="852" text-anchor="middle" font-size="10" font-weight="600" fill="#6b21a8">Risk Simulation Engine</text>
+  <text x="1004" y="866" text-anchor="middle" font-size="7.5" fill="#6b7280">Deterministic: ID suffix "999"→HIGH "555"→MED else→LOW</text>
+  <text x="1004" y="878" text-anchor="middle" font-size="7.5" fill="#b45309">Drives: credit score, debt count, employment</text>
+  <rect x="1196" y="832" width="360" height="55" rx="5" fill="#fff" stroke="#a855f7" stroke-width=".8"/>
+  <text x="1376" y="852" text-anchor="middle" font-size="10" font-weight="600" fill="#6b21a8">pdf-lib</text>
+  <text x="1376" y="866" text-anchor="middle" font-size="7.5" fill="#6b7280">PDF Generation + Watermark Overlay</text>
+  <text x="1376" y="878" text-anchor="middle" font-size="7.5" fill="#ea580c">Password-protected export with profile</text>
+
+  <!-- L7: DEVOPS -->
+  <rect x="10" y="986" width="1580" height="70" rx="6" fill="url(#g8)" stroke="#2dd4bf" stroke-width="1.2" filter="url(#s)"/>
+  <text x="24" y="1006" font-size="11" font-weight="700" fill="#134e4a">DEPLOYMENT &amp; INFRASTRUCTURE</text>
+  <rect x="24" y="1014" width="230" height="32" rx="5" fill="#fff" stroke="#14b8a6" stroke-width=".8"/>
+  <text x="139" y="1034" text-anchor="middle" font-size="9" font-weight="600" fill="#134e4a">Docker Compose — 9 containers + SQLite vol</text>
+  <rect x="264" y="1014" width="230" height="32" rx="5" fill="#fff" stroke="#14b8a6" stroke-width=".8"/>
+  <text x="379" y="1034" text-anchor="middle" font-size="9" font-weight="600" fill="#134e4a">Kubernetes — Deployments, Services, Ingress</text>
+  <rect x="504" y="1014" width="230" height="32" rx="5" fill="#fff" stroke="#14b8a6" stroke-width=".8"/>
+  <text x="619" y="1034" text-anchor="middle" font-size="9" font-weight="600" fill="#134e4a">Helm Charts — Dev / Staging / Prod</text>
+  <rect x="744" y="1014" width="230" height="32" rx="5" fill="#fff" stroke="#14b8a6" stroke-width=".8"/>
+  <text x="859" y="1034" text-anchor="middle" font-size="9" font-weight="600" fill="#134e4a">Health Probes — /health/live, /health/ready</text>
+  <rect x="984" y="1014" width="230" height="32" rx="5" fill="#fff" stroke="#14b8a6" stroke-width=".8"/>
+  <text x="1099" y="1034" text-anchor="middle" font-size="9" font-weight="600" fill="#134e4a">HPA — CPU-based Horizontal Autoscaler</text>
+  <rect x="1224" y="1014" width="230" height="32" rx="5" fill="#fff" stroke="#14b8a6" stroke-width=".8"/>
+  <text x="1339" y="1034" text-anchor="middle" font-size="9" font-weight="600" fill="#134e4a">PVC — SQLite Persistent Volume Claim</text>
+
+  <!-- Legend -->
+  <rect x="10" y="1064" width="1580" height="28" rx="5" fill="#fff" stroke="#e2e8f0" stroke-width=".8"/>
+  <text x="20" y="1082" font-size="9" font-weight="700" fill="#1e293b">Legend:</text>
+  <rect x="65" y="1072" width="12" height="10" rx="2" fill="url(#g1)" stroke="#93c5fd" stroke-width=".5"/>
+  <text x="82" y="1082" font-size="8" fill="#374151">Client</text>
+  <rect x="120" y="1072" width="12" height="10" rx="2" fill="url(#g2)" stroke="#818cf8" stroke-width=".5"/>
+  <text x="137" y="1082" font-size="8" fill="#374151">Frontend</text>
+  <rect x="185" y="1072" width="12" height="10" rx="2" fill="url(#g3)" stroke="#f59e0b" stroke-width=".5"/>
+  <text x="202" y="1082" font-size="8" fill="#374151">Middleware</text>
+  <rect x="260" y="1072" width="12" height="10" rx="2" fill="url(#g4)" stroke="#f97316" stroke-width=".5"/>
+  <text x="277" y="1082" font-size="8" fill="#374151">Proxy</text>
+  <rect x="310" y="1072" width="12" height="10" rx="2" fill="url(#g5)" stroke="#4ade80" stroke-width=".5"/>
+  <text x="327" y="1082" font-size="8" fill="#374151">Microservices</text>
+  <rect x="398" y="1072" width="12" height="10" rx="2" fill="url(#g6)" stroke="#f87171" stroke-width=".5"/>
+  <text x="415" y="1082" font-size="8" fill="#374151">Database</text>
+  <rect x="465" y="1072" width="12" height="10" rx="2" fill="url(#g7)" stroke="#a855f7" stroke-width=".5"/>
+  <text x="482" y="1082" font-size="8" fill="#374151">External</text>
+  <rect x="530" y="1072" width="12" height="10" rx="2" fill="url(#g8)" stroke="#2dd4bf" stroke-width=".5"/>
+  <text x="547" y="1082" font-size="8" fill="#374151">DevOps</text>
+  <line x1="590" y1="1077" x2="620" y2="1077" stroke="#64748b" stroke-width="1" stroke-dasharray="4,2" marker-end="url(#a)"/>
+  <text x="630" y="1082" font-size="8" fill="#374151">Data Flow</text>
+</svg></div></body></html>
