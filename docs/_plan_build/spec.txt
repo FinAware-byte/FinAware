@@ -1,0 +1,402 @@
+IMPORTANT NOTE
+One important point is deliberately highlighted: the dataset does not currently contain a genuine Low/Medium/High risk target, so the developer must not quietly invent one. That needs to be agreed and documented before supervised training.
+
+QUICK SUMMARY
+The supplied dataset is ready to be used as the foundation for the ML component.
+However, the risk target is the one item that must be resolved before the developer can legitimately complete supervised model training.
+Everything else can be developed around the defined contract.
+The developer should therefore start by:
+1. Reviewing the existing FinAware build.
+2. Integrating personal_finance_zar.csv.
+3. Reviewing the data dictionary.
+4. Implementing the preprocessing pipeline.
+5. Implementing the feature engineering.
+6. Confirming the risk_tier target methodology.
+7. Training the four required algorithms.
+8. Evaluating the models.
+9. Implementing probability output.
+10. Implementing explainability.
+11. Implementing the rule-based recommendation engine.
+12. Connecting the ML service to the existing FinAware backend.
+13. Updating the frontend to display risk, probability, drivers and recommendations.
+14. Testing the complete end-to-end flow.
+The objective is not simply to add an ML model to FinAware. The objective is to make machine learning the analytical engine behind FinAware's financial-risk decision-support experience.
+
+FINAWARE
+Complete Machine Learning, Data Engineering & System Integration Specification
+Project: FinAware
+System Type: Interactive Personal Finance Decision Support System
+Primary Emerging Technology: Machine Learning
+Dataset: Personal Finance ML Dataset — cleaned and localised to South African Rand (ZAR)
+Records: 32,424
+ML Algorithms: Random Forest, Gradient Boosting, K-Nearest Neighbours and Support Vector Machine
+
+1. PROJECT PURPOSE
+FinAware is an interactive personal finance decision-support system that uses machine learning to analyse financial information, classify a user's financial risk, explain the factors influencing the prediction and provide structured financial recommendations.
+The system is not intended to function as a chatbot.
+The machine-learning component should be the core analytical technology.
+The intended user journey is:
+User enters financial information → FinAware validates the information → Financial data is transformed into ML features → Machine-learning model analyses the financial profile → User receives: Financial Risk Tier; Probability for each risk tier; Key factors influencing the prediction; Data-driven recommendations.
+The three risk categories are: LOW FINANCIAL RISK, MEDIUM FINANCIAL RISK, HIGH FINANCIAL RISK.
+
+2. IMPORTANT CHANGE TO THE EXISTING SYSTEM
+The existing FinAware system should be extended rather than rebuilt from scratch.
+The developer should first inspect the current implementation and identify:
+1. What already exists.
+2. What can remain unchanged.
+3. What needs modification.
+4. What needs to be added.
+5. What existing functionality should be replaced.
+The existing architecture is:
+React / Next.js Frontend → Node.js / Express Backend → Microservices → Prisma → Database → Kubernetes / Helm / Minikube / OrbStack
+The ML functionality should be introduced as an additional analytical service rather than placing all ML logic directly inside the Next.js application.
+Recommended architecture:
+FinAware → Next.js / React UI → Node.js / Express API, which branches to:
+  (a) Financial Service → Prisma
+  (b) ML Service → ML Pipeline → { Features, Prediction, Explainability } → Recommendations → JSON Response → React UI
+
+3. DATASET
+The cleaned dataset supplied to the developer is: personal_finance_zar.csv
+It contains approximately: 32,424 records; 24 columns.
+The dataset has been cleaned and localised for the FinAware South African context.
+The data dictionary is supplied separately as: FinAware_Data_Dictionary.xlsx (supplied file name: data_dictionary.xlsx).
+The developer must use the data dictionary as the authoritative description of the dataset fields.
+
+4. CURRENCY LOCALISATION
+The source dataset contains monetary values represented in USD.
+FinAware uses South African Rand as its primary monetary representation.
+The supplied ZAR dataset uses: 1 USD = 16.27 ZAR.
+The ZAR fields should be used by the FinAware ML application.
+Relevant monetary fields include: monthly_income_zar, monthly_expenses_zar, savings_zar, loan_amount_zar, monthly_emi_zar.
+The original USD columns can be retained for provenance but should not normally be used alongside their ZAR equivalents as model inputs because they represent the same underlying information.
+
+5. DATA QUALITY REQUIREMENTS
+Before training, the developer must verify: number of records; number of columns; missing values; duplicate records; data types; numerical ranges; categorical values; invalid negative financial values; invalid categorical values; logical relationships between fields.
+The dataset should not be silently altered.
+Any additional transformation must be documented.
+
+6. IDENTIFIER HANDLING
+user_id is an identifier.
+It may be retained for: tracing a prediction back to a record; application/UI purposes; debugging; demonstration purposes.
+However: user_id must NOT be used as an ML feature.
+
+7. EXISTING CLEANING
+The cleaned dataset already handles the major source-data cleaning requirements.
+For example, users without loans are represented consistently using: loan_type = "No Loan" rather than leaving the value as an unexplained missing category.
+The developer must preserve this meaning.
+
+8. PREPROCESSING PIPELINE
+The ML implementation should use a reproducible preprocessing pipeline.
+Recommended conceptual pipeline:
+Input Data → Schema Validation → Feature Engineering → Categorical Encoding → Numerical Scaling where required → ML Model → Prediction
+The preprocessing transformations must be fitted using the training data only.
+This is critical to prevent data leakage.
+
+9. TRAIN / TEST SPLIT
+Recommended: 80% Training, 20% Testing.
+Use: stratify = target where applicable.
+Use a fixed random seed for reproducibility. Example: random_state = 42.
+The developer may use stratified cross-validation during model comparison.
+
+10. CATEGORICAL PREPROCESSING
+Potential categorical fields include: gender, education_level, employment_status, job_title, has_loan, loan_type.
+The recommended baseline approach is one-hot encoding.
+The encoder must be fitted only on the training dataset.
+The same fitted encoder must then be used for: validation; test data; new FinAware users.
+Unknown categories during inference should be handled safely rather than causing the entire prediction service to fail.
+
+11. NUMERICAL PREPROCESSING
+Potential numerical features include: age, monthly_income_zar, monthly_expenses_zar, savings_zar, loan_amount_zar, monthly_emi_zar, loan_term_months, loan_interest_rate_pct, debt_to_income_ratio, credit_score, savings_to_income_ratio.
+Scaling is particularly important for: KNN, SVM.
+Random Forest and Gradient Boosting do not mathematically require standardisation, but the implementation may use a consistent preprocessing architecture if properly documented.
+
+12. OUTLIERS
+Do not automatically delete large financial values simply because they are large.
+For example: high income, large savings, large loan, large expenses may be legitimate observations within a synthetic financial dataset.
+If outlier treatment is introduced, document: method; threshold; number of records affected; reason for treatment.
+The baseline approach should retain valid financial observations.
+
+13. FEATURE ENGINEERING
+The ML system should not rely only on raw financial values.
+It should create meaningful financial indicators.
+The objective is to allow FinAware to understand relationships between income, expenses, debt and savings.
+13.1 Disposable Income: disposable_income_zar = monthly_income_zar - monthly_expenses_zar. Purpose: measures the approximate amount remaining after monthly expenses.
+13.2 Expense-to-Income Ratio: expense_to_income_ratio = monthly_expenses_zar / monthly_income_zar. Purpose: measures what proportion of monthly income is consumed by expenses.
+13.3 EMI-to-Income Ratio (potential): emi_to_income_ratio = monthly_emi_zar / monthly_income_zar. Purpose: measures monthly repayment burden relative to income. Before implementing this, inspect the definition of the existing debt_to_income_ratio. If they represent essentially the same calculation, do not unnecessarily include both.
+13.4 Savings-to-Income Ratio: savings_to_income_ratio = savings_zar / monthly_income_zar. The supplied dataset already contains this feature, so the developer should use the documented existing field unless recalculation is necessary.
+13.5 Loan-to-Income Ratio (proposed): loan_to_income_ratio = loan_amount_zar / (monthly_income_zar × 12). Purpose: provides an approximate comparison between loan exposure and annual income.
+13.6 Monthly Surplus After EMI: monthly_surplus_after_emi_zar = monthly_income_zar - monthly_expenses_zar - monthly_emi_zar. Purpose: shows the approximate amount remaining after expenses and loan repayment. A negative value indicates that recorded expenses plus loan repayment exceed recorded monthly income.
+13.7 Savings Coverage: savings_coverage_months = savings_zar / monthly_expenses_zar. Purpose: estimates how many months of recorded expenses could theoretically be covered by savings.
+
+14. DIVISION-BY-ZERO HANDLING
+Any ratio must safely handle zero denominators.
+Do not allow Infinity or NaN to enter the model unexpectedly.
+For every ratio: if denominator == 0, apply a documented strategy.
+Do not arbitrarily replace every undefined ratio with zero because zero and undefined do not necessarily have the same meaning.
+
+15. BASELINE ML FEATURE SET
+Recommended baseline numerical features: age, monthly_income_zar, monthly_expenses_zar, savings_zar, loan_amount_zar, monthly_emi_zar, loan_term_months, loan_interest_rate_pct, debt_to_income_ratio, credit_score, savings_to_income_ratio, disposable_income_zar, expense_to_income_ratio, monthly_surplus_after_emi_zar, savings_coverage_months.
+Potential additional feature: loan_to_income_ratio, subject to validation.
+Categorical features: gender, education_level, employment_status, job_title, has_loan, loan_type.
+
+16. FEATURES TO EXCLUDE
+Do not use user_id as a model feature.
+Do not use raw USD and equivalent ZAR fields together. For example, do not train using both monthly_income_usd and monthly_income_zar because they contain essentially the same information. Similarly monthly_expenses_usd / monthly_expenses_zar and the other equivalent monetary fields should not be duplicated in the feature matrix.
+Do not include: target labels as inputs; fields generated from the target; future information; post-outcome information.
+
+17. THE MOST IMPORTANT OUTSTANDING ISSUE — TARGET VARIABLE
+The supplied dataset does not currently contain a genuine risk_tier target.
+This means the developer must NOT simply train X = financial features, y = risk_tier without first defining how risk_tier was obtained.
+The required target is risk_tier with Low, Medium, High.
+
+18. TARGET CREATION
+There are two possible approaches.
+Option A — Obtain a genuine labelled dataset. If a dataset containing genuine financial-risk labels is available and appropriate, use it. This is preferable for a real supervised-learning problem.
+Option B — Create a documented synthetic target. Because the current dataset is synthetic and does not provide the required risk label, the academic prototype may construct a target using a deterministic financial-risk rubric. If this approach is used, it must be clearly documented as a constructed/synthetic target rather than pretending that the dataset contained genuine risk labels.
+
+19. IF A SYNTHETIC TARGET IS USED
+The target-generation methodology should use independent financial indicators such as: credit_score; debt/repayment burden; expense burden; savings resilience; disposable income.
+The exact thresholds must be agreed and documented before model training.
+Conceptually: Financial indicators → Risk scoring/rules → Low / Medium / High → Training target.
+The developer must save the target-generation version. Example: risk_target_version = 1.0, and document: variables used; thresholds; weighting; class distribution; rationale.
+
+20. WARNING ABOUT TARGET LEAKAGE / CIRCULARITY
+If the target is created directly from credit_score, debt_to_income_ratio, expense_to_income_ratio, savings and those same features are then given to the ML model, the model will learn the constructed rule.
+This is not necessarily invalid for a prototype demonstration, but it must be disclosed academically.
+The system should NOT claim: "The model discovered financial risk independently from the data."
+Instead, documentation should explain that the prototype uses a constructed classification target and evaluates whether the algorithms can reproduce that classification.
+If a genuine labelled dataset becomes available, replace the constructed target.
+
+21. FOUR REQUIRED ML MODELS
+FinAware must train and evaluate:
+Model 1 — Random Forest. A tree-based ensemble classification algorithm capable of modelling nonlinear relationships. Particularly useful for FinAware because it can provide feature importance.
+Model 2 — Gradient Boosting. An ensemble method that sequentially builds decision trees to improve predictive performance. It can also provide feature importance.
+Model 3 — K-Nearest Neighbours. A distance-based classification algorithm. Because KNN is sensitive to feature scale, numerical features should be appropriately scaled.
+Model 4 — Support Vector Machine. A classification algorithm capable of modelling complex decision boundaries. Numerical feature scaling is particularly important. If probability output is required, configure probability estimation appropriately and document the implications.
+
+22. MODEL COMPARISON
+All four models must be evaluated using comparable methodology.
+At minimum report: Accuracy, Precision, Recall, F1-score, Confusion Matrix.
+For a three-class problem, report: Macro F1, Weighted F1, per-class precision, per-class recall, per-class F1.
+Do not rely on accuracy alone.
+
+23. MODEL SELECTION
+The developer must document why the final model was selected.
+Do not simply say: "Random Forest was selected because it had the highest accuracy."
+The comparison should consider: overall performance; macro F1; class-level recall; confusion matrix; probability support; explainability; inference requirements.
+The final selection must be evidence-based and documented.
+
+24. PREDICTED PROBABILITY
+The selected model should provide a probability distribution. Example: Low 8%, Medium 72%, High 20%.
+The system should then select Medium as the predicted risk tier because it has the highest predicted probability.
+The UI should display "Medium Financial Risk" and "72% predicted probability".
+Do not describe the probability as a guarantee.
+
+25. PREDICT_PROBA
+Where supported, use predict_proba().
+The response should contain: { "Low": 0.08, "Medium": 0.72, "High": 0.20 }
+The class ordering must be explicitly controlled so that probabilities are never assigned to the wrong risk tier.
+
+26. MODEL EXPLAINABILITY
+FinAware must answer: "Why did the model classify me this way?"
+The system should therefore return the most important factors contributing to the prediction.
+Potential drivers: debt-to-income ratio; expense-to-income ratio; savings; monthly income; monthly expenses; credit score; monthly EMI; disposable income; savings coverage.
+
+27. FEATURE IMPORTANCE
+For Random Forest: model.feature_importances_ can be used.
+For Gradient Boosting: model.feature_importances_ can also be used.
+KNN does not naturally provide conventional feature importance.
+A nonlinear SVM does not provide straightforward feature importance in the same way.
+Therefore, use an appropriate model-agnostic method where necessary, such as Permutation Importance or another documented explainability technique.
+Do not invent feature importance values.
+
+28. IMPORTANT EXPLAINABILITY DISCLAIMER
+Feature importance indicates that the model relies on a feature.
+It does NOT prove that feature X caused the user's financial risk.
+Therefore, the UI should say "Factors influencing this prediction" rather than "These factors caused your financial risk."
+
+29. USER-FRIENDLY DRIVER NAMES
+Do not expose debt_to_income_ratio to the ordinary user. Instead display "Debt-to-income ratio".
+Mapping (technical feature → user display):
+monthly_income_zar → Monthly income
+monthly_expenses_zar → Monthly expenses
+savings_zar → Savings
+debt_to_income_ratio → Debt-to-income ratio
+expense_to_income_ratio → Expense-to-income ratio
+credit_score → Credit score
+monthly_emi_zar → Monthly loan repayment
+disposable_income_zar → Disposable income
+monthly_surplus_after_emi_zar → Monthly surplus after loan repayment
+savings_coverage_months → Savings coverage
+
+30. RECOMMENDATION ENGINE
+The previous idea of using an OpenAI call for recommendations should be removed.
+FinAware should use a deterministic recommendation engine.
+Architecture: Risk Prediction + Top Drivers + Relevant Financial Values → Recommendation Rules → Structured Recommendations.
+This makes recommendations: reproducible; explainable; deterministic; easier to test; easier to demonstrate academically.
+
+31. RISK-BASED RECOMMENDATIONS
+Low Risk — potential recommendations: Maintain healthy financial behaviour. Continue building savings. Monitor monthly expenses. Maintain responsible debt levels. Continue long-term financial planning.
+Medium Risk — potential recommendations: Review discretionary spending. Increase savings where possible. Monitor debt repayments. Reduce unnecessary financial commitments. Improve monthly surplus. Strengthen financial resilience.
+High Risk — potential recommendations: Review debt obligations. Reduce unnecessary expenditure. Review affordability of current financial commitments. Prioritise essential financial obligations. Build/rebuild emergency savings where possible. Consider appropriate professional financial guidance.
+
+32. DRIVER-SPECIFIC RECOMMENDATIONS
+If debt_to_income_ratio is a significant driver: Review outstanding debt obligations and repayment commitments.
+If expense_to_income_ratio is a significant driver: Review recurring and discretionary expenses to identify opportunities to reduce monthly financial pressure.
+If savings_zar is a significant driver: Consider gradually increasing your emergency savings buffer.
+If credit_score is a significant driver: Monitor credit behaviour and maintain responsible credit usage.
+If monthly_surplus_after_emi_zar is low or negative: Review monthly expenses and loan repayment commitments to improve available cash flow.
+
+33. RECOMMENDATION TRACEABILITY
+Every recommendation should be traceable to: Risk Tier + Model Driver + User Financial Condition.
+Example: High Risk + High debt-to-income ratio + High monthly repayment → Debt-management recommendation.
+This makes the recommendation explainable.
+
+34. PREDICTION API
+The ML service should expose a prediction endpoint. Conceptually: POST /predict
+Input:
+{
+  "age": 32, "gender": "Female", "education_level": "Bachelor", "employment_status": "Employed", "job_title": "Accountant",
+  "monthly_income_zar": 35000, "monthly_expenses_zar": 22000, "savings_zar": 85000,
+  "has_loan": "Yes", "loan_type": "Car", "loan_amount_zar": 180000, "loan_term_months": 60,
+  "monthly_emi_zar": 4200, "loan_interest_rate_pct": 12.5, "debt_to_income_ratio": 0.12,
+  "credit_score": 650, "savings_to_income_ratio": 2.43
+}
+
+35. PREDICTION RESPONSE
+Expected structure:
+{
+  "riskTier": "Medium",
+  "probabilities": { "Low": 0.08, "Medium": 0.72, "High": 0.20 },
+  "topDrivers": [
+    { "feature": "debt_to_income_ratio", "label": "Debt-to-income ratio", "importance": 0.31, "direction": "increases_risk" },
+    { "feature": "expense_to_income_ratio", "label": "Expense-to-income ratio", "importance": 0.24, "direction": "increases_risk" }
+  ],
+  "recommendations": [
+    { "title": "Review debt obligations", "reason": "Debt-to-income ratio is a significant factor influencing the current prediction." }
+  ],
+  "model": { "name": "Random Forest", "version": "1.0" }
+}
+The exact driver importance format may differ depending on the explainability method.
+
+36. FRONTEND CHANGES
+The current financial form should feed the ML prediction service.
+After submission, the user should see a results page/card. Example card:
+YOUR FINANCIAL RISK ASSESSMENT — MEDIUM RISK — 72% probability — Low 8% | Medium 72% | High 20%
+
+37. KEY DRIVERS UI
+Below the prediction:
+WHAT IS INFLUENCING YOUR RESULT?
+1. Debt-to-income ratio — Significant influence
+2. Expense-to-income ratio — Significant influence
+3. Savings — Moderate influence
+The user should be able to understand this without knowing machine learning.
+
+38. RECOMMENDATIONS UI
+Then:
+YOUR RECOMMENDED ACTIONS
+Reduce debt pressure — Your debt-related indicators are contributing significantly to the current prediction.
+Review monthly expenses — Your expense burden is contributing to the current financial risk classification.
+Strengthen savings — Increasing financial reserves can improve financial resilience.
+
+39. DATABASE CHANGES
+Inspect the existing Prisma schema.
+The developer should determine whether the current financial profile tables can store the ML inputs and prediction.
+Recommended prediction record: FinancialRiskPrediction — potential fields: id, userId, riskTier, lowProbability, mediumProbability, highProbability, modelName, modelVersion, createdAt.
+Potential separate driver table: FinancialRiskDriver — fields: id, predictionId, featureName, displayName, importance, direction.
+Potential recommendation table: FinancialRecommendation — fields: id, predictionId, title, description, reason, priority, createdAt.
+The developer should integrate this with the existing schema rather than duplicating existing financial entities.
+
+40. ML SERVICE STORAGE
+The ML service should persist: pipeline/model; feature schema; model metadata; target version; model version.
+Recommended artefacts: pipeline.joblib; feature_schema.json; model_metadata.json.
+Example metadata:
+{ "model": "Random Forest", "version": "1.0", "features": [], "target": "risk_tier", "target_version": "1.0", "random_state": 42 }
+
+41. DOCKER / KUBERNETES INTEGRATION
+The ML service should be containerised consistently with the existing FinAware architecture.
+Conceptually: deploy/ backend/ frontend/ financial-service/ ml-service/
+The ML service should expose an internal API. Example: ml-service:8000
+The Node.js backend can call the ML service.
+Recommended communication: Next.js → Node.js API → ML Service → Model
+Do not expose the model directly to the public browser if it can be avoided.
+
+43. ERROR HANDLING
+The ML service should handle: missing required fields; invalid numeric values; unsupported categorical values; model unavailable; preprocessing failure; prediction failure; malformed requests.
+Return structured errors. Example:
+{ "error": "INVALID_INPUT", "message": "monthly_income_zar must be a positive numeric value." }
+
+44. SECURITY
+Do not expose: model files; internal service credentials; database credentials; environment variables; private configuration.
+Validate all user input.
+Do not trust frontend validation alone.
+Backend validation is required.
+
+45. TESTING REQUIREMENTS
+Data tests: correct record count; no unexpected missing values; correct data types; correct categorical values; correct monetary values.
+Feature tests: verify disposable_income_zar, expense_to_income_ratio, monthly_surplus_after_emi_zar, savings_coverage_months against manually calculated examples.
+Model tests: model loads; prediction succeeds; probability sums to approximately 1; risk tier matches highest probability (example: 0.08 + 0.72 + 0.20 = 1.00).
+API tests: valid request; invalid request; missing field; invalid data type; unknown category; model unavailable.
+
+45 (b). IMPORTANT PROBABILITY VALIDATION
+The API should ensure: Low + Medium + High ≈ 1.0.
+The frontend can display percentages rounded to whole numbers (e.g. 8%, 72%, 20%).
+The underlying API should retain greater precision.
+
+46. MODEL VERSIONING
+The system should know which model produced a prediction. Example: Model: Random Forest; Version: 1.0; Prediction date: 2026-09-XX (date not important).
+This becomes particularly important if the model is retrained later.
+
+47. RECOMMENDATION VERSIONING
+Recommendations should also be versioned where practical. Example: Recommendation Rules: 1.0.
+This allows the developer to identify which rule set produced a recommendation.
+
+48. WHAT SHOULD BE REMOVED FROM THE OLD IMPLEMENTATION
+If the existing implementation currently contains an OpenAI chatbot or a generic AI recommendation call, it should not be the primary recommendation mechanism for FinAware.
+Replace: Financial data → OpenAI → Generic advice
+with: Financial data → ML prediction → Risk tier → Top drivers → Rule-based recommendation engine.
+The system therefore remains fully aligned with the requirement that the emerging technology is machine learning rather than a chatbot.
+
+50. WHAT THE FINAL SYSTEM SHOULD DEMONSTRATE
+The completed FinAware system should be able to demonstrate the following end-to-end scenario:
+Step 1: User enters financial information.
+Step 2: FinAware validates the information.
+Step 3: The ML service calculates engineered features.
+Step 4: The model processes the financial profile.
+Step 5: FinAware predicts Medium Financial Risk.
+Step 6: The model returns Low 8%, Medium 72%, High 20%.
+Step 7: The explainability layer identifies debt-to-income ratio, expense-to-income ratio and savings as important drivers.
+Step 8: The recommendation engine applies rules.
+Step 9: The user receives: Medium Financial Risk; 72% predicted probability; Key factors: debt-to-income ratio, expense-to-income ratio, savings; Recommended actions: review debt obligations, review discretionary expenses, strengthen savings.
+
+50 (b). ACADEMIC POSITIONING
+FinAware should be described as: an interactive machine-learning-based personal finance decision-support system that predicts financial risk, provides prediction probabilities, explains important financial factors and generates rule-based recommendations.
+The machine-learning component demonstrates: Data preparation → Feature engineering → Classification → Model evaluation → Probability estimation → Explainability → Decision support.
+This provides a clear relationship between the dataset, emerging technology and system functionality.
+
+51. WHAT THE DEVELOPER MUST HAND BACK
+/data: personal_finance_zar.csv
+/ml: preprocessing; feature_engineering; target_generation; models; evaluation; explainability; prediction
+/models: pipeline.joblib; model_metadata.json; feature_schema.json
+/api: prediction endpoint
+/recommendations: recommendation rules
+/tests: data tests; feature tests; model tests; API tests
+The exact folder structure can be adapted to the existing project.
+
+52. FINAL DEVELOPER CHECKLIST
+DATA: Dataset integrated. 32,424 records verified. Data dictionary reviewed. Data types validated. Missing values checked. Duplicate records checked. ZAR fields used appropriately. USD duplicate fields excluded from ML features.
+TARGET: Risk target defined. Low/Medium/High documented. Target-generation methodology documented. Class distribution reported. Target leakage assessed.
+FEATURES: Feature engineering implemented. Ratios validated. Division-by-zero handled. Duplicate features removed. Feature schema documented.
+PREPROCESSING: Train/test split implemented. Stratification used. Categorical encoding implemented. Numerical scaling implemented where appropriate. No preprocessing leakage. Reusable pipeline created.
+MODELS: Random Forest implemented. Gradient Boosting implemented. KNN implemented. SVM implemented. All four evaluated. Confusion matrices produced. Accuracy reported. Precision reported. Recall reported. F1 reported. Macro F1 reported. Final model documented.
+PREDICTION: Risk tier returned. Low probability returned. Medium probability returned. High probability returned. Probabilities validated. Model version returned.
+EXPLAINABILITY: Top drivers calculated. Drivers mapped to human-readable labels. Appropriate method used for each model. Drivers presented in UI. No causal claims made.
+RECOMMENDATIONS: Rule-based engine implemented. Risk-specific rules implemented. Driver-specific rules implemented. Recommendations traceable to prediction. OpenAI dependency removed from recommendation generation.
+BACKEND: ML endpoint implemented. Input validation implemented. Error handling implemented. ML service integrated with Node.js backend. Prediction results persisted where required.
+FRONTEND: Risk tier displayed. Probability distribution displayed. Top drivers displayed. Recommendations displayed. User-friendly terminology used. Loading/error states implemented.
+INFRASTRUCTURE: ML service containerised. Kubernetes deployment configured. Service networking configured. Environment configuration documented. Model artefacts included appropriately.
+TESTING: Data tests. Feature tests. Model tests. API tests. End-to-end prediction test.
+
+53. DEFINITION OF DONE
+FinAware's ML component is considered complete when a user can enter financial information and receive a risk tier, probabilities, drivers and recommendations. The complete chain must work:
+Financial Input → Validation → Feature Engineering → Preprocessing → ML Model → Risk Classification → Prediction Probabilities → Feature Drivers → Recommendation Rules → API → FinAware UI

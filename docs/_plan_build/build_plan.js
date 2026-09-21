@@ -2,7 +2,7 @@ const fs = require("fs");
 const {
   Document, Packer, Paragraph, TextRun, HeadingLevel, Table, TableRow, TableCell,
   WidthType, ShadingType, AlignmentType, LevelFormat, BorderStyle, PageBreak,
-  TableOfContents, Footer, PageNumber, Header
+  TableOfContents, Footer, PageNumber, Header, ImageRun
 } = require("docx");
 
 const NAVY = "1F3A5F", TEAL = "0F766E", GREY = "F2F4F7", AMBER = "FFF4E5", RED = "B42318";
@@ -82,11 +82,12 @@ children.push(
     ["Scope", "**Additive only.** The existing FinAware application stays as it is. The ML service, the dataset and the Assess Financial Risk feature are added alongside it."],
     ["Design authority", "The four supplied UML diagrams: Class, Use Case, Activity and Sequence (Assess Financial Risk)"],
     ["Inputs reviewed", "Existing FinAware repo (FinAware-byte/FinAware, main); ML specification; developer handoff package (12 Python files); data package (2 CSVs + data dictionary); the four UML diagrams"],
-    ["Date", "21 September 2026 (revision 4)"],
+    ["Date", "21 September 2026 (revision 5 — self-contained for AI use)"],
     ["Total effort", "≈ 21 developer-days core + 20% contingency ≈ 25 days (≈ 5 weeks full-time)"],
   ], [2600, 7038]),
   new Paragraph({ children: [new PageBreak()] }),
   new Paragraph({ spacing: { after: 240 }, children: [new TextRun({ text: "Contents", size: 32, bold: true, color: NAVY })] }),
+  new Paragraph({ spacing: { after: 80 }, children: [new TextRun({ text: "0. Instructions for an AI assistant using this document", bold: true })] }),
   new Paragraph({ spacing: { after: 80 }, children: [new TextRun("1. Executive summary")] }),
   new Paragraph({ spacing: { after: 80 }, children: [new TextRun("2. What exists today")] }),
   new Paragraph({ spacing: { after: 80 }, children: [new TextRun("2A. Alignment with the UML diagrams")] }),
@@ -111,6 +112,57 @@ children.push(
   new Paragraph({ spacing: { after: 80 }, children: [new TextRun("Appendix B — Data package: full reference")] }),
   new Paragraph({ spacing: { after: 80 }, children: [new TextRun("Appendix C — Traceability to the ML specification")] }),
   new Paragraph({ spacing: { after: 80 }, children: [new TextRun("Appendix D — Verbatim source of the handoff package")] }),
+  new Paragraph({ spacing: { after: 80 }, children: [new TextRun("Appendix E — UML diagrams (design authority) with text transcriptions")] }),
+  new Paragraph({ spacing: { after: 80 }, children: [new TextRun("Appendix F — Full ML specification (as supplied)")] }),
+  new Paragraph({ spacing: { after: 80 }, children: [new TextRun("Appendix G — Existing FinAware code reference (patterns to follow)")] }),
+  new Paragraph({ children: [new PageBreak()] }),
+);
+
+// ---------- 0. AI instructions ----------
+children.push(
+  h1("0. Instructions for an AI assistant using this document"),
+  p("This document is self-contained. It includes the full ML specification (Appendix F), the four UML diagrams with text transcriptions (Appendix E), the existing FinAware code patterns (Appendix G), the developer handoff code verbatim (Appendix D), the dataset reference (Appendix B) and the step-by-step plan (Steps 0–11). An AI assistant given this document should be able to implement the ML feature without other context."),
+  callout("Suggested prompt to paste with this document", [
+    "\"You are implementing the FinAware ML risk-assessment feature described in the attached document. Read section 0 first and follow its rules. Work through Steps 0 to 11 in order. Before each step, restate what you will build and which files you will create. Do not modify existing FinAware behaviour. Stop and ask me at every STOP POINT listed in section 0.4.\"",
+  ], "E8F4F8", NAVY),
+  gap(),
+  h2("0.1 Hard rules (never break these)"),
+  n("**Do not invent the risk target.** The dataset has no genuine Low/Medium/High label. Propose a constructed target (Step 1), then STOP until the human confirms the supervisor has approved it. Never train the final models on an unapproved target.", "rules"),
+  n("**Additive only.** Do not change or remove existing pages, services, tables, data or behaviour. Only the additive touch points in section 2A.5 may be edited.", "rules"),
+  n("**Follow the UML diagrams (Appendix E).** Components, flow, names and responsibilities come from the sequence, activity and class diagrams — e.g. recommendations are generated in the Financial API Service, and data access goes through the Financial Data Service.", "rules"),
+  n("**No OpenAI or other LLM in the new flow.** Recommendations are deterministic rules.", "rules"),
+  n("**Do not silently alter data.** Every transformation is logged and documented.", "rules"),
+  n("**Do not claim causation or independent discovery.** Use 'Factors influencing this prediction'; disclose that the target is constructed.", "rules"),
+  n("**Do not invent numbers.** Metrics, importances and class distributions come from running code on the real data.", "rules"),
+  n("**Never expose the ML service, model files or secrets to the browser.**", "rules"),
+  h2("0.2 Where things are"),
+  tableS(["Item", "Location"], [
+    ["FinAware repository", "~/Documents/school proj/finaware_main_project (GitHub FinAware-byte/FinAware, branch main)"],
+    ["Handoff code", "finaware_main_project/developerhandoffpackagefolder/ (verbatim in Appendix D)"],
+    ["Dataset and dictionary", "~/Downloads/redeveloperhandoffpackagefolder (1)/ — personal_finance_zar.csv, synthetic_personal_finance_dataset.csv, data_dictionary.xlsx (reference in Appendix B)"],
+    ["UML diagrams", "finaware_main_project/docs/uml/01-class, 02-use-case, 03-activity, 04-sequence (Appendix E)"],
+    ["Specification", "Appendix F (full text)"],
+    ["Existing code patterns", "Appendix G"],
+  ], [2600, 7038]),
+  h2("0.3 Work order"),
+  tableS(["Order", "Step", "Output", "Gate"], [
+    ["1", "Step 0 — setup", "ml-service/ with data; working Node and Python", "App builds unchanged"],
+    ["2", "Step 1 — propose target rubric + class distribution", "docs/risk_tier_methodology.md draft", "**STOP A**"],
+    ["3", "Step 2 — data audit, features, pipeline (fixed handoff code)", "reports/data_audit.md; ml/ modules", "—"],
+    ["4", "Steps 6, 7, 8, 9 against a stubbed ML response", "New services, tables, pages, deployment", "**STOP B** (migration review)"],
+    ["5", "Step 3 — train & evaluate (only after STOP A approval)", "reports/model_comparison.md; artefacts", "**STOP C**"],
+    ["6", "Steps 4 and 5 — explainability, recommendation rules", "explain.py; recommendations.ts", "—"],
+    ["7", "Step 10 — tests; Step 11 — documentation", "Tests green; docs complete", "**STOP D** (final review)"],
+  ], [800, 4200, 3100, 1538]),
+  h2("0.4 STOP POINTS (ask the human before continuing)"),
+  b("**STOP A — Target approval.** Present the proposed rubric, thresholds, weights, class distribution and the circularity disclosure. Continue to Step 3 only after explicit approval. Also confirm Decisions D-1 to D-6 (section 4); if not answered, use the recommended option and say so."),
+  b("**STOP B — Database migration.** Show the Prisma diff and confirm it only creates new tables and adds the Users back-relation."),
+  b("**STOP C — Model selection.** Present the comparison table, confusion matrices and the proposed final model with reasons."),
+  b("**STOP D — Final review.** Walk through the activity diagram on screen, including both error branches, and the §52 checklist (Appendix C.4)."),
+  h2("0.5 Known environment issues on this machine"),
+  b("Global npm is broken in every nvm Node version (missing proc-log module). Fix first: nvm install 20 --reinstall-packages-from=20.20.0."),
+  b("Python 3 is installed but has no pandas or scikit-learn; use a virtual environment inside ml-service/."),
+  b("Training all four models takes about 5–6 minutes (SVM dominates)."),
   new Paragraph({ children: [new PageBreak()] }),
 );
 
@@ -926,6 +978,130 @@ children.push(
     .flatMap(f => [h2(`D · ${f}`), ...listing(f), gap()]),
 );
 
+// ================= Appendix E: UML diagrams =================
+const REPO = "/Users/kumbulani/Documents/school proj/finaware_main_project";
+const img = (file, w, h) => new Paragraph({ alignment: AlignmentType.CENTER, spacing: { after: 120 },
+  children: [new ImageRun({ type: "png", data: fs.readFileSync(`${REPO}/docs/uml/${file}`), transformation: { width: w, height: h } })] });
+children.push(
+  new Paragraph({ children: [new PageBreak()] }),
+  h1("Appendix E — UML diagrams (design authority) with text transcriptions"),
+  p("Image files: docs/uml/01-class-diagram.png, 02-use-case-diagram.png, 03-activity-diagram.png, 04-sequence-diagram.png. Each image is followed by a full text transcription so the content is readable without the picture."),
+
+  h2("E.1 Class diagram"),
+  img("01-class-diagram.png", 460, 505),
+  tableS(["Class", "Attributes", "Operations"], [
+    ["User", "-userId: UUID; -firstName: String; -lastName: String; -email: String; -passwordHash: String", "+register(): void; +login(): boolean; +updateProfile(): void"],
+    ["Debt", "-debtId: UUID; -debtType: String; -outstandingBalance: Decimal; -monthlyPayment: Decimal; -interestRate: Decimal", "+calculateDebtBalance(): Decimal; +calculateMonthlyDebtObligation(): Decimal"],
+    ["FinancialProfile", "-profileId: UUID; -monthlyIncome: Decimal; -monthlyExpenses: Decimal; -savings: Decimal; -creditScore: Integer; -financialGoal: String", "+calculateDebtToIncomeRatio(): Decimal; +calculateSavingsRatio(): Decimal; +updateFinancialProfile(): void"],
+    ["ML Prediction Service", "-modelVersion: String; -modelName: String", "+preprocessData(): void; +predictRisk(): RiskAssessment"],
+    ["RiskAssessment", "-assessmentId: UUID; -riskLevel: String; -riskScore: Decimal; -predictionDate: DateTime; -modelVersion: String", "+calculateRiskScore(): Decimal; +getRiskLevel(): String"],
+    ["Recommendation", "-recommendationId: UUID; -recommendationType: String; -recommendationText: String; -createdDate: DateTime", "+generateRecommendation(): void"],
+  ], [1900, 4400, 3338]),
+  p("**Relationships:** User 1 — 0..* Debt (aggregation). User 1 — 1 FinancialProfile (composition). ML Prediction Service uses debt data (→ Debt) and uses financial data (→ FinancialProfile), and produces RiskAssessment. FinancialProfile 1 — 0..* RiskAssessment. RiskAssessment 1 — 0..* Recommendation."),
+
+  h2("E.2 Use-case diagram"),
+  img("02-use-case-diagram.png", 520, 294),
+  p("**System boundary:** FinAware System. **Actors:** User (primary); ML Prediction Service (secondary)."),
+  b("User → Register Account; Login; Manage Financial Profile; Manage Debt; Generate Recommendation; View Financial Dashboard; Assess Financial Risk; View Risk Assessment."),
+  b("Generate Recommendation «extend» Assess Financial Risk."),
+  b("View Financial Dashboard «include» View Risk Assessment."),
+  b("Assess Financial Risk «include» Store Risk Assessment; «include» Preprocess Financial Data; «include» Generate Risk Prediction."),
+  b("ML Prediction Service → Generate Risk Prediction."),
+
+  h2("E.3 Activity diagram — FinAware: Assess Financial Risk"),
+  img("03-activity-diagram.png", 360, 567),
+  n("Start → User logs into FinAware → Open Financial Dashboard → Enter or update financial information → Validate financial information.", "act"),
+  n("Decision 'Is financial data valid?' — **No:** Display validation errors → User corrects financial information → Resubmit financial information → (to the final merge).", "act"),
+  n("**Yes:** User requests financial risk assessment → Retrieve FinancialProfile and Debt data → Prepare financial data → Apply preprocessing rules → Generate ML features → Send features to ML Prediction Service → Generate risk prediction.", "act"),
+  n("Decision 'Prediction successful?' — **Yes:** Create RiskAssessment → Store RiskAssessment → Generate Recommendation → Display risk score, risk level and recommendation.", "act"),
+  n("**No:** Display prediction error → Allow User to retry assessment.", "act"),
+  n("Both prediction branches merge, then merge with the validation branch → End.", "act"),
+
+  h2("E.4 Sequence diagram — FinAware: Assess Financial Risk"),
+  img("04-sequence-diagram.png", 620, 464),
+  p("**Participants (left to right):** User; Financial Web Interface; Financial API Service; Financial Data Service; PostgreSQL Database; ML Prediction Service."),
+  tableS(["#", "From → To", "Message"], [
+    ["1", "User → Financial Web Interface", "Enter financial information"],
+    ["2", "Web Interface → Financial API Service", "Submit financial information"],
+    ["3", "Financial API Service → itself", "Validate financial information"],
+    ["4", "Financial API Service → Web Interface", "Validation successful (return)"],
+    ["5", "User → Web Interface", "Request risk assessment"],
+    ["6", "Web Interface → Financial API Service", "POST /risk-assessment"],
+    ["7", "Financial API Service → Financial Data Service", "Retrieve FinancialProfile and Debt"],
+    ["8", "Financial Data Service → Database", "Query FinancialProfile"],
+    ["9", "Financial Data Service → Database", "Query Debt"],
+    ["10", "Database → Financial Data Service", "Financial data (return)"],
+    ["11", "Financial Data Service → Financial API Service", "FinancialProfile and Debt data (return)"],
+    ["12", "Financial API Service → ML Prediction Service", "Send financial features"],
+    ["13", "ML Prediction Service → itself", "Apply preprocessing rules"],
+    ["14", "ML Prediction Service → itself", "Generate ML features"],
+    ["15", "ML Prediction Service → itself", "Generate risk prediction"],
+    ["16", "ML Prediction Service → Financial API Service", "Return risk score and risk level"],
+    ["17", "Financial API Service → Financial Data Service", "Create RiskAssessment"],
+    ["18", "Financial Data Service → Database", "INSERT RiskAssessment"],
+    ["19", "Database → Financial Data Service", "Assessment stored (return)"],
+    ["20", "Financial Data Service → Financial API Service", "RiskAssessment created (return)"],
+    ["21", "Financial API Service → itself", "Generate Recommendation"],
+    ["22", "Financial API Service → Web Interface", "Return risk assessment and recommendation"],
+    ["23", "Web Interface → User", "Display risk score, risk level and recommendation"],
+  ], [600, 4200, 4838]),
+);
+
+// ================= Appendix F: full specification =================
+children.push(
+  new Paragraph({ children: [new PageBreak()] }),
+  h1("Appendix F — Full ML specification (as supplied)"),
+  p("The complete specification text, reproduced for completeness. Where the plan deviates (additive-only scope, UML naming), see Appendix C.3."),
+  ...fs.readFileSync(__dirname + "/spec.txt", "utf8").split("\n").map(l => {
+    if (/^(\d+(\s\(b\))?\.\s+[A-Z][A-Z0-9 /&,—'_-]+|IMPORTANT NOTE|QUICK SUMMARY|FINAWARE)$/.test(l.trim()))
+      return new Paragraph({ spacing: { before: 200, after: 80 }, children: [new TextRun({ text: l.trim(), bold: true, color: TEAL })] });
+    if (/^\s*[{}\[\]"]/.test(l) || /^\s{2,}/.test(l))
+      return new Paragraph({ spacing: { after: 0 }, shading: { type: ShadingType.CLEAR, fill: GREY }, children: [new TextRun({ text: l, font: "Consolas", size: 16 })] });
+    return new Paragraph({ spacing: { after: 60 }, children: [new TextRun({ text: l || " ", size: 19 })] });
+  }),
+);
+
+// ================= Appendix G: existing FinAware code reference =================
+const repoListing = rel => fs.readFileSync(`${REPO}/${rel}`, "utf8").replace(/\r/g, "").split("\n")
+  .map(l => new Paragraph({ spacing: { after: 0 }, shading: { type: ShadingType.CLEAR, fill: GREY },
+    children: [new TextRun({ text: l.length ? l : " ", font: "Consolas", size: 14 })] }));
+children.push(
+  new Paragraph({ children: [new PageBreak()] }),
+  h1("Appendix G — Existing FinAware code reference (patterns to follow)"),
+  p("New code must follow these existing patterns. These files are shown for reference only; apart from the additive touch points in section 2A.5 they must not be modified."),
+  h2("G.1 Conventions"),
+  tableS(["Topic", "Existing convention"], [
+    ["Stack", "Next.js 14 App Router + TypeScript, Tailwind, Recharts, Zod, Prisma 5 + SQLite, Express 4 services run with tsx"],
+    ["Service pattern", "services/<name>/src/server.ts uses createServiceApp(name) from services/shared/boot.ts (adds express.json, /health/live, /health/ready) and resolvePort(env, default); domain logic lives in lib/microservices/*"],
+    ["Ports", "web 30005 (dev:web); auth 4101; dashboard 4102; identity 4103; debts 4104; rehab 4105; help 4106; pdf 4107. New: financial-api 4108; financial-data 4109; ml-service 8000"],
+    ["Web → service calls", "Next.js route handlers under app/api/microservices/* read the session with getSessionUserId() and call services with callServiceJson(name, path, init) from lib/microservices/proxy.ts; service URLs come from <NAME>_SERVICE_URL env vars with localhost defaults"],
+    ["Auth", "Cookie session (finaware_session = user id); middleware.ts redirects protected prefixes to /login and enforces FICA"],
+    ["Database IDs", "Existing tables use Int autoincrement keys (Users.user_id). New tables may use UUID primary keys with Int foreign key user_id"],
+    ["Scripts", "npm run dev:stack runs web + all services via concurrently; prisma:sync = prisma generate && prisma db push; typecheck = tsc --noEmit; lint = next lint"],
+    ["Style", "Prettier (prettier-plugin-tailwindcss), ESLint next config; short 'Why:' comments explain security-relevant choices"],
+  ], [2200, 7438]),
+  h2("G.2 Repository file list (tracked files; docs binaries omitted)"),
+  ...fs.readFileSync(__dirname + "/tree.txt", "utf8").trim().split("\n").reduce((acc, l, i, arr) => {
+    if (i % 3 === 0) acc.push(arr.slice(i, i + 3).join("    ·    ")); return acc; }, [])
+    .map(l => new Paragraph({ spacing: { after: 0 }, children: [new TextRun({ text: l, font: "Consolas", size: 14 })] })),
+  ...[
+    ["G.3 prisma/schema.prisma", "prisma/schema.prisma"],
+    ["G.4 services/shared/boot.ts (service template)", "services/shared/boot.ts"],
+    ["G.5 services/debts/src/server.ts (example service)", "services/debts/src/server.ts"],
+    ["G.6 lib/microservices/proxy.ts (service calls)", "lib/microservices/proxy.ts"],
+    ["G.7 app/api/microservices/debts/route.ts (example API route)", "app/api/microservices/debts/route.ts"],
+    ["G.8 lib/auth/session.ts", "lib/auth/session.ts"],
+    ["G.9 middleware.ts", "middleware.ts"],
+    ["G.10 components/sidebar/main-tabs.tsx", "components/sidebar/main-tabs.tsx"],
+    ["G.11 package.json", "package.json"],
+    ["G.12 .env.example", ".env.example"],
+    ["G.13 Dockerfile", "Dockerfile"],
+    ["G.14 docker-compose.yml", "docker-compose.yml"],
+    ["G.15 deploy/helm/finaware/values.yaml", "deploy/helm/finaware/values.yaml"],
+    ["G.16 deploy/helm/finaware/templates/deployments.yaml", "deploy/helm/finaware/templates/deployments.yaml"],
+  ].flatMap(([t, f]) => [h2(t), ...repoListing(f), gap()]),
+);
+
 const doc = new Document({
   creator: "FinAware", title: "FinAware ML Implementation Plan",
   styles: {
@@ -940,6 +1116,8 @@ const doc = new Document({
     { reference: "bul", levels: [
       { level: 0, format: LevelFormat.BULLET, text: "•", alignment: AlignmentType.LEFT, style: { paragraph: { indent: { left: 360, hanging: 260 } } } },
       { level: 1, format: LevelFormat.BULLET, text: "–", alignment: AlignmentType.LEFT, style: { paragraph: { indent: { left: 800, hanging: 260 } } } } ] },
+    { reference: "rules", levels: [{ level: 0, format: LevelFormat.DECIMAL, text: "%1.", alignment: AlignmentType.LEFT, style: { paragraph: { indent: { left: 360, hanging: 300 } } } }] },
+    { reference: "act", levels: [{ level: 0, format: LevelFormat.DECIMAL, text: "%1.", alignment: AlignmentType.LEFT, style: { paragraph: { indent: { left: 360, hanging: 300 } } } }] },
     { reference: "num", levels: [{ level: 0, format: LevelFormat.DECIMAL, text: "%1.", alignment: AlignmentType.LEFT, style: { paragraph: { indent: { left: 360, hanging: 300 } } } }] },
   ] },
   sections: [{
