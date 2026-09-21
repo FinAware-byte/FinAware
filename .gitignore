@@ -38,3 +38,4 @@ pnpm-debug.log*
 # local macOS TLS certs
 deploy/caddy/certs/*
 !deploy/caddy/certs/.gitkeep
+.idea/
