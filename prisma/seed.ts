@@ -1,4 +1,6 @@
 import { PrismaClient } from "@prisma/client";
+import { toDebtStatus } from "../lib/domain";
+import { estimateMonthlyObligation } from "../lib/simulation/generator";
 
 const prisma = new PrismaClient();
 const PROVIDER_WHATSAPP_NUMBER = "27670298265";
@@ -179,45 +181,17 @@ function generateDueDates(monthCount: number, endDate = new Date()): Date[] {
 }
 
 // Required helper: monthly obligation estimate to store in Credit_Profile.
-function monthlyObligationEstimator(debtType: string, balance: number): number {
-  const kind = debtType.toLowerCase();
-
-  let factor = 0.05;
-  let minimum = 400;
-
-  if (kind.includes("bond") || kind.includes("mortgage") || kind.includes("home loan")) {
-    factor = 0.008;
-    minimum = 2200;
-  } else if (kind.includes("vehicle") || kind.includes("equipment finance")) {
-    factor = 0.02;
-    minimum = 1600;
-  } else if (kind.includes("credit card") || kind.includes("store")) {
-    factor = 0.08;
-    minimum = 250;
-  } else if (kind.includes("personal loan") || kind.includes("business loan")) {
-    factor = 0.05;
-    minimum = 700;
-  } else if (kind.includes("overdraft") || kind.includes("telecom") || kind.includes("utility") || kind.includes("municipality") || kind.includes("city power")) {
-    factor = 0.1;
-    minimum = 220;
-  } else if (kind.includes("student") || kind.includes("nsfas")) {
-    factor = 0.03;
-    minimum = 300;
-  } else if (kind.includes("medical")) {
-    factor = 0.06;
-    minimum = 450;
-  } else if (kind.includes("maintenance")) {
-    factor = 0.12;
-    minimum = 1200;
-  } else if (kind.includes("funeral")) {
-    factor = 0.06;
-    minimum = 180;
-  } else if (kind.includes("unregistered") || kind.includes("informal")) {
-    factor = 0.12;
-    minimum = 500;
-  }
-
-  return roundCurrency(Math.max(minimum, balance * factor));
+// Why: Credit_Profile must hold the same totals the app computes (refreshCreditProfileTotals and the
+// dashboard): ACTIVE debts only, repayments from estimateMonthlyObligation(). Otherwise freshly seeded users
+// show different figures until their debts first change.
+function creditProfileTotals(debts: CreatedDebt[]): { totalDebt: number; monthlyObligations: number } {
+  const active = debts.filter((debt) => toDebtStatus(debt.status) === "ACTIVE");
+  return {
+    totalDebt: roundCurrency(active.reduce((sum, debt) => sum + debt.balance, 0)),
+    monthlyObligations: roundCurrency(
+      active.reduce((sum, debt) => sum + estimateMonthlyObligation(debt.balance, debt.interestRate), 0)
+    )
+  };
 }
 
 function seedDobPrefix(index: number): string {
@@ -1518,22 +1492,18 @@ async function seedUsersAndRelations() {
       await prisma.expertRequests.createMany({ data: requests });
     }
 
+    // All debts (any status) feed the demo net-worth estimate only; Credit_Profile uses creditProfileTotals.
     const totalDebt = roundCurrency(createdDebts.reduce((sum, debt) => sum + debt.balance, 0));
-    const monthlyObligations = roundCurrency(
-      createdDebts.reduce(
-        (sum, debt) => sum + monthlyObligationEstimator(debt.debtType, debt.balance),
-        0
-      )
-    );
 
     const creditScore = creditScoreForRisk(scenario.risk, rng);
 
+    const profileTotals = creditProfileTotals(createdDebts);
     await prisma.creditProfile.create({
       data: {
         user_id: user.user_id,
         credit_score: creditScore,
-        total_debt: totalDebt,
-        monthly_obligations: monthlyObligations
+        total_debt: profileTotals.totalDebt,
+        monthly_obligations: profileTotals.monthlyObligations
       }
     });
 
@@ -1549,7 +1519,7 @@ async function seedUsersAndRelations() {
     });
 
     summaryRows.push(
-      `${user.name} ${user.surname} | STANDARD | NetWorth R${formatCurrency(estimatedNetWorth)} | ${scenario.risk} | ${creditScore} | #Debts ${createdDebts.length} | TotalDebt R${formatCurrency(totalDebt)} | MonthlyObligations R${formatCurrency(monthlyObligations)} | #Requests ${requestCount} | #LegalRecords ${legalRows.length}`
+      `${user.name} ${user.surname} | STANDARD | NetWorth R${formatCurrency(estimatedNetWorth)} | ${scenario.risk} | ${creditScore} | #Debts ${createdDebts.length} | TotalDebt R${formatCurrency(profileTotals.totalDebt)} | MonthlyObligations R${formatCurrency(profileTotals.monthlyObligations)} | #Requests ${requestCount} | #LegalRecords ${legalRows.length}`
     );
   }
 
@@ -1631,26 +1601,20 @@ async function seedUsersAndRelations() {
       }
     });
 
-    const totalDebt = roundCurrency(createdDebts.reduce((sum, debt) => sum + debt.balance, 0));
-    const monthlyObligations = roundCurrency(
-      createdDebts.reduce(
-        (sum, debt) => sum + monthlyObligationEstimator(debt.debtType, debt.balance),
-        0
-      )
-    );
     const creditScore = creditScoreForRisk(profile.risk, rng);
 
+    const profileTotals = creditProfileTotals(createdDebts);
     await prisma.creditProfile.create({
       data: {
         user_id: user.user_id,
         credit_score: creditScore,
-        total_debt: totalDebt,
-        monthly_obligations: monthlyObligations
+        total_debt: profileTotals.totalDebt,
+        monthly_obligations: profileTotals.monthlyObligations
       }
     });
 
     summaryRows.push(
-      `${user.name} ${user.surname} | ${profile.tier} | NetWorth R${formatCurrency(profile.estimatedNetWorth)} | ${profile.risk} | ${creditScore} | #Assets ${profile.assets.length} | #Debts ${createdDebts.length} | TotalDebt R${formatCurrency(totalDebt)}`
+      `${user.name} ${user.surname} | ${profile.tier} | NetWorth R${formatCurrency(profile.estimatedNetWorth)} | ${profile.risk} | ${creditScore} | #Assets ${profile.assets.length} | #Debts ${createdDebts.length} | TotalDebt R${formatCurrency(profileTotals.totalDebt)}`
     );
   }
 
