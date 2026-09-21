@@ -1,8 +1,10 @@
 import { prisma } from "@/lib/db/prisma";
 import {
+  DebtStatus,
   type AppUser,
   type IdentificationType,
   type PassportCountry,
+  toDebtStatus,
   toDocumentType,
   toEmploymentStatus,
   toPassportCountry,
@@ -67,9 +69,10 @@ function mapDbUserToAppUser(user: {
 }
 
 async function refreshCreditProfileTotalsInternal(userId: number): Promise<void> {
-  const activeDebts = await prisma.debts.findMany({
-    where: { user_id: userId, status: "ACTIVE" }
-  });
+  // Why: seeded rows store "Active" while app-created rows store "ACTIVE"; normalise the same way the
+  // dashboard does (toDebtStatus) so seeded debts are not dropped from the stored totals.
+  const debts = await prisma.debts.findMany({ where: { user_id: userId } });
+  const activeDebts = debts.filter((debt) => toDebtStatus(debt.status) === DebtStatus.ACTIVE);
 
   const totalDebt = activeDebts.reduce((sum, debt) => sum + debt.balance, 0);
   const monthlyObligations = activeDebts.reduce(
@@ -197,7 +200,7 @@ export async function ensureUserByIdentifier(input: EnsureUserInput): Promise<Ap
       }
     }
 
-    const activeDebts = createdDebts.filter((debt) => debt.status === "ACTIVE");
+    const activeDebts = createdDebts.filter((debt) => toDebtStatus(debt.status) === DebtStatus.ACTIVE);
     const totalDebt = activeDebts.reduce((sum, debt) => sum + debt.balance, 0);
     const monthlyObligations = activeDebts.reduce(
       (sum, debt) => sum + estimateMonthlyObligation(debt.balance, debt.interest_rate),
