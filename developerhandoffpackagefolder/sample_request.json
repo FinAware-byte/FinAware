@@ -1,0 +1,5 @@
+{
+  "age":31,"gender":"Female","education_level":"Bachelor's Degree","employment_status":"Employed","job_title":"Software Developer",
+  "monthly_income_zar":42000,"monthly_expenses_zar":22000,"savings_zar":8000,"loan_status":"Active","loan_type":"Personal",
+  "loan_amount_zar":100000,"loan_term_months":48,"monthly_emi_zar":4500,"interest_rate":12.5,"credit_score":680,"region":"Gauteng"
+}

@@ -1,0 +1,530 @@
+{
+ "Dataset Summary": [
+  [
+   "Dataset file",
+   "personal_finance_zar.csv"
+  ],
+  [
+   "Records",
+   "32424"
+  ],
+  [
+   "Columns",
+   "24"
+  ],
+  [
+   "Source representation",
+   "USD monetary fields retained"
+  ],
+  [
+   "Localised representation",
+   "ZAR monetary fields added"
+  ],
+  [
+   "USD \u2192 ZAR rate",
+   "1 USD = 16.27 ZAR"
+  ],
+  [
+   "Missing values",
+   "0"
+  ],
+  [
+   "Duplicate records",
+   "0"
+  ],
+  [
+   "Region field",
+   "Removed during cleaning"
+  ],
+  [
+   "Loan type handling",
+   "'No Loan' used where has_loan = No"
+  ]
+ ],
+ "Dataset Summary__cols": [
+  "Dataset Property",
+  "Value"
+ ],
+ "Data Dictionary": [
+  [
+   "user_id",
+   "Unique synthetic identifier for each financial record/user.",
+   "String/Categorical",
+   "",
+   "U00001",
+   "Min: U00001 | Max: U32424",
+   "Original",
+   "",
+   "Identifier; generally excluded from model features."
+  ],
+  [
+   "age",
+   "Age of the synthetic user.",
+   "Integer",
+   "years",
+   "56",
+   "Min: 18 | Max: 69",
+   "Original",
+   "",
+   "Potential demographic/profile feature."
+  ],
+  [
+   "gender",
+   "Gender category recorded in the synthetic dataset.",
+   "String/Categorical",
+   "",
+   "Female, Male, Other",
+   "Female, Male, Other",
+   "Original",
+   "",
+   "Potential demographic feature; assess appropriateness before modelling."
+  ],
+  [
+   "education_level",
+   "Highest education level recorded for the user.",
+   "String/Categorical",
+   "",
+   "Bachelor, High School, Master, Other, PhD",
+   "Bachelor, High School, Master, Other, PhD",
+   "Original",
+   "",
+   "Potential financial-profile feature."
+  ],
+  [
+   "employment_status",
+   "Employment status of the user.",
+   "String/Categorical",
+   "",
+   "Employed, Self-employed, Student, Unemployed",
+   "Employed, Self-employed, Student, Unemployed",
+   "Original",
+   "",
+   "Potential income/employment stability feature."
+  ],
+  [
+   "job_title",
+   "Job/profession category recorded for the user.",
+   "String/Categorical",
+   "",
+   "Accountant, Doctor, Driver, Engineer, Manager, Salesperson, Student, Teacher, Unemployed",
+   "Accountant, Doctor, Driver, Engineer, Manager, Salesperson, Student, Teacher, Unemployed",
+   "Original",
+   "",
+   "Potential occupational profile feature."
+  ],
+  [
+   "monthly_income_usd",
+   "Monthly income in the original US dollar representation.",
+   "Decimal",
+   "USD/month",
+   "3531.69",
+   "Min: 500.0 | Max: 12404.05",
+   "Original",
+   "",
+   "Source monetary field; ZAR equivalent is preferred for FinAware."
+  ],
+  [
+   "monthly_expenses_usd",
+   "Monthly expenses in the original US dollar representation.",
+   "Decimal",
+   "USD/month",
+   "1182.59",
+   "Min: 150.01 | Max: 10082.71",
+   "Original",
+   "",
+   "Source monetary field; ZAR equivalent is preferred for FinAware."
+  ],
+  [
+   "savings_usd",
+   "Savings balance in the original US dollar representation.",
+   "Decimal",
+   "USD",
+   "367655.03",
+   "Min: 635.96 | Max: 1237774.39",
+   "Original",
+   "",
+   "Source monetary field; ZAR equivalent is preferred for FinAware."
+  ],
+  [
+   "has_loan",
+   "Indicates whether the user has a loan.",
+   "String/Categorical",
+   "",
+   "No, Yes",
+   "No, Yes",
+   "Original",
+   "",
+   "Potential debt-profile feature/target depending on model objective."
+  ],
+  [
+   "loan_type",
+   "Loan category; 'No Loan' represents users without a loan.",
+   "String/Categorical",
+   "",
+   "Business, Car, Education, Home, No Loan",
+   "Business, Car, Education, Home, No Loan",
+   "Cleaned",
+   "Missing values structurally represented as 'No Loan' because missing values correspond to has_loan = No.",
+   "Potential categorical debt-profile feature."
+  ],
+  [
+   "loan_amount_usd",
+   "Loan amount in the original US dollar representation.",
+   "Decimal",
+   "USD",
+   "0.0",
+   "Min: 0.0 | Max: 499954.75",
+   "Original",
+   "",
+   "Source monetary field; ZAR equivalent is preferred for FinAware."
+  ],
+  [
+   "loan_term_months",
+   "Loan repayment term measured in months.",
+   "Integer",
+   "months",
+   "0",
+   "Min: 0 | Max: 360",
+   "Original",
+   "",
+   "Potential loan characteristic feature."
+  ],
+  [
+   "monthly_emi_usd",
+   "Monthly loan instalment/EMI in the original US dollar representation.",
+   "Decimal",
+   "USD/month",
+   "0.0",
+   "Min: 0.0 | Max: 47723.84",
+   "Original",
+   "",
+   "Source monetary field; ZAR equivalent is preferred for FinAware."
+  ],
+  [
+   "loan_interest_rate_pct",
+   "Loan interest rate expressed as a percentage.",
+   "Decimal",
+   "%",
+   "0.0",
+   "Min: 0.0 | Max: 30.0",
+   "Original",
+   "",
+   "Potential loan-risk/affordability feature."
+  ],
+  [
+   "debt_to_income_ratio",
+   "Debt-to-income ratio calculated from monthly EMI relative to monthly income.",
+   "Decimal",
+   "ratio",
+   "0.0",
+   "Min: 0.0 | Max: 90.67",
+   "Original",
+   "",
+   "Important candidate financial-risk feature."
+  ],
+  [
+   "credit_score",
+   "Synthetic credit score.",
+   "Integer",
+   "score",
+   "430",
+   "Min: 300 | Max: 850",
+   "Original",
+   "",
+   "Important candidate credit-risk feature."
+  ],
+  [
+   "savings_to_income_ratio",
+   "Savings-to-income ratio.",
+   "Decimal",
+   "ratio",
+   "8.68",
+   "Min: 0.1 | Max: 10.0",
+   "Original",
+   "",
+   "Important candidate financial-resilience feature."
+  ],
+  [
+   "record_date",
+   "Date associated with the financial record.",
+   "String/Categorical",
+   "date",
+   "2024-01-09",
+   "Min: 2021-07-23 | Max: 2025-07-22",
+   "Original",
+   "Parsed/validated as a date; no invalid dates found.",
+   "Temporal feature if time-based analysis is required."
+  ],
+  [
+   "monthly_income_zar",
+   "Monthly income converted to South African Rand.",
+   "Decimal",
+   "ZAR/month",
+   "57460.6",
+   "Min: 8135.0 | Max: 201813.89",
+   "Derived",
+   "Converted from USD using fixed academic localisation rate: 1 USD = 16.27 ZAR; rounded to 2 decimals.",
+   "Primary localized income feature for FinAware."
+  ],
+  [
+   "monthly_expenses_zar",
+   "Monthly expenses converted to South African Rand.",
+   "Decimal",
+   "ZAR/month",
+   "19240.74",
+   "Min: 2440.66 | Max: 164045.69",
+   "Derived",
+   "Converted from USD using fixed academic localisation rate: 1 USD = 16.27 ZAR; rounded to 2 decimals.",
+   "Primary localized expense feature for FinAware."
+  ],
+  [
+   "savings_zar",
+   "Savings balance converted to South African Rand.",
+   "Decimal",
+   "ZAR",
+   "5981747.34",
+   "Min: 10347.07 | Max: 20138589.33",
+   "Derived",
+   "Converted from USD using fixed academic localisation rate: 1 USD = 16.27 ZAR; rounded to 2 decimals.",
+   "Primary localized savings feature for FinAware."
+  ],
+  [
+   "loan_amount_zar",
+   "Loan amount converted to South African Rand.",
+   "Decimal",
+   "ZAR",
+   "0.0",
+   "Min: 0.0 | Max: 8134263.78",
+   "Derived",
+   "Converted from USD using fixed academic localisation rate: 1 USD = 16.27 ZAR; rounded to 2 decimals.",
+   "Primary localized debt feature for FinAware."
+  ],
+  [
+   "monthly_emi_zar",
+   "Monthly loan instalment/EMI converted to South African Rand.",
+   "Decimal",
+   "ZAR/month",
+   "0.0",
+   "Min: 0.0 | Max: 776466.88",
+   "Derived",
+   "Converted from USD using fixed academic localisation rate: 1 USD = 16.27 ZAR; rounded to 2 decimals.",
+   "Primary localized repayment/affordability feature for FinAware."
+  ]
+ ],
+ "Data Dictionary__cols": [
+  "Column Name",
+  "Description",
+  "Data Type",
+  "Unit",
+  "Example Value",
+  "Possible Values / Range",
+  "Origin",
+  "Cleaning / Transformation",
+  "FinAware / ML Relevance"
+ ],
+ "Category Breakdown": [
+  [
+   "gender",
+   "Male",
+   "15595",
+   "48.1"
+  ],
+  [
+   "gender",
+   "Female",
+   "15550",
+   "47.96"
+  ],
+  [
+   "gender",
+   "Other",
+   "1279",
+   "3.94"
+  ],
+  [
+   "education_level",
+   "Bachelor",
+   "13038",
+   "40.21"
+  ],
+  [
+   "education_level",
+   "Master",
+   "9673",
+   "29.83"
+  ],
+  [
+   "education_level",
+   "High School",
+   "6456",
+   "19.91"
+  ],
+  [
+   "education_level",
+   "PhD",
+   "1638",
+   "5.05"
+  ],
+  [
+   "education_level",
+   "Other",
+   "1619",
+   "4.99"
+  ],
+  [
+   "employment_status",
+   "Employed",
+   "19410",
+   "59.86"
+  ],
+  [
+   "employment_status",
+   "Self-employed",
+   "6580",
+   "20.29"
+  ],
+  [
+   "employment_status",
+   "Unemployed",
+   "3220",
+   "9.93"
+  ],
+  [
+   "employment_status",
+   "Student",
+   "3214",
+   "9.91"
+  ],
+  [
+   "job_title",
+   "Driver",
+   "3698",
+   "11.41"
+  ],
+  [
+   "job_title",
+   "Teacher",
+   "3674",
+   "11.33"
+  ],
+  [
+   "job_title",
+   "Manager",
+   "3621",
+   "11.17"
+  ],
+  [
+   "job_title",
+   "Student",
+   "3609",
+   "11.13"
+  ],
+  [
+   "job_title",
+   "Unemployed",
+   "3606",
+   "11.12"
+  ],
+  [
+   "job_title",
+   "Accountant",
+   "3591",
+   "11.08"
+  ],
+  [
+   "job_title",
+   "Salesperson",
+   "3567",
+   "11.0"
+  ],
+  [
+   "job_title",
+   "Doctor",
+   "3554",
+   "10.96"
+  ],
+  [
+   "job_title",
+   "Engineer",
+   "3504",
+   "10.81"
+  ],
+  [
+   "has_loan",
+   "No",
+   "19429",
+   "59.92"
+  ],
+  [
+   "has_loan",
+   "Yes",
+   "12995",
+   "40.08"
+  ],
+  [
+   "loan_type",
+   "No Loan",
+   "19429",
+   "59.92"
+  ],
+  [
+   "loan_type",
+   "Home",
+   "3284",
+   "10.13"
+  ],
+  [
+   "loan_type",
+   "Education",
+   "3275",
+   "10.1"
+  ],
+  [
+   "loan_type",
+   "Business",
+   "3261",
+   "10.06"
+  ],
+  [
+   "loan_type",
+   "Car",
+   "3175",
+   "9.79"
+  ]
+ ],
+ "Category Breakdown__cols": [
+  "Column",
+  "Category",
+  "Count",
+  "Percentage"
+ ],
+ "orig_region": {
+  "North America": 6581,
+  "Asia": 6551,
+  "Europe": 6519,
+  "Other": 6407,
+  "Africa": 6366
+ },
+ "orig_cols": [
+  "user_id",
+  "age",
+  "gender",
+  "education_level",
+  "employment_status",
+  "job_title",
+  "monthly_income_usd",
+  "monthly_expenses_usd",
+  "savings_usd",
+  "has_loan",
+  "loan_type",
+  "loan_amount_usd",
+  "loan_term_months",
+  "monthly_emi_usd",
+  "loan_interest_rate_pct",
+  "debt_to_income_ratio",
+  "credit_score",
+  "savings_to_income_ratio",
+  "region",
+  "record_date"
+ ]
+}
