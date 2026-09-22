@@ -1,0 +1,149 @@
+import { Card } from "@/components/common/card";
+import { formatDriverValue, riskTone, wholePercentages } from "@/lib/risk/format";
+import type { RiskAssessmentRecord, RiskLevel } from "@/lib/risk/types";
+import { cn } from "@/lib/utils";
+
+const levels: RiskLevel[] = ["Low", "Medium", "High"];
+
+const fieldLabels: Record<string, string> = {
+  monthly_income_zar: "monthly income",
+  monthly_expenses_zar: "monthly expenses",
+  savings_zar: "savings",
+  credit_score: "credit score",
+  loan_amount_zar: "total debt",
+  monthly_emi_zar: "monthly debt repayments",
+  loan_interest_rate_pct: "interest rate",
+  age: "age",
+  employment_status: "employment status"
+};
+
+const priorityTone: Record<string, string> = {
+  Critical: "bg-red-100 text-red-700",
+  High: "bg-orange-100 text-orange-700",
+  Medium: "bg-amber-100 text-amber-700",
+  Low: "bg-emerald-100 text-emerald-700"
+};
+
+const influenceTone: Record<string, string> = {
+  Significant: "bg-slate-900 text-white",
+  Moderate: "bg-slate-200 text-slate-800",
+  Minor: "bg-slate-100 text-slate-500"
+};
+
+export function RiskResult({ assessment }: { assessment: RiskAssessmentRecord }) {
+  const percent = wholePercentages(assessment.probabilities);
+  const tone = riskTone[assessment.riskLevel];
+  const predicted = new Date(assessment.predictionDate);
+  const warnings = assessment.warnings ?? [];
+
+  return (
+    <div className="space-y-4">
+      <Card>
+        <div className="flex flex-wrap items-start justify-between gap-4">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">ML Financial Risk Assessment</p>
+            <h2 className={cn("mt-1 text-2xl font-bold", tone.text)}>{assessment.riskLevel} Financial Risk</h2>
+            <p className="mt-1 text-sm text-slate-600">
+              {percent[assessment.riskLevel]}% predicted probability · assessed{" "}
+              {predicted.toLocaleString("en-ZA", { dateStyle: "medium", timeStyle: "short" })}
+            </p>
+          </div>
+          <div className="text-right">
+            <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">Risk score</p>
+            <p className="text-3xl font-bold text-slate-900">
+              {Math.round(assessment.riskScore)}
+              <span className="text-base font-medium text-slate-400"> / 100</span>
+            </p>
+          </div>
+        </div>
+
+        <div className="mt-5">
+          <div className="flex h-3 overflow-hidden rounded-full bg-slate-100" aria-hidden="true">
+            {levels.map((level) => (
+              <div key={level} className={riskTone[level].bar} style={{ width: `${percent[level]}%` }} />
+            ))}
+          </div>
+          <dl className="mt-2 flex flex-wrap gap-x-5 gap-y-1 text-sm">
+            {levels.map((level) => (
+              <div key={level} className="flex items-center gap-2">
+                <span className={cn("h-2.5 w-2.5 rounded-full", riskTone[level].bar)} />
+                <dt className="text-slate-600">{level}</dt>
+                <dd className="font-semibold text-slate-900">{percent[level]}%</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+
+        {warnings.length > 0 && (
+          <div role="note" className="mt-4 rounded-lg border border-amber-200 bg-amber-50 p-3 text-sm text-amber-800">
+            <p className="font-semibold">This result is less reliable for your profile</p>
+            <p className="mt-1">
+              Some of your details are outside the range of the data the model learned from (
+              {[...new Set(warnings.map((w) => fieldLabels[w.field] ?? "other details"))].join(", ")}), so treat this
+              assessment as a rough guide. Models trained on this data tend to under-estimate risk for people
+              with low savings.
+            </p>
+          </div>
+        )}
+
+        <p className="mt-4 text-xs text-slate-500">
+          The probabilities are the model&apos;s estimate, not a guarantee. The risk score summarises them on a 0–100
+          scale (Medium counts half, High counts fully). This is separate from the demo risk badge shown elsewhere in
+          FinAware.
+        </p>
+      </Card>
+
+      <div className="grid gap-4 lg:grid-cols-2">
+        <Card>
+          <h3 className="text-lg font-semibold text-slate-900">What is influencing your result?</h3>
+          <p className="mb-3 text-xs text-slate-500">
+            Factors influencing this prediction, compared with a typical profile. They show what the model relied on, not what caused your situation.
+          </p>
+          <ol className="space-y-3">
+            {assessment.drivers.map((driver, index) => (
+              <li key={driver.feature} className="flex items-start justify-between gap-3 border-b border-slate-100 pb-3 last:border-0">
+                <div>
+                  <p className="text-sm font-medium text-slate-900">
+                    {index + 1}. {driver.label}
+                  </p>
+                  <p className="text-xs text-slate-500">
+                    Your value: {formatDriverValue(driver.feature, driver.value)} ·{" "}
+                    {driver.direction === "increases_risk" ? "pushes risk up" : "pushes risk down"} compared with a typical profile
+                  </p>
+                </div>
+                <span className={cn("shrink-0 rounded-full px-2.5 py-1 text-xs font-semibold", influenceTone[driver.influence])}>
+                  {driver.influence} influence
+                </span>
+              </li>
+            ))}
+          </ol>
+        </Card>
+
+        <Card>
+          <h3 className="text-lg font-semibold text-slate-900">Your recommended actions</h3>
+          <p className="mb-3 text-xs text-slate-500">Generated from fixed rules (version {assessment.recommendations[0]?.rulesVersion ?? "1.0"}).</p>
+          <ul className="space-y-3">
+            {assessment.recommendations.map((item) => (
+              <li key={item.recommendationId} className="rounded-lg border border-slate-200 p-3">
+                <div className="flex items-start justify-between gap-2">
+                  <p className="text-sm font-semibold text-slate-900">{item.title}</p>
+                  <span className={cn("shrink-0 rounded-full px-2 py-0.5 text-xs font-semibold", priorityTone[item.priority])}>
+                    {item.priority}
+                  </span>
+                </div>
+                <p className="mt-1 text-sm text-slate-700">{item.description}</p>
+                <p className="mt-1 text-xs text-slate-500">Why: {item.reason}</p>
+              </li>
+            ))}
+          </ul>
+        </Card>
+      </div>
+
+      <p className="text-xs text-slate-500">
+        Model: {assessment.modelName} v{assessment.modelVersion} · Risk target v{assessment.targetVersion}
+        {assessment.targetStatus !== "approved" ? " (provisional — pending approval)" : ""} · Demo data — not financial
+        advice. The model was trained on a constructed risk classification, not on real lending outcomes.
+      </p>
+    </div>
+  );
+}

@@ -33,6 +33,7 @@ model Users {
   legal_records           LegalRecords[]
   expert_requests         ExpertRequests[]
   wealth_assets           WealthAssets[]
+  financial_profile       FinancialProfile?
 
   @@map("Users")
 }
@@ -135,4 +136,90 @@ model Providers {
   whatsapp_number    String
 
   @@map("Providers")
+}
+
+// ---------------------------------------------------------------------------
+// ML Financial Risk Assessment (additive). Names follow the supplied UML class diagram.
+// ---------------------------------------------------------------------------
+
+model FinancialProfile {
+  profile_id        String           @id @default(uuid())
+  user_id           Int              @unique
+  monthly_income    Float
+  monthly_expenses  Float
+  savings           Float
+  credit_score      Int
+  financial_goal    String?
+  created_at        DateTime         @default(now())
+  updated_at        DateTime         @updatedAt
+
+  user              Users            @relation(fields: [user_id], references: [user_id], onDelete: Cascade)
+  risk_assessments  RiskAssessment[]
+
+  @@map("Financial_Profile")
+}
+
+model RiskAssessment {
+  assessment_id       String           @id @default(uuid())
+  profile_id          String
+  risk_level          String
+  risk_score          Float
+  low_probability     Float
+  medium_probability  Float
+  high_probability    Float
+  prediction_date     DateTime         @default(now())
+  model_name          String
+  model_version       String
+  target_version      String
+  target_status       String
+  explanation_method  String
+  // Why: the exact model inputs and derived indicators are kept so every prediction can be traced and reproduced.
+  input_snapshot_json String
+  indicators_json     String
+  // Inputs outside the training data range or unknown categories (prediction less reliable).
+  warnings_json       String           @default("[]")
+
+  profile             FinancialProfile @relation(fields: [profile_id], references: [profile_id], onDelete: Cascade)
+  drivers             RiskDriver[]
+  recommendations     Recommendation[]
+
+  @@index([profile_id, prediction_date])
+  @@map("Risk_Assessment")
+}
+
+model RiskDriver {
+  driver_id      String         @id @default(uuid())
+  assessment_id  String
+  rank           Int
+  feature_name   String
+  display_name   String
+  importance     Float
+  influence      String
+  direction      String
+  feature_value  String
+
+  assessment     RiskAssessment @relation(fields: [assessment_id], references: [assessment_id], onDelete: Cascade)
+
+  @@index([assessment_id])
+  @@map("Risk_Driver")
+}
+
+model Recommendation {
+  recommendation_id    String         @id @default(uuid())
+  assessment_id        String
+  recommendation_type  String
+  title                String
+  recommendation_text  String
+  reason               String
+  priority             String
+  priority_rank        Int
+  rule_id              String
+  trace_json           String
+  rules_version        String
+  created_date         DateTime       @default(now())
+
+  assessment           RiskAssessment @relation(fields: [assessment_id], references: [assessment_id], onDelete: Cascade)
+
+  @@index([assessment_id])
+  @@map("Recommendation")
 }

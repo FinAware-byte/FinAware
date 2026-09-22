@@ -9,6 +9,7 @@ const mainTabs = [
   { href: "/identity", label: "My Identity" },
   { href: "/debts", label: "Debts & Liabilities" },
   { href: "/rehab", label: "Financial Rehab" },
+  { href: "/risk-assessment", label: "Risk Assessment" },
   { href: "/help", label: "Get Help" }
 ];
 

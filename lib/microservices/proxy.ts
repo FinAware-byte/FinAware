@@ -1,4 +1,14 @@
-export type ServiceName = "auth" | "dashboard" | "identity" | "debts" | "rehab" | "help" | "pdf";
+export type ServiceName =
+  | "auth"
+  | "dashboard"
+  | "identity"
+  | "debts"
+  | "rehab"
+  | "help"
+  | "pdf"
+  | "financial-api"
+  | "financial-data"
+  | "ml";
 
 const serviceEnvMap: Record<ServiceName, string> = {
   auth: "AUTH_SERVICE_URL",
@@ -7,7 +17,10 @@ const serviceEnvMap: Record<ServiceName, string> = {
   debts: "DEBTS_SERVICE_URL",
   rehab: "REHAB_SERVICE_URL",
   help: "HELP_SERVICE_URL",
-  pdf: "PDF_SERVICE_URL"
+  pdf: "PDF_SERVICE_URL",
+  "financial-api": "FINANCIAL_API_SERVICE_URL",
+  "financial-data": "FINANCIAL_DATA_SERVICE_URL",
+  ml: "ML_SERVICE_URL"
 };
 
 const serviceDefaultMap: Record<ServiceName, string> = {
@@ -17,7 +30,10 @@ const serviceDefaultMap: Record<ServiceName, string> = {
   debts: "http://127.0.0.1:4104",
   rehab: "http://127.0.0.1:4105",
   help: "http://127.0.0.1:4106",
-  pdf: "http://127.0.0.1:4107"
+  pdf: "http://127.0.0.1:4107",
+  "financial-api": "http://127.0.0.1:4108",
+  "financial-data": "http://127.0.0.1:4109",
+  ml: "http://127.0.0.1:8000"
 };
 
 function serviceUrl(name: ServiceName): string {
