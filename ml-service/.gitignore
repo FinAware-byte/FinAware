@@ -1,0 +1,6 @@
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+# Why: models are produced by training (locally and in the Docker build), never committed.
+artifacts/

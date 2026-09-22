@@ -1,0 +1,9 @@
+# Runtime (pinned; resolved on Python 3.14 locally and 3.12 in Docker)
+pandas==2.3.3
+numpy==2.5.3
+scikit-learn==1.7.2
+joblib==1.6.0
+fastapi==0.141.1
+uvicorn[standard]==0.53.0
+pydantic==2.13.5
+shap==0.52.0

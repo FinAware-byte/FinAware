@@ -1,0 +1,698 @@
+{
+  "results": {
+    "random_forest": {
+      "grid": {
+        "model__max_depth": [
+          null,
+          16
+        ],
+        "model__min_samples_leaf": [
+          1,
+          3
+        ]
+      },
+      "best_params": {
+        "model__max_depth": 16,
+        "model__min_samples_leaf": 1
+      },
+      "cv_f1_macro_mean": 0.9942911408697033,
+      "cv_f1_macro_std": 0.0009346051598892871,
+      "test": {
+        "accuracy": 0.994757131842714,
+        "precision_macro": 0.9953323660683897,
+        "recall_macro": 0.9945740268940689,
+        "f1_macro": 0.994950347447038,
+        "precision_weighted": 0.9947650678898673,
+        "recall_weighted": 0.994757131842714,
+        "f1_weighted": 0.9947590764653526,
+        "per_class": {
+          "Low": {
+            "precision": 0.9954385964912281,
+            "recall": 0.9957879957879958,
+            "f1-score": 0.9956132654851728,
+            "support": 2849.0
+          },
+          "Medium": {
+            "precision": 0.9913081269013473,
+            "recall": 0.9938997821350762,
+            "f1-score": 0.9926022628372497,
+            "support": 2295.0
+          },
+          "High": {
+            "precision": 0.9992503748125937,
+            "recall": 0.994034302759135,
+            "f1-score": 0.9966355140186915,
+            "support": 1341.0
+          }
+        },
+        "confusion_matrix": [
+          [
+            2837,
+            12,
+            0
+          ],
+          [
+            13,
+            2281,
+            1
+          ],
+          [
+            0,
+            8,
+            1333
+          ]
+        ],
+        "roc_auc_ovr_macro": 0.9999129527452749,
+        "log_loss": 0.04902415979805292,
+        "brier_multiclass": 0.015226129411558122,
+        "mean_max_probability": 0.9577171946799006,
+        "latency_ms_single_row": 7.466627500252798
+      },
+      "fit_seconds": 48.6
+    },
+    "gradient_boosting": {
+      "grid": {
+        "model__n_estimators": [
+          150,
+          300
+        ],
+        "model__learning_rate": [
+          0.05,
+          0.1
+        ]
+      },
+      "best_params": {
+        "model__learning_rate": 0.1,
+        "model__n_estimators": 300
+      },
+      "cv_f1_macro_mean": 0.9976048595943852,
+      "cv_f1_macro_std": 0.0003180746838094163,
+      "test": {
+        "accuracy": 0.9969159599074788,
+        "precision_macro": 0.9974082727977073,
+        "recall_macro": 0.9965598992313033,
+        "f1_macro": 0.9969816973224809,
+        "precision_weighted": 0.9969194990843304,
+        "recall_weighted": 0.9969159599074788,
+        "f1_weighted": 0.9969157638512456,
+        "per_class": {
+          "Low": {
+            "precision": 0.9961498074903745,
+            "recall": 0.9989469989469989,
+            "f1-score": 0.997546442341395,
+            "support": 2849.0
+          },
+          "Medium": {
+            "precision": 0.9960750109027475,
+            "recall": 0.9952069716775599,
+            "f1-score": 0.995640802092415,
+            "support": 2295.0
+          },
+          "High": {
+            "precision": 1.0,
+            "recall": 0.9955257270693513,
+            "f1-score": 0.9977578475336323,
+            "support": 1341.0
+          }
+        },
+        "confusion_matrix": [
+          [
+            2846,
+            3,
+            0
+          ],
+          [
+            11,
+            2284,
+            0
+          ],
+          [
+            0,
+            6,
+            1335
+          ]
+        ],
+        "roc_auc_ovr_macro": 0.9999043921211439,
+        "log_loss": 0.00889486727507728,
+        "brier_multiclass": 0.004261773856907305,
+        "mean_max_probability": 0.9963768630309953,
+        "latency_ms_single_row": 6.278464159695432
+      },
+      "fit_seconds": 303.9
+    },
+    "knn": {
+      "grid": {
+        "model__n_neighbors": [
+          5,
+          15,
+          31
+        ],
+        "model__weights": [
+          "uniform",
+          "distance"
+        ]
+      },
+      "best_params": {
+        "model__n_neighbors": 31,
+        "model__weights": "distance"
+      },
+      "cv_f1_macro_mean": 0.8978368048566676,
+      "cv_f1_macro_std": 0.0055448174861647565,
+      "test": {
+        "accuracy": 0.9088666152659984,
+        "precision_macro": 0.9024636737894802,
+        "recall_macro": 0.9067878261719557,
+        "f1_macro": 0.9044695385595954,
+        "precision_weighted": 0.9087753994901447,
+        "recall_weighted": 0.9088666152659984,
+        "f1_weighted": 0.9086990795914063,
+        "per_class": {
+          "Low": {
+            "precision": 0.941279272981475,
+            "recall": 0.9452439452439453,
+            "f1-score": 0.9432574430823117,
+            "support": 2849.0
+          },
+          "Medium": {
+            "precision": 0.8840125391849529,
+            "recall": 0.8601307189542484,
+            "f1-score": 0.8719081272084805,
+            "support": 2295.0
+          },
+          "High": {
+            "precision": 0.8820992092020129,
+            "recall": 0.9149888143176734,
+            "f1-score": 0.8982430453879942,
+            "support": 1341.0
+          }
+        },
+        "confusion_matrix": [
+          [
+            2693,
+            150,
+            6
+          ],
+          [
+            163,
+            1974,
+            158
+          ],
+          [
+            5,
+            109,
+            1227
+          ]
+        ],
+        "roc_auc_ovr_macro": 0.98528725873718,
+        "log_loss": 0.2632427524096506,
+        "brier_multiclass": 0.1506617574774341,
+        "mean_max_probability": 0.8281702738729229,
+        "latency_ms_single_row": 5.11530832038261
+      },
+      "fit_seconds": 5.3
+    },
+    "svm": {
+      "grid": {
+        "model__estimator__C": [
+          1.0,
+          5.0
+        ]
+      },
+      "best_params": {
+        "model__estimator__C": 5.0
+      },
+      "cv_f1_macro_mean": 0.9242917419724067,
+      "cv_f1_macro_std": 0.004730819390967136,
+      "test": {
+        "accuracy": 0.9349267540478026,
+        "precision_macro": 0.9304398881302052,
+        "recall_macro": 0.9362275262788488,
+        "f1_macro": 0.9331999134125563,
+        "precision_weighted": 0.9353688385504629,
+        "recall_weighted": 0.9349267540478026,
+        "f1_weighted": 0.935041670058202,
+        "per_class": {
+          "Low": {
+            "precision": 0.9666905444126075,
+            "recall": 0.9473499473499474,
+            "f1-score": 0.9569225314660521,
+            "support": 2849.0
+          },
+          "Medium": {
+            "precision": 0.9066435084672166,
+            "recall": 0.9098039215686274,
+            "f1-score": 0.9082209656372335,
+            "support": 2295.0
+          },
+          "High": {
+            "precision": 0.9179856115107914,
+            "recall": 0.9515287099179717,
+            "f1-score": 0.934456243134383,
+            "support": 1341.0
+          }
+        },
+        "confusion_matrix": [
+          [
+            2699,
+            150,
+            0
+          ],
+          [
+            93,
+            2088,
+            114
+          ],
+          [
+            0,
+            65,
+            1276
+          ]
+        ],
+        "roc_auc_ovr_macro": 0.9882904384082228,
+        "log_loss": 0.1894604044557447,
+        "brier_multiclass": 0.10142922658883365,
+        "mean_max_probability": 0.9245013864372125,
+        "latency_ms_single_row": 8.811295840423554
+      },
+      "fit_seconds": 39.7
+    }
+  },
+  "ablation": {
+    "inputs": [
+      "age",
+      "loan_amount_zar",
+      "loan_interest_rate_pct",
+      "employment_status",
+      "has_loan"
+    ],
+    "results": {
+      "random_forest": {
+        "accuracy": 0.6235929067077872,
+        "precision_macro": 0.5550934024176531,
+        "recall_macro": 0.6320389684516543,
+        "f1_macro": 0.5389280991605578,
+        "precision_weighted": 0.562495863926962,
+        "recall_weighted": 0.6235929067077872,
+        "f1_weighted": 0.5375957871101075,
+        "per_class": {
+          "Low": {
+            "precision": 0.6730190571715146,
+            "recall": 0.9420849420849421,
+            "f1-score": 0.7851396811467017,
+            "support": 2849.0
+          },
+          "Medium": {
+            "precision": 0.4190064794816415,
+            "recall": 0.08453159041394336,
+            "f1-score": 0.1406816533720087,
+            "support": 2295.0
+          },
+          "High": {
+            "precision": 0.5732546705998034,
+            "recall": 0.8695003728560775,
+            "f1-score": 0.690962962962963,
+            "support": 1341.0
+          }
+        },
+        "confusion_matrix": [
+          [
+            2684,
+            116,
+            49
+          ],
+          [
+            1282,
+            194,
+            819
+          ],
+          [
+            22,
+            153,
+            1166
+          ]
+        ],
+        "roc_auc_ovr_macro": 0.7407851910085325,
+        "log_loss": 0.7173700971774164,
+        "brier_multiclass": 0.4854547903244852,
+        "mean_max_probability": 0.6351297483391034,
+        "latency_ms_single_row": 14.995996680809185
+      },
+      "gradient_boosting": {
+        "accuracy": 0.6220508866615266,
+        "precision_macro": 0.5564814738578455,
+        "recall_macro": 0.6191530010979939,
+        "f1_macro": 0.5457049139954869,
+        "precision_weighted": 0.5623538853885388,
+        "recall_weighted": 0.6220508866615266,
+        "f1_weighted": 0.5477663222662256,
+        "per_class": {
+          "Low": {
+            "precision": 0.6716196136701337,
+            "recall": 0.9519129519129519,
+            "f1-score": 0.7875707855379701,
+            "support": 2849.0
+          },
+          "Medium": {
+            "precision": 0.4144,
+            "recall": 0.11285403050108933,
+            "f1-score": 0.1773972602739726,
+            "support": 2295.0
+          },
+          "High": {
+            "precision": 0.5834248079034029,
+            "recall": 0.7926920208799404,
+            "f1-score": 0.6721466961745178,
+            "support": 1341.0
+          }
+        },
+        "confusion_matrix": [
+          [
+            2712,
+            112,
+            25
+          ],
+          [
+            1302,
+            259,
+            734
+          ],
+          [
+            24,
+            254,
+            1063
+          ]
+        ],
+        "roc_auc_ovr_macro": 0.7469371286610533,
+        "log_loss": 0.7059295467555904,
+        "brier_multiclass": 0.4773330695137791,
+        "mean_max_probability": 0.6407567836005432,
+        "latency_ms_single_row": 1.3199816597625613
+      },
+      "knn": {
+        "accuracy": 0.6137239784117193,
+        "precision_macro": 0.5506885252999261,
+        "recall_macro": 0.6098116409999552,
+        "f1_macro": 0.547773018379234,
+        "precision_weighted": 0.5566923352574193,
+        "recall_weighted": 0.6137239784117193,
+        "f1_weighted": 0.5509026160535762,
+        "per_class": {
+          "Low": {
+            "precision": 0.6716760061130922,
+            "recall": 0.9255879255879256,
+            "f1-score": 0.778450184501845,
+            "support": 2849.0
+          },
+          "Medium": {
+            "precision": 0.40025412960609913,
+            "recall": 0.13725490196078433,
+            "f1-score": 0.2044127190136275,
+            "support": 2295.0
+          },
+          "High": {
+            "precision": 0.5801354401805869,
+            "recall": 0.7665920954511558,
+            "f1-score": 0.6604561516222294,
+            "support": 1341.0
+          }
+        },
+        "confusion_matrix": [
+          [
+            2637,
+            180,
+            32
+          ],
+          [
+            1268,
+            315,
+            712
+          ],
+          [
+            21,
+            292,
+            1028
+          ]
+        ],
+        "roc_auc_ovr_macro": 0.7505300065767392,
+        "log_loss": 0.7591900946697332,
+        "brier_multiclass": 0.4849545378524433,
+        "mean_max_probability": 0.6377630368236286,
+        "latency_ms_single_row": 1.6103991807904094
+      },
+      "svm": {
+        "accuracy": 0.6240555127216654,
+        "precision_macro": 0.5416942159624563,
+        "recall_macro": 0.6472711971067018,
+        "f1_macro": 0.5217973104779944,
+        "precision_weighted": 0.5510681269467522,
+        "recall_weighted": 0.6240555127216654,
+        "f1_weighted": 0.5169023965252985,
+        "per_class": {
+          "Low": {
+            "precision": 0.6780786918753193,
+            "recall": 0.9315549315549315,
+            "f1-score": 0.7848587904775987,
+            "support": 2849.0
+          },
+          "Medium": {
+            "precision": 0.3898305084745763,
+            "recall": 0.04008714596949891,
+            "f1-score": 0.07269853812722245,
+            "support": 2295.0
+          },
+          "High": {
+            "precision": 0.5571734475374732,
+            "recall": 0.9701715137956749,
+            "f1-score": 0.7078346028291621,
+            "support": 1341.0
+          }
+        },
+        "confusion_matrix": [
+          [
+            2654,
+            113,
+            82
+          ],
+          [
+            1251,
+            92,
+            952
+          ],
+          [
+            9,
+            31,
+            1301
+          ]
+        ],
+        "roc_auc_ovr_macro": 0.7528425972565284,
+        "log_loss": 0.722743065295067,
+        "brier_multiclass": 0.47831380660843514,
+        "mean_max_probability": 0.6235671940139785,
+        "latency_ms_single_row": 3.122754180803895
+      }
+    }
+  },
+  "importance": {
+    "n_rows": 2000,
+    "n_repeats": 5,
+    "by_model": {
+      "random_forest": {
+        "age": {
+          "mean": -8.474227556978242e-05,
+          "std": 0.00016948455113956486
+        },
+        "monthly_income_zar": {
+          "mean": 0.3067719151615607,
+          "std": 0.005448961628665084
+        },
+        "monthly_expenses_zar": {
+          "mean": 0.3560372100133902,
+          "std": 0.008530880024707142
+        },
+        "savings_zar": {
+          "mean": 0.013221133297594645,
+          "std": 0.0022910009420498718
+        },
+        "credit_score": {
+          "mean": 0.2944561825547023,
+          "std": 0.007466599967151798
+        },
+        "loan_amount_zar": {
+          "mean": 0.00034677965682803345,
+          "std": 0.0003177516902343631
+        },
+        "monthly_emi_zar": {
+          "mean": 0.48552958415377584,
+          "std": 0.010017137998842877
+        },
+        "loan_interest_rate_pct": {
+          "mean": -0.0002513433358985573,
+          "std": 0.0004343409522465792
+        },
+        "employment_status": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "has_loan": {
+          "mean": -0.00033654821210182817,
+          "std": 0.0003186772894653405
+        }
+      },
+      "gradient_boosting": {
+        "age": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "monthly_income_zar": {
+          "mean": 0.38415790213547724,
+          "std": 0.005980267626181118
+        },
+        "monthly_expenses_zar": {
+          "mean": 0.4163089820203908,
+          "std": 0.009486768204683152
+        },
+        "savings_zar": {
+          "mean": 0.015187928382846261,
+          "std": 0.0017432138790559081
+        },
+        "credit_score": {
+          "mean": 0.29774402131149535,
+          "std": 0.008180626644773726
+        },
+        "loan_amount_zar": {
+          "mean": -0.0004261062444139707,
+          "std": 0.0005028692586798403
+        },
+        "monthly_emi_zar": {
+          "mean": 0.4942613261967824,
+          "std": 0.010047983382937019
+        },
+        "loan_interest_rate_pct": {
+          "mean": 0.00042581647238133514,
+          "std": 0.0002693334586680993
+        },
+        "employment_status": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "has_loan": {
+          "mean": 0.0,
+          "std": 0.0
+        }
+      },
+      "knn": {
+        "age": {
+          "mean": -0.0004559633485992531,
+          "std": 0.0020612105795368594
+        },
+        "monthly_income_zar": {
+          "mean": 0.22692210089232567,
+          "std": 0.00862973531737958
+        },
+        "monthly_expenses_zar": {
+          "mean": 0.2772288547052956,
+          "std": 0.012251590803974102
+        },
+        "savings_zar": {
+          "mean": 0.015362555499069197,
+          "std": 0.005609603855537104
+        },
+        "credit_score": {
+          "mean": 0.23270996650427217,
+          "std": 0.009125097858836018
+        },
+        "loan_amount_zar": {
+          "mean": 0.1324631957876769,
+          "std": 0.00788708678848308
+        },
+        "monthly_emi_zar": {
+          "mean": 0.06706440764991192,
+          "std": 0.002478000099352297
+        },
+        "loan_interest_rate_pct": {
+          "mean": 0.06358799990000208,
+          "std": 0.004257280701491284
+        },
+        "employment_status": {
+          "mean": -0.006090513510121709,
+          "std": 0.002763935734305433
+        },
+        "has_loan": {
+          "mean": 0.0155698503916333,
+          "std": 0.0030126816389650377
+        }
+      },
+      "svm": {
+        "age": {
+          "mean": -0.0018031338699335598,
+          "std": 0.0013047828574091816
+        },
+        "monthly_income_zar": {
+          "mean": 0.33663716810474786,
+          "std": 0.008112526078934479
+        },
+        "monthly_expenses_zar": {
+          "mean": 0.37012859075504007,
+          "std": 0.008009511169468674
+        },
+        "savings_zar": {
+          "mean": 0.029049535989314746,
+          "std": 0.002904176804957485
+        },
+        "credit_score": {
+          "mean": 0.24353822898892483,
+          "std": 0.004728335645275981
+        },
+        "loan_amount_zar": {
+          "mean": 0.08520345609930716,
+          "std": 0.00675548118609129
+        },
+        "monthly_emi_zar": {
+          "mean": 0.22989182717195603,
+          "std": 0.0070307726344643945
+        },
+        "loan_interest_rate_pct": {
+          "mean": 0.012061282456980349,
+          "std": 0.0025097649405904495
+        },
+        "employment_status": {
+          "mean": 9.328604964342624e-05,
+          "std": 0.0021635283231821968
+        },
+        "has_loan": {
+          "mean": 0.01136954103771155,
+          "std": 0.0031675935410929884
+        }
+      }
+    }
+  },
+  "selection": {
+    "selected": "gradient_boosting",
+    "tolerance": 0.01,
+    "reasons": [
+      "Highest test macro F1: Gradient Boosting (0.997). Within 0.01: Random Forest, Gradient Boosting.",
+      "Gradient Boosting: macro F1 0.997, weighted F1 0.997, High-risk recall 0.996, log loss 0.009, 6.3 ms per prediction.",
+      "Tree-based, so each user's prediction can be explained exactly with SHAP TreeExplainer.",
+      "Random Forest not selected: lower High-risk recall / worse log loss.",
+      "K-Nearest Neighbours not selected: macro F1 0.904 is more than 0.01 below the best.",
+      "Support Vector Machine not selected: macro F1 0.933 is more than 0.01 below the best."
+    ]
+  },
+  "class_distribution": [
+    {
+      "risk_tier": "Low",
+      "records": 14246,
+      "percentage": 43.94
+    },
+    {
+      "risk_tier": "Medium",
+      "records": 11476,
+      "percentage": 35.39
+    },
+    {
+      "risk_tier": "High",
+      "records": 6702,
+      "percentage": 20.67
+    }
+  ]
+}

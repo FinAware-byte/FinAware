@@ -1,0 +1,12 @@
+{
+  "age": 32,
+  "employment_status": "Employed",
+  "monthly_income_zar": 35000,
+  "monthly_expenses_zar": 22000,
+  "savings_zar": 85000,
+  "has_loan": "Yes",
+  "loan_amount_zar": 180000,
+  "monthly_emi_zar": 4200,
+  "loan_interest_rate_pct": 12.5,
+  "credit_score": 650
+}

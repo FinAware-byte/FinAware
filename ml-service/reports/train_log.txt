@@ -1,0 +1,16 @@
+           records  percentage
+risk_tier                     
+Low          14246       43.94
+Medium       11476       35.39
+High          6702       20.67
+random_forest      macroF1=0.9950 acc=0.9948 (48.6s) {'model__max_depth': 16, 'model__min_samples_leaf': 1}
+gradient_boosting  macroF1=0.9970 acc=0.9969 (303.9s) {'model__learning_rate': 0.1, 'model__n_estimators': 300}
+knn                macroF1=0.9045 acc=0.9089 (5.3s) {'model__n_neighbors': 31, 'model__weights': 'distance'}
+svm                macroF1=0.9332 acc=0.9349 (39.7s) {'model__estimator__C': 5.0}
+permutation importance done
+ablation random_forest      macroF1=0.5389
+ablation gradient_boosting  macroF1=0.5457
+ablation knn                macroF1=0.5478
+ablation svm                macroF1=0.5218
+Selected gradient_boosting; artefacts in /Users/kumbulani/Documents/school proj/finaware_main_project/ml-service/artifacts; 479s total
+EXIT=0
