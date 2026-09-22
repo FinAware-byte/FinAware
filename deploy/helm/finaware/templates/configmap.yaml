@@ -5,6 +5,9 @@
 {{- $rehabName := include "finaware.serviceFullname" (dict "context" . "name" "rehab") -}}
 {{- $helpName := include "finaware.serviceFullname" (dict "context" . "name" "help") -}}
 {{- $pdfName := include "finaware.serviceFullname" (dict "context" . "name" "pdf") -}}
+{{- $financialApiName := include "finaware.serviceFullname" (dict "context" . "name" "financial-api") -}}
+{{- $financialDataName := include "finaware.serviceFullname" (dict "context" . "name" "financial-data") -}}
+{{- $mlName := include "finaware.serviceFullname" (dict "context" . "name" "ml-service") -}}
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -38,3 +41,8 @@ data:
   REHAB_SERVICE_URL: {{ printf "http://%s:%v" $rehabName (index .Values.services "rehab").servicePort | quote }}
   HELP_SERVICE_URL: {{ printf "http://%s:%v" $helpName (index .Values.services "help").servicePort | quote }}
   PDF_SERVICE_URL: {{ printf "http://%s:%v" $pdfName (index .Values.services "pdf").servicePort | quote }}
+  FINANCIAL_API_SERVICE_PORT: {{ (index .Values.services "financial-api").port | quote }}
+  FINANCIAL_DATA_SERVICE_PORT: {{ (index .Values.services "financial-data").port | quote }}
+  FINANCIAL_API_SERVICE_URL: {{ printf "http://%s:%v" $financialApiName (index .Values.services "financial-api").servicePort | quote }}
+  FINANCIAL_DATA_SERVICE_URL: {{ printf "http://%s:%v" $financialDataName (index .Values.services "financial-data").servicePort | quote }}
+  ML_SERVICE_URL: {{ printf "http://%s:%v" $mlName (index .Values.services "ml-service").servicePort | quote }}

@@ -1,0 +1,27 @@
+{{- $ml := index .Values.services "ml-service" -}}
+{{- if and .Values.mlNetworkPolicy.enabled $ml.enabled }}
+# Why: the ML Prediction Service is internal; only the Financial API Service may reach it (spec §44).
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: {{ include "finaware.serviceFullname" (dict "context" . "name" "ml-service") }}
+  labels:
+    {{- include "finaware.labels" . | nindent 4 }}
+    app.kubernetes.io/component: ml-service
+spec:
+  podSelector:
+    matchLabels:
+      {{- include "finaware.selectorLabels" . | nindent 6 }}
+      app.kubernetes.io/component: ml-service
+  policyTypes:
+    - Ingress
+  ingress:
+    - from:
+        - podSelector:
+            matchLabels:
+              {{- include "finaware.selectorLabels" . | nindent 14 }}
+              app.kubernetes.io/component: financial-api
+      ports:
+        - protocol: TCP
+          port: {{ $ml.port }}
+{{- end }}

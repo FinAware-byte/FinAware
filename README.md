@@ -34,6 +34,7 @@ Demo data only. Not financial advice.
   - Debts & Liabilities
   - Financial Rehab
   - Get Help
+- ML Financial Risk Assessment: risk level + probabilities, factors influencing the prediction and rule-based recommendations (see below)
 - Health endpoints for Kubernetes probes
 - Process-isolated microservice runtimes for:
   - Authentication
@@ -53,6 +54,10 @@ Demo data only. Not financial advice.
 - `AI_Recommendations`: stored generated recommendation snapshots
 - `Expert_Requests`: consultation request log
 - `Providers`: advisor channel metadata (WhatsApp numbers)
+- `Financial_Profile`: income, expenses, savings, credit score, goal (ML feature)
+- `Risk_Assessment`: risk level, score, probabilities, model/target versions (ML feature)
+- `Risk_Driver`: factors influencing each prediction (ML feature)
+- `Recommendation`: rule-based actions with their trace (ML feature)
 
 ## Project Structure
 - `components/sidebar`
@@ -64,6 +69,9 @@ Demo data only. Not financial advice.
 - `prisma`
 - `deploy/k8s`
 - `deploy/minikube`
+- `ml-service` (Python ML Prediction Service)
+- `services/financial-api`, `services/financial-data`
+- `components/risk`, `lib/risk`
 
 ## Local Setup (Replit-friendly)
 1. Copy env file:
@@ -199,6 +207,10 @@ Security notes:
 - `REHAB_SERVICE_URL`
 - `HELP_SERVICE_URL`
 - `PDF_SERVICE_URL`
+- `FINANCIAL_API_SERVICE_URL`
+- `FINANCIAL_DATA_SERVICE_URL`
+- `ML_SERVICE_URL`
+- `ML_SERVICE_TIMEOUT_MS` (default `15000`)
 - `ENVIRONMENT` (`dev` | `stag` | `prod`)
 - `LETSENCRYPT_EMAIL`
 - `LETSENCRYPT_CA`
@@ -223,6 +235,8 @@ Security notes:
 - `PATCH /api/microservices/debts/:id`
 - `POST /api/microservices/rehab/plan`
 - `GET/POST /api/microservices/help/requests`
+- `GET/PUT /api/financial-profile`
+- `GET/POST /api/risk-assessment`
 
 These Next routes act as the authenticated edge/BFF and proxy to process-isolated internal services:
 - `auth` on `4101`
@@ -232,8 +246,52 @@ These Next routes act as the authenticated edge/BFF and proxy to process-isolate
 - `rehab` on `4105`
 - `help` on `4106`
 - `pdf` on `4107`
+- `financial-api` on `4108` (ML feature)
+- `financial-data` on `4109` (ML feature)
+- `ml-service` on `8000` (Python, internal only)
 
 The web layer does not connect directly to Prisma/SQLite; all data and domain operations run behind microservices.
+
+## ML Financial Risk Assessment (Assess Financial Risk)
+
+Machine learning predicts a user's financial risk, explains the factors behind it and generates rule-based
+recommendations. It follows the supplied UML diagrams (`docs/uml/`) and is **additive**: existing pages,
+services, tables and behaviour are unchanged.
+
+- Methodology and limitations: `docs/ml/ML_METHODOLOGY.md`
+- Risk target (needs supervisor sign-off): `docs/risk_tier_methodology.md`
+- FinAware records to model inputs: `docs/ml/feature_mapping.md`
+- Specification checklist with evidence: `docs/ml/SPEC_CHECKLIST.md`
+- ML service reference: `ml-service/README.md`
+
+### Flow
+`/risk-assessment` → `POST /api/risk-assessment` → Financial API Service `4108` (validate, orchestrate,
+recommendation rules) → Financial Data Service `4109` (all database access) and ML Prediction Service `8000`
+(FastAPI, scikit-learn). The browser never calls the ML or data services directly.
+
+### New pages
+- `/financial-profile` — enter or update income, expenses, savings, credit score and an optional goal
+- `/risk-assessment` — request an assessment; shows risk level, risk score (0–100), the Low/Medium/High
+  probabilities, the factors influencing the prediction, recommended actions and a history list
+
+### New tables (create-only migration)
+`Financial_Profile`, `Risk_Assessment`, `Risk_Driver`, `Recommendation` — see
+`docs/ml/prisma_migration_ml_risk.sql`. Existing tables and data are untouched.
+
+### Model
+- Gradient Boosting (compared with Random Forest, KNN and SVM), scikit-learn Pipeline, seed 42
+- Per-user explanations with SHAP; deterministic recommendation rules (versioned, no OpenAI in this flow)
+- The risk target is **constructed and pending approval**; artefacts are labelled provisional until then
+
+### Run it
+```bash
+npm run ml:setup        # one-off: Python venv + dependencies for ml-service
+npm run ml:audit        # data-quality report (31 checks)
+npm run ml:train        # trains + evaluates 4 models (needs the approved target; see the doc)
+npm run ml:test         # Python tests
+npm run dev:stack:ml    # web + all Node services + the ML service
+npm test                # Node tests (validation, rules, orchestration)
+```
 
 ## WhatsApp Integration Note
 This prototype uses `wa.me` click-to-chat URLs and does **not** automatically send messages.
@@ -247,6 +305,10 @@ Implemented protections:
 ## Architecture Diagram
 - `FinAware_architecture_diagram.svg`
 - `FinAware_diagram_README.md`
+- `docs/architecture-diagram.png` / `docs/service-communication-diagram.png` (original)
+- `docs/architecture-diagram-ml.png` / `docs/service-communication-diagram-ml.png` — with the ML feature
+  (regenerate: `bash docs/ml/diagrams/render.sh`)
+- `docs/uml/` — the supplied class, use-case, activity and sequence diagrams
 
 ## Kubernetes (Helm 3)
 ### Full-stack services deployed

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><title>FinAware Assess Financial Risk — Service Communication</title>
+<style>*{margin:0;padding:0;box-sizing:border-box}html,body{background:#f8fafc}svg{display:block;width:100%;height:auto}</style>
+</head><body>
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1260" viewBox="0 0 1600 1260" font-family="'Segoe UI', Arial, sans-serif">
+  <defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#475569"/></marker><marker id="arrowg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#059669"/></marker><marker id="arrowr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#dc2626"/></marker></defs>
+  <rect width="1600" height="1260" fill="#f8fafc"/>
+  <text x="800" y="42" font-size="26" font-weight="700" fill="#0f172a" text-anchor="middle">FinAware — Service Communication: Assess Financial Risk</text>
+  <text x="800" y="66" font-size="13" font-weight="500" fill="#475569" text-anchor="middle">Implementation of the supplied UML sequence diagram · endpoints, ports and error branches as built</text>
+  <rect x="15" y="90" width="230" height="52" rx="10" fill="#ffffff" stroke="#94a3b8" stroke-width="2"/>
+  <text x="130" y="113" font-size="13.5" font-weight="700" fill="#0f172a" text-anchor="middle">User / Browser</text>
+  <text x="130" y="131" font-size="10.5" font-weight="500" fill="#475569" text-anchor="middle">React 18</text>
+  <line x1="130" y1="142" x2="130" y2="1082" stroke="#cbd5e1" stroke-width="1.2" stroke-dasharray="4 4"/>
+  <rect x="265" y="90" width="230" height="52" rx="10" fill="#ffffff" stroke="#94a3b8" stroke-width="2"/>
+  <text x="380" y="113" font-size="13.5" font-weight="700" fill="#0f172a" text-anchor="middle">Next.js web :30005</text>
+  <text x="380" y="131" font-size="10.5" font-weight="500" fill="#475569" text-anchor="middle">pages + /api routes</text>
+  <line x1="380" y1="142" x2="380" y2="1082" stroke="#cbd5e1" stroke-width="1.2" stroke-dasharray="4 4"/>
+  <rect x="525" y="90" width="230" height="52" rx="10" fill="#ecfdf5" stroke="#059669" stroke-width="2"/>
+  <text x="640" y="113" font-size="13.5" font-weight="700" fill="#065f46" text-anchor="middle">Financial API Service</text>
+  <text x="640" y="131" font-size="10.5" font-weight="500" fill="#475569" text-anchor="middle">:4108 · validate · orchestrate · rules</text>
+  <line x1="640" y1="142" x2="640" y2="1082" stroke="#cbd5e1" stroke-width="1.2" stroke-dasharray="4 4"/>
+  <rect x="795" y="90" width="230" height="52" rx="10" fill="#ecfdf5" stroke="#059669" stroke-width="2"/>
+  <text x="910" y="113" font-size="13.5" font-weight="700" fill="#065f46" text-anchor="middle">Financial Data Service</text>
+  <text x="910" y="131" font-size="10.5" font-weight="500" fill="#475569" text-anchor="middle">:4109 · Prisma</text>
+  <line x1="910" y1="142" x2="910" y2="1082" stroke="#cbd5e1" stroke-width="1.2" stroke-dasharray="4 4"/>
+  <rect x="1055" y="90" width="230" height="52" rx="10" fill="#ffffff" stroke="#94a3b8" stroke-width="2"/>
+  <text x="1170" y="113" font-size="13.5" font-weight="700" fill="#0f172a" text-anchor="middle">SQLite (Prisma)</text>
+  <text x="1170" y="131" font-size="10.5" font-weight="500" fill="#475569" text-anchor="middle">shared volume</text>
+  <line x1="1170" y1="142" x2="1170" y2="1082" stroke="#cbd5e1" stroke-width="1.2" stroke-dasharray="4 4"/>
+  <rect x="1315" y="90" width="230" height="52" rx="10" fill="#ecfdf5" stroke="#059669" stroke-width="2"/>
+  <text x="1430" y="113" font-size="13.5" font-weight="700" fill="#065f46" text-anchor="middle">ML Prediction Service</text>
+  <text x="1430" y="131" font-size="10.5" font-weight="500" fill="#475569" text-anchor="middle">:8000 · FastAPI</text>
+  <line x1="1430" y1="142" x2="1430" y2="1082" stroke="#cbd5e1" stroke-width="1.2" stroke-dasharray="4 4"/>
+  <rect x="40" y="156" width="1520" height="22" rx="5" fill="#eef2ff" stroke="#eef2ff" stroke-width="0"/>
+  <text x="52" y="172" font-size="11.5" font-weight="700" fill="#0f172a" text-anchor="start">A · Manage Financial Profile (activity: enter → validate → [invalid → correct &amp; resubmit])</text>
+  <line x1="130" y1="196" x2="378" y2="196" stroke="#475569" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="255.0" y="190" font-size="11" font-weight="600" fill="#1e293b" text-anchor="middle">1 PUT /api/financial-profile</text>
+  <text x="255.0" y="209" font-size="9.5" font-weight="500" fill="#64748b" text-anchor="middle" font-style="italic">session cookie checked</text>
+  <line x1="380" y1="232" x2="638" y2="232" stroke="#475569" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="510.0" y="226" font-size="11" font-weight="600" fill="#1e293b" text-anchor="middle">2 PUT /financial-profile/:userId</text>
+  <path d="M640 262 h40 v18 h-38" fill="none" stroke="#475569" stroke-width="1.4" marker-end="url(#arrow)"/>
+  <text x="688" y="275" font-size="11" font-weight="500" fill="#1e293b" text-anchor="start">3 Validate financial information (Zod)</text>
+  <line x1="640" y1="308" x2="382" y2="308" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#arrowr)"/>
+  <text x="510.0" y="302" font-size="11" font-weight="600" fill="#dc2626" text-anchor="middle">invalid → 400 INVALID_INPUT + fieldErrors</text>
+  <line x1="640" y1="338" x2="908" y2="338" stroke="#475569" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="775.0" y="332" font-size="11" font-weight="600" fill="#1e293b" text-anchor="middle">4 PUT /financial-profile/:userId</text>
+  <text x="775.0" y="351" font-size="9.5" font-weight="500" fill="#64748b" text-anchor="middle" font-style="italic">re-validated (defence in depth)</text>
+  <line x1="910" y1="374" x2="1168" y2="374" stroke="#475569" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="1040.0" y="368" font-size="11" font-weight="600" fill="#1e293b" text-anchor="middle">upsert Financial_Profile</text>
+  <line x1="640" y1="404" x2="132" y2="404" stroke="#64748b" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#arrow)"/>
+  <text x="385.0" y="398" font-size="11" font-weight="500" fill="#64748b" text-anchor="middle">5 &quot;Validation successful&quot; → profile saved</text>
+  <rect x="40" y="420" width="1520" height="22" rx="5" fill="#eef2ff" stroke="#eef2ff" stroke-width="0"/>
+  <text x="52" y="436" font-size="11.5" font-weight="700" fill="#0f172a" text-anchor="start">B · Assess Financial Risk (sequence diagram messages 5–23)</text>
+  <line x1="130" y1="460" x2="378" y2="460" stroke="#475569" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="255.0" y="454" font-size="11" font-weight="600" fill="#1e293b" text-anchor="middle">6 POST /api/risk-assessment</text>
+  <line x1="380" y1="490" x2="638" y2="490" stroke="#475569" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="510.0" y="484" font-size="11" font-weight="600" fill="#1e293b" text-anchor="middle">7 POST /risk-assessment/:userId</text>
+  <line x1="640" y1="520" x2="908" y2="520" stroke="#475569" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="775.0" y="514" font-size="11" font-weight="600" fill="#1e293b" text-anchor="middle">8 GET /financial-data/:userId</text>
+  <text x="775.0" y="533" font-size="9.5" font-weight="500" fill="#64748b" text-anchor="middle" font-style="italic">Retrieve FinancialProfile and Debt</text>
+  <line x1="910" y1="556" x2="1168" y2="556" stroke="#475569" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="1040.0" y="550" font-size="11" font-weight="600" fill="#1e293b" text-anchor="middle">9–10 query Financial_Profile, Debts (ACTIVE), Users</text>
+  <line x1="910" y1="586" x2="642" y2="586" stroke="#64748b" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#arrow)"/>
+  <text x="775.0" y="580" font-size="11" font-weight="500" fill="#64748b" text-anchor="middle">11 profile + 10 model inputs (feature_mapping.md)</text>
+  <line x1="640" y1="616" x2="1428" y2="616" stroke="#059669" stroke-width="2" marker-end="url(#arrowg)"/>
+  <text x="1035.0" y="610" font-size="11" font-weight="600" fill="#059669" text-anchor="middle">12 POST /predict  { income, expenses, savings, credit score, debt, repayment, rate, age, … }</text>
+  <path d="M1430 646 h-40 v18 h38" fill="none" stroke="#475569" stroke-width="1.4" marker-end="url(#arrow)"/>
+  <text x="1382" y="659" font-size="11" font-weight="500" fill="#1e293b" text-anchor="end">13–15 validate → engineer features → scale/one-hot → Gradient Boosting → SHAP</text>
+  <line x1="1430" y1="692" x2="642" y2="692" stroke="#64748b" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#arrow)"/>
+  <text x="1035.0" y="686" font-size="11" font-weight="500" fill="#64748b" text-anchor="middle">16 riskLevel, riskScore, probabilities, topDrivers, indicators, warnings, versions</text>
+  <path d="M640 722 h40 v18 h-38" fill="none" stroke="#475569" stroke-width="1.4" marker-end="url(#arrow)"/>
+  <text x="688" y="735" font-size="11" font-weight="500" fill="#1e293b" text-anchor="start">check Σp ≈ 1 and riskLevel = most probable class</text>
+  <line x1="640" y1="768" x2="908" y2="768" stroke="#475569" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="775.0" y="762" font-size="11" font-weight="600" fill="#1e293b" text-anchor="middle">17 POST /risk-assessments/:userId</text>
+  <line x1="910" y1="798" x2="1168" y2="798" stroke="#475569" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="1040.0" y="792" font-size="11" font-weight="600" fill="#1e293b" text-anchor="middle">18 INSERT Risk_Assessment + Risk_Driver</text>
+  <line x1="910" y1="828" x2="642" y2="828" stroke="#64748b" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#arrow)"/>
+  <text x="775.0" y="822" font-size="11" font-weight="500" fill="#64748b" text-anchor="middle">19–20 { assessmentId }</text>
+  <path d="M640 858 h40 v18 h-38" fill="none" stroke="#475569" stroke-width="1.4" marker-end="url(#arrow)"/>
+  <text x="688" y="871" font-size="11" font-weight="500" fill="#1e293b" text-anchor="start">21 Generate Recommendation — rules v1.0 (tier + driver + user value), max 5</text>
+  <line x1="640" y1="904" x2="908" y2="904" stroke="#475569" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="775.0" y="898" font-size="11" font-weight="600" fill="#1e293b" text-anchor="middle">POST /risk-assessments/by-id/:id/recommendations → INSERT Recommendation</text>
+  <line x1="640" y1="934" x2="382" y2="934" stroke="#64748b" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#arrow)"/>
+  <text x="510.0" y="928" font-size="11" font-weight="500" fill="#64748b" text-anchor="middle">22 201 assessment + recommendations</text>
+  <line x1="380" y1="964" x2="132" y2="964" stroke="#64748b" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#arrow)"/>
+  <text x="255.0" y="958" font-size="11" font-weight="500" fill="#64748b" text-anchor="middle">23 Display risk score, level, probabilities, factors, recommendations</text>
+  <rect x="40" y="980" width="1520" height="22" rx="5" fill="#fee2e2" stroke="#fee2e2" stroke-width="0"/>
+  <text x="52" y="996" font-size="11.5" font-weight="700" fill="#991b1b" text-anchor="start">C · Prediction failed (activity: display prediction error → allow retry)</text>
+  <line x1="1430" y1="1020" x2="642" y2="1020" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#arrowr)"/>
+  <text x="1035.0" y="1014" font-size="11" font-weight="600" fill="#dc2626" text-anchor="middle">ML unreachable / 503 MODEL_UNAVAILABLE / 500 PREDICTION_FAILED / invalid probabilities</text>
+  <line x1="640" y1="1050" x2="132" y2="1050" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#arrowr)"/>
+  <text x="385.0" y="1044" font-size="11" font-weight="600" fill="#dc2626" text-anchor="middle">503 / 502 structured error — nothing stored → page shows error + &quot;Retry assessment&quot;</text>
+  <rect x="40" y="1094" width="1520" height="92" rx="10" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="58" y="1118" font-size="13" font-weight="700" fill="#0f172a" text-anchor="start">Boundaries</text>
+  <text x="58" y="1140" font-size="11.5" font-weight="500" fill="#334155" text-anchor="start">• Only Next.js is exposed (Ingress / published port). financial-api, financial-data and ml-service are ClusterIP / internal Compose services.</text>
+  <text x="58" y="1158" font-size="11.5" font-weight="500" fill="#334155" text-anchor="start">• Kubernetes NetworkPolicy: ml-service accepts traffic only from financial-api pods. /model-info returns metadata only — never model files, paths or env.</text>
+  <text x="58" y="1176" font-size="11.5" font-weight="500" fill="#334155" text-anchor="start">• Every hop uses callServiceJson(): connection failure → 503; ML call has a 15 s timeout (ML_SERVICE_TIMEOUT_MS). No OpenAI/LLM in this flow.</text>
+  <rect x="20" y="1198" width="1560" height="40" rx="8" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="38" y="1223" font-size="12" font-weight="700" fill="#0f172a" text-anchor="start">Legend:</text>
+  <rect x="100" y="1206" width="150" height="26" rx="6" fill="#f8fafc" stroke="#94a3b8" stroke-width="1"/>
+  <text x="175.0" y="1223.0" font-size="11" font-weight="500" fill="#334155" text-anchor="middle">Existing — unchanged</text>
+  <rect x="262" y="1206" width="170" height="26" rx="6" fill="#ecfdf5" stroke="#059669" stroke-width="2"/>
+  <text x="347.0" y="1223.0" font-size="11" font-weight="700" fill="#065f46" text-anchor="middle">NEW — ML feature (additive)</text>
+  <line x1="450" y1="1219" x2="490" y2="1219" stroke="#475569" stroke-width="1.6" marker-end="url(#arrow)"/>
+  <text x="498" y="1223" font-size="11" font-weight="500" fill="#334155" text-anchor="start">request</text>
+  <line x1="577" y1="1219" x2="617" y2="1219" stroke="#059669" stroke-width="2" marker-end="url(#arrowg)"/>
+  <text x="625" y="1223" font-size="11" font-weight="500" fill="#334155" text-anchor="start">request to ML</text>
+  <line x1="746" y1="1219" x2="786" y2="1219" stroke="#64748b" stroke-width="1.6" stroke-dasharray="5 4" marker-end="url(#arrow)"/>
+  <text x="794" y="1223" font-size="11" font-weight="500" fill="#334155" text-anchor="start">response</text>
+  <line x1="880" y1="1219" x2="920" y2="1219" stroke="#dc2626" stroke-width="1.6" stroke-dasharray="5 4" marker-end="url(#arrowr)"/>
+  <text x="928" y="1223" font-size="11" font-weight="500" fill="#334155" text-anchor="start">error branch</text>
+</svg>
+</body></html>

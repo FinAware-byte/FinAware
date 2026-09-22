@@ -22,7 +22,8 @@ spec:
     spec:
       containers:
         - name: {{ $name }}
-          image: "{{ $root.Values.image.repository }}:{{ $root.Values.image.tag }}"
+          {{- $image := $svc.image | default dict }}
+          image: "{{ $image.repository | default $root.Values.image.repository }}:{{ $image.tag | default $root.Values.image.tag }}"
           imagePullPolicy: {{ $root.Values.image.pullPolicy }}
           {{- if $svc.command }}
           command:
@@ -55,12 +56,12 @@ spec:
           resources:
             {{- toYaml . | nindent 12 }}
           {{- end }}
-          {{- if $root.Values.persistence.enabled }}
+          {{- if and $root.Values.persistence.enabled (ne $svc.mountData false) }}
           volumeMounts:
             - name: sqlite-data
               mountPath: {{ $root.Values.persistence.mountPath }}
           {{- end }}
-      {{- if $root.Values.persistence.enabled }}
+      {{- if and $root.Values.persistence.enabled (ne $svc.mountData false) }}
       volumes:
         - name: sqlite-data
           persistentVolumeClaim:

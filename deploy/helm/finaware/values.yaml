@@ -229,3 +229,82 @@ services:
       maxReplicas: 3
       targetCPUUtilizationPercentage: 70
     resources: {}
+
+  # ---- ML Financial Risk Assessment (additive). ClusterIP only; never exposed by the ingress. ----
+  financial-api:
+    enabled: true
+    replicaCount: 1
+    port: 4108
+    servicePort: 4108
+    command:
+      - sh
+      - -c
+      - npm run service:financial-api
+    probe:
+      readinessPath: /health/ready
+      livenessPath: /health/live
+      readinessInitialDelaySeconds: 8
+      livenessInitialDelaySeconds: 15
+      periodSeconds: 10
+    hpa:
+      enabled: false
+      minReplicas: 1
+      maxReplicas: 3
+      targetCPUUtilizationPercentage: 70
+    resources:
+      requests: { cpu: 50m, memory: 128Mi }
+      limits: { cpu: 500m, memory: 384Mi }
+
+  financial-data:
+    enabled: true
+    # Why: SQLite on a ReadWriteOnce volume — keep a single writer (Decision D-1).
+    replicaCount: 1
+    port: 4109
+    servicePort: 4109
+    command:
+      - sh
+      - -c
+      - npx prisma db push && npm run service:financial-data
+    probe:
+      readinessPath: /health/ready
+      livenessPath: /health/live
+      readinessInitialDelaySeconds: 8
+      livenessInitialDelaySeconds: 15
+      periodSeconds: 10
+    hpa:
+      enabled: false
+      minReplicas: 1
+      maxReplicas: 1
+      targetCPUUtilizationPercentage: 70
+    resources:
+      requests: { cpu: 50m, memory: 128Mi }
+      limits: { cpu: 500m, memory: 384Mi }
+
+  ml-service:
+    enabled: true
+    replicaCount: 1
+    port: 8000
+    servicePort: 8000
+    # Separate Python image built from ml-service/Dockerfile (model baked in, runs as non-root).
+    image:
+      repository: finaware-ml
+      tag: latest
+    mountData: false
+    probe:
+      readinessPath: /health/ready
+      livenessPath: /health/live
+      readinessInitialDelaySeconds: 10
+      livenessInitialDelaySeconds: 20
+      periodSeconds: 10
+    hpa:
+      enabled: false
+      minReplicas: 1
+      maxReplicas: 3
+      targetCPUUtilizationPercentage: 70
+    resources:
+      requests: { cpu: 100m, memory: 256Mi }
+      limits: { cpu: "1", memory: 768Mi }
+
+# Only the Financial API Service may call the ML Prediction Service (spec §41, §44).
+mlNetworkPolicy:
+  enabled: true

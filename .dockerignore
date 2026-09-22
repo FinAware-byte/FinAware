@@ -6,3 +6,6 @@ node_modules
 .env.*
 npm-debug.log*
 deploy/**/*.tmp
+
+# ML service has its own image (ml-service/Dockerfile); keep its venv and data out of the Node image.
+ml-service

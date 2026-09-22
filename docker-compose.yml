@@ -153,6 +153,54 @@ services:
       - sqlite_data:/data
     restart: unless-stopped
 
+  # ---- ML Financial Risk Assessment (additive). Internal only: no published ports. ----
+  ml-service:
+    build:
+      context: ./ml-service
+      dockerfile: Dockerfile
+      args:
+        # Remove (or set to "0") once the supervisor has approved risk_target_version 1.0.
+        ALLOW_PROPOSED_TARGET: "1"
+    restart: unless-stopped
+
+  financial-data:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: npm run service:financial-data
+    env_file:
+      - .env
+    environment:
+      NODE_ENV: production
+      DATABASE_URL: file:/data/dev.db
+      FINANCIAL_DATA_SERVICE_PORT: "4109"
+    depends_on:
+      db-init:
+        condition: service_completed_successfully
+    volumes:
+      - sqlite_data:/data
+    restart: unless-stopped
+
+  financial-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: npm run service:financial-api
+    env_file:
+      - .env
+    environment:
+      NODE_ENV: production
+      DATABASE_URL: file:/data/dev.db
+      FINANCIAL_API_SERVICE_PORT: "4108"
+      FINANCIAL_DATA_SERVICE_URL: http://financial-data:4109
+      ML_SERVICE_URL: http://ml-service:8000
+    depends_on:
+      - financial-data
+      - ml-service
+    volumes:
+      - sqlite_data:/data
+    restart: unless-stopped
+
   web:
     build:
       context: .
@@ -171,6 +219,7 @@ services:
       REHAB_SERVICE_URL: http://rehab:4105
       HELP_SERVICE_URL: http://help:4106
       PDF_SERVICE_URL: http://pdf:4107
+      FINANCIAL_API_SERVICE_URL: http://financial-api:4108
     depends_on:
       - auth
       - dashboard
@@ -179,6 +228,7 @@ services:
       - rehab
       - help
       - pdf
+      - financial-api
     ports:
       - "30005:30005"
     volumes:

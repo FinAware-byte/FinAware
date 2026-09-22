@@ -24,3 +24,8 @@ data:
   REHAB_SERVICE_PORT: "4105"
   HELP_SERVICE_PORT: "4106"
   PDF_SERVICE_PORT: "4107"
+  FINANCIAL_API_SERVICE_URL: "http://finaware-financial-api:4108"
+  FINANCIAL_DATA_SERVICE_URL: "http://finaware-financial-data:4109"
+  ML_SERVICE_URL: "http://finaware-ml-service:8000"
+  FINANCIAL_API_SERVICE_PORT: "4108"
+  FINANCIAL_DATA_SERVICE_PORT: "4109"

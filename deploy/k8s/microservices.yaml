@@ -431,3 +431,202 @@ spec:
       targetPort: 4107
       protocol: TCP
   type: ClusterIP
+# ---- ML Financial Risk Assessment (additive) ----
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: finaware-financial-api
+  namespace: finaware
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: finaware-financial-api
+  template:
+    metadata:
+      labels:
+        app: finaware-financial-api
+    spec:
+      containers:
+        - name: finaware-financial-api
+          image: finaware:latest
+          imagePullPolicy: IfNotPresent
+          command: ["sh", "-c", "npm run service:financial-api"]
+          ports:
+            - containerPort: 4108
+          envFrom:
+            - configMapRef:
+                name: finaware-config
+            - secretRef:
+                name: finaware-secret
+          readinessProbe:
+            httpGet:
+              path: /health/ready
+              port: 4108
+            initialDelaySeconds: 8
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /health/live
+              port: 4108
+            initialDelaySeconds: 15
+            periodSeconds: 20
+          volumeMounts:
+            - name: sqlite-data
+              mountPath: /app/prisma
+      volumes:
+        - name: sqlite-data
+          persistentVolumeClaim:
+            claimName: finaware-sqlite-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: finaware-financial-api
+  namespace: finaware
+spec:
+  selector:
+    app: finaware-financial-api
+  ports:
+    - name: http
+      port: 4108
+      targetPort: 4108
+      protocol: TCP
+  type: ClusterIP
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: finaware-financial-data
+  namespace: finaware
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: finaware-financial-data
+  template:
+    metadata:
+      labels:
+        app: finaware-financial-data
+    spec:
+      containers:
+        - name: finaware-financial-data
+          image: finaware:latest
+          imagePullPolicy: IfNotPresent
+          command: ["sh", "-c", "npx prisma db push && npm run service:financial-data"]
+          ports:
+            - containerPort: 4109
+          envFrom:
+            - configMapRef:
+                name: finaware-config
+            - secretRef:
+                name: finaware-secret
+          readinessProbe:
+            httpGet:
+              path: /health/ready
+              port: 4109
+            initialDelaySeconds: 8
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /health/live
+              port: 4109
+            initialDelaySeconds: 15
+            periodSeconds: 20
+          volumeMounts:
+            - name: sqlite-data
+              mountPath: /app/prisma
+      volumes:
+        - name: sqlite-data
+          persistentVolumeClaim:
+            claimName: finaware-sqlite-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: finaware-financial-data
+  namespace: finaware
+spec:
+  selector:
+    app: finaware-financial-data
+  ports:
+    - name: http
+      port: 4109
+      targetPort: 4109
+      protocol: TCP
+  type: ClusterIP
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: finaware-ml-service
+  namespace: finaware
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: finaware-ml-service
+  template:
+    metadata:
+      labels:
+        app: finaware-ml-service
+    spec:
+      containers:
+        - name: finaware-ml-service
+          # Built from ml-service/Dockerfile; model baked in, runs as non-root (uid 10001).
+          image: finaware-ml:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8000
+          readinessProbe:
+            httpGet:
+              path: /health/ready
+              port: 8000
+            initialDelaySeconds: 10
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /health/live
+              port: 8000
+            initialDelaySeconds: 20
+            periodSeconds: 20
+          resources:
+            requests: { cpu: 100m, memory: 256Mi }
+            limits: { cpu: "1", memory: 768Mi }
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: finaware-ml-service
+  namespace: finaware
+spec:
+  selector:
+    app: finaware-ml-service
+  ports:
+    - name: http
+      port: 8000
+      targetPort: 8000
+      protocol: TCP
+  type: ClusterIP
+---
+# Why: only the Financial API Service may call the ML Prediction Service.
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: finaware-ml-service
+  namespace: finaware
+spec:
+  podSelector:
+    matchLabels:
+      app: finaware-ml-service
+  policyTypes:
+    - Ingress
+  ingress:
+    - from:
+        - podSelector:
+            matchLabels:
+              app: finaware-financial-api
+      ports:
+        - protocol: TCP
+          port: 8000
