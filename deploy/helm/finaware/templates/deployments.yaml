@@ -40,18 +40,35 @@ spec:
                 name: {{ include "finaware.fullname" $root }}-config
             - secretRef:
                 name: {{ include "finaware.fullname" $root }}-secret
+          {{- with $svc.probe.startup }}
+          # Why: a slow first start (loading the model) must not be mistaken for a hung container.
+          # Liveness only begins once this passes, so it stays tight afterwards.
+          startupProbe:
+            httpGet:
+              path: {{ .path }}
+              port: http
+            periodSeconds: {{ .periodSeconds }}
+            failureThreshold: {{ .failureThreshold }}
+            timeoutSeconds: {{ .timeoutSeconds }}
+          {{- end }}
           readinessProbe:
             httpGet:
               path: {{ $svc.probe.readinessPath }}
               port: http
             initialDelaySeconds: {{ $svc.probe.readinessInitialDelaySeconds }}
             periodSeconds: {{ $svc.probe.periodSeconds }}
+            {{- with $svc.probe.timeoutSeconds }}
+            timeoutSeconds: {{ . }}
+            {{- end }}
           livenessProbe:
             httpGet:
               path: {{ $svc.probe.livenessPath }}
               port: http
             initialDelaySeconds: {{ $svc.probe.livenessInitialDelaySeconds }}
             periodSeconds: {{ $svc.probe.periodSeconds }}
+            {{- with $svc.probe.timeoutSeconds }}
+            timeoutSeconds: {{ . }}
+            {{- end }}
           {{- with $svc.resources }}
           resources:
             {{- toYaml . | nindent 12 }}

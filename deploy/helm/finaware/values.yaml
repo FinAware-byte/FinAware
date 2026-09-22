@@ -296,6 +296,16 @@ services:
       readinessInitialDelaySeconds: 10
       livenessInitialDelaySeconds: 20
       periodSeconds: 10
+      # Why: importing scikit-learn/SHAP and loading the model takes far longer than a Node start.
+      # Measured at ~60s on a loaded OrbStack node, where liveness restarted the pod mid-load.
+      # Liveness is held back until this passes; 30 x 5s = 150s of headroom.
+      startup:
+        path: /health/live
+        periodSeconds: 5
+        failureThreshold: 30
+        timeoutSeconds: 3
+      # A busy node made the 1s default probe timeout flap ("context deadline exceeded").
+      timeoutSeconds: 5
     hpa:
       enabled: false
       minReplicas: 1

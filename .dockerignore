@@ -9,3 +9,12 @@ deploy/**/*.tmp
 
 # ML service has its own image (ml-service/Dockerfile); keep its venv and data out of the Node image.
 ml-service
+
+# Not needed to build or run the app; keeping them out shrinks the build context and speeds builds.
+docs
+deploy
+developerhandoffpackagefolder
+tests
+.github
+*.md
+tsconfig.tsbuildinfo

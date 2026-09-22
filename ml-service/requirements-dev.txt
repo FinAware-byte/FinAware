@@ -1,4 +1,6 @@
 -r requirements.txt
+# The extras the runtime image leaves out (auto-reload, faster event loop) are useful locally.
+uvicorn[standard]==0.53.0
 matplotlib==3.11.2
 openpyxl==3.1.5
 pytest==9.1.1

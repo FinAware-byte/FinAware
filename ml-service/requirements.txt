@@ -4,6 +4,8 @@ numpy==2.5.3
 scikit-learn==1.7.2
 joblib==1.6.0
 fastapi==0.141.1
-uvicorn[standard]==0.53.0
+# Plain uvicorn, not [standard]: the extras (uvloop, watchfiles, websockets, PyYAML) add ~26 MB and
+# this service serves a handful of JSON requests. requirements-dev.txt keeps the extras for local work.
+uvicorn==0.53.0
 pydantic==2.13.5
 shap==0.52.0
