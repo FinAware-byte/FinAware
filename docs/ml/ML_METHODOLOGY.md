@@ -170,7 +170,8 @@ recall and worse log loss. KNN and SVM were more than 0.01 behind the best.
   including ML-down and invalid-probability branches.
 - **End to end:** browser walk-through of both activity-diagram branches, plus a check that the existing pages
   still load.
-- **CI** runs all of these (`.github/workflows/ci.yml`).
+- **CI** (`.github/workflows/ci.yml`) runs all of these, but its automatic runs are paused for now, so run
+  them locally: `npm test` and `npm run ml:test`.
 
 ## 11b. Second model: missed payments (a recorded outcome)
 

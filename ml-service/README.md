@@ -67,7 +67,7 @@ Response: `riskLevel`, `riskScore` (0–100 = 100 × (0.5·P(Medium) + P(High)))
 (~750 MB) that runs as a non-root user with the model baked in and a health check on `/health/ready`.
 
 ```bash
-# Default: train during the build — reproducible, used by CI and Compose.
+# Default: train during the build — reproducible, used by Compose.
 docker build --build-arg ALLOW_PROPOSED_TARGET=1 -t finaware-ml:latest ml-service
 
 # Fast local/dev build: reuse ml-service/artifacts from an earlier `python -m ml.train` (~30 s).

@@ -1,8 +1,13 @@
 name: CI
 
+# Paused: CI no longer runs on every push or pull request. Run the same checks locally instead
+# (npm run lint, npm run typecheck, npm test, npm run ml:test). To switch CI back on, remove the
+# "workflow_dispatch" line and un-comment "push" and "pull_request". Until then it only runs when
+# started by hand from the Actions tab.
 on:
-  push:
-  pull_request:
+  workflow_dispatch:
+  # push:
+  # pull_request:
 
 jobs:
   build:

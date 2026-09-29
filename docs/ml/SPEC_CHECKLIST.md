@@ -132,7 +132,7 @@ Legend: **Done** · **Done (provisional)** — correct but re-run after the risk
 | Model tests | Done | `ml-service/tests/test_model.py` |
 | API tests | Done | `ml-service/tests/test_api.py` |
 | End-to-end prediction test | Done | Browser walk-through of both activity-diagram branches + `tests/risk/assess.test.ts`; existing pages re-checked |
-| CI | Done | `.github/workflows/ci.yml` — lint, typecheck, build, `npm test`, and a Python job (audit, train, pytest) |
+| CI | Paused | `.github/workflows/ci.yml` — lint, typecheck, build, `npm test`, and a Python job (audit, train, pytest). Automatic runs are switched off for now; run the checks locally |
 
 ## Open items
 
