@@ -1,7 +1,9 @@
 # syntax=docker/dockerfile:1.7
 # One image serves the web app (next start) and all nine Express microservices (tsx), so the runtime
-# needs the production dependencies plus tsx and the Prisma CLI — but not the rest of the dev toolchain
-# (typescript, eslint, prettier, tailwind, @types/*) and not the Next build cache.
+# needs the production dependencies but not the dev toolchain (typescript, eslint, prettier, tailwind,
+# @types/*) and not the Next build cache. tsx and the Prisma CLI count as runtime dependencies here:
+# every service is started through tsx and every pod runs "prisma db push" first, so they belong in
+# "dependencies", not "devDependencies".
 
 FROM node:20-bookworm-slim AS deps
 WORKDIR /app
@@ -22,9 +24,7 @@ FROM node:20-bookworm-slim AS prod-deps
 WORKDIR /app
 RUN apt-get update && apt-get install -y --no-install-recommends openssl ca-certificates && rm -rf /var/lib/apt/lists/*
 COPY package.json package-lock.json ./
-RUN npm ci --omit=dev --no-audit --fund=false \
- # tsx runs the services, prisma runs "db push" on start; both are devDependencies of the repo.
- && npm install --omit=dev --no-save --no-audit --fund=false tsx prisma
+RUN npm ci --omit=dev --no-audit --fund=false
 COPY prisma ./prisma
 RUN npx prisma generate
 

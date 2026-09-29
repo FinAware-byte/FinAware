@@ -1,8 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
-import { useState } from "react";
+import { usePathname } from "next/navigation";
+import { LogoutButton } from "@/components/sidebar/logout-button";
 import { cn } from "@/lib/utils";
 
 const items = [
@@ -16,26 +16,13 @@ const items = [
 
 export function AppSidebar() {
   const pathname = usePathname();
-  const router = useRouter();
-  const [loggingOut, setLoggingOut] = useState(false);
 
-  const logout = async () => {
-    setLoggingOut(true);
-    try {
-      await fetch("/api/microservices/auth/logout", {
-        method: "POST"
-      });
-    } finally {
-      router.replace("/");
-      router.refresh();
-      setLoggingOut(false);
-    }
-  };
-
+  // Hidden on phones: MobileHeader plus the tab strip already carry navigation there, and a
+  // full-height column of the same links pushed every screen's content below the fold.
   return (
-    <aside className="h-full min-h-[calc(100vh-56px)] w-full border-r border-slate-200 bg-white p-5 md:flex md:w-64 md:flex-col">
+    <aside className="hidden h-full min-h-[calc(100vh-56px)] w-full border-r border-slate-200 bg-white p-5 md:flex md:w-64 md:flex-col">
       <div className="mb-8">
-        <h1 className="text-xl font-bold text-brand-700">FinAware</h1>
+        <p className="text-xl font-bold text-brand-700">FinAware</p>
         <p className="text-xs text-slate-500">Secure &amp; Private Financial Rehabilitation</p>
       </div>
       <nav className="space-y-2 md:flex-1">
@@ -57,14 +44,7 @@ export function AppSidebar() {
       </nav>
 
       <div className="mt-6 border-t border-slate-200 pt-4">
-        <button
-          type="button"
-          onClick={logout}
-          disabled={loggingOut}
-          className="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm font-semibold text-slate-700 transition hover:bg-slate-100 disabled:opacity-60"
-        >
-          {loggingOut ? "Logging out..." : "Logout"}
-        </button>
+        <LogoutButton className="w-full" />
       </div>
     </aside>
   );

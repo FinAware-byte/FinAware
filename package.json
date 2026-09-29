@@ -19,6 +19,7 @@
     "typecheck": "tsc --noEmit",
     "test": "node --import tsx --test tests/**/*.test.ts",
     "seed": "prisma db seed",
+    "demo:data": "tsx scripts/demo-data.ts",
     "validate:login-identifiers": "tsx scripts/validate-login-identifiers.ts",
     "format": "prettier --check .",
     "format:write": "prettier --write .",
@@ -32,9 +33,10 @@
     "service:financial-api": "tsx services/financial-api/src/server.ts",
     "service:financial-data": "tsx services/financial-data/src/server.ts",
     "service:ml": "cd ml-service && .venv/bin/uvicorn api.main:app --host 127.0.0.1 --port 8000",
-    "ml:setup": "cd ml-service && python3 -m venv .venv && .venv/bin/pip install -r requirements-dev.txt",
+    "ml:setup": "sh scripts/ml-setup.sh",
     "ml:audit": "cd ml-service && .venv/bin/python -m ml.data_audit",
     "ml:train": "cd ml-service && .venv/bin/python -m ml.train",
+    "ml:models": "cd ml-service && .venv/bin/python -m ml.train --allow-proposed-target --skip-ablation && .venv/bin/python -m ml.payment.train --db ../prisma/prisma/dev.db && .venv/bin/python -m ml.segments",
     "ml:test": "cd ml-service && .venv/bin/python -m pytest -q",
     "dev:stack:ml": "npm run prisma:sync && concurrently -k -n web,auth,dashboard,identity,debts,rehab,help,pdf,fin-api,fin-data,ml \"npm run dev:web\" \"npm run service:auth\" \"npm run service:dashboard\" \"npm run service:identity\" \"npm run service:debts\" \"npm run service:rehab\" \"npm run service:help\" \"npm run service:pdf\" \"npm run service:financial-api\" \"npm run service:financial-data\" \"npm run service:ml\"",
     "helm:lint": "helm lint deploy/helm/finaware",
@@ -55,10 +57,12 @@
     "next": "^14.2.35",
     "openai": "^4.56.0",
     "pdf-lib": "^1.17.1",
+    "prisma": "^5.20.0",
     "react": "18.3.1",
     "react-dom": "18.3.1",
     "recharts": "^2.12.7",
     "tailwind-merge": "^2.5.2",
+    "tsx": "^4.21.0",
     "zod": "^3.23.8"
   },
   "devDependencies": {
@@ -73,9 +77,7 @@
     "postcss": "^8.4.39",
     "prettier": "^3.3.3",
     "prettier-plugin-tailwindcss": "^0.6.6",
-    "prisma": "^5.20.0",
     "tailwindcss": "^3.4.10",
-    "tsx": "^4.21.0",
     "typescript": "^5.5.4"
   }
 }

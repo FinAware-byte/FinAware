@@ -15,7 +15,10 @@ const protectedPrefixes = [
   "/help",
   "/fica-verification",
   "/financial-profile",
-  "/risk-assessment"
+  "/risk-assessment",
+  "/money-plan",
+  "/score-coach",
+  "/about-the-model"
 ];
 
 export function middleware(request: NextRequest) {
@@ -63,6 +66,9 @@ export const config = {
     "/help/:path*",
     "/fica-verification/:path*",
     "/financial-profile/:path*",
-    "/risk-assessment/:path*"
+    "/risk-assessment/:path*",
+    "/money-plan/:path*",
+    "/score-coach/:path*",
+    "/about-the-model/:path*"
   ]
 };

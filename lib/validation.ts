@@ -49,8 +49,9 @@ export const identityUpdateSchema = z.object({
     .or(z.literal("")),
   monthlyIncome: z.coerce.number().min(0, "Monthly income cannot be negative"),
   employmentStatus: z.enum(employmentStatusValues as [EmploymentStatus, ...EmploymentStatus[]]),
-  realAge: z.coerce.number().int().min(16, "Real age must be at least 16").max(100),
-  creditScore: z.coerce.number().int().min(300).max(900)
+  realAge: z.coerce.number().int().min(16, "Real age must be at least 16").max(100)
+  // No creditScore: it is calculated from the accounts on record (lib/finance/credit-score),
+  // so accepting one here would let the form overwrite the calculation.
 });
 
 export const createDebtSchema = z.object({

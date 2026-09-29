@@ -29,9 +29,11 @@ export default async function FinancialProfilePage() {
     monthlyIncome: String(profile?.monthlyIncome ?? view.defaults.monthlyIncome ?? ""),
     monthlyExpenses: profile ? String(profile.monthlyExpenses) : "",
     savings: profile ? String(profile.savings) : "",
-    creditScore: String(profile?.creditScore ?? view.defaults.creditScore),
     financialGoal: profile?.financialGoal ?? ""
   };
+  // Always the score on record, never the copy stored on a previous save — so this page and the
+  // dashboard cannot drift apart.
+  const creditScore = view.defaults.creditScore;
   const activeDebts = view.debts.filter((debt) => debt.status === "ACTIVE");
 
   return (
@@ -39,12 +41,13 @@ export default async function FinancialProfilePage() {
       <div>
         <h1 className="text-2xl font-semibold text-slate-900">Financial Profile</h1>
         <p className="text-sm text-slate-500">
-          Enter or update the financial information used for your ML Financial Risk Assessment.
-          {!profile && " Income and credit score are pre-filled from your existing details — please check them."}
+          Enter or update the financial information used for your ML Financial Risk Assessment. Your credit score is
+          taken from your accounts and is not editable.
+          {!profile && " Income is pre-filled from your existing details — please check it."}
         </p>
       </div>
 
-      <FinancialProfileForm initial={initial} />
+      <FinancialProfileForm initial={initial} creditScore={creditScore} />
 
       <Card>
         <div className="flex flex-wrap items-center justify-between gap-2">

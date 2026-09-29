@@ -94,17 +94,18 @@ export function IdentityForm({ user }: { user: IdentityFormUser }) {
             className="w-full rounded-lg border border-slate-300 px-3 py-2"
           />
         </label>
-        <label className="text-sm">
+        {/* Calculated from the accounts on record, so there is nothing to type here. Shown for
+            reference only — it is not submitted with this form. */}
+        <div className="text-sm">
           <span className="mb-1 block font-medium text-slate-700">Current Credit Score</span>
-          <input
-            name="creditScore"
-            defaultValue={user.creditScore}
-            type="number"
-            min={300}
-            max={900}
-            className="w-full rounded-lg border border-slate-300 px-3 py-2"
-          />
-        </label>
+          <div className="flex items-center gap-3 rounded-lg border border-slate-200 bg-slate-50 px-3 py-2">
+            <span className="text-xl font-bold tabular-nums text-slate-900">{user.creditScore}</span>
+            <span className="rounded-full bg-slate-200 px-2 py-0.5 text-xs font-medium text-slate-600">Calculated</span>
+          </div>
+          <span className="mt-1 block text-xs text-slate-500">
+            Worked out from your payment history, what you owe and any judgments.
+          </span>
+        </div>
         <label className="text-sm">
           <span className="mb-1 block font-medium text-slate-700">Saved Download Password (optional)</span>
           <input

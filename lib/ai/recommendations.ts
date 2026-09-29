@@ -1,6 +1,8 @@
 import { z } from "zod";
 import type { AiRecommendationsResponse } from "@/types/ai";
 import type { AppDebt, AppUser } from "@/lib/domain";
+import { computedActions, computedHeadline, computedSummary } from "@/lib/ai/computed-actions";
+import { extractOutputText, modelPausedReason, noteModelRefusal } from "@/lib/ai/model";
 
 export type RecommendationContext = {
   focus?: string;
@@ -30,11 +32,25 @@ const aiOutputSchema: z.ZodType<AiRecommendationsResponse> = z.object({
 });
 
 function buildPrompt(user: AppUser, debts: AppDebt[], context?: RecommendationContext): string {
+  // Every figure the model is allowed to use is computed first and handed over. The model
+  // rephrases; it never does the arithmetic. Without this it would estimate interest and payoff
+  // periods from raw JSON, and a wrong rand figure in financial guidance is worse than none.
+  const grounded = computedActions({
+    user,
+    debts,
+    netCashflow: context?.cashflow?.netCashflow ?? null
+  });
+
   const promptParts = [
     "You are a financial rehabilitation assistant for a demo app called FinAware.",
     "Produce practical and non-absolute advice. Do not guarantee outcomes.",
     "Return strict JSON only matching the requested schema.",
     "Always include a warning that this is demo guidance and not financial advice.",
+    "IMPORTANT: the statements under 'Calculated findings' are the only source of numbers.",
+    "Reuse their amounts exactly as written. Never calculate, estimate, round or invent a figure,",
+    "and never state a number that does not appear there.",
+    "Calculated findings:",
+    JSON.stringify(grounded.map((action) => action.text), null, 2),
     "User profile:",
     JSON.stringify(
       {
@@ -99,14 +115,36 @@ function fallbackRecommendations(
         ? "reduce revolving balances and rebuild payment consistency"
         : "maintain healthy utilization and grow emergency buffers";
 
-  // Why: deterministic fallback keeps recommendation output stable and available when AI access is unavailable.
+  // Deterministic and specific: the actions below are worked out from this user's own balances,
+  // rates and payment record, so they carry real rand figures rather than general advice. This
+  // runs whenever there is no model available — and its numbers are also what a model is given
+  // to phrase, so the figures are identical either way.
+  const actions = computedActions({ user, debts, netCashflow });
+
   return {
-    summary: `Your current priority is to ${focus}. Start with one change you can sustain for the next 30 days.`,
-    top_actions: [
-      "List all debts by interest rate and pay minimums on all accounts first.",
-      "Direct any surplus income to the highest-cost debt while avoiding new credit usage.",
-      "Set payment reminders 3 days before due dates to reduce missed payments."
-    ],
+    source: "calculated",
+    headline: computedHeadline({ user, debts }),
+    actions: actions.map(({ headline, amount, amountLabel, detail, basis, working, tone }) => ({
+      headline,
+      amount,
+      amountLabel,
+      detail,
+      basis,
+      working,
+      tone
+    })),
+    summary:
+      actions.length > 0
+        ? computedSummary({ user, debts, netCashflow })
+        : `Your current priority is to ${focus}. Start with one change you can sustain for the next 30 days.`,
+    top_actions:
+      actions.length > 0
+        ? actions.map((action) => action.text)
+        : [
+            "List all debts by interest rate and pay minimums on all accounts first.",
+            "Direct any surplus income to the highest-cost debt while avoiding new credit usage.",
+            "Set payment reminders 3 days before due dates to reduce missed payments."
+          ],
     risk_factors: [
       "Debt utilization pressure",
       missedTotal > 0 ? "Recent missed payments" : "Payment consistency risk",
@@ -133,8 +171,22 @@ export async function getAiRecommendations(
 ): Promise<AiRecommendationsResponse> {
   const apiKey = process.env.OPENAI_API_KEY;
   if (!apiKey) {
+    // Not an error: without a key the calculated recommendations are the product, not a downgrade.
     return fallbackRecommendations(user, debts, context);
   }
+
+  // Why this is logged: every failure below falls back to the calculated text, which looks
+  // identical to a working feature. Without a line in the log, "the API key does nothing" is
+  // impossible to diagnose.
+  const giveUp = (reason: string) => {
+    console.warn(`[ai-recommendations] using calculated recommendations: ${reason}`);
+    return fallbackRecommendations(user, debts, context);
+  };
+
+  // Shared with every other model feature: after an out-of-credit answer, do not make the
+  // dashboard wait seven seconds for the same refusal on every load.
+  const paused = modelPausedReason();
+  if (paused) return fallbackRecommendations(user, debts, context);
 
   const model = process.env.OPENAI_MODEL ?? "gpt-4.1-mini";
 
@@ -200,14 +252,29 @@ export async function getAiRecommendations(
     });
 
     if (!response.ok) {
-      return fallbackRecommendations(user, debts, context);
+      const detail = (await response.json().catch(() => ({}))) as { error?: { type?: string; message?: string } };
+      noteModelRefusal(response.status, detail.error?.type);
+      return giveUp(
+        `OpenAI returned ${response.status}${detail.error?.type ? ` (${detail.error.type})` : ""}: ${detail.error?.message ?? "no detail"}`
+      );
     }
 
-    const data = (await response.json()) as { output_text?: string };
-    const parsed = aiOutputSchema.safeParse(JSON.parse(data.output_text ?? "{}"));
+    const data = (await response.json()) as Parameters<typeof extractOutputText>[0];
+    const text = extractOutputText(data);
+    if (!text) {
+      return giveUp("the response carried no output text");
+    }
 
+    let candidate: unknown;
+    try {
+      candidate = JSON.parse(text);
+    } catch {
+      return giveUp("the model did not return valid JSON");
+    }
+
+    const parsed = aiOutputSchema.safeParse(candidate);
     if (!parsed.success) {
-      return fallbackRecommendations(user, debts, context);
+      return giveUp(`the model's JSON did not match the schema: ${parsed.error.issues[0]?.message ?? "unknown"}`);
     }
 
     const warnings = parsed.data.warnings.some((warning) =>
@@ -216,8 +283,28 @@ export async function getAiRecommendations(
       ? parsed.data.warnings
       : [...parsed.data.warnings, "Demo data only. Not financial advice."];
 
-    return { ...parsed.data, warnings };
-  } catch {
-    return fallbackRecommendations(user, debts, context);
+    return {
+      ...parsed.data,
+      source: "model",
+      // Deliberately not from the model: the headline figure and the per-action amounts stay
+      // calculated even when the prose is rephrased, so no displayed number is ever generated.
+      headline: computedHeadline({ user, debts }),
+      actions: computedActions({ user, debts, netCashflow: context?.cashflow?.netCashflow ?? null }).map(({ headline, amount, amountLabel, detail, basis, working, tone }) => ({
+        headline,
+        amount,
+        amountLabel,
+        detail,
+        basis,
+        working,
+        tone
+      })),
+      warnings
+    };
+  } catch (error) {
+    return giveUp(error instanceof Error ? error.message : "the request failed");
   }
 }
+
+// Moved to lib/ai/model.ts so every feature reads model output the same way; re-exported so
+// existing imports keep working.
+export { extractOutputText } from "@/lib/ai/model";

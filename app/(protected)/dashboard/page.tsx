@@ -1,5 +1,7 @@
 import { redirect } from "next/navigation";
 import { AiRecommendationsCard } from "@/components/cards/ai-recommendations-card";
+import { MonthBar } from "@/components/dashboard/month-bar";
+import { FigureRow } from "@/components/dashboard/figure-row";
 import { MetricCard } from "@/components/cards/metric-card";
 import { RiskBadge } from "@/components/cards/risk-badge";
 import { CreditScoreProjectionChart } from "@/components/charts/credit-score-projection-chart";
@@ -104,6 +106,7 @@ export default async function DashboardPage() {
     overview.user.monthlyIncome > 0
       ? (overview.metrics.monthlyObligations / overview.user.monthlyIncome) * 100
       : 100;
+  const riskLabel = (risk: string) => (risk === "HIGH" ? "Higher" : risk === "MEDIUM" ? "Moderate" : "Lower");
   const debtPressureLabel =
     debtToIncomeRatio >= 60 ? "High pressure" : debtToIncomeRatio >= 40 ? "Moderate pressure" : "Manageable pressure";
   const debtPressureTone =
@@ -131,48 +134,47 @@ export default async function DashboardPage() {
 
   return (
     <div className="space-y-6">
-      <div className="flex flex-wrap items-center justify-between gap-3">
-        <div>
-          <h1 className="text-2xl font-semibold text-slate-900">Dashboard</h1>
-          <p className="text-sm text-slate-500">Welcome back, {overview.user.fullName}.</p>
-        </div>
+      {/* The money sentence is this page's h1: it is what the page is actually about. */}
+      <MonthBar
+        firstName={overview.user.fullName.split(" ")[0]}
+        monthlyIncome={overview.user.monthlyIncome}
+        monthlyObligations={overview.metrics.monthlyObligations}
+      >
         <DownloadOverviewButton />
-      </div>
+      </MonthBar>
 
-      <div className="grid gap-4 lg:grid-cols-2 xl:grid-cols-4">
-        <MetricCard
-          title="Credit Score"
-          value={String(overview.user.creditScore)}
-          subtitle="Updated from active debt behavior"
-          tone="blue"
-          right={<RiskBadge risk={overview.user.riskStatus} />}
-        />
-        <MetricCard
-          title="Total Debt"
-          value={formatZAR(overview.metrics.totalDebt)}
-          subtitle={`Across ${overview.metrics.activeAccounts} active accounts`}
-          tone="amber"
-        />
-        <MetricCard
-          title="Monthly Obligations"
-          value={formatZAR(overview.metrics.monthlyObligations)}
-          subtitle="Expected monthly debt commitments"
-          tone="cyan"
-        />
-        <MetricCard
-          title="Financial vs Real Age"
-          value={`${overview.metrics.financialAge} years`}
-          subtitle={overview.metrics.financialAgeMessage}
-          tone="emerald"
-        />
-      </div>
+      <FigureRow
+        figures={[
+          {
+            label: "Credit score",
+            value: String(overview.user.creditScore),
+            note: `${riskLabel(overview.user.riskStatus)} risk, based on how your accounts are running`
+          },
+          {
+            label: "What you owe",
+            value: formatZAR(overview.metrics.totalDebt),
+            note: `Across ${overview.metrics.activeAccounts} active ${overview.metrics.activeAccounts === 1 ? "account" : "accounts"}`,
+            href: "/debts"
+          },
+          {
+            label: "Going out each month",
+            value: formatZAR(overview.metrics.monthlyObligations),
+            note: `${debtPressureLabel} at ${Math.round(debtToIncomeRatio)}% of your income`,
+            emphasis: debtToIncomeRatio >= 60 ? "attention" : "normal"
+          },
+          {
+            label: "Financial age",
+            value: `${overview.metrics.financialAge} years`,
+            note: overview.metrics.financialAgeMessage
+          }
+        ]}
+      />
 
       <div className="grid gap-4 xl:grid-cols-3">
         <Card className="xl:col-span-2">
           <div className="flex items-start justify-between gap-3">
             <div>
-              <p className="text-xs font-semibold uppercase tracking-wide text-indigo-700">Debt analytics</p>
-              <h3 className="mt-1 text-lg font-semibold text-slate-900">Debt composition by creditor</h3>
+              <h3 className="text-lg font-semibold text-slate-900">Who you owe the most</h3>
               <p className="mt-1 text-sm text-slate-500">
                 Breakdown of active debt by creditor so you can target the largest pressure points first.
               </p>
@@ -191,9 +193,8 @@ export default async function DashboardPage() {
           </div>
         </Card>
 
-        <Card className="bg-gradient-to-b from-white to-indigo-50/40">
-          <p className="text-xs font-semibold uppercase tracking-wide text-indigo-700">Debt learning snapshot</p>
-          <h3 className="mt-1 text-lg font-semibold text-slate-900">What this chart tells you</h3>
+        <Card>
+          <h3 className="text-lg font-semibold text-slate-900">What this means</h3>
           <div className="mt-4 space-y-3 text-sm">
             <div className="rounded-lg border border-slate-200 bg-white p-3">
               <p className="font-semibold text-slate-800">Top creditor concentration</p>
@@ -226,8 +227,7 @@ export default async function DashboardPage() {
         <Card className="xl:col-span-2">
           <div className="flex items-center justify-between gap-3">
             <div>
-              <p className="text-xs font-semibold uppercase tracking-wide text-blue-700">Credit outlook simulator</p>
-              <h3 className="mt-1 text-lg font-semibold text-slate-900">Projected score: current vs recommended</h3>
+              <h3 className="text-lg font-semibold text-slate-900">Where your score could go</h3>
               <p className="mt-1 text-sm text-slate-500">
                 3-month and 6-month simulation if payment behavior remains unchanged versus recommended actions.
               </p>
@@ -260,9 +260,8 @@ export default async function DashboardPage() {
           </div>
         </Card>
 
-        <Card className="bg-gradient-to-b from-white to-blue-50/40">
-          <p className="text-xs font-semibold uppercase tracking-wide text-blue-700">Score coaching snapshot</p>
-          <h3 className="mt-1 text-lg font-semibold text-slate-900">3 and 6 month comparison</h3>
+        <Card>
+          <h3 className="text-lg font-semibold text-slate-900">In three and six months</h3>
           <div className="mt-4 space-y-3 text-sm">
             <div className="rounded-lg border border-orange-200 bg-orange-50 p-3">
               <p className="font-semibold text-orange-800">Current payment behavior</p>
@@ -286,8 +285,7 @@ export default async function DashboardPage() {
       <Card>
         <div className="flex flex-wrap items-start justify-between gap-3">
           <div>
-            <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">Credit accounts ledger</p>
-            <h3 className="mt-1 text-lg font-semibold text-slate-900">All credit accounts and repayment progress</h3>
+            <h3 className="text-lg font-semibold text-slate-900">Every account, and how it is running</h3>
             <p className="mt-1 text-sm text-slate-600">
               Educational account view grouped by credit type, outstanding balance, and payments made so far.
             </p>

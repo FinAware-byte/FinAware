@@ -11,7 +11,10 @@ persistence:
   accessMode: ReadWriteOnce
   size: 2Gi
   storageClassName: ""
-  mountPath: /app/prisma
+  # Why a subdirectory: mounting the volume on /app/prisma itself hides the image's schema.prisma
+  # behind an empty volume, and every pod starts with "prisma db push", which then fails with
+  # "Could not find Prisma Schema". The SQLite file lives one level down instead.
+  mountPath: /app/prisma/data
 
 config:
   environment: dev
@@ -28,7 +31,7 @@ config:
   ficaRequiredCookieName: finaware_fica_required
 
 secret:
-  databaseUrl: file:/app/prisma/dev.db
+  databaseUrl: file:/app/prisma/data/dev.db
   openaiApiKey: ""
 
 ingress:

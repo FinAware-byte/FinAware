@@ -1,7 +1,7 @@
 import { prisma } from "@/lib/db/prisma";
 import { toDebtStatus } from "@/lib/domain";
-import { estimateMonthlyObligation } from "@/lib/simulation/generator";
-import type { FinancialProfileInput } from "@/lib/risk/validation";
+import { monthlyPaymentFor } from "@/lib/finance/repayment";
+import { clampCreditScore, type FinancialProfileInput } from "@/lib/risk/validation";
 import type {
   FinancialProfile,
   FinancialProfileView,
@@ -60,8 +60,8 @@ export async function getFinancialProfileView(userId: string): Promise<Financial
     profile: user.financial_profile ? toProfile(user.financial_profile) : null,
     defaults: {
       monthlyIncome: user.monthly_income,
-      // Why: the model was trained on 300–850; existing scores may go up to 900, so clamp the suggestion only.
-      creditScore: Math.min(850, Math.max(300, user.credit_profile?.credit_score ?? 600))
+      // The model was trained on 300–850; a score on record may go higher, so clamp for the model.
+      creditScore: clampCreditScore(user.credit_profile?.credit_score)
     },
     debts: user.debts.map((debt) => ({
       creditorName: debt.creditor_name,
@@ -78,14 +78,19 @@ export async function getFinancialProfileView(userId: string): Promise<Financial
 export async function upsertFinancialProfile(userId: string, input: FinancialProfileInput): Promise<FinancialProfile | null> {
   const id = parseUserId(userId);
   if (!id) return null;
-  const exists = await prisma.users.count({ where: { user_id: id } });
-  if (!exists) return null;
+  const user = await prisma.users.findUnique({
+    where: { user_id: id },
+    select: { user_id: true, credit_profile: { select: { credit_score: true } } }
+  });
+  if (!user) return null;
 
   const data = {
     monthly_income: input.monthlyIncome,
     monthly_expenses: input.monthlyExpenses,
     savings: input.savings,
-    credit_score: input.creditScore,
+    // Read from Credit_Profile, not from the request. The score is a consequence of how the
+    // accounts are running, so the one the model scores on is the one the dashboard displays.
+    credit_score: clampCreditScore(user.credit_profile?.credit_score),
     financial_goal: input.financialGoal
   };
   const row = await prisma.financialProfile.upsert({
@@ -103,13 +108,19 @@ const EMPLOYMENT_TO_DATASET: Record<string, string> = {
   UNEMPLOYED: "Unemployed"
 };
 
-// Why: Debts has no repayment column. The dashboard's "Monthly Obligations" sums estimateMonthlyObligation()
-// over ACTIVE debts; the stored Credit_Profile.monthly_obligations can be stale (e.g. seeded users), so the
-// model uses the dashboard's calculation and the user sees the same figure everywhere.
-function activeMonthlyRepayment(debts: Array<{ balance: number; interest_rate: number; status: string }>): number {
+// Why: Debts has no repayment column. The dashboard's "Monthly Obligations" and this share one
+// calculation (lib/finance/repayment), so the model and the interface never disagree. The stored
+// Credit_Profile.monthly_obligations can be stale, which is why it is recomputed here.
+function activeMonthlyRepayment(
+  debts: Array<{ balance: number; interest_rate: number; status: string; debt_type: string }>
+): number {
   const total = debts
     .filter((debt) => toDebtStatus(debt.status) === "ACTIVE")
-    .reduce((sum, debt) => sum + estimateMonthlyObligation(debt.balance, debt.interest_rate), 0);
+    .reduce(
+      (sum, debt) =>
+        sum + monthlyPaymentFor({ balance: debt.balance, interestRate: debt.interest_rate, debtType: debt.debt_type }),
+      0
+    );
   return Number(total.toFixed(2));
 }
 
@@ -131,7 +142,7 @@ export async function getFinancialData(
 
   const user = await prisma.users.findUnique({
     where: { user_id: id },
-    include: { financial_profile: true, debts: true }
+    include: { financial_profile: true, debts: true, credit_profile: true }
   });
   if (!user) return null;
   if (!user.financial_profile) return { profile: null, features: null };
@@ -152,7 +163,10 @@ export async function getFinancialData(
       monthly_income_zar: profile.monthly_income,
       monthly_expenses_zar: profile.monthly_expenses,
       savings_zar: profile.savings,
-      credit_score: profile.credit_score,
+      // Read live from Credit_Profile, not from the profile row. The profile stores a snapshot
+      // taken when it was last saved; a debt added since then would have moved the calculated
+      // score, and the model must score on the current one.
+      credit_score: clampCreditScore(user.credit_profile?.credit_score),
       has_loan: hasLoan ? "Yes" : "No",
       loan_amount_zar: hasLoan ? Number(totalBalance.toFixed(2)) : 0,
       // Decision D-4: the same per-debt repayment estimate the dashboard shows ("Monthly Obligations").
@@ -235,6 +249,16 @@ function parseNumericValue(value: string): number | string {
   return value.trim() !== "" && Number.isFinite(parsed) ? parsed : value;
 }
 
+// A snapshot that fails to parse costs the explanation its arithmetic, not the whole assessment.
+function parseSnapshot(json: string): MlFeaturePayload | null {
+  try {
+    const value = JSON.parse(json) as MlFeaturePayload;
+    return value && typeof value.monthly_income_zar === "number" ? value : null;
+  } catch {
+    return null;
+  }
+}
+
 async function loadAssessment(where: { assessment_id: string } | { profile_id: string }): Promise<RiskAssessmentRecord | null> {
   const row = await prisma.riskAssessment.findFirst({
     where,
@@ -258,6 +282,7 @@ async function loadAssessment(where: { assessment_id: string } | { profile_id: s
     targetStatus: row.target_status,
     explanationMethod: row.explanation_method,
     indicators: JSON.parse(row.indicators_json) as RiskAssessmentRecord["indicators"],
+    inputs: parseSnapshot(row.input_snapshot_json),
     warnings: JSON.parse(row.warnings_json) as RiskAssessmentRecord["warnings"],
     drivers: row.drivers.map((driver) => ({
       feature: driver.feature_name,

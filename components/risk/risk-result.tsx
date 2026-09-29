@@ -1,4 +1,7 @@
+import Link from "next/link";
 import { Card } from "@/components/common/card";
+import { WhyRecommendation } from "@/components/risk/why-recommendation";
+import { explainRecommendation } from "@/lib/risk/explain";
 import { formatDriverValue, riskTone, wholePercentages } from "@/lib/risk/format";
 import type { RiskAssessmentRecord, RiskLevel } from "@/lib/risk/types";
 import { cn } from "@/lib/utils";
@@ -133,6 +136,7 @@ export function RiskResult({ assessment }: { assessment: RiskAssessmentRecord })
                 </div>
                 <p className="mt-1 text-sm text-slate-700">{item.description}</p>
                 <p className="mt-1 text-xs text-slate-500">Why: {item.reason}</p>
+                <WhyRecommendation why={explainRecommendation(item, assessment)} />
               </li>
             ))}
           </ul>
@@ -142,7 +146,10 @@ export function RiskResult({ assessment }: { assessment: RiskAssessmentRecord })
       <p className="text-xs text-slate-500">
         Model: {assessment.modelName} v{assessment.modelVersion} · Risk target v{assessment.targetVersion}
         {assessment.targetStatus !== "approved" ? " (provisional — pending approval)" : ""} · Demo data — not financial
-        advice. The model was trained on a constructed risk classification, not on real lending outcomes.
+        advice. The model was trained on a constructed risk classification, not on real lending outcomes.{" "}
+        <Link href="/about-the-model" className="font-semibold text-brand-700 hover:underline">
+          What this model can and cannot tell you
+        </Link>
       </p>
     </div>
   );

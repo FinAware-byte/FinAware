@@ -119,6 +119,9 @@ export type RiskAssessmentRecord = {
   targetStatus: string;
   explanationMethod: string;
   indicators: RiskIndicators;
+  /** The exact figures the model scored, as stored with the prediction — what "Why this
+   *  recommendation?" shows its arithmetic from. Null only if the snapshot could not be read. */
+  inputs: MlFeaturePayload | null;
   warnings: PredictionWarning[];
   drivers: RiskDriver[];
   recommendations: StoredRecommendation[];

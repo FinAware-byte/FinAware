@@ -8,18 +8,18 @@ type Values = {
   monthlyIncome: string;
   monthlyExpenses: string;
   savings: string;
-  creditScore: string;
   financialGoal: string;
 };
 
 const fields: Array<{ name: keyof Values; label: string; hint: string; type: string; step?: string }> = [
   { name: "monthlyIncome", label: "Monthly income (R)", hint: "Take-home income per month", type: "number", step: "0.01" },
   { name: "monthlyExpenses", label: "Monthly expenses (R)", hint: "Living costs, excluding debt repayments", type: "number", step: "0.01" },
-  { name: "savings", label: "Savings (R)", hint: "Total savings you can access", type: "number", step: "0.01" },
-  { name: "creditScore", label: "Credit score", hint: "Between 300 and 850", type: "number", step: "1" }
+  { name: "savings", label: "Savings (R)", hint: "Total savings you can access", type: "number", step: "0.01" }
 ];
 
-export function FinancialProfileForm({ initial }: { initial: Values }) {
+// Credit score is shown, not asked for. It is the outcome of how the accounts on record are
+// running, so it is read from the credit profile and cannot be typed in here or posted to the API.
+export function FinancialProfileForm({ initial, creditScore }: { initial: Values; creditScore: number }) {
   const [values, setValues] = useState<Values>(initial);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [status, setStatus] = useState<{ tone: "success" | "error"; message: string } | null>(null);
@@ -95,6 +95,17 @@ export function FinancialProfileForm({ initial }: { initial: Values }) {
             )}
           </label>
         ))}
+        <div className="text-sm">
+          <span className="mb-1 block font-medium text-slate-700">Credit score</span>
+          <div className="flex items-center gap-3 rounded-lg border border-slate-200 bg-slate-50 px-3 py-2">
+            <span className="text-xl font-bold tabular-nums text-slate-900">{creditScore}</span>
+            <span className="rounded-full bg-slate-200 px-2 py-0.5 text-xs font-medium text-slate-600">Read only</span>
+          </div>
+          <span className="mt-1 block text-xs text-slate-500">
+            Calculated from your accounts and payment history — it cannot be entered by hand.
+          </span>
+        </div>
+
         <label className="text-sm md:col-span-2">
           <span className="mb-1 block font-medium text-slate-700">Financial goal (optional)</span>
           <input

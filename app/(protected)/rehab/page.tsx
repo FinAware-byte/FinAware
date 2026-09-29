@@ -50,7 +50,7 @@ export default async function RehabPage() {
         </p>
       </Card>
 
-      <AiRecommendationsCard title="AI-Powered Recommendations" compact />
+      <AiRecommendationsCard title="Recommended next moves" compact />
     </div>
   );
 }

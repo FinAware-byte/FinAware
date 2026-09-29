@@ -1,5 +1,8 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
+import { PaymentOutlook } from "@/components/risk/payment-outlook";
+import { PeerComparison } from "@/components/risk/peer-comparison";
+import { WhatIfSimulator } from "@/components/risk/what-if-simulator";
 import { RiskAssessmentPanel } from "@/components/risk/risk-assessment-panel";
 import { getSessionUserId } from "@/lib/auth/session";
 import { callServiceJson } from "@/lib/microservices/proxy";
@@ -49,6 +52,9 @@ export default async function RiskAssessmentPage() {
             Complete financial profile
           </Link>
         </div>
+        {/* The missed-payment model reads recorded payments, not the financial profile, so it
+            has something to say even before the profile is filled in. */}
+        <PaymentOutlook />
       </div>
     );
   }
@@ -60,6 +66,9 @@ export default async function RiskAssessmentPage() {
     <div className="space-y-4">
       {header}
       <RiskAssessmentPanel initialAssessment={assessment} history={rows} />
+      <WhatIfSimulator />
+      <PeerComparison />
+      <PaymentOutlook />
     </div>
   );
 }

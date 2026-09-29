@@ -39,3 +39,12 @@ pnpm-debug.log*
 deploy/caddy/certs/*
 !deploy/caddy/certs/.gitkeep
 .idea/
+.mcp.json
+
+# Planning documents: working notes, not part of the application. (Named precisely — the Money
+# Plan, rehab plan and income-expense planner are app features and must stay tracked.)
+docs/_plan_build/
+docs/*Implementation_Plan*
+plans/
+*.plan.md
+PLAN.md

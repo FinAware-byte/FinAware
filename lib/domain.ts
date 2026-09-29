@@ -153,6 +153,13 @@ export type AppDebt = {
   userId: number;
   creditorName: string;
   debtType: DebtType;
+  /**
+   * The type exactly as stored ("Bond", "Vehicle Finance", "Store Card"). debtType above is
+   * normalised for display and maps anything unrecognised to OTHER, which is lossy — three
+   * genuinely different accounts collapse into one. Calculations that care about the real
+   * product (repayment shape, account mix) must use this.
+   */
+  debtTypeStored: string;
   interestRate: number;
   balance: number;
   status: DebtStatus;

@@ -1,7 +1,8 @@
 "use client";
 
 import { AssistanceType, ConsultationStatus, type AssistanceType as AssistanceTypeValue, type ConsultationStatus as ConsultationStatusValue } from "@/lib/domain";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { triageByKeywords } from "@/lib/help/triage-keywords";
 import { formatDate } from "@/lib/format";
 
 type ConsultationItem = {
@@ -15,16 +16,46 @@ type Props = {
   initialRequests: ConsultationItem[];
   supportPhone: string;
   supportEmail: string;
+  /** Pre-selected when the user arrives from a page that already knows who they need. */
+  defaultAssistanceType?: AssistanceTypeValue;
 };
 
-export function HelpRequestForm({ initialRequests, supportPhone, supportEmail }: Props) {
+export function HelpRequestForm({ initialRequests, supportPhone, supportEmail, defaultAssistanceType }: Props) {
   const [assistanceType, setAssistanceType] = useState<AssistanceTypeValue>(
-    AssistanceType.FINANCIAL_ADVISOR
+    defaultAssistanceType ?? AssistanceType.FINANCIAL_ADVISOR
   );
   const [message, setMessage] = useState("");
   const [requests, setRequests] = useState(initialRequests);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+  const [suggestion, setSuggestion] = useState<{ assistanceType: AssistanceTypeValue | null; reasons: string[] } | null>(null);
+
+  // Suggest an advisor from what the user writes, once they pause. A suggestion only — the
+  // choice stays with the user.
+  useEffect(() => {
+    if (message.trim().length < 15) {
+      setSuggestion(null);
+      return;
+    }
+    // Keywords answer at once; the model, if there is one, may refine it a moment later.
+    setSuggestion(triageByKeywords(message));
+    const controller = new AbortController();
+    const timer = setTimeout(() => {
+      fetch("/api/help/triage", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message }),
+        signal: controller.signal
+      })
+        .then((response) => (response.ok ? response.json() : null))
+        .then((payload) => payload?.source === "model" && setSuggestion(payload))
+        .catch(() => undefined);
+    }, 600);
+    return () => {
+      clearTimeout(timer);
+      controller.abort();
+    };
+  }, [message]);
 
   const submit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -88,6 +119,26 @@ export function HelpRequestForm({ initialRequests, supportPhone, supportEmail }:
                 required
               />
             </label>
+
+            {suggestion?.assistanceType && (
+              <div className="flex flex-wrap items-center gap-2 rounded-lg border border-brand-200 bg-brand-50/60 p-3 text-sm" aria-live="polite">
+                <span className="text-slate-800">
+                  A <span className="font-semibold">{suggestion.assistanceType.replaceAll("_", " ").toLowerCase()}</span> looks
+                  right{suggestion.reasons.length > 0 ? ` — ${suggestion.reasons.join("; ")}` : ""}.
+                </span>
+                {suggestion.assistanceType !== assistanceType ? (
+                  <button
+                    type="button"
+                    onClick={() => setAssistanceType(suggestion.assistanceType as AssistanceTypeValue)}
+                    className="rounded-md bg-brand-600 px-2.5 py-1 text-xs font-semibold text-white hover:bg-brand-700"
+                  >
+                    Use this
+                  </button>
+                ) : (
+                  <span className="text-xs font-semibold text-emerald-700">Selected</span>
+                )}
+              </div>
+            )}
           </div>
 
           {error && <p className="mt-2 text-sm text-red-600">{error}</p>}

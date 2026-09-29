@@ -1,4 +1,7 @@
 import { PrismaClient } from "@prisma/client";
+import { calculateCreditScore, isJudgmentRecord } from "../lib/finance/credit-score";
+import { applyDemoProfiles } from "./demo/apply";
+import { monthlyPaymentFor } from "../lib/finance/repayment";
 
 const prisma = new PrismaClient();
 const PROVIDER_WHATSAPP_NUMBER = "27670298265";
@@ -163,11 +166,77 @@ function riskFromId(idNumber: string): RiskLevel {
 }
 
 // Required helper: score by risk range.
+//
+// This is now only a starting value written alongside the credit profile. Every score is replaced
+// by recalculateCreditScores() at the end of the seed, which computes it from the debts and
+// payment history that were actually created — the same calculation the running app uses. A
+// randomInt() in a band picked off the risk level is not a credit score; it was the reason a
+// seeded user's score bore no relation to their accounts.
 function creditScoreForRisk(risk: RiskLevel, rng: () => number): number {
   if (risk === "Low") return randomInt(740, 820, rng);
   if (risk === "Medium") return randomInt(620, 739, rng);
   return randomInt(300, 619, rng);
 }
+
+// Recompute every seeded score from the accounts on record, so demo data and the running
+// application agree on how a score is arrived at.
+async function recalculateCreditScores(): Promise<void> {
+  const users = await prisma.users.findMany({
+    select: {
+      user_id: true,
+      name: true,
+      surname: true,
+      monthly_income: true,
+      debts: { include: { payment_history: true } },
+      legal_records: { select: { record_type: true } }
+    }
+  });
+
+  let changed = 0;
+  const scores: Array<{ name: string; score: number; band: string }> = [];
+  for (const user of users) {
+    const { score, band } = calculateCreditScore({
+      monthlyIncome: user.monthly_income,
+      debts: user.debts.map((debt) => ({
+        debtTypeStored: debt.debt_type,
+        status: normaliseDebtStatus(debt.status),
+        balance: debt.balance,
+        monthlyObligation: monthlyPaymentFor({
+          balance: debt.balance,
+          interestRate: debt.interest_rate,
+          debtType: debt.debt_type
+        }),
+        paymentsMadeCount: debt.payment_history.filter((entry) => entry.paid).length,
+        totalPaymentsCount: debt.payment_history.length,
+        missedPaymentsCount: debt.payment_history.filter((entry) => entry.missed).length,
+        hasLegalJudgment: user.legal_records.some((record) => isJudgmentRecord(record.record_type))
+      }))
+    });
+
+    const updated = await prisma.creditProfile.updateMany({
+      where: { user_id: user.user_id },
+      data: { credit_score: score }
+    });
+    changed += updated.count;
+    scores.push({ name: `${user.name} ${user.surname}`, score, band });
+  }
+
+  console.log(`\nCredit scores, calculated from recorded accounts (not assigned):`);
+  for (const row of scores.sort((a, b) => b.score - a.score)) {
+    console.log(`  ${String(row.score).padStart(3)}  ${row.band.padEnd(9)} ${row.name}`);
+  }
+  console.log(`\nRecalculated ${changed} credit scores.`);
+}
+
+// The seed stores debt types and statuses in display casing ("Store Card", "Re-considered");
+// the calculation expects the domain values.
+function normaliseDebtStatus(value: string): "ACTIVE" | "RECONSIDERED" | "GARNISHED" {
+  const key = value.trim().toUpperCase().replace(/[\s-]+/g, "");
+  if (key === "GARNISHED") return "GARNISHED";
+  if (key === "RECONSIDERED") return "RECONSIDERED";
+  return "ACTIVE";
+}
+
 
 // Required helper: monthly due dates for 6-12 month history.
 function generateDueDates(monthCount: number, endDate = new Date()): Date[] {
@@ -178,46 +247,11 @@ function generateDueDates(monthCount: number, endDate = new Date()): Date[] {
   return dates;
 }
 
-// Required helper: monthly obligation estimate to store in Credit_Profile.
-function monthlyObligationEstimator(debtType: string, balance: number): number {
-  const kind = debtType.toLowerCase();
-
-  let factor = 0.05;
-  let minimum = 400;
-
-  if (kind.includes("bond") || kind.includes("mortgage") || kind.includes("home loan")) {
-    factor = 0.008;
-    minimum = 2200;
-  } else if (kind.includes("vehicle") || kind.includes("equipment finance")) {
-    factor = 0.02;
-    minimum = 1600;
-  } else if (kind.includes("credit card") || kind.includes("store")) {
-    factor = 0.08;
-    minimum = 250;
-  } else if (kind.includes("personal loan") || kind.includes("business loan")) {
-    factor = 0.05;
-    minimum = 700;
-  } else if (kind.includes("overdraft") || kind.includes("telecom") || kind.includes("utility") || kind.includes("municipality") || kind.includes("city power")) {
-    factor = 0.1;
-    minimum = 220;
-  } else if (kind.includes("student") || kind.includes("nsfas")) {
-    factor = 0.03;
-    minimum = 300;
-  } else if (kind.includes("medical")) {
-    factor = 0.06;
-    minimum = 450;
-  } else if (kind.includes("maintenance")) {
-    factor = 0.12;
-    minimum = 1200;
-  } else if (kind.includes("funeral")) {
-    factor = 0.06;
-    minimum = 180;
-  } else if (kind.includes("unregistered") || kind.includes("informal")) {
-    factor = 0.12;
-    minimum = 500;
-  }
-
-  return roundCurrency(Math.max(minimum, balance * factor));
+// Monthly obligation stored in Credit_Profile. This deliberately calls the same calculation the
+// app uses at runtime (lib/finance/repayment), so a seeded user's stored total matches what the
+// dashboard, the money plan and the ML features compute from the same debts.
+function monthlyObligationEstimator(debtType: string, balance: number, interestRate: number): number {
+  return roundCurrency(monthlyPaymentFor({ balance, interestRate, debtType }));
 }
 
 function seedDobPrefix(index: number): string {
@@ -1521,7 +1555,7 @@ async function seedUsersAndRelations() {
     const totalDebt = roundCurrency(createdDebts.reduce((sum, debt) => sum + debt.balance, 0));
     const monthlyObligations = roundCurrency(
       createdDebts.reduce(
-        (sum, debt) => sum + monthlyObligationEstimator(debt.debtType, debt.balance),
+        (sum, debt) => sum + monthlyObligationEstimator(debt.debtType, debt.balance, debt.interestRate),
         0
       )
     );
@@ -1549,7 +1583,7 @@ async function seedUsersAndRelations() {
     });
 
     summaryRows.push(
-      `${user.name} ${user.surname} | STANDARD | NetWorth R${formatCurrency(estimatedNetWorth)} | ${scenario.risk} | ${creditScore} | #Debts ${createdDebts.length} | TotalDebt R${formatCurrency(totalDebt)} | MonthlyObligations R${formatCurrency(monthlyObligations)} | #Requests ${requestCount} | #LegalRecords ${legalRows.length}`
+      `${user.name} ${user.surname} | STANDARD | NetWorth R${formatCurrency(estimatedNetWorth)} | ${scenario.risk} | #Debts ${createdDebts.length} | TotalDebt R${formatCurrency(totalDebt)} | MonthlyObligations R${formatCurrency(monthlyObligations)} | #Requests ${requestCount} | #LegalRecords ${legalRows.length}`
     );
   }
 
@@ -1634,7 +1668,7 @@ async function seedUsersAndRelations() {
     const totalDebt = roundCurrency(createdDebts.reduce((sum, debt) => sum + debt.balance, 0));
     const monthlyObligations = roundCurrency(
       createdDebts.reduce(
-        (sum, debt) => sum + monthlyObligationEstimator(debt.debtType, debt.balance),
+        (sum, debt) => sum + monthlyObligationEstimator(debt.debtType, debt.balance, debt.interestRate),
         0
       )
     );
@@ -1650,7 +1684,7 @@ async function seedUsersAndRelations() {
     });
 
     summaryRows.push(
-      `${user.name} ${user.surname} | ${profile.tier} | NetWorth R${formatCurrency(profile.estimatedNetWorth)} | ${profile.risk} | ${creditScore} | #Assets ${profile.assets.length} | #Debts ${createdDebts.length} | TotalDebt R${formatCurrency(totalDebt)}`
+      `${user.name} ${user.surname} | ${profile.tier} | NetWorth R${formatCurrency(profile.estimatedNetWorth)} | ${profile.risk} | #Assets ${profile.assets.length} | #Debts ${createdDebts.length} | TotalDebt R${formatCurrency(totalDebt)}`
     );
   }
 
@@ -1668,6 +1702,12 @@ async function main() {
   await seedProviders();
   await seedAiRecommendations();
   await seedUsersAndRelations();
+  await recalculateCreditScores();
+  // The demo personas' financial profiles and Money Plans, so a re-seed does not leave the
+  // Risk Assessment asking every presenter to fill in a profile first. Statements, payslips and
+  // risk assessments come from `npm run demo:data` (the assessments need the ML service).
+  const { applied } = await applyDemoProfiles();
+  console.log(`Demo personas: ${applied.length} profiles and Money Plans applied.`);
 }
 
 main()

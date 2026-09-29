@@ -10,6 +10,8 @@ const mainTabs = [
   { href: "/debts", label: "Debts & Liabilities" },
   { href: "/rehab", label: "Financial Rehab" },
   { href: "/risk-assessment", label: "Risk Assessment" },
+  { href: "/score-coach", label: "Score Coach" },
+  { href: "/money-plan", label: "Money Plan" },
   { href: "/help", label: "Get Help" }
 ];
 

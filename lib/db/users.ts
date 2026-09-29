@@ -3,12 +3,15 @@ import {
   type AppUser,
   type IdentificationType,
   type PassportCountry,
+  toDebtStatus,
   toDocumentType,
   toEmploymentStatus,
   toPassportCountry,
   toRiskStatus
 } from "@/lib/domain";
-import { estimateMonthlyObligation, generateProfileAndDebts } from "@/lib/simulation/generator";
+import { generateProfileAndDebts } from "@/lib/simulation/generator";
+import { creditScoreFor, isJudgmentRecord } from "@/lib/finance/credit-score";
+import { monthlyPaymentFor } from "@/lib/finance/repayment";
 
 function parseUserId(userId: string): number | null {
   const value = Number(userId);
@@ -67,21 +70,48 @@ function mapDbUserToAppUser(user: {
 }
 
 async function refreshCreditProfileTotalsInternal(userId: number): Promise<void> {
-  const activeDebts = await prisma.debts.findMany({
-    where: { user_id: userId, status: "ACTIVE" }
-  });
+  const [user, allDebts, legalRecords] = await Promise.all([
+    prisma.users.findUnique({ where: { user_id: userId }, select: { monthly_income: true } }),
+    prisma.debts.findMany({ where: { user_id: userId }, include: { payment_history: true } }),
+    prisma.legalRecords.findMany({ where: { user_id: userId }, select: { record_type: true } })
+  ]);
+  const hasJudgment = legalRecords.some((record) => isJudgmentRecord(record.record_type));
 
+  const activeDebts = allDebts.filter((debt) => toDebtStatus(debt.status) === "ACTIVE");
   const totalDebt = activeDebts.reduce((sum, debt) => sum + debt.balance, 0);
   const monthlyObligations = activeDebts.reduce(
-    (sum, debt) => sum + estimateMonthlyObligation(debt.balance, debt.interest_rate),
+    (sum, debt) =>
+      sum + monthlyPaymentFor({ balance: debt.balance, interestRate: debt.interest_rate, debtType: debt.debt_type }),
     0
   );
+
+  // The score is a consequence of the accounts, so it is recalculated here — the one place that
+  // already runs whenever a debt is added, changed or removed. Credit_Profile.credit_score is a
+  // cache of this calculation, never a value anyone typed.
+  const creditScore = creditScoreFor({
+    monthlyIncome: user?.monthly_income ?? 0,
+    debts: allDebts.map((debt) => ({
+      debtTypeStored: debt.debt_type,
+      status: toDebtStatus(debt.status),
+      balance: debt.balance,
+      monthlyObligation: monthlyPaymentFor({
+        balance: debt.balance,
+        interestRate: debt.interest_rate,
+        debtType: debt.debt_type
+      }),
+      paymentsMadeCount: debt.payment_history.filter((entry) => entry.paid).length,
+      totalPaymentsCount: debt.payment_history.length,
+      missedPaymentsCount: debt.payment_history.filter((entry) => entry.missed).length,
+      hasLegalJudgment: hasJudgment
+    }))
+  });
 
   await prisma.creditProfile.updateMany({
     where: { user_id: userId },
     data: {
       total_debt: Number(totalDebt.toFixed(2)),
-      monthly_obligations: Number(monthlyObligations.toFixed(2))
+      monthly_obligations: Number(monthlyObligations.toFixed(2)),
+      credit_score: creditScore
     }
   });
 }
@@ -134,7 +164,16 @@ export async function ensureUserByIdentifier(input: EnsureUserInput): Promise<Ap
       }
     });
 
-    const createdDebts = [] as { debt_id: number; creditor_name: string; status: string; balance: number; interest_rate: number; missedPaymentsCount: number; hasLegalJudgment: boolean; }[];
+    const createdDebts = [] as {
+      debt_id: number;
+      creditor_name: string;
+      status: string;
+      balance: number;
+      interest_rate: number;
+      debt_type: string;
+      missedPaymentsCount: number;
+      hasLegalJudgment: boolean;
+    }[];
 
     for (const debt of simulated.debts) {
       const createdDebt = await tx.debts.create({
@@ -154,6 +193,7 @@ export async function ensureUserByIdentifier(input: EnsureUserInput): Promise<Ap
         status: createdDebt.status,
         balance: createdDebt.balance,
         interest_rate: createdDebt.interest_rate,
+        debt_type: createdDebt.debt_type,
         missedPaymentsCount: debt.missedPaymentsCount,
         hasLegalJudgment: debt.hasLegalJudgment
       });
@@ -200,7 +240,8 @@ export async function ensureUserByIdentifier(input: EnsureUserInput): Promise<Ap
     const activeDebts = createdDebts.filter((debt) => debt.status === "ACTIVE");
     const totalDebt = activeDebts.reduce((sum, debt) => sum + debt.balance, 0);
     const monthlyObligations = activeDebts.reduce(
-      (sum, debt) => sum + estimateMonthlyObligation(debt.balance, debt.interest_rate),
+      (sum, debt) =>
+      sum + monthlyPaymentFor({ balance: debt.balance, interestRate: debt.interest_rate, debtType: debt.debt_type }),
       0
     );
 

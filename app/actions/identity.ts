@@ -23,8 +23,7 @@ export async function updateIdentity(
     bankAccountNumber: formData.get("bankAccountNumber") ?? "",
     monthlyIncome: formData.get("monthlyIncome"),
     employmentStatus: formData.get("employmentStatus"),
-    realAge: formData.get("realAge"),
-    creditScore: formData.get("creditScore")
+    realAge: formData.get("realAge")
   });
 
   if (!parsed.success) {

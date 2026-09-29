@@ -16,7 +16,10 @@ COPY data ./data
 # Why: training refuses to run on an unapproved risk target unless this is explicitly set to 1.
 ARG ALLOW_PROPOSED_TARGET=0
 RUN if [ "$ALLOW_PROPOSED_TARGET" = "1" ]; then FLAG=--allow-proposed-target; else FLAG=; fi \
- && python -m ml.train $FLAG --skip-ablation
+ && python -m ml.train $FLAG --skip-ablation \
+ # Peer groups need only the training data, so they are built here too. (The missed-payment model
+ # learns from the app database, which the image build cannot see; the service runs without it.)
+ && python -m ml.segments
 
 # ---- Stage 1b: reuse artefacts already trained on the host (fast local builds) ----
 # Build with --build-arg ARTIFACT_STAGE=prebuilt to skip training; ml-service/artifacts must exist.

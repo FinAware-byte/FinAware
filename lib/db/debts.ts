@@ -1,6 +1,7 @@
 import { prisma } from "@/lib/db/prisma";
 import { type AppDebt, type DebtStatus, type DebtType, toDebtStatus, toDebtType } from "@/lib/domain";
-import { estimateMonthlyObligation } from "@/lib/simulation/generator";
+import { isJudgmentRecord } from "@/lib/finance/credit-score";
+import { monthlyPaymentFor } from "@/lib/finance/repayment";
 import { refreshCreditProfileTotals } from "@/lib/db/users";
 
 function parseId(value: string): number | null {
@@ -34,10 +35,17 @@ function mapDbDebtToAppDebt(
     userId: debt.user_id,
     creditorName: debt.creditor_name,
     debtType: toDebtType(debt.debt_type),
+    debtTypeStored: debt.debt_type,
     interestRate: debt.interest_rate,
     balance: debt.balance,
     status: toDebtStatus(debt.status),
-    monthlyObligation: estimateMonthlyObligation(debt.balance, debt.interest_rate),
+    // The raw stored type ("Bond", "Store Card") decides how the debt repays; toDebtType() above
+    // normalises most of them to OTHER, which would lose that distinction.
+    monthlyObligation: monthlyPaymentFor({
+      balance: debt.balance,
+      interestRate: debt.interest_rate,
+      debtType: debt.debt_type
+    }),
     paymentsMadeCount,
     totalPaymentsCount,
     missedPaymentsCount,
@@ -51,18 +59,16 @@ export async function listDebtsForUser(userId: string): Promise<AppDebt[]> {
   const parsedUserId = parseId(userId);
   if (!parsedUserId) return [];
 
-  const [debts, legalCount] = await Promise.all([
+  const [debts, legalRecords] = await Promise.all([
     prisma.debts.findMany({
       where: { user_id: parsedUserId },
       include: { payment_history: true },
       orderBy: [{ status: "asc" }, { created_at: "desc" }]
     }),
-    prisma.legalRecords.count({
-      where: { user_id: parsedUserId, record_type: { contains: "Judgment" } }
-    })
+    prisma.legalRecords.findMany({ where: { user_id: parsedUserId }, select: { record_type: true } })
   ]);
 
-  const hasLegalJudgment = legalCount > 0;
+  const hasLegalJudgment = legalRecords.some((record) => isJudgmentRecord(record.record_type));
   return debts.map((debt) => mapDbDebtToAppDebt(debt, hasLegalJudgment));
 }
 
@@ -150,3 +156,17 @@ export async function updateDebtEditableFields(
 
 // Why: no delete helper is intentionally provided so debt removal is blocked at the service boundary.
 export const debtDeleteDisabled = true;
+
+/** The date of the last payment actually made on each of a user's debts (none if never paid). */
+export async function lastPaymentDates(userId: string): Promise<Map<number, Date>> {
+  const parsedUserId = parseId(userId);
+  if (!parsedUserId) return new Map();
+  const rows = await prisma.paymentHistory.groupBy({
+    by: ["debt_id"],
+    where: { paid: true, debt: { user_id: parsedUserId } },
+    _max: { due_date: true }
+  });
+  return new Map(
+    rows.filter((row) => row._max.due_date !== null).map((row) => [row.debt_id, row._max.due_date as Date])
+  );
+}

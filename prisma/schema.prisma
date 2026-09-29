@@ -8,45 +8,46 @@ datasource db {
 }
 
 model Users {
-  user_id                 Int            @id @default(autoincrement())
-  id_number               String         @unique
-  document_type           String         @default("SA_ID")
-  passport_country        String?
-  name                    String
-  surname                 String
-  employment_status       String
-  monthly_income          Float
-  risk_level              String
-  wealth_segment          String         @default("STANDARD")
-  estimated_net_worth     Float          @default(0)
-  real_age                Int            @default(30)
-  bank_account_number     String?
-  is_fica_verified        Boolean        @default(false)
-  fica_verified_at        DateTime?
-  fica_documents_json     String?
-  download_password_hash  String?
-  created_at              DateTime       @default(now())
-  updated_at              DateTime       @updatedAt
+  user_id                Int       @id @default(autoincrement())
+  id_number              String    @unique
+  document_type          String    @default("SA_ID")
+  passport_country       String?
+  name                   String
+  surname                String
+  employment_status      String
+  monthly_income         Float
+  risk_level             String
+  wealth_segment         String    @default("STANDARD")
+  estimated_net_worth    Float     @default(0)
+  real_age               Int       @default(30)
+  bank_account_number    String?
+  is_fica_verified       Boolean   @default(false)
+  fica_verified_at       DateTime?
+  fica_documents_json    String?
+  download_password_hash String?
+  created_at             DateTime  @default(now())
+  updated_at             DateTime  @updatedAt
 
-  credit_profile          CreditProfile?
-  debts                   Debts[]
-  legal_records           LegalRecords[]
-  expert_requests         ExpertRequests[]
-  wealth_assets           WealthAssets[]
-  financial_profile       FinancialProfile?
+  credit_profile    CreditProfile?
+  debts             Debts[]
+  legal_records     LegalRecords[]
+  expert_requests   ExpertRequests[]
+  wealth_assets     WealthAssets[]
+  financial_profile FinancialProfile?
+  budget_items      BudgetItem[]
 
   @@map("Users")
 }
 
 model WealthAssets {
-  asset_id               Int      @id @default(autoincrement())
-  user_id                Int
-  asset_type             String
-  asset_name             String
-  estimated_value        Float
-  ownership_percentage   Float    @default(100)
-  created_at             DateTime @default(now())
-  updated_at             DateTime @updatedAt
+  asset_id             Int      @id @default(autoincrement())
+  user_id              Int
+  asset_type           String
+  asset_name           String
+  estimated_value      Float
+  ownership_percentage Float    @default(100)
+  created_at           DateTime @default(now())
+  updated_at           DateTime @updatedAt
 
   user Users @relation(fields: [user_id], references: [user_id], onDelete: Cascade)
 
@@ -55,11 +56,11 @@ model WealthAssets {
 }
 
 model CreditProfile {
-  profile_id            Int      @id @default(autoincrement())
-  user_id               Int      @unique
-  credit_score          Int
-  total_debt            Float
-  monthly_obligations   Float
+  profile_id          Int   @id @default(autoincrement())
+  user_id             Int   @unique
+  credit_score        Int
+  total_debt          Float
+  monthly_obligations Float
 
   user Users @relation(fields: [user_id], references: [user_id], onDelete: Cascade)
 
@@ -67,17 +68,17 @@ model CreditProfile {
 }
 
 model Debts {
-  debt_id          Int            @id @default(autoincrement())
-  user_id          Int
-  creditor_name    String
-  debt_type        String
-  interest_rate    Float
-  balance          Float
-  status           String
-  created_at       DateTime       @default(now())
-  updated_at       DateTime       @updatedAt
+  debt_id       Int      @id @default(autoincrement())
+  user_id       Int
+  creditor_name String
+  debt_type     String
+  interest_rate Float
+  balance       Float
+  status        String
+  created_at    DateTime @default(now())
+  updated_at    DateTime @updatedAt
 
-  user Users @relation(fields: [user_id], references: [user_id], onDelete: Cascade)
+  user            Users            @relation(fields: [user_id], references: [user_id], onDelete: Cascade)
   payment_history PaymentHistory[]
 
   @@index([user_id])
@@ -85,11 +86,11 @@ model Debts {
 }
 
 model PaymentHistory {
-  payment_id       Int       @id @default(autoincrement())
-  debt_id          Int
-  due_date         DateTime
-  paid             Boolean
-  missed           Boolean
+  payment_id Int      @id @default(autoincrement())
+  debt_id    Int
+  due_date   DateTime
+  paid       Boolean
+  missed     Boolean
 
   debt Debts @relation(fields: [debt_id], references: [debt_id], onDelete: Cascade)
 
@@ -98,10 +99,10 @@ model PaymentHistory {
 }
 
 model LegalRecords {
-  legal_id         Int      @id @default(autoincrement())
-  user_id          Int
-  record_type      String
-  description      String
+  legal_id    Int    @id @default(autoincrement())
+  user_id     Int
+  record_type String
+  description String
 
   user Users @relation(fields: [user_id], references: [user_id], onDelete: Cascade)
 
@@ -110,19 +111,19 @@ model LegalRecords {
 }
 
 model AiRecommendations {
-  recommendation_id    Int      @id @default(autoincrement())
-  risk_level           String
-  recommendation_text  String
+  recommendation_id   Int    @id @default(autoincrement())
+  risk_level          String
+  recommendation_text String
 
   @@map("AI_Recommendations")
 }
 
 model ExpertRequests {
-  request_id        Int      @id @default(autoincrement())
-  user_id           Int
-  advisor_type      String
-  message           String
-  request_date      DateTime
+  request_id   Int      @id @default(autoincrement())
+  user_id      Int
+  advisor_type String
+  message      String
+  request_date DateTime
 
   user Users @relation(fields: [user_id], references: [user_id], onDelete: Cascade)
 
@@ -131,9 +132,9 @@ model ExpertRequests {
 }
 
 model Providers {
-  provider_id        Int     @id @default(autoincrement())
-  provider_type      String  @unique
-  whatsapp_number    String
+  provider_id     Int    @id @default(autoincrement())
+  provider_type   String @unique
+  whatsapp_number String
 
   @@map("Providers")
 }
@@ -143,31 +144,31 @@ model Providers {
 // ---------------------------------------------------------------------------
 
 model FinancialProfile {
-  profile_id        String           @id @default(uuid())
-  user_id           Int              @unique
-  monthly_income    Float
-  monthly_expenses  Float
-  savings           Float
-  credit_score      Int
-  financial_goal    String?
-  created_at        DateTime         @default(now())
-  updated_at        DateTime         @updatedAt
+  profile_id       String   @id @default(uuid())
+  user_id          Int      @unique
+  monthly_income   Float
+  monthly_expenses Float
+  savings          Float
+  credit_score     Int
+  financial_goal   String?
+  created_at       DateTime @default(now())
+  updated_at       DateTime @updatedAt
 
-  user              Users            @relation(fields: [user_id], references: [user_id], onDelete: Cascade)
-  risk_assessments  RiskAssessment[]
+  user             Users            @relation(fields: [user_id], references: [user_id], onDelete: Cascade)
+  risk_assessments RiskAssessment[]
 
   @@map("Financial_Profile")
 }
 
 model RiskAssessment {
-  assessment_id       String           @id @default(uuid())
+  assessment_id       String   @id @default(uuid())
   profile_id          String
   risk_level          String
   risk_score          Float
   low_probability     Float
   medium_probability  Float
   high_probability    Float
-  prediction_date     DateTime         @default(now())
+  prediction_date     DateTime @default(now())
   model_name          String
   model_version       String
   target_version      String
@@ -177,49 +178,66 @@ model RiskAssessment {
   input_snapshot_json String
   indicators_json     String
   // Inputs outside the training data range or unknown categories (prediction less reliable).
-  warnings_json       String           @default("[]")
+  warnings_json       String   @default("[]")
 
-  profile             FinancialProfile @relation(fields: [profile_id], references: [profile_id], onDelete: Cascade)
-  drivers             RiskDriver[]
-  recommendations     Recommendation[]
+  profile         FinancialProfile @relation(fields: [profile_id], references: [profile_id], onDelete: Cascade)
+  drivers         RiskDriver[]
+  recommendations Recommendation[]
 
   @@index([profile_id, prediction_date])
   @@map("Risk_Assessment")
 }
 
 model RiskDriver {
-  driver_id      String         @id @default(uuid())
-  assessment_id  String
-  rank           Int
-  feature_name   String
-  display_name   String
-  importance     Float
-  influence      String
-  direction      String
-  feature_value  String
+  driver_id     String @id @default(uuid())
+  assessment_id String
+  rank          Int
+  feature_name  String
+  display_name  String
+  importance    Float
+  influence     String
+  direction     String
+  feature_value String
 
-  assessment     RiskAssessment @relation(fields: [assessment_id], references: [assessment_id], onDelete: Cascade)
+  assessment RiskAssessment @relation(fields: [assessment_id], references: [assessment_id], onDelete: Cascade)
 
   @@index([assessment_id])
   @@map("Risk_Driver")
 }
 
 model Recommendation {
-  recommendation_id    String         @id @default(uuid())
-  assessment_id        String
-  recommendation_type  String
-  title                String
-  recommendation_text  String
-  reason               String
-  priority             String
-  priority_rank        Int
-  rule_id              String
-  trace_json           String
-  rules_version        String
-  created_date         DateTime       @default(now())
+  recommendation_id   String   @id @default(uuid())
+  assessment_id       String
+  recommendation_type String
+  title               String
+  recommendation_text String
+  reason              String
+  priority            String
+  priority_rank       Int
+  rule_id             String
+  trace_json          String
+  rules_version       String
+  created_date        DateTime @default(now())
 
-  assessment           RiskAssessment @relation(fields: [assessment_id], references: [assessment_id], onDelete: Cascade)
+  assessment RiskAssessment @relation(fields: [assessment_id], references: [assessment_id], onDelete: Cascade)
 
   @@index([assessment_id])
   @@map("Recommendation")
+}
+
+// Essential monthly expenses, entered by the user, used by the money plan (budget rules v1.0).
+// Additive: no existing table or column changes. One row per category per user.
+model BudgetItem {
+  budget_item_id Int      @id @default(autoincrement())
+  user_id        Int
+  category       String
+  amount         Float
+  created_at     DateTime @default(now())
+  updated_at     DateTime @updatedAt
+
+  user Users @relation(fields: [user_id], references: [user_id], onDelete: Cascade)
+
+  @@unique([user_id, category])
+  @@index([user_id])
+  @@map("Budget_Item")
 }

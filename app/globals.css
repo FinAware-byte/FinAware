@@ -350,3 +350,47 @@ body {
     transition: none;
   }
 }
+
+/* The dashboard's one orchestrated moment: the month bar grows from nothing on load, so the eye
+   lands on the proportion of the month that is already committed. Scaling the bar rather than
+   animating its width keeps it on the compositor. */
+@keyframes finaware-grow-x {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+.month-bar-fill {
+  transform-origin: left center;
+  animation: finaware-grow-x 900ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .month-bar-fill {
+    animation: none;
+  }
+}
+
+/* Printing a page that marks a .print-region prints only that region — the case summary is
+   handed to an advisor, and the app's navigation has no place on it. Scoped with :has() so no
+   other page's printing changes. */
+@media print {
+  body:has(.print-region) * {
+    visibility: hidden;
+  }
+  .print-region,
+  .print-region * {
+    visibility: visible;
+  }
+  .print-region {
+    position: absolute;
+    inset: 0 auto auto 0;
+    width: 100%;
+  }
+  .print-region .no-print {
+    display: none;
+  }
+}

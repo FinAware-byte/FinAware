@@ -81,3 +81,10 @@ def test_model_info_exposes_metadata_only(client):
     body = client.get("/model-info").json()
     assert body["classOrder"] == ["Low", "Medium", "High"]
     assert "path" not in str(body).lower() and "joblib" not in str(body)
+
+
+def test_model_info_carries_what_the_model_card_needs(client):
+    evaluation = client.get("/model-info").json()["evaluation"]
+    assert evaluation["trainRows"] > evaluation["testRows"] > 0
+    assert 0.0 < evaluation["highRiskRecall"] <= 1.0
+    assert 0.0 < evaluation["meanTopProbability"] <= 1.0

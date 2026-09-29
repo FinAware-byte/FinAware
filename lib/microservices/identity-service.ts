@@ -1,6 +1,6 @@
 import { z } from "zod";
 import { prisma } from "@/lib/db/prisma";
-import { getUserById } from "@/lib/db/users";
+import { getUserById, refreshCreditProfileTotals } from "@/lib/db/users";
 import type { EmploymentStatus, RiskStatus } from "@/lib/domain";
 import { hashPassword } from "@/lib/auth/password";
 import { identityUpdateSchema } from "@/lib/validation";
@@ -68,11 +68,12 @@ export async function updateIdentityProfile(userId: string, input: IdentityUpdat
       }
     });
 
-    await tx.creditProfile.updateMany({
-      where: { user_id: parsedUserId },
-      data: {
-        credit_score: input.creditScore
-      }
-    });
+    // credit_score is deliberately not written here. It is calculated from the accounts on
+    // record, so an identity update must not be able to set it.
   });
+
+  // Income is part of that calculation (repayments are measured against it), so a change to it
+  // has to move the score. Done after the transaction commits so the recalculation reads the
+  // income that was just saved.
+  await refreshCreditProfileTotals(String(parsedUserId));
 }

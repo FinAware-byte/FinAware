@@ -172,6 +172,118 @@ recall and worse log loss. KNN and SVM were more than 0.01 behind the best.
   still load.
 - **CI** runs all of these (`.github/workflows/ci.yml`).
 
+## 11b. Second model: missed payments (a recorded outcome)
+
+The `risk_tier` model reproduces a rubric (§3). This second model exists to answer the obvious
+challenge — *does any of this need machine learning?* — with a task that has a **real label**.
+
+- **Task.** Given what is known before a payment falls due, estimate the probability it is missed.
+- **Label.** `Payment_History.missed`, an outcome already recorded in FinAware. No feature
+  computes it, so the circularity criticism does not apply here.
+- **Features (none of them rubric inputs).** Past miss rate, miss rate over the last six payments,
+  current miss streak, months since the last miss, payments on record, number of active debts,
+  this debt's interest rate and balance-to-income, total balance-to-income, and debt status.
+  The seeded `risk_level` is deliberately excluded: it is the demo label the app displays, and
+  using it would let the model read the answer.
+- **Panel.** Every feature at a due date is computed from payments strictly earlier than it
+  (`ml/payment/dataset.py`), and the holdout is the **latest slice of due dates**, never a random
+  sample — the question is about the future.
+- **Signal check, run before building anything.** Base miss rate 13.1%; by debt status Active 6.9%
+  → Re-considered 16.7% → Garnished 28.7%; past miss rate alone reaches AUC 0.608. The signal is
+  real, so the model was worth building.
+
+### Results (holdout = the most recent 30% of due dates, 418 rows)
+
+| Model | Avg precision | ROC AUC | Brier | Precision | Recall |
+|---|---|---|---|---|---|
+| Baseline: always the base rate | 0.115 | 0.500 | 0.102 | 0.115 | 1.000 |
+| Baseline: the user's past miss rate | 0.185 | 0.621 | 0.102 | 0.197 | 0.250 |
+| Logistic Regression | 0.197 | 0.704 | 0.236 | 0.230 | 0.479 |
+| Random Forest | 0.214 | 0.696 | 0.210 | 0.234 | 0.458 |
+| **Gradient Boosting (selected)** | **0.205** | **0.699** | **0.101** | 0.217 | 0.438 |
+
+Selection rule, fixed before training: average precision, then Brier score, then simplicity.
+Gradient Boosting was chosen over Random Forest's marginally higher average precision because its
+Brier score is half as large, and the interface shows the probability itself.
+
+**The decision threshold is 0.18, not 0.5.** With a 13% base rate a well-calibrated model rarely
+crosses 0.5 and would flag nobody. The threshold is chosen on out-of-fold training predictions and
+only then applied to the holdout.
+
+**Honest reading of the numbers.** AUC 0.70 means the model ranks a missed payment above a paid one
+about seven times in ten. It beats the past-miss-rate heuristic (0.205 vs 0.185), so the learning
+adds something — but it is a nudge to check your dates, not a forecast, and the interface says so.
+
+### What it does not show
+
+The seed draws each user's *number* of missed payments from their demo risk band and weights misses
+towards Garnished debts, but spreads them uniformly in time. Propensity and debt status are
+therefore learnable; **timing is not**. The weak streak and recency effects in the data are
+consistent with that, and the model must not be presented as having found a temporal pattern.
+
+### Serving
+
+One probability per outstanding debt (including Garnished and Re-considered ones — those have the
+most payments at risk), plus a user-level "chance of missing at least one", which assumes the debts
+fail independently. They do not, so the per-debt figures stay visible beneath the headline number.
+Explanations use SHAP directly: a binary `GradientBoostingClassifier` needs none of the per-class
+reconstruction §8 describes. The endpoint is `POST /predict/payment-miss`, reached through
+`GET /payment-outlook/:userId` on the Financial API; the feature computation lives in the Financial
+Data Service, so the ML service still never touches the database.
+
+The artefact is optional at runtime: an image built without `payment_pipeline.joblib` still serves
+the risk tier and reports ready, and only this endpoint returns `MODEL_UNAVAILABLE`.
+
+## 11c. Credit score: calculated, not entered
+
+Until this change `credit_score` was a stored number with two ways in: a user could type it into
+the Identity form, and for seeded users it came from `randomInt()` inside a band chosen from the
+ID number. It was not a consequence of anything the user did, yet it was a model input and one of
+the indicators behind the constructed `risk_tier` target. A user could raise their own score and
+receive a better risk tier.
+
+It is now calculated by `lib/finance/credit-score.ts` from recorded facts only:
+
+| Factor | Weight | Source |
+|---|---|---|
+| Payment history | 35% | missed vs total rows in `Payment_History` |
+| Amounts owed | 30% | monthly repayments against `Users.monthly_income` |
+| Length of history | 15% | count of payment rows (proxy for account age) |
+| Account mix | 10% | distinct `Debts.debt_type` values |
+| Judgments and orders | 10% | `Legal_Records`, `GARNISHED` / `RECONSIDERED` status |
+
+Output is 300–850, the range the model was trained on. The stored `Credit_Profile.credit_score` is
+a cache of this calculation, refreshed by `refreshCreditProfileTotals()` whenever a debt changes or
+income is updated. No request body can set it: it was removed from `financialProfileSchema`, from
+`identityUpdateSchema`, and from `simulationOverridesSchema`.
+
+**This is a model of a credit score, not a bureau score.** It excludes enquiry counts, true account
+ages in months and bureau-specific adjustments, because the application does not record them.
+
+### Effect on the risk model — read before retraining
+
+In the training data (`personal_finance_zar.csv`, 32 424 rows) `credit_score` is effectively
+uniform on 300–850 and has almost no relationship to the financial variables:
+
+| Pair | Correlation |
+|---|---|
+| credit_score vs debt_to_income_ratio | +0.012 |
+| credit_score vs savings_to_income_ratio | +0.002 |
+| credit_score vs monthly_emi_zar | +0.001 |
+| credit_score vs loan_amount_zar | +0.007 |
+
+In other words the column the model trained on carries no signal about the rest of the row. The
+calculated score does — by construction it is a function of repayments, income and payment history.
+That is a **distribution shift in an input feature**: the value stays inside the trained range, but
+its relationship to the other features is new.
+
+Measured over the 54 seeded users, the calculated scores sit within the trained range and close to
+its centre (median 623 against 575; spread 421–808 against 300–850), so predictions remain
+in-distribution. It is still a change the model has not seen, and the correct resolution is to
+retrain once the `risk_tier` target is approved — noting that `credit_score` is itself one of the
+indicators used to construct that target, so the two decisions are linked and should be made
+together.
+
 ## 12. Limitations
 
 1. **Synthetic data.** The dataset is synthetic, with independently random columns; results do not describe
