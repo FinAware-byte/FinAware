@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { expectedAgeFromSouthAfricanId } from "@/lib/identification/rules";
 import {
   assistanceTypeValues,
   debtStatusValues,
@@ -40,19 +41,44 @@ export const authLoginSchema = z
     passportCountry: value.passportCountry ?? null
   }));
 
-export const identityUpdateSchema = z.object({
-  fullName: z.string().min(2, "Full name is required"),
-  bankAccountNumber: z
-    .string()
-    .max(40, "Bank account number is too long")
-    .optional()
-    .or(z.literal("")),
-  monthlyIncome: z.coerce.number().min(0, "Monthly income cannot be negative"),
-  employmentStatus: z.enum(employmentStatusValues as [EmploymentStatus, ...EmploymentStatus[]]),
-  realAge: z.coerce.number().int().min(16, "Real age must be at least 16").max(100)
-  // No creditScore: it is calculated from the accounts on record (lib/finance/credit-score),
-  // so accepting one here would let the form overwrite the calculation.
-});
+const identityMoney = z.preprocess(
+  (value) =>
+    typeof value === "string"
+      ? value.replace(/R/gi, "").replace(/[\\s,]/g, "")
+      : value,
+  z.number({
+    required_error: "Monthly income is required",
+    invalid_type_error: "Monthly income must be a valid number"
+  })
+);
+
+const bankAccountSchema = z.preprocess(
+  (value) => (typeof value === "string" ? value.replace(/\\D/g, "") : value),
+  z.string().min(6, "Bank account number must contain at least 6 digits").max(20, "Bank account number is too long")
+);
+
+export const identityUpdateSchema = z
+  .object({
+    fullName: z.string().trim().min(2, "Full name is required"),
+    bankAccountNumber: bankAccountSchema,
+    monthlyIncome: identityMoney.pipe(z.number().positive("Monthly income must be greater than R0")),
+    employmentStatus: z.enum(employmentStatusValues as [EmploymentStatus, ...EmploymentStatus[]], {
+      required_error: "Employment status is required"
+    }),
+    realAge: z.coerce
+      .number({ required_error: "Real age is required", invalid_type_error: "Real age must be a number" })
+      .int("Real age must be a whole number")
+      .min(16, "Real age must be at least 16")
+      .max(100, "Real age cannot be greater than 100")
+  })
+  .superRefine((value, context) => {
+    const sessionId = context.path;
+    void sessionId;
+    // The ID is not posted with the editable form, so the service performs the ID-age comparison
+    // after loading the user's immutable identifier.
+  });
+// No creditScore: it is calculated from the accounts on record (lib/finance/credit-score),
+// so accepting one here would let the form overwrite the calculation.
 
 export const createDebtSchema = z.object({
   creditorName: z.string().min(2, "Creditor name is required"),
