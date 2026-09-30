@@ -11,6 +11,7 @@ export async function createUserDebt(input: {
   debtType: DebtType;
   interestRate: number;
   balance: number;
+  monthlyRepayment: number;
   status: DebtStatus;
 }) {
   return createDebtForUser(input);
