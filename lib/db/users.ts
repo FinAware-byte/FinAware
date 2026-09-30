@@ -9,7 +9,6 @@ import {
   toPassportCountry,
   toRiskStatus
 } from "@/lib/domain";
-import { generateProfileAndDebts } from "@/lib/simulation/generator";
 import { creditScoreFor, isJudgmentRecord } from "@/lib/finance/credit-score";
 import { monthlyPaymentFor } from "@/lib/finance/repayment";
 
@@ -85,9 +84,6 @@ async function refreshCreditProfileTotalsInternal(userId: number): Promise<void>
     0
   );
 
-  // The score is a consequence of the accounts, so it is recalculated here — the one place that
-  // already runs whenever a debt is added, changed or removed. Credit_Profile.credit_score is a
-  // cache of this calculation, never a value anyone typed.
   const creditScore = creditScoreFor({
     monthlyIncome: user?.monthly_income ?? 0,
     debts: allDebts.map((debt) => ({
@@ -142,127 +138,30 @@ export async function ensureUserByIdentifier(input: EnsureUserInput): Promise<Ap
   const existing = await findUserByIdentifier(input.idNumberOrPassport);
   if (existing) return existing;
 
-  const simulated = generateProfileAndDebts(input.idNumberOrPassport);
-
-  const createdUser = await prisma.$transaction(async (tx) => {
-    const user = await tx.users.create({
-      data: {
-        id_number: simulated.user.idNumber,
-        document_type: input.documentType,
-        passport_country: input.documentType === "PASSPORT" ? input.passportCountry : null,
-        name: simulated.user.name,
-        surname: simulated.user.surname,
-        employment_status: simulated.user.employmentStatus,
-        monthly_income: simulated.user.monthlyIncome,
-        risk_level: simulated.user.riskLevel,
-        real_age: simulated.user.realAge,
-        bank_account_number: null,
-        is_fica_verified: false,
-        fica_verified_at: null,
-        fica_documents_json: null,
-        download_password_hash: null
-      }
-    });
-
-    const createdDebts = [] as {
-      debt_id: number;
-      creditor_name: string;
-      status: string;
-      balance: number;
-      interest_rate: number;
-      debt_type: string;
-      missedPaymentsCount: number;
-      hasLegalJudgment: boolean;
-    }[];
-
-    for (const debt of simulated.debts) {
-      const createdDebt = await tx.debts.create({
-        data: {
-          user_id: user.user_id,
-          creditor_name: debt.creditorName,
-          debt_type: debt.debtType,
-          interest_rate: debt.interestRate,
-          balance: debt.balance,
-          status: debt.status
-        }
-      });
-
-      createdDebts.push({
-        debt_id: createdDebt.debt_id,
-        creditor_name: createdDebt.creditor_name,
-        status: createdDebt.status,
-        balance: createdDebt.balance,
-        interest_rate: createdDebt.interest_rate,
-        debt_type: createdDebt.debt_type,
-        missedPaymentsCount: debt.missedPaymentsCount,
-        hasLegalJudgment: debt.hasLegalJudgment
-      });
-    }
-
-    const now = new Date();
-    for (const debt of createdDebts) {
-      const totalRows = Math.max(3, debt.missedPaymentsCount + 1);
-      for (let monthOffset = 0; monthOffset < totalRows; monthOffset += 1) {
-        const dueDate = new Date(now.getFullYear(), now.getMonth() - monthOffset, 5);
-        const missed = monthOffset < debt.missedPaymentsCount;
-
-        await tx.paymentHistory.create({
-          data: {
-            debt_id: debt.debt_id,
-            due_date: dueDate,
-            paid: !missed,
-            missed
-          }
-        });
-      }
-
-      if (debt.hasLegalJudgment) {
-        await tx.legalRecords.create({
-          data: {
-            user_id: user.user_id,
-            record_type: "Judgment",
-            description: `Legal judgment linked to ${debt.creditor_name}`
-          }
-        });
-      }
-
-      if (debt.status === "GARNISHED") {
-        await tx.legalRecords.create({
-          data: {
-            user_id: user.user_id,
-            record_type: "Garnishee",
-            description: `Garnishee order linked to ${debt.creditor_name}`
-          }
-        });
-      }
-    }
-
-    const activeDebts = createdDebts.filter((debt) => debt.status === "ACTIVE");
-    const totalDebt = activeDebts.reduce((sum, debt) => sum + debt.balance, 0);
-    const monthlyObligations = activeDebts.reduce(
-      (sum, debt) =>
-      sum + monthlyPaymentFor({ balance: debt.balance, interestRate: debt.interest_rate, debtType: debt.debt_type }),
-      0
-    );
-
-    await tx.creditProfile.create({
-      data: {
-        user_id: user.user_id,
-        credit_score: simulated.creditScore,
-        total_debt: Number(totalDebt.toFixed(2)),
-        monthly_obligations: Number(monthlyObligations.toFixed(2))
-      }
-    });
-
-    return tx.users.findUnique({
-      where: { user_id: user.user_id },
-      include: { credit_profile: true }
-    });
+  // A new account must not receive simulated financial data. Financial information is collected
+  // from the user and/or the financial-profile workflow before an ML assessment is run.
+  // The database currently requires values for several legacy identity columns, so neutral
+  // placeholders are stored here and the identity UI treats this combination as an incomplete
+  // profile. No debts, payment history, legal records or credit profile are created at signup.
+  const createdUser = await prisma.users.create({
+    data: {
+      id_number: input.idNumberOrPassport,
+      document_type: input.documentType,
+      passport_country: input.documentType === "PASSPORT" ? input.passportCountry : null,
+      name: "",
+      surname: "",
+      employment_status: "UNEMPLOYED",
+      monthly_income: 0,
+      risk_level: "LOW",
+      real_age: 0,
+      bank_account_number: null,
+      is_fica_verified: false,
+      fica_verified_at: null,
+      fica_documents_json: null,
+      download_password_hash: null
+    },
+    include: { credit_profile: true }
   });
-
-  if (!createdUser) {
-    throw new Error("Failed to create user");
-  }
 
   return mapDbUserToAppUser(createdUser);
 }
