@@ -31,6 +31,8 @@ export default async function FinancialProfilePage() {
     savings: profile ? String(profile.savings) : "",
     financialGoal: profile?.financialGoal ?? ""
   };
+  const initialEssentials = Object.fromEntries(view.essentials.map((item) => [item.category, String(item.amount)]));
+
   // Always the score on record, never the copy stored on a previous save — so this page and the
   // dashboard cannot drift apart.
   const creditScore = view.defaults.creditScore;
@@ -47,7 +49,12 @@ export default async function FinancialProfilePage() {
         </p>
       </div>
 
-      <FinancialProfileForm initial={initial} creditScore={creditScore} />
+      <FinancialProfileForm
+        initial={initial}
+        initialEssentials={initialEssentials}
+        creditScore={creditScore}
+        hasActiveDebts={activeDebts.length > 0}
+      />
 
       <Card>
         <div className="flex flex-wrap items-center justify-between gap-2">
