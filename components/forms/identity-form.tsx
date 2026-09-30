@@ -2,9 +2,24 @@
 
 import { EmploymentStatus, type EmploymentStatus as EmploymentStatusValue } from "@/lib/domain";
 import { useFormState, useFormStatus } from "react-dom";
+import { useState } from "react";
+import Link from "next/link";
 import { updateIdentity, type IdentityActionState } from "@/app/actions/identity";
 
 const initialState: IdentityActionState = {};
+
+function formatMoney(value: number | string): string {
+  const numeric = typeof value === "number" ? value : Number(String(value).replace(/R/gi, "").replace(/,/g, ""));
+  if (!Number.isFinite(numeric)) return "";
+  return `R${new Intl.NumberFormat("en-ZA", {
+    maximumFractionDigits: 2,
+    minimumFractionDigits: numeric % 1 === 0 ? 0 : 2
+  }).format(numeric)}`;
+}
+
+function rawMoney(value: string): string {
+  return value.replace(/R/gi, "").replace(/,/g, "").replace(/\s/g, "");
+}
 
 function SaveButton() {
   const { pending } = useFormStatus();
@@ -14,7 +29,7 @@ function SaveButton() {
       disabled={pending}
       className="rounded-lg bg-brand-600 px-4 py-2 text-sm font-semibold text-white transition hover:bg-brand-700 disabled:opacity-60"
     >
-      {pending ? "Saving..." : "Save Changes"}
+      {pending ? "Saving..." : "Save Information"}
     </button>
   );
 }
@@ -31,19 +46,20 @@ type IdentityFormUser = {
 
 export function IdentityForm({ user }: { user: IdentityFormUser }) {
   const [state, action] = useFormState(updateIdentity, initialState);
-  const isIncomplete = !user.fullName.trim() || user.monthlyIncome <= 0 || user.realAge <= 0;
+  const [monthlyIncome, setMonthlyIncome] = useState(user.monthlyIncome > 0 ? formatMoney(user.monthlyIncome) : "");
 
   return (
     <form action={action} className="space-y-4 rounded-xl border border-slate-200 bg-white p-6 shadow-card">
-      {isIncomplete ? (
-        <div className="rounded-lg border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-800">
-          Complete your identity and financial information before running a financial risk assessment.
-        </div>
-      ) : null}
+      <div className="rounded-lg border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-600">
+        All fields marked <span className="font-semibold text-rose-600">*</span> are required. Your age is checked
+        against the date of birth encoded in a South African ID.
+      </div>
 
       <div className="grid gap-4 md:grid-cols-2">
         <label className="text-sm">
-          <span className="mb-1 block font-medium text-slate-700">Full Name</span>
+          <span className="mb-1 block font-medium text-slate-700">
+            Full Name <span className="text-rose-600">*</span>
+          </span>
           <input
             name="fullName"
             defaultValue={user.fullName}
@@ -52,6 +68,7 @@ export function IdentityForm({ user }: { user: IdentityFormUser }) {
             className="w-full rounded-lg border border-slate-300 px-3 py-2"
           />
         </label>
+
         <label className="text-sm">
           <span className="mb-1 block font-medium text-slate-700">ID / Passport</span>
           <input
@@ -60,29 +77,48 @@ export function IdentityForm({ user }: { user: IdentityFormUser }) {
             className="w-full rounded-lg border border-slate-200 bg-slate-100 px-3 py-2 text-slate-500"
           />
         </label>
+
         <label className="text-sm">
-          <span className="mb-1 block font-medium text-slate-700">Bank Account Number (demo)</span>
+          <span className="mb-1 block font-medium text-slate-700">
+            Bank Account Number <span className="text-rose-600">*</span>
+          </span>
           <input
             name="bankAccountNumber"
             defaultValue={user.bankAccountNumber ?? ""}
-            className="w-full rounded-lg border border-slate-300 px-3 py-2"
-          />
-        </label>
-        <label className="text-sm">
-          <span className="mb-1 block font-medium text-slate-700">Monthly Income (R)</span>
-          <input
-            name="monthlyIncome"
-            defaultValue={user.monthlyIncome || ""}
-            placeholder="Enter monthly income"
-            type="number"
-            min={0}
-            step="0.01"
+            placeholder="Enter your bank account number"
+            inputMode="numeric"
+            pattern="[0-9 ]{6,20}"
             required
             className="w-full rounded-lg border border-slate-300 px-3 py-2"
           />
+          <span className="mt-1 block text-xs text-slate-500">Enter 6–20 digits. Spaces are allowed.</span>
         </label>
+
         <label className="text-sm">
-          <span className="mb-1 block font-medium text-slate-700">Employment Status</span>
+          <span className="mb-1 block font-medium text-slate-700">
+            Monthly Income <span className="text-rose-600">*</span>
+          </span>
+          <input
+            name="monthlyIncome"
+            value={monthlyIncome}
+            onChange={(event) => setMonthlyIncome(rawMoney(event.target.value))}
+            onFocus={() => setMonthlyIncome(rawMoney(monthlyIncome))}
+            onBlur={() => {
+              const numeric = Number(rawMoney(monthlyIncome));
+              if (Number.isFinite(numeric) && numeric > 0) setMonthlyIncome(formatMoney(numeric));
+            }}
+            placeholder="e.g. R35,000"
+            inputMode="decimal"
+            required
+            className="w-full rounded-lg border border-slate-300 px-3 py-2"
+          />
+          <span className="mt-1 block text-xs text-slate-500">Enter the amount in South African rand, e.g. R35,000.</span>
+        </label>
+
+        <label className="text-sm">
+          <span className="mb-1 block font-medium text-slate-700">
+            Employment Status <span className="text-rose-600">*</span>
+          </span>
           <select
             name="employmentStatus"
             defaultValue={user.monthlyIncome > 0 ? user.employmentStatus : ""}
@@ -96,8 +132,11 @@ export function IdentityForm({ user }: { user: IdentityFormUser }) {
             <option value={EmploymentStatus.STUDENT}>Student</option>
           </select>
         </label>
+
         <label className="text-sm">
-          <span className="mb-1 block font-medium text-slate-700">Real Age</span>
+          <span className="mb-1 block font-medium text-slate-700">
+            Real Age <span className="text-rose-600">*</span>
+          </span>
           <input
             name="realAge"
             defaultValue={user.realAge || ""}
@@ -108,11 +147,13 @@ export function IdentityForm({ user }: { user: IdentityFormUser }) {
             required
             className="w-full rounded-lg border border-slate-300 px-3 py-2"
           />
+          <span className="mt-1 block text-xs text-slate-500">For a South African ID, this must match the ID date of birth.</span>
         </label>
+
         <div className="text-sm">
           <span className="mb-1 block font-medium text-slate-700">Current Credit Score</span>
           <div className="flex items-center gap-3 rounded-lg border border-slate-200 bg-slate-50 px-3 py-2">
-            <span className="text-xl font-bold tabular-nums text-slate-900">
+            <span className="text-sm font-semibold tabular-nums text-slate-900">
               {user.creditScore > 0 ? user.creditScore : "Not available"}
             </span>
             <span className="rounded-full bg-slate-200 px-2 py-0.5 text-xs font-medium text-slate-600">
@@ -120,9 +161,10 @@ export function IdentityForm({ user }: { user: IdentityFormUser }) {
             </span>
           </div>
           <span className="mt-1 block text-xs text-slate-500">
-            Your credit score will be calculated once financial account and payment information is available.
+            Calculated from recorded debt accounts and payment history. It is not entered manually.
           </span>
         </div>
+
         <label className="text-sm">
           <span className="mb-1 block font-medium text-slate-700">Saved Download Password (optional)</span>
           <input
@@ -137,7 +179,17 @@ export function IdentityForm({ user }: { user: IdentityFormUser }) {
       {state.error && <p className="text-sm text-red-600">{state.error}</p>}
       {state.success && <p className="text-sm text-emerald-600">{state.success}</p>}
 
-      <SaveButton />
+      <div className="flex flex-wrap items-center gap-3">
+        <SaveButton />
+        {state.success && (
+          <Link
+            href="/dashboard"
+            className="rounded-lg border border-brand-600 px-4 py-2 text-sm font-semibold text-brand-700 transition hover:bg-brand-50"
+          >
+            Back to Dashboard
+          </Link>
+        )}
+      </div>
     </form>
   );
 }
