@@ -1,0 +1,233 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2400" height="1148" viewBox="0 0 2400 1148">
+<title>FinAware — The Three Machine-Learning Models</title>
+<defs><marker id="ah-flow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" markerUnits="userSpaceOnUse" orient="auto"><path d="M0,0.5 L10,5 L0,9.5 Z" fill="#1e293b"/></marker><marker id="ah-flow-start" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="9" markerHeight="9" markerUnits="userSpaceOnUse" orient="auto"><path d="M10,0.5 L0,5 L10,9.5 Z" fill="#1e293b"/></marker><marker id="ah-ml" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" markerUnits="userSpaceOnUse" orient="auto"><path d="M0,0.5 L10,5 L0,9.5 Z" fill="#7c3aed"/></marker><marker id="ah-ml-start" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="9" markerHeight="9" markerUnits="userSpaceOnUse" orient="auto"><path d="M10,0.5 L0,5 L10,9.5 Z" fill="#7c3aed"/></marker><marker id="ah-opt" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" markerUnits="userSpaceOnUse" orient="auto"><path d="M0,0.5 L10,5 L0,9.5 Z" fill="#64748b"/></marker><marker id="ah-opt-start" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="9" markerHeight="9" markerUnits="userSpaceOnUse" orient="auto"><path d="M10,0.5 L0,5 L10,9.5 Z" fill="#64748b"/></marker><marker id="ah-service" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" markerUnits="userSpaceOnUse" orient="auto"><path d="M0,0.5 L10,5 L0,9.5 Z" fill="#047857"/></marker><marker id="ah-service-start" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="9" markerHeight="9" markerUnits="userSpaceOnUse" orient="auto"><path d="M10,0.5 L0,5 L10,9.5 Z" fill="#047857"/></marker></defs>
+<rect width="2400" height="1148" fill="#ffffff"/>
+<text x="1200.0" y="44.0" font-family="Arial, Helvetica, sans-serif" font-size="27" font-weight="700" fill="#0f172a" text-anchor="middle" xml:space="preserve">FinAware — The Three Machine-Learning Models</text>
+<text x="1200.0" y="70.0" font-family="Arial, Helvetica, sans-serif" font-size="13.5" font-weight="400" fill="#475569" text-anchor="middle" xml:space="preserve">Each model is trained offline from a fixed dataset, saved as files, loaded by the ML service when it starts, and asked for answers by the Financial API while the app runs. The recommendations themselves are rules, not a model.</text>
+<rect x="40.0" y="104.0" width="1520.0" height="30.0" rx="8" fill="#f5f3ff" stroke="#7c3aed" stroke-width="1.2"/>
+<text x="805.0" y="124.0" font-family="Arial, Helvetica, sans-serif" font-size="12.5" font-weight="700" fill="#4c1d95" text-anchor="middle" xml:space="preserve">OFFLINE — trained by  npm run ml:models  (about 10 minutes), results committed as files</text>
+<rect x="1580.0" y="104.0" width="790.0" height="30.0" rx="8" fill="#ecfdf5" stroke="#059669" stroke-width="1.2"/>
+<text x="1975.0" y="124.0" font-family="Arial, Helvetica, sans-serif" font-size="12.5" font-weight="700" fill="#064e3b" text-anchor="middle" xml:space="preserve">ONLINE — while the app runs</text>
+<rect x="40.0" y="214.0" width="2330.0" height="248.6" rx="14" fill="#faf8ff" stroke="#7c3aed" stroke-width="1.6"/>
+<circle cx="70.0" cy="238.0" r="13" fill="#7c3aed"/>
+<text x="70.0" y="242.5" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="700" fill="#ffffff" text-anchor="middle" xml:space="preserve">1</text>
+<text x="92.0" y="243.0" font-family="Arial, Helvetica, sans-serif" font-size="15.5" font-weight="700" fill="#4c1d95" text-anchor="start" xml:space="preserve">Risk tier model</text>
+<text x="216.9" y="243.0" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="400" fill="#475569" text-anchor="start" xml:space="preserve">How stretched is this person&#x27;s position?  Low · Medium · High</text>
+<rect x="40.0" y="482.6" width="2330.0" height="215.7" rx="14" fill="#faf8ff" stroke="#7c3aed" stroke-width="1.6"/>
+<circle cx="70.0" cy="506.6" r="13" fill="#7c3aed"/>
+<text x="70.0" y="511.1" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="700" fill="#ffffff" text-anchor="middle" xml:space="preserve">2</text>
+<text x="92.0" y="511.6" font-family="Arial, Helvetica, sans-serif" font-size="15.5" font-weight="700" fill="#4c1d95" text-anchor="start" xml:space="preserve">Missed-payment model</text>
+<text x="277.2" y="511.6" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="400" fill="#475569" text-anchor="start" xml:space="preserve">Will this person miss their next payment?</text>
+<rect x="40.0" y="718.2" width="2330.0" height="153.4" rx="14" fill="#faf8ff" stroke="#7c3aed" stroke-width="1.6"/>
+<circle cx="70.0" cy="742.2" r="13" fill="#7c3aed"/>
+<text x="70.0" y="746.7" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="700" fill="#ffffff" text-anchor="middle" xml:space="preserve">3</text>
+<text x="92.0" y="747.2" font-family="Arial, Helvetica, sans-serif" font-size="15.5" font-weight="700" fill="#4c1d95" text-anchor="start" xml:space="preserve">Peer groups</text>
+<text x="196.5" y="747.2" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="400" fill="#475569" text-anchor="start" xml:space="preserve">Who is in a similar position, and how do the ones doing well manage?</text>
+<rect x="40.0" y="1005.0" width="2330.0" height="100.0" rx="10" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.2"/>
+<text x="56.0" y="1029.0" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="700" fill="#0f172a" text-anchor="start" xml:space="preserve">How to read this diagram</text>
+<path d="M360.0,170.0 L400.0,170.0" fill="none" stroke="#1e293b" stroke-width="1.7" marker-end="url(#ah-flow)" stroke-linejoin="round"/>
+<path d="M780.0,170.0 L810.0,170.0" fill="none" stroke="#1e293b" stroke-width="1.7" marker-end="url(#ah-flow)" stroke-linejoin="round"/>
+<path d="M1220.0,170.0 L1250.0,170.0" fill="none" stroke="#1e293b" stroke-width="1.7" marker-end="url(#ah-flow)" stroke-linejoin="round"/>
+<path d="M1540.0,170.0 L1600.0,170.0" fill="none" stroke="#1e293b" stroke-width="1.7" marker-end="url(#ah-flow)" stroke-linejoin="round"/>
+<path d="M2000.0,170.0 L2030.0,170.0" fill="none" stroke="#1e293b" stroke-width="1.7" marker-end="url(#ah-flow)" stroke-linejoin="round"/>
+<path d="M360.0,354.3 L400.0,354.3" fill="none" stroke="#1e293b" stroke-width="1.7" marker-end="url(#ah-flow)" stroke-linejoin="round"/>
+<path d="M780.0,354.3 L810.0,354.3" fill="none" stroke="#1e293b" stroke-width="1.7" marker-end="url(#ah-flow)" stroke-linejoin="round"/>
+<path d="M1220.0,354.3 L1250.0,354.3" fill="none" stroke="#1e293b" stroke-width="1.7" marker-end="url(#ah-flow)" stroke-linejoin="round"/>
+<path d="M1540.0,300.0 L1600.0,300.0" fill="none" stroke="#7c3aed" stroke-width="1.7" marker-end="url(#ah-ml)" stroke-linejoin="round"/>
+<path d="M2000.0,300.0 L2030.0,300.0" fill="none" stroke="#047857" stroke-width="1.7" marker-end="url(#ah-service)" stroke-linejoin="round"/>
+<path d="M360.0,606.4 L400.0,606.4" fill="none" stroke="#1e293b" stroke-width="1.7" marker-end="url(#ah-flow)" stroke-linejoin="round"/>
+<path d="M780.0,606.4 L810.0,606.4" fill="none" stroke="#1e293b" stroke-width="1.7" marker-end="url(#ah-flow)" stroke-linejoin="round"/>
+<path d="M1220.0,606.4 L1250.0,606.4" fill="none" stroke="#1e293b" stroke-width="1.7" marker-end="url(#ah-flow)" stroke-linejoin="round"/>
+<path d="M1540.0,568.6 L1600.0,568.6" fill="none" stroke="#7c3aed" stroke-width="1.7" marker-end="url(#ah-ml)" stroke-linejoin="round"/>
+<path d="M2000.0,568.6 L2030.0,568.6" fill="none" stroke="#047857" stroke-width="1.7" marker-end="url(#ah-service)" stroke-linejoin="round"/>
+<path d="M360.0,810.9 L400.0,810.9" fill="none" stroke="#1e293b" stroke-width="1.7" marker-end="url(#ah-flow)" stroke-linejoin="round"/>
+<path d="M780.0,810.9 L810.0,810.9" fill="none" stroke="#1e293b" stroke-width="1.7" marker-end="url(#ah-flow)" stroke-linejoin="round"/>
+<path d="M1220.0,810.9 L1250.0,810.9" fill="none" stroke="#1e293b" stroke-width="1.7" marker-end="url(#ah-flow)" stroke-linejoin="round"/>
+<path d="M1540.0,804.2 L1600.0,804.2" fill="none" stroke="#7c3aed" stroke-width="1.7" marker-end="url(#ah-ml)" stroke-linejoin="round"/>
+<path d="M2000.0,804.2 L2030.0,804.2" fill="none" stroke="#047857" stroke-width="1.7" marker-end="url(#ah-service)" stroke-linejoin="round"/>
+<path d="M1570.0,150.0 L1570.0,881.6" fill="none" stroke="#64748b" stroke-width="1.6" stroke-dasharray="6 4" stroke-linejoin="round"/>
+<rect x="60.0" y="150.0" width="300.0" height="40.0" rx="10" fill="#fff7ed" stroke="#ea580c" stroke-width="1.6"/>
+<text x="218.0" y="174.4" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="700" fill="#7c2d12" text-anchor="middle" xml:space="preserve">Data</text>
+<circle cx="61.0" cy="151.0" r="12" fill="#ea580c" stroke="#ffffff" stroke-width="2"/>
+<text x="61.0" y="155.2" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="700" fill="#ffffff" text-anchor="middle" xml:space="preserve">1</text>
+<rect x="400.0" y="150.0" width="380.0" height="40.0" rx="10" fill="#ffffff" stroke="#64748b" stroke-width="1.6"/>
+<text x="598.0" y="174.4" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="700" fill="#0f172a" text-anchor="middle" xml:space="preserve">Prepare</text>
+<circle cx="401.0" cy="151.0" r="12" fill="#64748b" stroke="#ffffff" stroke-width="2"/>
+<text x="401.0" y="155.2" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="700" fill="#ffffff" text-anchor="middle" xml:space="preserve">2</text>
+<rect x="810.0" y="150.0" width="410.0" height="40.0" rx="10" fill="#f5f3ff" stroke="#7c3aed" stroke-width="1.6"/>
+<text x="1023.0" y="174.4" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="700" fill="#4c1d95" text-anchor="middle" xml:space="preserve">Train and choose</text>
+<circle cx="811.0" cy="151.0" r="12" fill="#7c3aed" stroke="#ffffff" stroke-width="2"/>
+<text x="811.0" y="155.2" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="700" fill="#ffffff" text-anchor="middle" xml:space="preserve">3</text>
+<rect x="1250.0" y="150.0" width="290.0" height="40.0" rx="10" fill="#f5f3ff" stroke="#7c3aed" stroke-width="1.6"/>
+<text x="1403.0" y="174.4" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="700" fill="#4c1d95" text-anchor="middle" xml:space="preserve">Saved files — ml-service/artifacts/</text>
+<circle cx="1251.0" cy="151.0" r="12" fill="#7c3aed" stroke="#ffffff" stroke-width="2"/>
+<text x="1251.0" y="155.2" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="700" fill="#ffffff" text-anchor="middle" xml:space="preserve">4</text>
+<rect x="1600.0" y="150.0" width="400.0" height="40.0" rx="10" fill="#f5f3ff" stroke="#7c3aed" stroke-width="1.6"/>
+<text x="1808.0" y="174.4" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="700" fill="#4c1d95" text-anchor="middle" xml:space="preserve">Served by the ML service (FastAPI :8000)</text>
+<circle cx="1601.0" cy="151.0" r="12" fill="#7c3aed" stroke="#ffffff" stroke-width="2"/>
+<text x="1601.0" y="155.2" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="700" fill="#ffffff" text-anchor="middle" xml:space="preserve">5</text>
+<rect x="2030.0" y="150.0" width="330.0" height="40.0" rx="10" fill="#ecfdf5" stroke="#059669" stroke-width="1.6"/>
+<text x="2203.0" y="174.4" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="700" fill="#064e3b" text-anchor="middle" xml:space="preserve">Used by</text>
+<circle cx="2031.0" cy="151.0" r="12" fill="#059669" stroke="#ffffff" stroke-width="2"/>
+<text x="2031.0" y="155.2" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="700" fill="#ffffff" text-anchor="middle" xml:space="preserve">6</text>
+<rect x="60.0" y="260.0" width="300.0" height="188.6" rx="10" fill="#ffffff" stroke="#ea580c" stroke-width="1.6"/>
+<path d="M60.8,294.5 L60.8,270.3 Q60.8,260.8 70.3,260.8 L349.7,260.8 Q359.2,260.8 359.2,270.3 L359.2,294.5 Z" fill="#ffedd5" stroke="none" stroke-width="0"/>
+<line x1="60.0" y1="294.5" x2="360.0" y2="294.5" stroke="#ea580c" stroke-width="0.8" stroke-opacity="0.55"/>
+<text x="70.0" y="282.8" font-family="Arial, Helvetica, sans-serif" font-size="13.5" font-weight="700" fill="#7c2d12" text-anchor="start" xml:space="preserve">Synthetic dataset</text>
+<text x="70.0" y="314.2" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="10.5" font-weight="400" fill="#1e293b" text-anchor="start" xml:space="preserve">data/personal_finance_zar.csv</text>
+<text x="70.0" y="329.9" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">32 424 records × 24 columns, amounts in rand</text>
+<text x="70.0" y="345.0" font-family="Arial, Helvetica, sans-serif" font-size="10.5" font-weight="400" fill="#475569" text-anchor="start" xml:space="preserve">Its SHA-256 fingerprint is checked on every run</text>
+<rect x="400.0" y="260.0" width="380.0" height="188.6" rx="10" fill="#ffffff" stroke="#64748b" stroke-width="1.6"/>
+<path d="M400.8,294.5 L400.8,270.3 Q400.8,260.8 410.3,260.8 L769.7,260.8 Q779.2,260.8 779.2,270.3 L779.2,294.5 Z" fill="#f1f5f9" stroke="none" stroke-width="0"/>
+<line x1="400.0" y1="294.5" x2="780.0" y2="294.5" stroke="#64748b" stroke-width="0.8" stroke-opacity="0.55"/>
+<text x="410.0" y="282.8" font-family="Arial, Helvetica, sans-serif" font-size="13.5" font-weight="700" fill="#0f172a" text-anchor="start" xml:space="preserve">Audit, label, features</text>
+<text x="410.0" y="314.2" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="10.5" font-weight="400" fill="#1e293b" text-anchor="start" xml:space="preserve">ml.data_audit</text>
+<text x="410.0" y="329.9" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">31 checks passed; nothing altered, removed or filled in</text>
+<text x="410.0" y="345.0" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="10.5" font-weight="400" fill="#1e293b" text-anchor="start" xml:space="preserve">ml.target</text>
+<text x="410.0" y="360.7" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">risk_tier v1.0: five indicators score 0, 1 or 2 points → Low 0–2 ·</text>
+<text x="410.0" y="376.8" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">Medium 3–5 · High 6–10</text>
+<text x="410.0" y="392.4" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="700" fill="#b45309" text-anchor="start" xml:space="preserve">Proposed — not yet approved by the supervisor</text>
+<text x="410.0" y="407.3" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="10.5" font-weight="400" fill="#1e293b" text-anchor="start" xml:space="preserve">ml.features</text>
+<text x="410.0" y="423.0" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">10 inputs + 5 worked-out ratios = 17 model features</text>
+<rect x="810.0" y="260.0" width="410.0" height="188.6" rx="10" fill="#ffffff" stroke="#7c3aed" stroke-width="1.6"/>
+<path d="M810.8,294.5 L810.8,270.3 Q810.8,260.8 820.3,260.8 L1209.7,260.8 Q1219.2,260.8 1219.2,270.3 L1219.2,294.5 Z" fill="#ede9fe" stroke="none" stroke-width="0"/>
+<line x1="810.0" y1="294.5" x2="1220.0" y2="294.5" stroke="#7c3aed" stroke-width="0.8" stroke-opacity="0.55"/>
+<text x="820.0" y="282.8" font-family="Arial, Helvetica, sans-serif" font-size="13.5" font-weight="700" fill="#4c1d95" text-anchor="start" xml:space="preserve">Train four, keep the best</text>
+<text x="820.0" y="314.2" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="10.5" font-weight="400" fill="#1e293b" text-anchor="start" xml:space="preserve">ml.train</text>
+<text x="820.0" y="329.9" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">Stratified 80/20 split (25 939 / 6 485 records); 5-fold cross-validation on</text>
+<text x="820.0" y="346.0" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">macro F1</text>
+<text x="820.0" y="362.1" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="700" fill="#0f172a" text-anchor="start" xml:space="preserve">• Gradient Boosting — macro F1 0.997  ✓ chosen</text>
+<text x="820.0" y="378.2" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">• Random Forest — 0.995</text>
+<text x="820.0" y="394.3" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">• Support Vector Machine — 0.933</text>
+<text x="820.0" y="410.4" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">• K-Nearest Neighbours — 0.904</text>
+<text x="820.0" y="426.0" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="700" fill="#b45309" text-anchor="start" xml:space="preserve">Scores are this high because the label is built from these same fields —</text>
+<text x="820.0" y="441.4" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="700" fill="#b45309" text-anchor="start" xml:space="preserve">the report says so.</text>
+<rect x="1250.0" y="260.0" width="290.0" height="188.6" rx="8" fill="#f5f3ff" stroke="#7c3aed" stroke-width="1.6"/>
+<text x="1260.0" y="277.7" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="10.5" font-weight="400" fill="#6d28d9" text-anchor="start" xml:space="preserve">pipeline.joblib</text>
+<text x="1260.0" y="292.4" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="10.5" font-weight="400" fill="#6d28d9" text-anchor="start" xml:space="preserve">feature_schema.json</text>
+<text x="1260.0" y="307.1" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="10.5" font-weight="400" fill="#6d28d9" text-anchor="start" xml:space="preserve">model_metadata.json</text>
+<text x="1260.0" y="321.8" font-family="Arial, Helvetica, sans-serif" font-size="10.5" font-weight="400" fill="#475569" text-anchor="start" xml:space="preserve">reports/: data_audit.md, model_comparison.md,</text>
+<text x="1260.0" y="336.5" font-family="Arial, Helvetica, sans-serif" font-size="10.5" font-weight="400" fill="#475569" text-anchor="start" xml:space="preserve">metrics.json</text>
+<rect x="1600.0" y="260.0" width="400.0" height="188.6" rx="8" fill="#f5f3ff" stroke="#7c3aed" stroke-width="1.6"/>
+<text x="1610.0" y="277.7" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="10.5" font-weight="400" fill="#6d28d9" text-anchor="start" xml:space="preserve">POST /predict</text>
+<text x="1610.0" y="293.4" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">→ the level (the most likely class) and the three probabilities</text>
+<text x="1610.0" y="309.5" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">→ riskScore = 100 × (0.5 × P(Medium) + P(High))</text>
+<text x="1610.0" y="325.6" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">→ top drivers from SHAP (exact for tree models): what pushed towards</text>
+<text x="1622.0" y="341.7" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">High or Low</text>
+<text x="1610.0" y="357.8" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">→ warnings: UNKNOWN_CATEGORY, OUTSIDE_TRAINING_RANGE</text>
+<text x="1610.0" y="372.9" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="10.5" font-weight="400" fill="#6d28d9" text-anchor="start" xml:space="preserve">POST /what-if</text>
+<text x="1610.0" y="388.6" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">→ the smallest change that reaches a better tier, scored by the same</text>
+<text x="1622.0" y="404.7" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">model</text>
+<rect x="2030.0" y="260.0" width="330.0" height="188.6" rx="8" fill="#ecfdf5" stroke="#059669" stroke-width="1.6"/>
+<text x="2040.0" y="278.7" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="700" fill="#0f172a" text-anchor="start" xml:space="preserve">Financial API → Risk Assessment page</text>
+<text x="2040.0" y="294.8" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">the result, its drivers, Why this recommendation? and the</text>
+<text x="2040.0" y="310.9" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">What-if simulator</text>
+<text x="2040.0" y="326.0" font-family="Arial, Helvetica, sans-serif" font-size="10.5" font-weight="400" fill="#475569" text-anchor="start" xml:space="preserve">The recommendations come from rules (v1.0) in the Financial API,</text>
+<text x="2040.0" y="340.7" font-family="Arial, Helvetica, sans-serif" font-size="10.5" font-weight="400" fill="#475569" text-anchor="start" xml:space="preserve">not from the model.</text>
+<rect x="60.0" y="528.6" width="300.0" height="155.7" rx="10" fill="#ffffff" stroke="#ea580c" stroke-width="1.6"/>
+<path d="M60.8,563.0 L60.8,538.9 Q60.8,529.4 70.3,529.4 L349.7,529.4 Q359.2,529.4 359.2,538.9 L359.2,563.0 Z" fill="#ffedd5" stroke="none" stroke-width="0"/>
+<line x1="60.0" y1="563.0" x2="360.0" y2="563.0" stroke="#ea580c" stroke-width="0.8" stroke-opacity="0.55"/>
+<text x="70.0" y="551.4" font-family="Arial, Helvetica, sans-serif" font-size="13.5" font-weight="700" fill="#7c2d12" text-anchor="start" xml:space="preserve">The app&#x27;s own records</text>
+<text x="70.0" y="582.8" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="10.5" font-weight="400" fill="#1e293b" text-anchor="start" xml:space="preserve">prisma/prisma/dev.db</text>
+<text x="70.0" y="598.5" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">Payment_History (paid or missed), Debts, Users</text>
+<text x="70.0" y="614.1" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="700" fill="#047857" text-anchor="start" xml:space="preserve">A recorded outcome, not a constructed label</text>
+<rect x="400.0" y="528.6" width="380.0" height="155.7" rx="10" fill="#ffffff" stroke="#64748b" stroke-width="1.6"/>
+<path d="M400.8,563.0 L400.8,538.9 Q400.8,529.4 410.3,529.4 L769.7,529.4 Q779.2,529.4 779.2,538.9 L779.2,563.0 Z" fill="#f1f5f9" stroke="none" stroke-width="0"/>
+<line x1="400.0" y1="563.0" x2="780.0" y2="563.0" stroke="#64748b" stroke-width="0.8" stroke-opacity="0.55"/>
+<text x="410.0" y="551.4" font-family="Arial, Helvetica, sans-serif" font-size="13.5" font-weight="700" fill="#0f172a" text-anchor="start" xml:space="preserve">One row per due date</text>
+<text x="410.0" y="582.8" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="10.5" font-weight="400" fill="#1e293b" text-anchor="start" xml:space="preserve">ml.payment.dataset</text>
+<text x="410.0" y="598.5" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">Features come only from payments before that date: past miss rate,</text>
+<text x="410.0" y="614.6" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">last-6 miss rate, current streak, months since the last miss, active</text>
+<text x="410.0" y="630.7" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">debts, interest rate, balance ÷ income</text>
+<text x="410.0" y="645.8" font-family="Arial, Helvetica, sans-serif" font-size="10.5" font-weight="400" fill="#475569" text-anchor="start" xml:space="preserve">Needs 3 earlier payments. The seeded risk level is left out so the model</text>
+<text x="410.0" y="660.5" font-family="Arial, Helvetica, sans-serif" font-size="10.5" font-weight="400" fill="#475569" text-anchor="start" xml:space="preserve">cannot read the answer.</text>
+<rect x="810.0" y="528.6" width="410.0" height="155.7" rx="10" fill="#ffffff" stroke="#7c3aed" stroke-width="1.6"/>
+<path d="M810.8,563.0 L810.8,538.9 Q810.8,529.4 820.3,529.4 L1209.7,529.4 Q1219.2,529.4 1219.2,538.9 L1219.2,563.0 Z" fill="#ede9fe" stroke="none" stroke-width="0"/>
+<line x1="810.0" y1="563.0" x2="1220.0" y2="563.0" stroke="#7c3aed" stroke-width="0.8" stroke-opacity="0.55"/>
+<text x="820.0" y="551.4" font-family="Arial, Helvetica, sans-serif" font-size="13.5" font-weight="700" fill="#4c1d95" text-anchor="start" xml:space="preserve">Train three, keep the best</text>
+<text x="820.0" y="582.8" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="10.5" font-weight="400" fill="#1e293b" text-anchor="start" xml:space="preserve">ml.payment.train</text>
+<text x="820.0" y="598.5" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">Logistic Regression · Random Forest · Gradient Boosting, chosen by</text>
+<text x="820.0" y="614.6" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">average precision, then Brier score, then simplicity</text>
+<text x="820.0" y="630.7" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="700" fill="#0f172a" text-anchor="start" xml:space="preserve">Gradient Boosting: ROC AUC 0.70 · average precision 0.20</text>
+<text x="820.0" y="646.8" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">Misses are 11% of the test rows; alert threshold 0.18</text>
+<text x="820.0" y="662.4" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="700" fill="#047857" text-anchor="start" xml:space="preserve">Beats the &#x27;past miss rate&#x27; rule of thumb</text>
+<text x="820.0" y="677.3" font-family="Arial, Helvetica, sans-serif" font-size="10.5" font-weight="400" fill="#475569" text-anchor="start" xml:space="preserve">1 280 training / 418 test rows</text>
+<rect x="1250.0" y="528.6" width="290.0" height="155.7" rx="8" fill="#f5f3ff" stroke="#7c3aed" stroke-width="1.6"/>
+<text x="1260.0" y="546.3" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="10.5" font-weight="400" fill="#6d28d9" text-anchor="start" xml:space="preserve">payment_pipeline.joblib</text>
+<text x="1260.0" y="561.0" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="10.5" font-weight="400" fill="#6d28d9" text-anchor="start" xml:space="preserve">payment_model_metadata.json</text>
+<text x="1260.0" y="575.7" font-family="Arial, Helvetica, sans-serif" font-size="10.5" font-weight="400" fill="#475569" text-anchor="start" xml:space="preserve">reports/payment_model.md</text>
+<rect x="1600.0" y="528.6" width="400.0" height="155.7" rx="8" fill="#f5f3ff" stroke="#7c3aed" stroke-width="1.6"/>
+<text x="1610.0" y="546.3" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="10.5" font-weight="400" fill="#6d28d9" text-anchor="start" xml:space="preserve">POST /predict/payment-miss</text>
+<text x="1610.0" y="562.0" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">→ each debt&#x27;s chance that its next payment is missed, and the chance of</text>
+<text x="1622.0" y="578.1" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">missing any</text>
+<text x="1610.0" y="593.2" font-family="Arial, Helvetica, sans-serif" font-size="10.5" font-weight="400" fill="#475569" text-anchor="start" xml:space="preserve">The Financial Data service works out the features; the ML service never reads</text>
+<text x="1610.0" y="607.9" font-family="Arial, Helvetica, sans-serif" font-size="10.5" font-weight="400" fill="#475569" text-anchor="start" xml:space="preserve">the database.</text>
+<rect x="2030.0" y="528.6" width="330.0" height="155.7" rx="8" fill="#ecfdf5" stroke="#059669" stroke-width="1.6"/>
+<text x="2040.0" y="547.3" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="700" fill="#0f172a" text-anchor="start" xml:space="preserve">Financial API → Payment outlook card</text>
+<text x="2040.0" y="563.4" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="700" fill="#0f172a" text-anchor="start" xml:space="preserve">Money Plan</text>
+<text x="2040.0" y="579.5" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">changes the wording of the credit advice — never an</text>
+<text x="2040.0" y="595.6" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">amount</text>
+<rect x="60.0" y="764.2" width="300.0" height="93.4" rx="10" fill="#ffffff" stroke="#ea580c" stroke-width="1.6"/>
+<path d="M60.8,798.7 L60.8,774.5 Q60.8,765.0 70.3,765.0 L349.7,765.0 Q359.2,765.0 359.2,774.5 L359.2,798.7 Z" fill="#ffedd5" stroke="none" stroke-width="0"/>
+<line x1="60.0" y1="798.7" x2="360.0" y2="798.7" stroke="#ea580c" stroke-width="0.8" stroke-opacity="0.55"/>
+<text x="70.0" y="787.1" font-family="Arial, Helvetica, sans-serif" font-size="13.5" font-weight="700" fill="#7c2d12" text-anchor="start" xml:space="preserve">Same synthetic dataset</text>
+<text x="70.0" y="818.4" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="10.5" font-weight="400" fill="#1e293b" text-anchor="start" xml:space="preserve">data/personal_finance_zar.csv</text>
+<text x="70.0" y="834.1" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">24 647 records used; 7 777 left out because their loan</text>
+<text x="70.0" y="850.2" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">repayments exceed their whole income</text>
+<rect x="400.0" y="764.2" width="380.0" height="93.4" rx="10" fill="#ffffff" stroke="#64748b" stroke-width="1.6"/>
+<path d="M400.8,798.7 L400.8,774.5 Q400.8,765.0 410.3,765.0 L769.7,765.0 Q779.2,765.0 779.2,774.5 L779.2,798.7 Z" fill="#f1f5f9" stroke="none" stroke-width="0"/>
+<line x1="400.0" y1="798.7" x2="780.0" y2="798.7" stroke="#64748b" stroke-width="0.8" stroke-opacity="0.55"/>
+<text x="410.0" y="787.1" font-family="Arial, Helvetica, sans-serif" font-size="13.5" font-weight="700" fill="#0f172a" text-anchor="start" xml:space="preserve">Four position features</text>
+<text x="410.0" y="819.4" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">Income (log), living costs ÷ income, repayments ÷ income, credit score</text>
+<text x="410.0" y="835.5" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">— standardised</text>
+<text x="410.0" y="850.6" font-family="Arial, Helvetica, sans-serif" font-size="10.5" font-weight="400" fill="#475569" text-anchor="start" xml:space="preserve">Savings are compared, not clustered on</text>
+<rect x="810.0" y="764.2" width="410.0" height="93.4" rx="10" fill="#ffffff" stroke="#7c3aed" stroke-width="1.6"/>
+<path d="M810.8,798.7 L810.8,774.5 Q810.8,765.0 820.3,765.0 L1209.7,765.0 Q1219.2,765.0 1219.2,774.5 L1219.2,798.7 Z" fill="#ede9fe" stroke="none" stroke-width="0"/>
+<line x1="810.0" y1="798.7" x2="1220.0" y2="798.7" stroke="#7c3aed" stroke-width="0.8" stroke-opacity="0.55"/>
+<text x="820.0" y="787.1" font-family="Arial, Helvetica, sans-serif" font-size="13.5" font-weight="700" fill="#4c1d95" text-anchor="start" xml:space="preserve">Group with KMeans</text>
+<text x="820.0" y="818.4" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="10.5" font-weight="400" fill="#1e293b" text-anchor="start" xml:space="preserve">ml.segments</text>
+<text x="820.0" y="834.1" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">k chosen by silhouette between 3 and 6 → k = 6</text>
+<text x="820.0" y="849.2" font-family="Arial, Helvetica, sans-serif" font-size="10.5" font-weight="400" fill="#475569" text-anchor="start" xml:space="preserve">Silhouette 0.28: useful bands, not natural types — the model card says so</text>
+<rect x="1250.0" y="764.2" width="290.0" height="93.4" rx="8" fill="#f5f3ff" stroke="#7c3aed" stroke-width="1.6"/>
+<text x="1260.0" y="781.9" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="10.5" font-weight="400" fill="#6d28d9" text-anchor="start" xml:space="preserve">segments.joblib</text>
+<text x="1260.0" y="796.6" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="10.5" font-weight="400" fill="#6d28d9" text-anchor="start" xml:space="preserve">segments_metadata.json</text>
+<text x="1260.0" y="811.4" font-family="Arial, Helvetica, sans-serif" font-size="10.5" font-weight="400" fill="#475569" text-anchor="start" xml:space="preserve">Each group&#x27;s medians and quartiles, and those of</text>
+<text x="1260.0" y="826.1" font-family="Arial, Helvetica, sans-serif" font-size="10.5" font-weight="400" fill="#475569" text-anchor="start" xml:space="preserve">members with 10%+ of income to spare</text>
+<rect x="1600.0" y="764.2" width="400.0" height="93.4" rx="8" fill="#f5f3ff" stroke="#7c3aed" stroke-width="1.6"/>
+<text x="1610.0" y="781.9" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="10.5" font-weight="400" fill="#6d28d9" text-anchor="start" xml:space="preserve">POST /segment</text>
+<text x="1610.0" y="797.7" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">→ the user&#x27;s group and where they sit within it</text>
+<rect x="2030.0" y="764.2" width="330.0" height="93.4" rx="8" fill="#ecfdf5" stroke="#059669" stroke-width="1.6"/>
+<text x="2040.0" y="783.0" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="700" fill="#0f172a" text-anchor="start" xml:space="preserve">Financial API → People in a similar position</text>
+<text x="2040.0" y="798.0" font-family="Arial, Helvetica, sans-serif" font-size="10.5" font-weight="400" fill="#475569" text-anchor="start" xml:space="preserve">Six groups: high or low living costs with a weaker or strong credit</text>
+<text x="2040.0" y="812.8" font-family="Arial, Helvetica, sans-serif" font-size="10.5" font-weight="400" fill="#475569" text-anchor="start" xml:space="preserve">record · heavy loan repayments · lower income</text>
+<rect x="40.0" y="891.6" width="1130.0" height="93.4" rx="10" fill="#ffffff" stroke="#d97706" stroke-width="1.6"/>
+<path d="M40.8,926.1 L40.8,901.9 Q40.8,892.4 50.3,892.4 L1159.7,892.4 Q1169.2,892.4 1169.2,901.9 L1169.2,926.1 Z" fill="#fef3c7" stroke="none" stroke-width="0"/>
+<line x1="40.0" y1="926.1" x2="1170.0" y2="926.1" stroke="#d97706" stroke-width="0.8" stroke-opacity="0.55"/>
+<text x="50.0" y="914.4" font-family="Arial, Helvetica, sans-serif" font-size="13.5" font-weight="700" fill="#78350f" text-anchor="start" xml:space="preserve">When a model file is missing</text>
+<text x="50.0" y="946.8" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">The risk model is required: without it /health/ready answers 503 and every risk request gets 503 MODEL_UNAVAILABLE, so nothing is stored. The missed-payment and peer-group files are optional: without them only</text>
+<text x="50.0" y="962.9" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">their own endpoint answers 503 and everything else works.</text>
+<text x="50.0" y="978.0" font-family="Arial, Helvetica, sans-serif" font-size="10.5" font-weight="400" fill="#475569" text-anchor="start" xml:space="preserve">Other errors: 422 INVALID_INPUT (a value out of range, or a loan with has_loan = No) · 500 PREDICTION_FAILED</text>
+<rect x="1200.0" y="891.6" width="1170.0" height="77.3" rx="10" fill="#ffffff" stroke="#7c3aed" stroke-width="1.6"/>
+<path d="M1200.8,926.1 L1200.8,901.9 Q1200.8,892.4 1210.3,892.4 L2359.7,892.4 Q2369.2,892.4 2369.2,901.9 L2369.2,926.1 Z" fill="#ede9fe" stroke="none" stroke-width="0"/>
+<line x1="1200.0" y1="926.1" x2="2370.0" y2="926.1" stroke="#7c3aed" stroke-width="0.8" stroke-opacity="0.55"/>
+<text x="1210.0" y="914.4" font-family="Arial, Helvetica, sans-serif" font-size="13.5" font-weight="700" fill="#4c1d95" text-anchor="start" xml:space="preserve">GET /model-info → the About the models page (the model card)</text>
+<text x="1210.0" y="946.8" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">Names, versions, training dates, test results, the risk score formula, the explanation method and the risk target&#x27;s status — read from the same metadata files the models were saved with. Never the model files themselves.</text>
+<text x="1210.0" y="961.9" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="10.5" font-weight="400" fill="#1e293b" text-anchor="start" xml:space="preserve">npm run ml:models   ·   npm run ml:test   ·   npm run ml:audit</text>
+<rect x="56.0" y="1045.0" width="34.0" height="20.0" rx="5" fill="#ffedd5" stroke="#ea580c" stroke-width="1.4"/>
+<text x="100.0" y="1059.5" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#1e293b" text-anchor="start" xml:space="preserve">Data the model learns from</text>
+<rect x="630.5" y="1045.0" width="34.0" height="20.0" rx="5" fill="#f1f5f9" stroke="#64748b" stroke-width="1.4"/>
+<text x="674.5" y="1059.5" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#1e293b" text-anchor="start" xml:space="preserve">Preparation step</text>
+<rect x="1205.0" y="1045.0" width="34.0" height="20.0" rx="5" fill="#ede9fe" stroke="#7c3aed" stroke-width="1.4"/>
+<text x="1249.0" y="1059.5" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#1e293b" text-anchor="start" xml:space="preserve">Model, files or ML endpoint</text>
+<rect x="1779.5" y="1045.0" width="34.0" height="20.0" rx="5" fill="#d1fae5" stroke="#059669" stroke-width="1.4"/>
+<text x="1823.5" y="1059.5" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#1e293b" text-anchor="start" xml:space="preserve">Where the answer is used</text>
+<rect x="56.0" y="1075.0" width="34.0" height="20.0" rx="5" fill="#fef3c7" stroke="#d97706" stroke-width="1.4"/>
+<text x="100.0" y="1089.5" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#1e293b" text-anchor="start" xml:space="preserve">Behaviour worth knowing</text>
+<path d="M630.5,1085.0 L664.5,1085.0" stroke="#1e293b" stroke-width="1.8" marker-end="url(#ah-flow)"/>
+<text x="674.5" y="1089.5" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#1e293b" text-anchor="start" xml:space="preserve">Next step</text>
+<path d="M1205.0,1085.0 L1239.0,1085.0" stroke="#7c3aed" stroke-width="1.8" marker-end="url(#ah-ml)"/>
+<text x="1249.0" y="1089.5" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#1e293b" text-anchor="start" xml:space="preserve">Files loaded at start-up</text>
+<path d="M1779.5,1085.0 L1813.5,1085.0" stroke="#047857" stroke-width="1.8" marker-end="url(#ah-service)"/>
+<text x="1823.5" y="1089.5" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#1e293b" text-anchor="start" xml:space="preserve">Request from the Financial API</text>
+<text x="1200.0" y="1132.0" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="400" fill="#94a3b8" text-anchor="middle" xml:space="preserve">FinAware · The Three Machine-Learning Models · drawn from the code · updated 29 September 2026</text>
+</svg>

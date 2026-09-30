@@ -1,0 +1,325 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2140" height="2264" viewBox="0 0 2140 2264">
+<title>FinAware — Flow: Get Help</title>
+<defs><marker id="ah-back" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" markerUnits="userSpaceOnUse" orient="auto"><path d="M0,0.5 L10,5 L0,9.5 Z" fill="#64748b"/></marker><marker id="ah-back-start" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="9" markerHeight="9" markerUnits="userSpaceOnUse" orient="auto"><path d="M10,0.5 L0,5 L10,9.5 Z" fill="#64748b"/></marker><marker id="ah-err" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" markerUnits="userSpaceOnUse" orient="auto"><path d="M0,0.5 L10,5 L0,9.5 Z" fill="#dc2626"/></marker><marker id="ah-err-start" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="9" markerHeight="9" markerUnits="userSpaceOnUse" orient="auto"><path d="M10,0.5 L0,5 L10,9.5 Z" fill="#dc2626"/></marker><marker id="ah-ext" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" markerUnits="userSpaceOnUse" orient="auto"><path d="M0,0.5 L10,5 L0,9.5 Z" fill="#475569"/></marker><marker id="ah-ext-start" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="9" markerHeight="9" markerUnits="userSpaceOnUse" orient="auto"><path d="M10,0.5 L0,5 L10,9.5 Z" fill="#475569"/></marker><marker id="ah-flow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" markerUnits="userSpaceOnUse" orient="auto"><path d="M0,0.5 L10,5 L0,9.5 Z" fill="#1e293b"/></marker><marker id="ah-flow-start" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="9" markerHeight="9" markerUnits="userSpaceOnUse" orient="auto"><path d="M10,0.5 L0,5 L10,9.5 Z" fill="#1e293b"/></marker><marker id="ah-http" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" markerUnits="userSpaceOnUse" orient="auto"><path d="M0,0.5 L10,5 L0,9.5 Z" fill="#334155"/></marker><marker id="ah-http-start" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="9" markerHeight="9" markerUnits="userSpaceOnUse" orient="auto"><path d="M10,0.5 L0,5 L10,9.5 Z" fill="#334155"/></marker><marker id="ah-ok" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" markerUnits="userSpaceOnUse" orient="auto"><path d="M0,0.5 L10,5 L0,9.5 Z" fill="#15803d"/></marker><marker id="ah-ok-start" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="9" markerHeight="9" markerUnits="userSpaceOnUse" orient="auto"><path d="M10,0.5 L0,5 L10,9.5 Z" fill="#15803d"/></marker></defs>
+<rect width="2140" height="2264" fill="#ffffff"/>
+<text x="1070.0" y="44.0" font-family="Arial, Helvetica, sans-serif" font-size="27" font-weight="700" fill="#0f172a" text-anchor="middle" xml:space="preserve">FinAware — Flow: Get Help</text>
+<text x="1070.0" y="70.0" font-family="Arial, Helvetica, sans-serif" font-size="13.5" font-weight="400" fill="#475569" text-anchor="middle" xml:space="preserve">Asking an advisor for help (A), and the three tools linked from the Get Help page: the Debt Review Check (B), the Case Summary (C) and the loan-offer check (D). The advisor suggestion is only a suggestion — the person chooses.</text>
+<rect x="30.0" y="118.0" width="470.0" height="1318.7" rx="12" fill="#f5f9ff" stroke="#2563eb" stroke-width="1.4"/>
+<path d="M30.0,154.0 L30.0,130.0 Q30.0,118.0 42.0,118.0 L488.0,118.0 Q500.0,118.0 500.0,130.0 L500.0,154.0 Z" fill="#dbeafe" stroke="#2563eb" stroke-width="1.4"/>
+<text x="265.0" y="141.0" font-family="Arial, Helvetica, sans-serif" font-size="14.5" font-weight="700" fill="#1e3a8a" text-anchor="middle" xml:space="preserve">Person — browser</text>
+<rect x="520.0" y="118.0" width="520.0" height="1318.7" rx="12" fill="#f7f7ff" stroke="#4f46e5" stroke-width="1.4"/>
+<path d="M520.0,154.0 L520.0,130.0 Q520.0,118.0 532.0,118.0 L1028.0,118.0 Q1040.0,118.0 1040.0,130.0 L1040.0,154.0 Z" fill="#e0e7ff" stroke="#4f46e5" stroke-width="1.4"/>
+<text x="780.0" y="141.0" font-family="Arial, Helvetica, sans-serif" font-size="14.5" font-weight="700" fill="#312e81" text-anchor="middle" xml:space="preserve">Web app :30005</text>
+<rect x="1060.0" y="118.0" width="520.0" height="1318.7" rx="12" fill="#f3fcf8" stroke="#059669" stroke-width="1.4"/>
+<path d="M1060.0,154.0 L1060.0,130.0 Q1060.0,118.0 1072.0,118.0 L1568.0,118.0 Q1580.0,118.0 1580.0,130.0 L1580.0,154.0 Z" fill="#d1fae5" stroke="#059669" stroke-width="1.4"/>
+<text x="1320.0" y="141.0" font-family="Arial, Helvetica, sans-serif" font-size="14.5" font-weight="700" fill="#064e3b" text-anchor="middle" xml:space="preserve">Help service :4106 + database</text>
+<rect x="1600.0" y="118.0" width="510.0" height="1318.7" rx="12" fill="#fbfcfd" stroke="#475569" stroke-width="1.4" stroke-dasharray="7 4"/>
+<path d="M1600.0,154.0 L1600.0,130.0 Q1600.0,118.0 1612.0,118.0 L2098.0,118.0 Q2110.0,118.0 2110.0,130.0 L2110.0,154.0 Z" fill="#e2e8f0" stroke="#475569" stroke-width="1.4"/>
+<text x="1855.0" y="141.0" font-family="Arial, Helvetica, sans-serif" font-size="14.5" font-weight="700" fill="#1e293b" text-anchor="middle" xml:space="preserve">Outside FinAware</text>
+<rect x="30.0" y="1476.7" width="2080.0" height="205.6" rx="14" fill="#f7f7ff" stroke="#4f46e5" stroke-width="1.6"/>
+<text x="48.0" y="1505.7" font-family="Arial, Helvetica, sans-serif" font-size="15.5" font-weight="700" fill="#312e81" text-anchor="start" xml:space="preserve">B · Debt Review Check — /help/debt-review</text>
+<text x="380.2" y="1505.7" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="400" fill="#475569" text-anchor="start" xml:space="preserve">worked out in the web app, on the server; lib/finance/debt-review.ts</text>
+<rect x="30.0" y="1712.2" width="2080.0" height="170.6" rx="14" fill="#f7f7ff" stroke="#4f46e5" stroke-width="1.6"/>
+<text x="48.0" y="1741.2" font-family="Arial, Helvetica, sans-serif" font-size="15.5" font-weight="700" fill="#312e81" text-anchor="start" xml:space="preserve">C · Case Summary — /help/case-summary</text>
+<text x="371.8" y="1741.2" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="400" fill="#475569" text-anchor="start" xml:space="preserve">worked out in the web app, on the server; lib/help/case-summary.ts</text>
+<rect x="30.0" y="1912.8" width="2080.0" height="188.1" rx="14" fill="#f5f9ff" stroke="#2563eb" stroke-width="1.6"/>
+<text x="48.0" y="1941.8" font-family="Arial, Helvetica, sans-serif" font-size="15.5" font-weight="700" fill="#1e3a8a" text-anchor="start" xml:space="preserve">D · Check a Loan Offer — /help/check-offer</text>
+<text x="376.8" y="1941.8" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="400" fill="#475569" text-anchor="start" xml:space="preserve">in the browser only — the message is not sent anywhere or saved; lib/finance/offer-check.ts</text>
+<rect x="30.0" y="2120.9" width="2080.0" height="100.0" rx="10" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.2"/>
+<text x="46.0" y="2144.9" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="700" fill="#0f172a" text-anchor="start" xml:space="preserve">How to read this diagram</text>
+<path d="M265.0,280.6 L265.0,306.6" fill="none" stroke="#1e293b" stroke-width="1.7" marker-end="url(#ah-flow)" stroke-linejoin="round"/>
+<path d="M478.0,342.6 L542.0,342.6" fill="none" stroke="#334155" stroke-width="1.7" marker-end="url(#ah-http)" stroke-linejoin="round"/>
+<path d="M780.0,382.4 L780.0,559.2" fill="none" stroke="#1e293b" stroke-width="1.7" marker-end="url(#ah-flow)" stroke-linejoin="round"/>
+<path d="M945.0,621.2 L1622.0,621.2" fill="none" stroke="#475569" stroke-width="1.7" stroke-dasharray="6 4" marker-end="url(#ah-ext)" stroke-linejoin="round"/>
+<path d="M1855.0,654.6 L1855.0,791.2 L930.0,791.2" fill="none" stroke="#64748b" stroke-width="1.7" stroke-dasharray="6 4" marker-end="url(#ah-back)" stroke-linejoin="round"/>
+<path d="M780.0,850.2 L780.0,889.2" fill="none" stroke="#15803d" stroke-width="1.7" marker-end="url(#ah-ok)" stroke-linejoin="round"/>
+<path d="M615.0,621.2 L478.0,621.2" fill="none" stroke="#dc2626" stroke-width="1.7" marker-end="url(#ah-err)" stroke-linejoin="round"/>
+<path d="M630.0,791.2 L478.0,791.2" fill="none" stroke="#dc2626" stroke-width="1.7" marker-end="url(#ah-err)" stroke-linejoin="round"/>
+<path d="M620.0,951.2 L478.0,951.2" fill="none" stroke="#dc2626" stroke-width="1.7" marker-end="url(#ah-err)" stroke-linejoin="round"/>
+<path d="M780.0,1013.2 L780.0,1091.2 L478.0,1091.2" fill="none" stroke="#15803d" stroke-width="1.7" marker-end="url(#ah-ok)" stroke-linejoin="round"/>
+<path d="M265.0,1156.0 L265.0,1196.0" fill="none" stroke="#1e293b" stroke-width="1.7" marker-end="url(#ah-flow)" stroke-linejoin="round"/>
+<path d="M478.0,1227.3 L542.0,1227.3" fill="none" stroke="#334155" stroke-width="1.7" marker-end="url(#ah-http)" stroke-linejoin="round"/>
+<path d="M1018.0,1227.3 L1082.0,1227.3" fill="none" stroke="#334155" stroke-width="1.7" marker-end="url(#ah-http)" stroke-linejoin="round"/>
+<path d="M1320.0,1305.5 L1320.0,1376.1 L478.0,1376.1" fill="none" stroke="#64748b" stroke-width="1.7" stroke-dasharray="6 4" marker-end="url(#ah-back)" stroke-linejoin="round"/>
+<path d="M435.6,1566.7 L463.6,1566.7" fill="none" stroke="#1e293b" stroke-width="1.7" marker-end="url(#ah-flow)" stroke-linejoin="round"/>
+<path d="M849.2,1566.7 L877.2,1566.7" fill="none" stroke="#1e293b" stroke-width="1.7" marker-end="url(#ah-flow)" stroke-linejoin="round"/>
+<path d="M1262.8,1566.7 L1290.8,1566.7" fill="none" stroke="#1e293b" stroke-width="1.7" marker-end="url(#ah-flow)" stroke-linejoin="round"/>
+<path d="M1676.4,1566.7 L1704.4,1566.7" fill="none" stroke="#1e293b" stroke-width="1.7" marker-end="url(#ah-flow)" stroke-linejoin="round"/>
+<path d="M539.0,1802.2 L567.0,1802.2" fill="none" stroke="#1e293b" stroke-width="1.7" marker-end="url(#ah-flow)" stroke-linejoin="round"/>
+<path d="M1056.0,1802.2 L1084.0,1802.2" fill="none" stroke="#1e293b" stroke-width="1.7" marker-end="url(#ah-flow)" stroke-linejoin="round"/>
+<path d="M1573.0,1802.2 L1601.0,1802.2" fill="none" stroke="#1e293b" stroke-width="1.7" marker-end="url(#ah-flow)" stroke-linejoin="round"/>
+<path d="M435.6,2002.8 L463.6,2002.8" fill="none" stroke="#1e293b" stroke-width="1.7" marker-end="url(#ah-flow)" stroke-linejoin="round"/>
+<path d="M849.2,2002.8 L877.2,2002.8" fill="none" stroke="#1e293b" stroke-width="1.7" marker-end="url(#ah-flow)" stroke-linejoin="round"/>
+<path d="M1262.8,2002.8 L1290.8,2002.8" fill="none" stroke="#1e293b" stroke-width="1.7" marker-end="url(#ah-flow)" stroke-linejoin="round"/>
+<path d="M1676.4,2002.8 L1704.4,2002.8" fill="none" stroke="#1e293b" stroke-width="1.7" marker-end="url(#ah-flow)" stroke-linejoin="round"/>
+<rect x="52.0" y="218.0" width="426.0" height="62.6" rx="10" fill="#ffffff" stroke="#2563eb" stroke-width="1.6"/>
+<path d="M52.8,252.5 L52.8,228.3 Q52.8,218.8 62.3,218.8 L467.7,218.8 Q477.2,218.8 477.2,228.3 L477.2,252.5 Z" fill="#dbeafe" stroke="none" stroke-width="0"/>
+<line x1="52.0" y1="252.5" x2="478.0" y2="252.5" stroke="#2563eb" stroke-width="0.8" stroke-opacity="0.55"/>
+<text x="78.0" y="240.8" font-family="Arial, Helvetica, sans-serif" font-size="13.5" font-weight="700" fill="#1e3a8a" text-anchor="start" xml:space="preserve">Write what is wrong</text>
+<text x="62.0" y="273.2" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">On the Get Help page: the message, and the kind of advisor</text>
+<circle cx="53.0" cy="219.0" r="12" fill="#2563eb" stroke="#ffffff" stroke-width="2"/>
+<text x="53.0" y="223.2" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="700" fill="#ffffff" text-anchor="middle" xml:space="preserve">1</text>
+<rect x="52.0" y="306.6" width="426.0" height="204.7" rx="10" fill="#ffffff" stroke="#2563eb" stroke-width="1.6"/>
+<path d="M52.8,341.0 L52.8,316.9 Q52.8,307.4 62.3,307.4 L467.7,307.4 Q477.2,307.4 477.2,316.9 L477.2,341.0 Z" fill="#dbeafe" stroke="none" stroke-width="0"/>
+<line x1="52.0" y1="341.0" x2="478.0" y2="341.0" stroke="#2563eb" stroke-width="0.8" stroke-opacity="0.55"/>
+<text x="78.0" y="329.4" font-family="Arial, Helvetica, sans-serif" font-size="13.5" font-weight="700" fill="#1e3a8a" text-anchor="start" xml:space="preserve">Suggest an advisor at once — keywords, in the browser</text>
+<text x="62.0" y="360.7" font-family="Arial, Helvetica, sans-serif" font-size="10.5" font-weight="400" fill="#475569" text-anchor="start" xml:space="preserve">From 15 characters. The words that decide it:</text>
+<text x="62.0" y="376.5" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="700" fill="#0f172a" text-anchor="start" xml:space="preserve">Legal advisor</text>
+<text x="62.0" y="392.6" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">summons, sheriff, court, judgment, garnishee, section 129, repossession,</text>
+<text x="62.0" y="408.7" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">eviction, attorney</text>
+<text x="62.0" y="424.8" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="700" fill="#0f172a" text-anchor="start" xml:space="preserve">Debt counsellor</text>
+<text x="62.0" y="440.9" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">debt review, can&#x27;t afford or pay, arrears, missed payments, creditors calling,</text>
+<text x="62.0" y="457.0" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">consolidate, blacklisted</text>
+<text x="62.0" y="473.1" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="700" fill="#0f172a" text-anchor="start" xml:space="preserve">Financial advisor</text>
+<text x="62.0" y="489.2" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">budget, saving, investing, retirement, tax, insurance</text>
+<text x="62.0" y="504.3" font-family="Arial, Helvetica, sans-serif" font-size="10.5" font-weight="400" fill="#475569" text-anchor="start" xml:space="preserve">lib/help/triage-keywords.ts</text>
+<circle cx="53.0" cy="307.6" r="12" fill="#2563eb" stroke="#ffffff" stroke-width="2"/>
+<text x="53.0" y="311.8" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="700" fill="#ffffff" text-anchor="middle" xml:space="preserve">2</text>
+<rect x="542.0" y="306.6" width="476.0" height="75.9" rx="10" fill="#ffffff" stroke="#4f46e5" stroke-width="1.6"/>
+<path d="M542.8,341.0 L542.8,316.9 Q542.8,307.4 552.3,307.4 L1007.7,307.4 Q1017.2,307.4 1017.2,316.9 L1017.2,341.0 Z" fill="#e0e7ff" stroke="none" stroke-width="0"/>
+<line x1="542.0" y1="341.0" x2="1018.0" y2="341.0" stroke="#4f46e5" stroke-width="0.8" stroke-opacity="0.55"/>
+<text x="568.0" y="329.4" font-family="Arial, Helvetica, sans-serif" font-size="13.5" font-weight="700" fill="#312e81" text-anchor="start" xml:space="preserve">Refine it — after a 600 ms pause in typing</text>
+<text x="552.0" y="360.7" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="10.5" font-weight="400" fill="#4338ca" text-anchor="start" xml:space="preserve">POST /api/help/triage</text>
+<text x="552.0" y="375.4" font-family="Arial, Helvetica, sans-serif" font-size="10.5" font-weight="400" fill="#475569" text-anchor="start" xml:space="preserve">Answered inside the web app (lib/help/triage.ts); nothing is stored</text>
+<circle cx="543.0" cy="307.6" r="12" fill="#4f46e5" stroke="#ffffff" stroke-width="2"/>
+<text x="543.0" y="311.8" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="700" fill="#ffffff" text-anchor="middle" xml:space="preserve">3</text>
+<polygon points="780.0,559.2 945.0,621.2 780.0,683.2 615.0,621.2" fill="#fefce8" stroke="#ca8a04" stroke-width="1.8"/>
+<text x="780.0" y="617.6" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="700" fill="#713f12" text-anchor="middle" xml:space="preserve">20+ characters, an OpenAI key</text>
+<text x="780.0" y="632.0" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="700" fill="#713f12" text-anchor="middle" xml:space="preserve">set, and not paused?</text>
+<circle cx="674.4" cy="581.6" r="12" fill="#ca8a04" stroke="#ffffff" stroke-width="2"/>
+<text x="674.4" y="585.8" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="700" fill="#ffffff" text-anchor="middle" xml:space="preserve">4</text>
+<rect x="1622.0" y="561.2" width="466.0" height="93.4" rx="10" fill="#ffffff" stroke="#475569" stroke-width="1.6" stroke-dasharray="7 4"/>
+<path d="M1622.8,595.7 L1622.8,571.5 Q1622.8,562.0 1632.3,562.0 L2077.7,562.0 Q2087.2,562.0 2087.2,571.5 L2087.2,595.7 Z" fill="#e2e8f0" stroke="none" stroke-width="0"/>
+<line x1="1622.0" y1="595.7" x2="2088.0" y2="595.7" stroke="#475569" stroke-width="0.8" stroke-opacity="0.55"/>
+<text x="1648.0" y="584.1" font-family="Arial, Helvetica, sans-serif" font-size="13.5" font-weight="700" fill="#1e293b" text-anchor="start" xml:space="preserve">OpenAI — outside FinAware</text>
+<text x="1632.0" y="615.4" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="10.5" font-weight="400" fill="#475569" text-anchor="start" xml:space="preserve">POST /v1/responses  (gpt-4.1-mini)</text>
+<text x="1632.0" y="631.1" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">&quot;Route this South African user&#x27;s request to one of three advisors … Anything with a</text>
+<text x="1632.0" y="647.2" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">legal deadline goes to LEGAL_ADVISOR. Give one short reason, starting with &#x27;you&#x27;.&quot;</text>
+<circle cx="1623.0" cy="562.2" r="12" fill="#475569" stroke="#ffffff" stroke-width="2"/>
+<text x="1623.0" y="566.4" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="700" fill="#ffffff" text-anchor="middle" xml:space="preserve">5</text>
+<polygon points="780.0,732.2 930.0,791.2 780.0,850.2 630.0,791.2" fill="#fefce8" stroke="#ca8a04" stroke-width="1.8"/>
+<text x="780.0" y="780.4" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="700" fill="#713f12" text-anchor="middle" xml:space="preserve">A valid answer — one of the</text>
+<text x="780.0" y="794.8" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="700" fill="#713f12" text-anchor="middle" xml:space="preserve">three advisors, with a</text>
+<text x="780.0" y="809.2" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="700" fill="#713f12" text-anchor="middle" xml:space="preserve">reason?</text>
+<circle cx="684.0" cy="753.5" r="12" fill="#ca8a04" stroke="#ffffff" stroke-width="2"/>
+<text x="684.0" y="757.7" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="700" fill="#ffffff" text-anchor="middle" xml:space="preserve">6</text>
+<polygon points="780.0,889.2 940.0,951.2 780.0,1013.2 620.0,951.2" fill="#fefce8" stroke="#ca8a04" stroke-width="1.8"/>
+<text x="780.0" y="947.6" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="700" fill="#713f12" text-anchor="middle" xml:space="preserve">The keywords found a legal</text>
+<text x="780.0" y="962.0" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="700" fill="#713f12" text-anchor="middle" xml:space="preserve">matter and the model did not?</text>
+<circle cx="677.6" cy="911.6" r="12" fill="#ca8a04" stroke="#ffffff" stroke-width="2"/>
+<text x="677.6" y="915.8" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="700" fill="#ffffff" text-anchor="middle" xml:space="preserve">7</text>
+<rect x="52.0" y="571.2" width="426.0" height="424.0" rx="10" fill="#ffffff" stroke="#d97706" stroke-width="1.6"/>
+<path d="M52.8,605.7 L52.8,581.5 Q52.8,572.0 62.3,572.0 L467.7,572.0 Q477.2,572.0 477.2,581.5 L477.2,605.7 Z" fill="#fef3c7" stroke="none" stroke-width="0"/>
+<line x1="52.0" y1="605.7" x2="478.0" y2="605.7" stroke="#d97706" stroke-width="0.8" stroke-opacity="0.55"/>
+<text x="62.0" y="594.1" font-family="Arial, Helvetica, sans-serif" font-size="13.5" font-weight="700" fill="#78350f" text-anchor="start" xml:space="preserve">The keyword suggestion stays</text>
+<text x="62.0" y="626.4" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">The web app answers with the keywords (source: keywords), so the browser</text>
+<text x="62.0" y="642.5" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">keeps the suggestion from step 2 when:</text>
+<text x="62.0" y="658.6" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">• the message is under 20 characters, there is no OpenAI key, or model calls</text>
+<text x="74.0" y="674.7" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">are paused for 10 minutes after a 401 or out-of-credit reply</text>
+<text x="62.0" y="690.8" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">• the model&#x27;s answer is not one of the three advisors</text>
+<text x="62.0" y="706.9" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">• a legal keyword was found — a summons does not wait for a second opinion</text>
+<rect x="52.0" y="1061.2" width="426.0" height="94.8" rx="10" fill="#ffffff" stroke="#2563eb" stroke-width="1.6"/>
+<path d="M52.8,1095.7 L52.8,1071.5 Q52.8,1062.0 62.3,1062.0 L467.7,1062.0 Q477.2,1062.0 477.2,1071.5 L477.2,1095.7 Z" fill="#dbeafe" stroke="none" stroke-width="0"/>
+<line x1="52.0" y1="1095.7" x2="478.0" y2="1095.7" stroke="#2563eb" stroke-width="0.8" stroke-opacity="0.55"/>
+<text x="78.0" y="1084.1" font-family="Arial, Helvetica, sans-serif" font-size="13.5" font-weight="700" fill="#1e3a8a" text-anchor="start" xml:space="preserve">The model&#x27;s suggestion replaces it</text>
+<text x="62.0" y="1116.4" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">&quot;A Debt Counsellor looks right — you are behind on payments&quot;, with a button to</text>
+<text x="62.0" y="1132.5" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">switch to it</text>
+<text x="62.0" y="1148.6" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="700" fill="#0f172a" text-anchor="start" xml:space="preserve">Either way, the choice stays with the person</text>
+<circle cx="53.0" cy="1062.2" r="12" fill="#2563eb" stroke="#ffffff" stroke-width="2"/>
+<text x="53.0" y="1066.4" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="700" fill="#ffffff" text-anchor="middle" xml:space="preserve">8</text>
+<rect x="52.0" y="1196.0" width="426.0" height="62.6" rx="10" fill="#ffffff" stroke="#2563eb" stroke-width="1.6"/>
+<path d="M52.8,1230.5 L52.8,1206.3 Q52.8,1196.8 62.3,1196.8 L467.7,1196.8 Q477.2,1196.8 477.2,1206.3 L477.2,1230.5 Z" fill="#dbeafe" stroke="none" stroke-width="0"/>
+<line x1="52.0" y1="1230.5" x2="478.0" y2="1230.5" stroke="#2563eb" stroke-width="0.8" stroke-opacity="0.55"/>
+<text x="78.0" y="1218.8" font-family="Arial, Helvetica, sans-serif" font-size="13.5" font-weight="700" fill="#1e3a8a" text-anchor="start" xml:space="preserve">Send it</text>
+<text x="62.0" y="1251.2" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="700" fill="#0f172a" text-anchor="start" xml:space="preserve">[Submit Request]</text>
+<circle cx="53.0" cy="1197.0" r="12" fill="#2563eb" stroke="#ffffff" stroke-width="2"/>
+<text x="53.0" y="1201.2" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="700" fill="#ffffff" text-anchor="middle" xml:space="preserve">9</text>
+<rect x="542.0" y="1196.0" width="476.0" height="61.2" rx="10" fill="#ffffff" stroke="#4f46e5" stroke-width="1.6"/>
+<path d="M542.8,1230.5 L542.8,1206.3 Q542.8,1196.8 552.3,1196.8 L1007.7,1196.8 Q1017.2,1196.8 1017.2,1206.3 L1017.2,1230.5 Z" fill="#e0e7ff" stroke="none" stroke-width="0"/>
+<line x1="542.0" y1="1230.5" x2="1018.0" y2="1230.5" stroke="#4f46e5" stroke-width="0.8" stroke-opacity="0.55"/>
+<text x="568.0" y="1218.8" font-family="Arial, Helvetica, sans-serif" font-size="13.5" font-weight="700" fill="#312e81" text-anchor="start" xml:space="preserve">Help route</text>
+<text x="552.0" y="1250.2" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="10.5" font-weight="400" fill="#4338ca" text-anchor="start" xml:space="preserve">POST /api/microservices/help/requests</text>
+<circle cx="543.0" cy="1197.0" r="12" fill="#4f46e5" stroke="#ffffff" stroke-width="2"/>
+<text x="543.0" y="1201.2" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="700" fill="#ffffff" text-anchor="middle" xml:space="preserve">10</text>
+<rect x="1082.0" y="1196.0" width="476.0" height="109.5" rx="10" fill="#ffffff" stroke="#059669" stroke-width="1.6"/>
+<path d="M1082.8,1230.5 L1082.8,1206.3 Q1082.8,1196.8 1092.3,1196.8 L1547.7,1196.8 Q1557.2,1196.8 1557.2,1206.3 L1557.2,1230.5 Z" fill="#d1fae5" stroke="none" stroke-width="0"/>
+<line x1="1082.0" y1="1230.5" x2="1558.0" y2="1230.5" stroke="#059669" stroke-width="0.8" stroke-opacity="0.55"/>
+<text x="1108.0" y="1218.8" font-family="Arial, Helvetica, sans-serif" font-size="13.5" font-weight="700" fill="#064e3b" text-anchor="start" xml:space="preserve">Help service :4106</text>
+<text x="1092.0" y="1250.2" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="10.5" font-weight="400" fill="#047857" text-anchor="start" xml:space="preserve">POST /help/requests/:userId</text>
+<text x="1092.0" y="1265.9" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">Zod check → INSERT Expert_Requests → look up the advisor&#x27;s number in Providers</text>
+<text x="1092.0" y="1282.0" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">→ a wa.me link with the message typed in: &quot;FinAware Consultation Request · Type ·</text>
+<text x="1104.0" y="1298.1" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">Message&quot;</text>
+<circle cx="1083.0" cy="1197.0" r="12" fill="#059669" stroke="#ffffff" stroke-width="2"/>
+<text x="1083.0" y="1201.2" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="700" fill="#ffffff" text-anchor="middle" xml:space="preserve">11</text>
+<rect x="52.0" y="1345.5" width="426.0" height="61.2" rx="10" fill="#ffffff" stroke="#475569" stroke-width="1.6" stroke-dasharray="7 4"/>
+<path d="M52.8,1380.0 L52.8,1355.8 Q52.8,1346.3 62.3,1346.3 L467.7,1346.3 Q477.2,1346.3 477.2,1355.8 L477.2,1380.0 Z" fill="#e2e8f0" stroke="none" stroke-width="0"/>
+<line x1="52.0" y1="1380.0" x2="478.0" y2="1380.0" stroke="#475569" stroke-width="0.8" stroke-opacity="0.55"/>
+<text x="78.0" y="1368.3" font-family="Arial, Helvetica, sans-serif" font-size="13.5" font-weight="700" fill="#1e293b" text-anchor="start" xml:space="preserve">WhatsApp opens with the message ready</text>
+<text x="62.0" y="1399.7" font-family="Arial, Helvetica, sans-serif" font-size="10.5" font-weight="400" fill="#475569" text-anchor="start" xml:space="preserve">The request is also listed under past requests</text>
+<circle cx="53.0" cy="1346.5" r="12" fill="#475569" stroke="#ffffff" stroke-width="2"/>
+<text x="53.0" y="1350.7" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="700" fill="#ffffff" text-anchor="middle" xml:space="preserve">12</text>
+<rect x="50.0" y="1532.7" width="385.6" height="75.9" rx="10" fill="#ffffff" stroke="#4f46e5" stroke-width="1.6"/>
+<path d="M50.8,1567.1 L50.8,1543.0 Q50.8,1533.5 60.3,1533.5 L425.3,1533.5 Q434.8,1533.5 434.8,1543.0 L434.8,1567.1 Z" fill="#e0e7ff" stroke="none" stroke-width="0"/>
+<line x1="50.0" y1="1567.1" x2="435.6" y2="1567.1" stroke="#4f46e5" stroke-width="0.8" stroke-opacity="0.55"/>
+<text x="76.0" y="1555.5" font-family="Arial, Helvetica, sans-serif" font-size="13.5" font-weight="700" fill="#312e81" text-anchor="start" xml:space="preserve">Gather the facts</text>
+<text x="60.0" y="1586.8" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="10.5" font-weight="400" fill="#c2410c" text-anchor="start" xml:space="preserve">Prisma: Users, Debts (+ payment history), Legal_Records</text>
+<text x="60.0" y="1601.5" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="10.5" font-weight="400" fill="#047857" text-anchor="start" xml:space="preserve">Financial API: GET /financial-profile — living costs</text>
+<circle cx="51.0" cy="1533.7" r="12" fill="#4f46e5" stroke="#ffffff" stroke-width="2"/>
+<text x="51.0" y="1537.9" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="700" fill="#ffffff" text-anchor="middle" xml:space="preserve">B1</text>
+<rect x="463.6" y="1532.7" width="385.6" height="94.8" rx="10" fill="#ffffff" stroke="#4f46e5" stroke-width="1.6"/>
+<path d="M464.4,1567.1 L464.4,1543.0 Q464.4,1533.5 473.9,1533.5 L838.9,1533.5 Q848.4,1533.5 848.4,1543.0 L848.4,1567.1 Z" fill="#e0e7ff" stroke="none" stroke-width="0"/>
+<line x1="463.6" y1="1567.1" x2="849.2" y2="1567.1" stroke="#4f46e5" stroke-width="0.8" stroke-opacity="0.55"/>
+<text x="489.6" y="1555.5" font-family="Arial, Helvetica, sans-serif" font-size="13.5" font-weight="700" fill="#312e81" text-anchor="start" xml:space="preserve">Sort the accounts</text>
+<text x="473.6" y="1587.9" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">Can be included · maybe (e.g. business credit — a counsellor to</text>
+<text x="473.6" y="1604.0" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">confirm) · cannot (e.g. child maintenance). A garnished account stays</text>
+<text x="473.6" y="1620.0" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">in the sums but cannot be restructured.</text>
+<circle cx="464.6" cy="1533.7" r="12" fill="#4f46e5" stroke="#ffffff" stroke-width="2"/>
+<text x="464.6" y="1537.9" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="700" fill="#ffffff" text-anchor="middle" xml:space="preserve">B2</text>
+<rect x="877.2" y="1532.7" width="385.6" height="78.7" rx="10" fill="#ffffff" stroke="#4f46e5" stroke-width="1.6"/>
+<path d="M878.0,1567.1 L878.0,1543.0 Q878.0,1533.5 887.5,1533.5 L1252.5,1533.5 Q1262.0,1533.5 1262.0,1543.0 L1262.0,1567.1 Z" fill="#e0e7ff" stroke="none" stroke-width="0"/>
+<line x1="877.2" y1="1567.1" x2="1262.8" y2="1567.1" stroke="#4f46e5" stroke-width="0.8" stroke-opacity="0.55"/>
+<text x="903.2" y="1555.5" font-family="Arial, Helvetica, sans-serif" font-size="13.5" font-weight="700" fill="#312e81" text-anchor="start" xml:space="preserve">The calculation (National Credit Act s79)</text>
+<text x="887.2" y="1587.9" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">Income − living costs − payments debt review cannot cover = available</text>
+<text x="887.2" y="1604.0" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">Available − repayments it could cover = left over, or short, every month</text>
+<circle cx="878.2" cy="1533.7" r="12" fill="#4f46e5" stroke="#ffffff" stroke-width="2"/>
+<text x="878.2" y="1537.9" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="700" fill="#ffffff" text-anchor="middle" xml:space="preserve">B3</text>
+<rect x="1290.8" y="1532.7" width="385.6" height="125.6" rx="10" fill="#ffffff" stroke="#ca8a04" stroke-width="1.6"/>
+<path d="M1291.6,1567.1 L1291.6,1543.0 Q1291.6,1533.5 1301.1,1533.5 L1666.1,1533.5 Q1675.6,1533.5 1675.6,1543.0 L1675.6,1567.1 Z" fill="#fef9c3" stroke="none" stroke-width="0"/>
+<line x1="1290.8" y1="1567.1" x2="1676.4" y2="1567.1" stroke="#ca8a04" stroke-width="0.8" stroke-opacity="0.55"/>
+<text x="1316.8" y="1555.5" font-family="Arial, Helvetica, sans-serif" font-size="13.5" font-weight="700" fill="#713f12" text-anchor="start" xml:space="preserve">The verdict</text>
+<text x="1300.8" y="1587.9" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="700" fill="#0f172a" text-anchor="start" xml:space="preserve">Likely — short every month</text>
+<text x="1300.8" y="1604.0" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="700" fill="#0f172a" text-anchor="start" xml:space="preserve">Possible — left over under 10% of income (under 25% with missed</text>
+<text x="1300.8" y="1620.0" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="700" fill="#0f172a" text-anchor="start" xml:space="preserve">payments)</text>
+<text x="1300.8" y="1636.1" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="700" fill="#0f172a" text-anchor="start" xml:space="preserve">Unlikely — enough left over, or nothing it could restructure</text>
+<text x="1300.8" y="1651.2" font-family="Arial, Helvetica, sans-serif" font-size="10.5" font-weight="400" fill="#475569" text-anchor="start" xml:space="preserve">Not suitable — no income · Need more information — living costs not given</text>
+<circle cx="1291.8" cy="1533.7" r="12" fill="#ca8a04" stroke="#ffffff" stroke-width="2"/>
+<text x="1291.8" y="1537.9" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="700" fill="#ffffff" text-anchor="middle" xml:space="preserve">B4</text>
+<rect x="1704.4" y="1532.7" width="385.6" height="124.2" rx="10" fill="#ffffff" stroke="#2563eb" stroke-width="1.6"/>
+<path d="M1705.2,1567.1 L1705.2,1543.0 Q1705.2,1533.5 1714.7,1533.5 L2079.7,1533.5 Q2089.2,1533.5 2089.2,1543.0 L2089.2,1567.1 Z" fill="#dbeafe" stroke="none" stroke-width="0"/>
+<line x1="1704.4" y1="1567.1" x2="2090.0" y2="1567.1" stroke="#2563eb" stroke-width="0.8" stroke-opacity="0.55"/>
+<text x="1730.4" y="1555.5" font-family="Arial, Helvetica, sans-serif" font-size="13.5" font-weight="700" fill="#1e3a8a" text-anchor="start" xml:space="preserve">Shown with the working</text>
+<text x="1714.4" y="1587.9" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">Legal warnings for a summons, judgment or garnishee</text>
+<text x="1714.4" y="1604.0" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="700" fill="#0f172a" text-anchor="start" xml:space="preserve">[Prepare a case summary] · [See your Money Plan] · [Add your</text>
+<text x="1714.4" y="1620.0" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="700" fill="#0f172a" text-anchor="start" xml:space="preserve">living costs]</text>
+<text x="1714.4" y="1635.1" font-family="Arial, Helvetica, sans-serif" font-size="10.5" font-weight="400" fill="#475569" text-anchor="start" xml:space="preserve">A screen, not an assessment — only a registered debt counsellor can declare</text>
+<text x="1714.4" y="1649.8" font-family="Arial, Helvetica, sans-serif" font-size="10.5" font-weight="400" fill="#475569" text-anchor="start" xml:space="preserve">someone over-indebted</text>
+<circle cx="1705.4" cy="1533.7" r="12" fill="#2563eb" stroke="#ffffff" stroke-width="2"/>
+<text x="1705.4" y="1537.9" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="700" fill="#ffffff" text-anchor="middle" xml:space="preserve">B5</text>
+<rect x="50.0" y="1768.2" width="489.0" height="90.6" rx="10" fill="#ffffff" stroke="#4f46e5" stroke-width="1.6"/>
+<path d="M50.8,1802.7 L50.8,1778.5 Q50.8,1769.0 60.3,1769.0 L528.7,1769.0 Q538.2,1769.0 538.2,1778.5 L538.2,1802.7 Z" fill="#e0e7ff" stroke="none" stroke-width="0"/>
+<line x1="50.0" y1="1802.7" x2="539.0" y2="1802.7" stroke="#4f46e5" stroke-width="0.8" stroke-opacity="0.55"/>
+<text x="76.0" y="1791.0" font-family="Arial, Helvetica, sans-serif" font-size="13.5" font-weight="700" fill="#312e81" text-anchor="start" xml:space="preserve">Gather the facts</text>
+<text x="60.0" y="1822.4" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="10.5" font-weight="400" fill="#c2410c" text-anchor="start" xml:space="preserve">Prisma: Users, Debts, Legal_Records</text>
+<text x="60.0" y="1837.1" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="10.5" font-weight="400" fill="#047857" text-anchor="start" xml:space="preserve">Financial API: profile, latest assessment</text>
+<text x="60.0" y="1851.8" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="10.5" font-weight="400" fill="#047857" text-anchor="start" xml:space="preserve">Help service: past requests</text>
+<circle cx="51.0" cy="1769.2" r="12" fill="#4f46e5" stroke="#ffffff" stroke-width="2"/>
+<text x="51.0" y="1773.4" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="700" fill="#ffffff" text-anchor="middle" xml:space="preserve">C1</text>
+<rect x="567.0" y="1768.2" width="489.0" height="77.3" rx="10" fill="#ffffff" stroke="#4f46e5" stroke-width="1.6"/>
+<path d="M567.8,1802.7 L567.8,1778.5 Q567.8,1769.0 577.3,1769.0 L1045.7,1769.0 Q1055.2,1769.0 1055.2,1778.5 L1055.2,1802.7 Z" fill="#e0e7ff" stroke="none" stroke-width="0"/>
+<line x1="567.0" y1="1802.7" x2="1056.0" y2="1802.7" stroke="#4f46e5" stroke-width="0.8" stroke-opacity="0.55"/>
+<text x="593.0" y="1791.0" font-family="Arial, Helvetica, sans-serif" font-size="13.5" font-weight="700" fill="#312e81" text-anchor="start" xml:space="preserve">Build the summary</text>
+<text x="577.0" y="1823.4" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">What needs attention first, the accounts, the figures, and the Debt Review screen</text>
+<text x="577.0" y="1838.5" font-family="Arial, Helvetica, sans-serif" font-size="10.5" font-weight="400" fill="#475569" text-anchor="start" xml:space="preserve">Every figure is worked out by FinAware</text>
+<circle cx="568.0" cy="1769.2" r="12" fill="#4f46e5" stroke="#ffffff" stroke-width="2"/>
+<text x="568.0" y="1773.4" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="700" fill="#ffffff" text-anchor="middle" xml:space="preserve">C2</text>
+<rect x="1084.0" y="1768.2" width="489.0" height="77.3" rx="10" fill="#ffffff" stroke="#475569" stroke-width="1.6" stroke-dasharray="7 4"/>
+<path d="M1084.8,1802.7 L1084.8,1778.5 Q1084.8,1769.0 1094.3,1769.0 L1562.7,1769.0 Q1572.2,1769.0 1572.2,1778.5 L1572.2,1802.7 Z" fill="#e2e8f0" stroke="none" stroke-width="0"/>
+<line x1="1084.0" y1="1802.7" x2="1573.0" y2="1802.7" stroke="#475569" stroke-width="0.8" stroke-opacity="0.55"/>
+<text x="1110.0" y="1791.0" font-family="Arial, Helvetica, sans-serif" font-size="13.5" font-weight="700" fill="#1e293b" text-anchor="start" xml:space="preserve">Reword it — optional</text>
+<text x="1094.0" y="1822.4" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="10.5" font-weight="400" fill="#475569" text-anchor="start" xml:space="preserve">OpenAI  POST /v1/responses</text>
+<text x="1094.0" y="1838.1" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">Kept only if every rand amount in it is one FinAware worked out (the figures guardrail)</text>
+<circle cx="1085.0" cy="1769.2" r="12" fill="#475569" stroke="#ffffff" stroke-width="2"/>
+<text x="1085.0" y="1773.4" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="700" fill="#ffffff" text-anchor="middle" xml:space="preserve">C3</text>
+<rect x="1601.0" y="1768.2" width="489.0" height="77.3" rx="10" fill="#ffffff" stroke="#2563eb" stroke-width="1.6"/>
+<path d="M1601.8,1802.7 L1601.8,1778.5 Q1601.8,1769.0 1611.3,1769.0 L2079.7,1769.0 Q2089.2,1769.0 2089.2,1778.5 L2089.2,1802.7 Z" fill="#dbeafe" stroke="none" stroke-width="0"/>
+<line x1="1601.0" y1="1802.7" x2="2090.0" y2="1802.7" stroke="#2563eb" stroke-width="0.8" stroke-opacity="0.55"/>
+<text x="1627.0" y="1791.0" font-family="Arial, Helvetica, sans-serif" font-size="13.5" font-weight="700" fill="#1e3a8a" text-anchor="start" xml:space="preserve">A one-page summary for an advisor</text>
+<text x="1611.0" y="1823.4" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="700" fill="#0f172a" text-anchor="start" xml:space="preserve">[Print] · [Download as text] · copy</text>
+<text x="1611.0" y="1838.5" font-family="Arial, Helvetica, sans-serif" font-size="10.5" font-weight="400" fill="#475569" text-anchor="start" xml:space="preserve">Without OpenAI the calculated summary is shown as it is</text>
+<circle cx="1602.0" cy="1769.2" r="12" fill="#2563eb" stroke="#ffffff" stroke-width="2"/>
+<text x="1602.0" y="1773.4" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="700" fill="#ffffff" text-anchor="middle" xml:space="preserve">C4</text>
+<rect x="50.0" y="1968.8" width="385.6" height="78.7" rx="10" fill="#ffffff" stroke="#2563eb" stroke-width="1.6"/>
+<path d="M50.8,2003.3 L50.8,1979.1 Q50.8,1969.6 60.3,1969.6 L425.3,1969.6 Q434.8,1969.6 434.8,1979.1 L434.8,2003.3 Z" fill="#dbeafe" stroke="none" stroke-width="0"/>
+<line x1="50.0" y1="2003.3" x2="435.6" y2="2003.3" stroke="#2563eb" stroke-width="0.8" stroke-opacity="0.55"/>
+<text x="76.0" y="1991.6" font-family="Arial, Helvetica, sans-serif" font-size="13.5" font-weight="700" fill="#1e3a8a" text-anchor="start" xml:space="preserve">Paste the offer</text>
+<text x="60.0" y="2024.0" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">An SMS, a WhatsApp message or an offer — or try an example such</text>
+<text x="60.0" y="2040.1" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">as &quot;Loan-shark SMS&quot;</text>
+<circle cx="51.0" cy="1969.8" r="12" fill="#2563eb" stroke="#ffffff" stroke-width="2"/>
+<text x="51.0" y="1974.0" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="700" fill="#ffffff" text-anchor="middle" xml:space="preserve">D1</text>
+<rect x="463.6" y="1968.8" width="385.6" height="78.7" rx="10" fill="#ffffff" stroke="#2563eb" stroke-width="1.6"/>
+<path d="M464.4,2003.3 L464.4,1979.1 Q464.4,1969.6 473.9,1969.6 L838.9,1969.6 Q848.4,1969.6 848.4,1979.1 L848.4,2003.3 Z" fill="#dbeafe" stroke="none" stroke-width="0"/>
+<line x1="463.6" y1="2003.3" x2="849.2" y2="2003.3" stroke="#2563eb" stroke-width="0.8" stroke-opacity="0.55"/>
+<text x="489.6" y="1991.6" font-family="Arial, Helvetica, sans-serif" font-size="13.5" font-weight="700" fill="#1e3a8a" text-anchor="start" xml:space="preserve">Read it</text>
+<text x="473.6" y="2024.0" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">Amount, interest rate, term, fees, and an NCR registration number</text>
+<text x="473.6" y="2040.1" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">(NCRCP…)</text>
+<circle cx="464.6" cy="1969.8" r="12" fill="#2563eb" stroke="#ffffff" stroke-width="2"/>
+<text x="464.6" y="1974.0" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="700" fill="#ffffff" text-anchor="middle" xml:space="preserve">D2</text>
+<rect x="877.2" y="1968.8" width="385.6" height="108.1" rx="10" fill="#ffffff" stroke="#2563eb" stroke-width="1.6"/>
+<path d="M878.0,2003.3 L878.0,1979.1 Q878.0,1969.6 887.5,1969.6 L1252.5,1969.6 Q1262.0,1969.6 1262.0,1979.1 L1262.0,2003.3 Z" fill="#dbeafe" stroke="none" stroke-width="0"/>
+<line x1="877.2" y1="2003.3" x2="1262.8" y2="2003.3" stroke="#2563eb" stroke-width="0.8" stroke-opacity="0.55"/>
+<text x="903.2" y="1991.6" font-family="Arial, Helvetica, sans-serif" font-size="13.5" font-weight="700" fill="#1e3a8a" text-anchor="start" xml:space="preserve">Look for warning signs</text>
+<text x="887.2" y="2023.5" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="700" fill="#b91c1c" text-anchor="start" xml:space="preserve">Scam signs: money before paying out · keeps your ID or bank card ·</text>
+<text x="887.2" y="2038.9" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="700" fill="#b91c1c" text-anchor="start" xml:space="preserve">asks for a PIN or one-time code · pay by voucher, e-wallet or airtime</text>
+<text x="887.2" y="2054.3" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="700" fill="#b45309" text-anchor="start" xml:space="preserve">Cautions: no credit check · pressure to act now · WhatsApp or</text>
+<text x="887.2" y="2069.7" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="700" fill="#b45309" text-anchor="start" xml:space="preserve">personal email · threats</text>
+<circle cx="878.2" cy="1969.8" r="12" fill="#2563eb" stroke="#ffffff" stroke-width="2"/>
+<text x="878.2" y="1974.0" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="700" fill="#ffffff" text-anchor="middle" xml:space="preserve">D3</text>
+<rect x="1290.8" y="1968.8" width="385.6" height="94.8" rx="10" fill="#ffffff" stroke="#2563eb" stroke-width="1.6"/>
+<path d="M1291.6,2003.3 L1291.6,1979.1 Q1291.6,1969.6 1301.1,1969.6 L1666.1,1969.6 Q1675.6,1969.6 1675.6,1979.1 L1675.6,2003.3 Z" fill="#dbeafe" stroke="none" stroke-width="0"/>
+<line x1="1290.8" y1="2003.3" x2="1676.4" y2="2003.3" stroke="#2563eb" stroke-width="0.8" stroke-opacity="0.55"/>
+<text x="1316.8" y="1991.6" font-family="Arial, Helvetica, sans-serif" font-size="13.5" font-weight="700" fill="#1e3a8a" text-anchor="start" xml:space="preserve">Cost against the law</text>
+<text x="1300.8" y="2024.0" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">The most a registered lender may charge for the same amount and</text>
+<text x="1300.8" y="2040.1" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">term: interest at the cap for the credit type (tied to the repo rate), plus</text>
+<text x="1300.8" y="2056.2" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">the maximum initiation and service fees, with VAT</text>
+<circle cx="1291.8" cy="1969.8" r="12" fill="#2563eb" stroke="#ffffff" stroke-width="2"/>
+<text x="1291.8" y="1974.0" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="700" fill="#ffffff" text-anchor="middle" xml:space="preserve">D4</text>
+<rect x="1704.4" y="1968.8" width="385.6" height="107.4" rx="10" fill="#ffffff" stroke="#ca8a04" stroke-width="1.6"/>
+<path d="M1705.2,2003.3 L1705.2,1979.1 Q1705.2,1969.6 1714.7,1969.6 L2079.7,1969.6 Q2089.2,1969.6 2089.2,1979.1 L2089.2,2003.3 Z" fill="#fef9c3" stroke="none" stroke-width="0"/>
+<line x1="1704.4" y1="2003.3" x2="2090.0" y2="2003.3" stroke="#ca8a04" stroke-width="0.8" stroke-opacity="0.55"/>
+<text x="1730.4" y="1991.6" font-family="Arial, Helvetica, sans-serif" font-size="13.5" font-weight="700" fill="#713f12" text-anchor="start" xml:space="preserve">The verdict</text>
+<text x="1714.4" y="2023.5" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="700" fill="#b91c1c" text-anchor="start" xml:space="preserve">Scam signs found</text>
+<text x="1714.4" y="2038.9" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="700" fill="#b91c1c" text-anchor="start" xml:space="preserve">Costs more than every legal charge added together</text>
+<text x="1714.4" y="2054.3" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="700" fill="#b45309" text-anchor="start" xml:space="preserve">Caution — a warning sign or no NCR number</text>
+<text x="1714.4" y="2069.2" font-family="Arial, Helvetica, sans-serif" font-size="10.5" font-weight="400" fill="#475569" text-anchor="start" xml:space="preserve">Need more information · No warning signs found</text>
+<circle cx="1705.4" cy="1969.8" r="12" fill="#ca8a04" stroke="#ffffff" stroke-width="2"/>
+<text x="1705.4" y="1974.0" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="700" fill="#ffffff" text-anchor="middle" xml:space="preserve">D5</text>
+<rect x="40.0" y="176.0" width="213.6" height="26.0" rx="6" fill="#ffffff" stroke="#94a3b8" stroke-width="0.8"/>
+<text x="48.0" y="194.0" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="700" fill="#334155" text-anchor="start" xml:space="preserve">A · Asking an advisor for help</text>
+<rect x="1267.7" y="610.9" width="31.6" height="20.8" rx="5" fill="#ffffff" fill-opacity="0.97" stroke="#475569" stroke-opacity="0.35" stroke-width="0.8"/>
+<text x="1283.5" y="625.5" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="700" fill="#475569" text-anchor="middle" xml:space="preserve">Yes</text>
+<rect x="1337.2" y="774.0" width="110.5" height="34.5" rx="5" fill="#ffffff" fill-opacity="0.97" stroke="#64748b" stroke-opacity="0.35" stroke-width="0.8"/>
+<text x="1392.5" y="788.7" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="700" fill="#64748b" text-anchor="middle" xml:space="preserve">the model&#x27;s choice</text>
+<text x="1392.5" y="802.4" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="700" fill="#64748b" text-anchor="middle" xml:space="preserve">and reason</text>
+<rect x="764.2" y="859.4" width="31.6" height="20.8" rx="5" fill="#ffffff" fill-opacity="0.97" stroke="#15803d" stroke-opacity="0.35" stroke-width="0.8"/>
+<text x="780.0" y="874.0" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="700" fill="#15803d" text-anchor="middle" xml:space="preserve">Yes</text>
+<rect x="533.1" y="610.9" width="26.8" height="20.8" rx="5" fill="#ffffff" fill-opacity="0.97" stroke="#dc2626" stroke-opacity="0.35" stroke-width="0.8"/>
+<text x="546.5" y="625.5" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="700" fill="#dc2626" text-anchor="middle" xml:space="preserve">No</text>
+<rect x="540.6" y="780.9" width="26.8" height="20.8" rx="5" fill="#ffffff" fill-opacity="0.97" stroke="#dc2626" stroke-opacity="0.35" stroke-width="0.8"/>
+<text x="554.0" y="795.5" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="700" fill="#dc2626" text-anchor="middle" xml:space="preserve">No</text>
+<rect x="533.2" y="940.9" width="31.6" height="20.8" rx="5" fill="#ffffff" fill-opacity="0.97" stroke="#dc2626" stroke-opacity="0.35" stroke-width="0.8"/>
+<text x="549.0" y="955.5" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="700" fill="#dc2626" text-anchor="middle" xml:space="preserve">Yes</text>
+<rect x="504.2" y="1080.9" width="249.6" height="20.8" rx="5" fill="#ffffff" fill-opacity="0.97" stroke="#15803d" stroke-opacity="0.35" stroke-width="0.8"/>
+<text x="629.0" y="1095.5" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="700" fill="#15803d" text-anchor="middle" xml:space="preserve">No — use the model&#x27;s choice (source: model)</text>
+<rect x="838.0" y="1365.7" width="122.0" height="20.8" rx="5" fill="#ffffff" fill-opacity="0.97" stroke="#64748b" stroke-opacity="0.35" stroke-width="0.8"/>
+<text x="899.0" y="1380.4" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="700" fill="#64748b" text-anchor="middle" xml:space="preserve">the request + the link</text>
+<circle cx="63.0" cy="2170.9" r="12" fill="#1e293b" stroke="#ffffff" stroke-width="2"/>
+<text x="63.0" y="2175.1" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="700" fill="#ffffff" text-anchor="middle" xml:space="preserve">1</text>
+<text x="90.0" y="2175.4" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#1e293b" text-anchor="start" xml:space="preserve">Step</text>
+<polygon points="472.6,2160.86 489.6,2170.86 472.6,2180.86 455.6,2170.86" fill="#fefce8" stroke="#ca8a04" stroke-width="1.4"/>
+<text x="499.6" y="2175.4" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#1e293b" text-anchor="start" xml:space="preserve">Decision</text>
+<rect x="865.2" y="2160.9" width="34.0" height="20.0" rx="5" fill="#fef3c7" stroke="#d97706" stroke-width="1.4"/>
+<text x="909.2" y="2175.4" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#1e293b" text-anchor="start" xml:space="preserve">The keyword suggestion kept</text>
+<rect x="1274.8" y="2160.9" width="34.0" height="20.0" rx="5" fill="#e2e8f0" stroke="#475569" stroke-width="1.4" stroke-dasharray="7 4"/>
+<text x="1318.8" y="2175.4" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#1e293b" text-anchor="start" xml:space="preserve">Outside FinAware (optional)</text>
+<path d="M1684.4,2170.9 L1718.4,2170.9" stroke="#334155" stroke-width="1.8" marker-end="url(#ah-http)"/>
+<text x="1728.4" y="2175.4" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#1e293b" text-anchor="start" xml:space="preserve">Request or next step</text>
+<path d="M46.0,2200.9 L80.0,2200.9" stroke="#64748b" stroke-width="1.8" stroke-dasharray="6 4" marker-end="url(#ah-back)"/>
+<text x="90.0" y="2205.4" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#1e293b" text-anchor="start" xml:space="preserve">Answer</text>
+<path d="M455.6,2200.9 L489.6,2200.9" stroke="#15803d" stroke-width="1.8" marker-end="url(#ah-ok)"/>
+<text x="499.6" y="2205.4" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#1e293b" text-anchor="start" xml:space="preserve">Yes</text>
+<path d="M865.2,2200.9 L899.2,2200.9" stroke="#dc2626" stroke-width="1.8" marker-end="url(#ah-err)"/>
+<text x="909.2" y="2205.4" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#1e293b" text-anchor="start" xml:space="preserve">No</text>
+<path d="M1274.8,2200.9 L1308.8,2200.9" stroke="#475569" stroke-width="1.8" stroke-dasharray="6 4" marker-end="url(#ah-ext)"/>
+<text x="1318.8" y="2205.4" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#1e293b" text-anchor="start" xml:space="preserve">Optional call to OpenAI</text>
+<text x="1070.0" y="2248.0" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="400" fill="#94a3b8" text-anchor="middle" xml:space="preserve">FinAware · Flow: Get Help · drawn from the code · updated 29 September 2026</text>
+</svg>

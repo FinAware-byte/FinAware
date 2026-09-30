@@ -48,3 +48,8 @@ docs/*Implementation_Plan*
 plans/
 *.plan.md
 PLAN.md
+
+# Helper scripts that draw the diagrams: tools for making documents, not part of the application.
+# The diagrams they produce (docs/diagrams/svg, png, pdf and README.md) stay tracked.
+docs/diagrams/*.py
+docs/ml/diagrams/

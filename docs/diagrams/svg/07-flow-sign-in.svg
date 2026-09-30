@@ -1,0 +1,274 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1960" height="2199" viewBox="0 0 1960 2199">
+<title>FinAware — Flow: Log In, Join and FICA Verification</title>
+<defs><marker id="ah-back" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" markerUnits="userSpaceOnUse" orient="auto"><path d="M0,0.5 L10,5 L0,9.5 Z" fill="#64748b"/></marker><marker id="ah-back-start" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="9" markerHeight="9" markerUnits="userSpaceOnUse" orient="auto"><path d="M10,0.5 L0,5 L10,9.5 Z" fill="#64748b"/></marker><marker id="ah-data" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" markerUnits="userSpaceOnUse" orient="auto"><path d="M0,0.5 L10,5 L0,9.5 Z" fill="#c2410c"/></marker><marker id="ah-data-start" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="9" markerHeight="9" markerUnits="userSpaceOnUse" orient="auto"><path d="M10,0.5 L0,5 L10,9.5 Z" fill="#c2410c"/></marker><marker id="ah-err" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" markerUnits="userSpaceOnUse" orient="auto"><path d="M0,0.5 L10,5 L0,9.5 Z" fill="#dc2626"/></marker><marker id="ah-err-start" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="9" markerHeight="9" markerUnits="userSpaceOnUse" orient="auto"><path d="M10,0.5 L0,5 L10,9.5 Z" fill="#dc2626"/></marker><marker id="ah-flow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" markerUnits="userSpaceOnUse" orient="auto"><path d="M0,0.5 L10,5 L0,9.5 Z" fill="#1e293b"/></marker><marker id="ah-flow-start" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="9" markerHeight="9" markerUnits="userSpaceOnUse" orient="auto"><path d="M10,0.5 L0,5 L10,9.5 Z" fill="#1e293b"/></marker><marker id="ah-http" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" markerUnits="userSpaceOnUse" orient="auto"><path d="M0,0.5 L10,5 L0,9.5 Z" fill="#334155"/></marker><marker id="ah-http-start" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="9" markerHeight="9" markerUnits="userSpaceOnUse" orient="auto"><path d="M10,0.5 L0,5 L10,9.5 Z" fill="#334155"/></marker><marker id="ah-ok" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" markerUnits="userSpaceOnUse" orient="auto"><path d="M0,0.5 L10,5 L0,9.5 Z" fill="#15803d"/></marker><marker id="ah-ok-start" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="9" markerHeight="9" markerUnits="userSpaceOnUse" orient="auto"><path d="M10,0.5 L0,5 L10,9.5 Z" fill="#15803d"/></marker></defs>
+<rect width="1960" height="2199" fill="#ffffff"/>
+<text x="980.0" y="44.0" font-family="Arial, Helvetica, sans-serif" font-size="27" font-weight="700" fill="#0f172a" text-anchor="middle" xml:space="preserve">FinAware — Flow: Log In, Join and FICA Verification</text>
+<text x="980.0" y="70.0" font-family="Arial, Helvetica, sans-serif" font-size="13.5" font-weight="400" fill="#475569" text-anchor="middle" xml:space="preserve">Step by step, from the login form to the dashboard. Each column is the part of the system doing the work; numbered circles give the order, diamonds are decisions, red boxes are what the person sees when something is refused.</text>
+<rect x="30.0" y="110.0" width="440.0" height="1925.2" rx="12" fill="#f5f9ff" stroke="#2563eb" stroke-width="1.4"/>
+<path d="M30.0,146.0 L30.0,122.0 Q30.0,110.0 42.0,110.0 L458.0,110.0 Q470.0,110.0 470.0,122.0 L470.0,146.0 Z" fill="#dbeafe" stroke="#2563eb" stroke-width="1.4"/>
+<text x="250.0" y="133.0" font-family="Arial, Helvetica, sans-serif" font-size="14.5" font-weight="700" fill="#1e3a8a" text-anchor="middle" xml:space="preserve">Browser — what the person does</text>
+<rect x="490.0" y="110.0" width="470.0" height="1925.2" rx="12" fill="#f7f7ff" stroke="#4f46e5" stroke-width="1.4"/>
+<path d="M490.0,146.0 L490.0,122.0 Q490.0,110.0 502.0,110.0 L948.0,110.0 Q960.0,110.0 960.0,122.0 L960.0,146.0 Z" fill="#e0e7ff" stroke="#4f46e5" stroke-width="1.4"/>
+<text x="725.0" y="133.0" font-family="Arial, Helvetica, sans-serif" font-size="14.5" font-weight="700" fill="#312e81" text-anchor="middle" xml:space="preserve">Web app — Next.js :30005</text>
+<rect x="980.0" y="110.0" width="620.0" height="1925.2" rx="12" fill="#f3fcf8" stroke="#059669" stroke-width="1.4"/>
+<path d="M980.0,146.0 L980.0,122.0 Q980.0,110.0 992.0,110.0 L1588.0,110.0 Q1600.0,110.0 1600.0,122.0 L1600.0,146.0 Z" fill="#d1fae5" stroke="#059669" stroke-width="1.4"/>
+<text x="1290.0" y="133.0" font-family="Arial, Helvetica, sans-serif" font-size="14.5" font-weight="700" fill="#064e3b" text-anchor="middle" xml:space="preserve">Auth service :4101</text>
+<rect x="1620.0" y="110.0" width="310.0" height="1925.2" rx="12" fill="#fffaf5" stroke="#ea580c" stroke-width="1.4"/>
+<path d="M1620.0,146.0 L1620.0,122.0 Q1620.0,110.0 1632.0,110.0 L1918.0,110.0 Q1930.0,110.0 1930.0,122.0 L1930.0,146.0 Z" fill="#ffedd5" stroke="#ea580c" stroke-width="1.4"/>
+<text x="1775.0" y="133.0" font-family="Arial, Helvetica, sans-serif" font-size="14.5" font-weight="700" fill="#7c2d12" text-anchor="middle" xml:space="preserve">Database</text>
+<rect x="30.0" y="2055.2" width="1900.0" height="100.0" rx="10" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.2"/>
+<text x="46.0" y="2079.2" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="700" fill="#0f172a" text-anchor="start" xml:space="preserve">How to read this diagram</text>
+<path d="M250.0,214.0 L250.0,240.0" fill="none" stroke="#1e293b" stroke-width="1.7" marker-end="url(#ah-flow)" stroke-linejoin="round"/>
+<path d="M440.0,290.0 L520.0,290.0" fill="none" stroke="#334155" stroke-width="1.7" marker-end="url(#ah-http)" stroke-linejoin="round"/>
+<path d="M930.0,290.0 L1170.0,290.0" fill="none" stroke="#334155" stroke-width="1.7" marker-end="url(#ah-http)" stroke-linejoin="round"/>
+<path d="M1170.0,290.0 L1137.5,290.0 L1137.5,410.0" fill="none" stroke="#1e293b" stroke-width="1.7" marker-end="url(#ah-flow)" stroke-linejoin="round"/>
+<path d="M1410.0,290.0 L1455.0,290.0 L1455.0,410.0" fill="none" stroke="#1e293b" stroke-width="1.7" marker-end="url(#ah-flow)" stroke-linejoin="round"/>
+<path d="M1137.5,487.3 L1137.5,550.8" fill="none" stroke="#1e293b" stroke-width="1.7" marker-end="url(#ah-flow)" stroke-linejoin="round"/>
+<path d="M1455.0,518.8 L1455.0,548.8" fill="none" stroke="#1e293b" stroke-width="1.7" marker-end="url(#ah-flow)" stroke-linejoin="round"/>
+<path d="M1037.5,598.8 L440.0,598.8" fill="none" stroke="#dc2626" stroke-width="1.7" marker-end="url(#ah-err)" stroke-linejoin="round"/>
+<path d="M1455.0,648.8 L1455.0,708.8" fill="none" stroke="#1e293b" stroke-width="1.7" marker-end="url(#ah-flow)" stroke-linejoin="round"/>
+<path d="M1600.0,748.8 L1640.0,748.8" fill="none" stroke="#c2410c" stroke-width="1.7" marker-end="url(#ah-data)" stroke-linejoin="round"/>
+<path d="M1137.5,646.8 L1137.5,934.4" fill="none" stroke="#15803d" stroke-width="1.7" marker-end="url(#ah-ok)" stroke-linejoin="round"/>
+<path d="M1345.0,598.8 L1280.0,598.8 L1280.0,934.4" fill="none" stroke="#15803d" stroke-width="1.7" marker-end="url(#ah-ok)" stroke-linejoin="round"/>
+<path d="M1455.0,884.4 L1455.0,934.4" fill="none" stroke="#15803d" stroke-width="1.7" marker-end="url(#ah-ok)" stroke-linejoin="round"/>
+<path d="M1000.0,964.4 L930.0,964.4" fill="none" stroke="#64748b" stroke-width="1.7" stroke-dasharray="6 4" marker-end="url(#ah-back)" stroke-linejoin="round"/>
+<path d="M602.0,1029.2 L602.0,1086.3 L440.0,1086.3" fill="none" stroke="#64748b" stroke-width="1.7" stroke-dasharray="6 4" marker-end="url(#ah-back)" stroke-linejoin="round"/>
+<path d="M440.0,1115.1 L725.0,1115.1 L725.0,1167.2" fill="none" stroke="#334155" stroke-width="1.7" marker-end="url(#ah-http)" stroke-linejoin="round"/>
+<path d="M595.0,1219.2 L440.0,1219.2" fill="none" stroke="#dc2626" stroke-width="1.7" marker-end="url(#ah-err)" stroke-linejoin="round"/>
+<path d="M725.0,1271.2 L725.0,1330.2" fill="none" stroke="#15803d" stroke-width="1.7" marker-end="url(#ah-ok)" stroke-linejoin="round"/>
+<path d="M870.0,1389.2 L1120.0,1389.2" fill="none" stroke="#15803d" stroke-width="1.7" marker-end="url(#ah-ok)" stroke-linejoin="round"/>
+<path d="M725.0,1448.2 L725.0,1469.2 L250.0,1469.2 L250.0,1489.2" fill="none" stroke="#1e293b" stroke-width="1.7" marker-end="url(#ah-flow)" stroke-linejoin="round"/>
+<path d="M440.0,1533.2 L520.0,1533.2" fill="none" stroke="#334155" stroke-width="1.7" marker-end="url(#ah-http)" stroke-linejoin="round"/>
+<path d="M725.0,1582.5 L725.0,1635.0" fill="none" stroke="#1e293b" stroke-width="1.7" marker-end="url(#ah-flow)" stroke-linejoin="round"/>
+<path d="M590.0,1690.0 L440.0,1690.0" fill="none" stroke="#dc2626" stroke-width="1.7" marker-end="url(#ah-err)" stroke-linejoin="round"/>
+<path d="M860.0,1690.0 L1010.0,1690.0" fill="none" stroke="#15803d" stroke-width="1.7" marker-end="url(#ah-ok)" stroke-linejoin="round"/>
+<path d="M1570.0,1690.0 L1640.0,1690.0" fill="none" stroke="#c2410c" stroke-width="1.7" marker-end="url(#ah-data)" stroke-linejoin="round"/>
+<path d="M1122.0,1727.3 L1122.0,1836.6 L930.0,1836.6" fill="none" stroke="#64748b" stroke-width="1.7" stroke-dasharray="6 4" marker-end="url(#ah-back)" stroke-linejoin="round"/>
+<path d="M520.0,1837.3 L400.0,1837.3" fill="none" stroke="#15803d" stroke-width="1.7" marker-end="url(#ah-ok)" stroke-linejoin="round"/>
+<path d="M440.0,1947.9 L520.0,1947.9" fill="none" stroke="#334155" stroke-width="1.7" marker-end="url(#ah-http)" stroke-linejoin="round"/>
+<path d="M930.0,1956.9 L1140.0,1956.9" fill="none" stroke="#64748b" stroke-width="1.7" stroke-dasharray="6 4" marker-end="url(#ah-back)" stroke-linejoin="round"/>
+<rect x="100.0" y="170.0" width="300.0" height="44.0" rx="22.0" fill="#1e40af" stroke="#1e3a8a" stroke-width="1.5"/>
+<text x="250.0" y="196.2" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="700" fill="#ffffff" text-anchor="middle" xml:space="preserve">Person opens /login or /join</text>
+<rect x="60.0" y="240.0" width="380.0" height="124.2" rx="10" fill="#ffffff" stroke="#2563eb" stroke-width="1.6"/>
+<path d="M60.8,274.5 L60.8,250.3 Q60.8,240.8 70.3,240.8 L429.7,240.8 Q439.2,240.8 439.2,250.3 L439.2,274.5 Z" fill="#dbeafe" stroke="none" stroke-width="0"/>
+<line x1="60.0" y1="274.5" x2="440.0" y2="274.5" stroke="#2563eb" stroke-width="0.8" stroke-opacity="0.55"/>
+<text x="86.0" y="262.8" font-family="Arial, Helvetica, sans-serif" font-size="13.5" font-weight="700" fill="#1e3a8a" text-anchor="start" xml:space="preserve">Fill in the form</text>
+<text x="70.0" y="295.2" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">Choose [South African ID] or [Passport] (+ country) and type the</text>
+<text x="70.0" y="311.3" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">number</text>
+<text x="70.0" y="326.4" font-family="Arial, Helvetica, sans-serif" font-size="10.5" font-weight="400" fill="#475569" text-anchor="start" xml:space="preserve">Required; at most 13 characters for an ID, 12 for a passport; letters become</text>
+<text x="70.0" y="341.1" font-family="Arial, Helvetica, sans-serif" font-size="10.5" font-weight="400" fill="#475569" text-anchor="start" xml:space="preserve">capitals</text>
+<text x="70.0" y="356.8" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="700" fill="#0f172a" text-anchor="start" xml:space="preserve">[Login] on /login  ·  [Get Started Now] on /join</text>
+<circle cx="61.0" cy="241.0" r="12" fill="#2563eb" stroke="#ffffff" stroke-width="2"/>
+<text x="61.0" y="245.2" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="700" fill="#ffffff" text-anchor="middle" xml:space="preserve">1</text>
+<rect x="520.0" y="240.0" width="410.0" height="93.4" rx="10" fill="#ffffff" stroke="#4f46e5" stroke-width="1.6"/>
+<path d="M520.8,274.5 L520.8,250.3 Q520.8,240.8 530.3,240.8 L919.7,240.8 Q929.2,240.8 929.2,250.3 L929.2,274.5 Z" fill="#e0e7ff" stroke="none" stroke-width="0"/>
+<line x1="520.0" y1="274.5" x2="930.0" y2="274.5" stroke="#4f46e5" stroke-width="0.8" stroke-opacity="0.55"/>
+<text x="546.0" y="262.8" font-family="Arial, Helvetica, sans-serif" font-size="13.5" font-weight="700" fill="#312e81" text-anchor="start" xml:space="preserve">Sign-in route</text>
+<text x="530.0" y="294.2" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="10.5" font-weight="400" fill="#4338ca" text-anchor="start" xml:space="preserve">POST /api/microservices/auth/login</text>
+<text x="530.0" y="309.9" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">Sends the number, document type, country and authIntent (login or join) to</text>
+<text x="530.0" y="326.0" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">the Auth service</text>
+<circle cx="521.0" cy="241.0" r="12" fill="#4f46e5" stroke="#ffffff" stroke-width="2"/>
+<text x="521.0" y="245.2" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="700" fill="#ffffff" text-anchor="middle" xml:space="preserve">2</text>
+<polygon points="1290.0,240.0 1410.0,290.0 1290.0,340.0 1170.0,290.0" fill="#fefce8" stroke="#ca8a04" stroke-width="1.8"/>
+<text x="1290.0" y="293.6" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="700" fill="#713f12" text-anchor="middle" xml:space="preserve">authIntent?</text>
+<circle cx="1213.2" cy="258.0" r="12" fill="#ca8a04" stroke="#ffffff" stroke-width="2"/>
+<text x="1213.2" y="262.2" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="700" fill="#ffffff" text-anchor="middle" xml:space="preserve">3</text>
+<rect x="1000.0" y="410.0" width="275.0" height="77.3" rx="10" fill="#ffffff" stroke="#059669" stroke-width="1.6"/>
+<path d="M1000.8,444.5 L1000.8,420.3 Q1000.8,410.8 1010.3,410.8 L1264.7,410.8 Q1274.2,410.8 1274.2,420.3 L1274.2,444.5 Z" fill="#d1fae5" stroke="none" stroke-width="0"/>
+<line x1="1000.0" y1="444.5" x2="1275.0" y2="444.5" stroke="#059669" stroke-width="0.8" stroke-opacity="0.55"/>
+<text x="1026.0" y="432.8" font-family="Arial, Helvetica, sans-serif" font-size="13.5" font-weight="700" fill="#064e3b" text-anchor="start" xml:space="preserve">Find the person</text>
+<text x="1010.0" y="465.2" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">Look up the number as typed, then in capitals</text>
+<text x="1010.0" y="480.3" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="10.5" font-weight="400" fill="#c2410c" text-anchor="start" xml:space="preserve">Users.id_number</text>
+<circle cx="1001.0" cy="411.0" r="12" fill="#059669" stroke="#ffffff" stroke-width="2"/>
+<text x="1001.0" y="415.2" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="700" fill="#ffffff" text-anchor="middle" xml:space="preserve">4</text>
+<rect x="1310.0" y="410.0" width="290.0" height="108.8" rx="10" fill="#ffffff" stroke="#059669" stroke-width="1.6"/>
+<path d="M1310.8,444.5 L1310.8,420.3 Q1310.8,410.8 1320.3,410.8 L1589.7,410.8 Q1599.2,410.8 1599.2,420.3 L1599.2,444.5 Z" fill="#d1fae5" stroke="none" stroke-width="0"/>
+<line x1="1310.0" y1="444.5" x2="1600.0" y2="444.5" stroke="#059669" stroke-width="0.8" stroke-opacity="0.55"/>
+<text x="1336.0" y="432.8" font-family="Arial, Helvetica, sans-serif" font-size="13.5" font-weight="700" fill="#064e3b" text-anchor="start" xml:space="preserve">Check the number</text>
+<text x="1320.0" y="465.2" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">Zod: it must not be empty</text>
+<text x="1320.0" y="480.8" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="700" fill="#b45309" text-anchor="start" xml:space="preserve">Not checked yet: the SA ID date of birth and check</text>
+<text x="1320.0" y="496.2" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="700" fill="#b45309" text-anchor="start" xml:space="preserve">digit. The validators exist (lib/identification/rules.ts)</text>
+<text x="1320.0" y="511.6" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="700" fill="#b45309" text-anchor="start" xml:space="preserve">but sign-up does not use them.</text>
+<circle cx="1311.0" cy="411.0" r="12" fill="#059669" stroke="#ffffff" stroke-width="2"/>
+<text x="1311.0" y="415.2" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="700" fill="#ffffff" text-anchor="middle" xml:space="preserve">4</text>
+<polygon points="1137.5,550.8 1237.5,598.8 1137.5,646.8 1037.5,598.8" fill="#fefce8" stroke="#ca8a04" stroke-width="1.8"/>
+<text x="1137.5" y="602.4" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="700" fill="#713f12" text-anchor="middle" xml:space="preserve">Found?</text>
+<polygon points="1455.0,548.8 1565.0,598.8 1455.0,648.8 1345.0,598.8" fill="#fefce8" stroke="#ca8a04" stroke-width="1.8"/>
+<text x="1455.0" y="595.2" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="700" fill="#713f12" text-anchor="middle" xml:space="preserve">Number already on</text>
+<text x="1455.0" y="609.6" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="700" fill="#713f12" text-anchor="middle" xml:space="preserve">record?</text>
+<rect x="60.0" y="556.8" width="380.0" height="92.0" rx="10" fill="#ffffff" stroke="#dc2626" stroke-width="1.6"/>
+<path d="M60.8,591.2 L60.8,567.1 Q60.8,557.6 70.3,557.6 L429.7,557.6 Q439.2,557.6 439.2,567.1 L439.2,591.2 Z" fill="#fee2e2" stroke="none" stroke-width="0"/>
+<line x1="60.0" y1="591.2" x2="440.0" y2="591.2" stroke="#dc2626" stroke-width="0.8" stroke-opacity="0.55"/>
+<text x="70.0" y="579.6" font-family="Arial, Helvetica, sans-serif" font-size="13.5" font-weight="700" fill="#7f1d1d" text-anchor="start" xml:space="preserve">Shown under the form</text>
+<text x="70.0" y="611.5" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="700" fill="#b91c1c" text-anchor="start" xml:space="preserve">&quot;No account found for this ID/Passport. Use Join Now to create</text>
+<text x="70.0" y="626.9" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="700" fill="#b91c1c" text-anchor="start" xml:space="preserve">one.&quot;</text>
+<text x="70.0" y="641.8" font-family="Arial, Helvetica, sans-serif" font-size="10.5" font-weight="400" fill="#475569" text-anchor="start" xml:space="preserve">Nothing is created; no cookies are set</text>
+<rect x="1310.0" y="708.8" width="290.0" height="175.6" rx="10" fill="#ffffff" stroke="#059669" stroke-width="1.6"/>
+<path d="M1310.8,759.7 L1310.8,719.1 Q1310.8,709.6 1320.3,709.6 L1589.7,709.6 Q1599.2,709.6 1599.2,719.1 L1599.2,759.7 Z" fill="#d1fae5" stroke="none" stroke-width="0"/>
+<line x1="1310.0" y1="759.7" x2="1600.0" y2="759.7" stroke="#059669" stroke-width="0.8" stroke-opacity="0.55"/>
+<text x="1336.0" y="731.6" font-family="Arial, Helvetica, sans-serif" font-size="13.5" font-weight="700" fill="#064e3b" text-anchor="start" xml:space="preserve">Simulate a new person from the</text>
+<text x="1336.0" y="748.1" font-family="Arial, Helvetica, sans-serif" font-size="13.5" font-weight="700" fill="#064e3b" text-anchor="start" xml:space="preserve">number</text>
+<text x="1320.0" y="780.4" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">The same number always gives the same person</text>
+<text x="1320.0" y="796.5" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">(seeded from a hash of the number)</text>
+<text x="1320.0" y="812.6" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">Last 3 digits: 999 → High risk · 555 → Medium ·</text>
+<text x="1320.0" y="828.7" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">anything else → Low</text>
+<text x="1320.0" y="844.8" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">Name, age, income, employment; 2 debts (Low),</text>
+<text x="1320.0" y="860.9" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">3–5 (Medium) or 4–6 (High), each with payment</text>
+<text x="1320.0" y="877.0" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">history; a legal record for a judgment or a garnishee</text>
+<circle cx="1311.0" cy="709.8" r="12" fill="#059669" stroke="#ffffff" stroke-width="2"/>
+<text x="1311.0" y="714.0" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="700" fill="#ffffff" text-anchor="middle" xml:space="preserve">5</text>
+<rect x="1640.0" y="708.8" width="270.0" height="75.9" rx="10" fill="#ffffff" stroke="#ea580c" stroke-width="1.6"/>
+<path d="M1640.8,743.2 L1640.8,719.1 Q1640.8,709.6 1650.3,709.6 L1899.7,709.6 Q1909.2,709.6 1909.2,719.1 L1909.2,743.2 Z" fill="#ffedd5" stroke="none" stroke-width="0"/>
+<line x1="1640.0" y1="743.2" x2="1910.0" y2="743.2" stroke="#ea580c" stroke-width="0.8" stroke-opacity="0.55"/>
+<text x="1650.0" y="731.6" font-family="Arial, Helvetica, sans-serif" font-size="13.5" font-weight="700" fill="#7c2d12" text-anchor="start" xml:space="preserve">One transaction</text>
+<text x="1650.0" y="763.0" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="10.5" font-weight="400" fill="#c2410c" text-anchor="start" xml:space="preserve">INSERT Users, Credit_Profile, Debts,</text>
+<text x="1650.0" y="777.7" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="10.5" font-weight="400" fill="#c2410c" text-anchor="start" xml:space="preserve">Payment_History, Legal_Records</text>
+<rect x="1000.0" y="934.4" width="600.0" height="62.6" rx="10" fill="#ffffff" stroke="#059669" stroke-width="1.6"/>
+<path d="M1000.8,968.9 L1000.8,944.7 Q1000.8,935.2 1010.3,935.2 L1589.7,935.2 Q1599.2,935.2 1599.2,944.7 L1599.2,968.9 Z" fill="#d1fae5" stroke="none" stroke-width="0"/>
+<line x1="1000.0" y1="968.9" x2="1600.0" y2="968.9" stroke="#059669" stroke-width="0.8" stroke-opacity="0.55"/>
+<text x="1026.0" y="957.2" font-family="Arial, Helvetica, sans-serif" font-size="13.5" font-weight="700" fill="#064e3b" text-anchor="start" xml:space="preserve">Answer with the session details</text>
+<text x="1010.0" y="989.6" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">User id, name, risk level, document type and whether FICA is already done</text>
+<circle cx="1001.0" cy="935.4" r="12" fill="#059669" stroke="#ffffff" stroke-width="2"/>
+<text x="1001.0" y="939.6" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="700" fill="#ffffff" text-anchor="middle" xml:space="preserve">6</text>
+<rect x="520.0" y="934.4" width="410.0" height="94.8" rx="10" fill="#ffffff" stroke="#4f46e5" stroke-width="1.6"/>
+<path d="M520.8,968.9 L520.8,944.7 Q520.8,935.2 530.3,935.2 L919.7,935.2 Q929.2,935.2 929.2,944.7 L929.2,968.9 Z" fill="#e0e7ff" stroke="none" stroke-width="0"/>
+<line x1="520.0" y1="968.9" x2="930.0" y2="968.9" stroke="#4f46e5" stroke-width="0.8" stroke-opacity="0.55"/>
+<text x="546.0" y="957.2" font-family="Arial, Helvetica, sans-serif" font-size="13.5" font-weight="700" fill="#312e81" text-anchor="start" xml:space="preserve">Set three httpOnly cookies (7 days)</text>
+<text x="530.0" y="989.6" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">• session = the user id</text>
+<text x="530.0" y="1005.7" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">• FICA-verified = 1 if FICA is already done, otherwise 0</text>
+<text x="530.0" y="1021.8" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">• FICA-required = 1 only when joining and not yet verified</text>
+<circle cx="521.0" cy="935.4" r="12" fill="#4f46e5" stroke="#ffffff" stroke-width="2"/>
+<text x="521.0" y="939.6" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="700" fill="#ffffff" text-anchor="middle" xml:space="preserve">7</text>
+<rect x="60.0" y="1069.2" width="380.0" height="61.2" rx="10" fill="#ffffff" stroke="#2563eb" stroke-width="1.6"/>
+<path d="M60.8,1103.7 L60.8,1079.5 Q60.8,1070.0 70.3,1070.0 L429.7,1070.0 Q439.2,1070.0 439.2,1079.5 L439.2,1103.7 Z" fill="#dbeafe" stroke="none" stroke-width="0"/>
+<line x1="60.0" y1="1103.7" x2="440.0" y2="1103.7" stroke="#2563eb" stroke-width="0.8" stroke-opacity="0.55"/>
+<text x="86.0" y="1092.0" font-family="Arial, Helvetica, sans-serif" font-size="13.5" font-weight="700" fill="#1e3a8a" text-anchor="start" xml:space="preserve">Browser goes to /dashboard</text>
+<text x="70.0" y="1123.4" font-family="Arial, Helvetica, sans-serif" font-size="10.5" font-weight="400" fill="#475569" text-anchor="start" xml:space="preserve">router.replace — a new page request</text>
+<circle cx="61.0" cy="1070.2" r="12" fill="#2563eb" stroke="#ffffff" stroke-width="2"/>
+<text x="61.0" y="1074.4" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="700" fill="#ffffff" text-anchor="middle" xml:space="preserve">8</text>
+<polygon points="725.0,1167.2 855.0,1219.2 725.0,1271.2 595.0,1219.2" fill="#fefce8" stroke="#ca8a04" stroke-width="1.8"/>
+<text x="725.0" y="1222.8" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="700" fill="#713f12" text-anchor="middle" xml:space="preserve">Session cookie present?</text>
+<circle cx="641.8" cy="1185.9" r="12" fill="#ca8a04" stroke="#ffffff" stroke-width="2"/>
+<text x="641.8" y="1190.1" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="700" fill="#ffffff" text-anchor="middle" xml:space="preserve">9</text>
+<rect x="60.0" y="1185.2" width="380.0" height="61.2" rx="10" fill="#ffffff" stroke="#dc2626" stroke-width="1.6"/>
+<path d="M60.8,1219.7 L60.8,1195.5 Q60.8,1186.0 70.3,1186.0 L429.7,1186.0 Q439.2,1186.0 439.2,1195.5 L439.2,1219.7 Z" fill="#fee2e2" stroke="none" stroke-width="0"/>
+<line x1="60.0" y1="1219.7" x2="440.0" y2="1219.7" stroke="#dc2626" stroke-width="0.8" stroke-opacity="0.55"/>
+<text x="70.0" y="1208.0" font-family="Arial, Helvetica, sans-serif" font-size="13.5" font-weight="700" fill="#7f1d1d" text-anchor="start" xml:space="preserve">Sent back to the login page</text>
+<text x="70.0" y="1239.4" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="10.5" font-weight="400" fill="#4338ca" text-anchor="start" xml:space="preserve">/login?next=/dashboard</text>
+<polygon points="725.0,1330.2 870.0,1389.2 725.0,1448.2 580.0,1389.2" fill="#fefce8" stroke="#ca8a04" stroke-width="1.8"/>
+<text x="725.0" y="1385.6" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="700" fill="#713f12" text-anchor="middle" xml:space="preserve">FICA-required = 1 and not</text>
+<text x="725.0" y="1400.0" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="700" fill="#713f12" text-anchor="middle" xml:space="preserve">yet verified?</text>
+<rect x="1120.0" y="1365.2" width="340.0" height="48.0" rx="24.0" fill="#334155" stroke="#1e293b" stroke-width="1.5"/>
+<text x="1290.0" y="1393.3" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="700" fill="#ffffff" text-anchor="middle" xml:space="preserve">Dashboard (or the page they asked for)</text>
+<rect x="60.0" y="1489.2" width="380.0" height="110.9" rx="10" fill="#ffffff" stroke="#2563eb" stroke-width="1.6"/>
+<path d="M60.8,1523.7 L60.8,1499.5 Q60.8,1490.0 70.3,1490.0 L429.7,1490.0 Q439.2,1490.0 439.2,1499.5 L439.2,1523.7 Z" fill="#dbeafe" stroke="none" stroke-width="0"/>
+<line x1="60.0" y1="1523.7" x2="440.0" y2="1523.7" stroke="#2563eb" stroke-width="0.8" stroke-opacity="0.55"/>
+<text x="86.0" y="1512.0" font-family="Arial, Helvetica, sans-serif" font-size="13.5" font-weight="700" fill="#1e3a8a" text-anchor="start" xml:space="preserve">FICA page — /fica-verification?next=/dashboard</text>
+<text x="70.0" y="1544.4" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">Upload an ID document and proof of address (bank statement</text>
+<text x="70.0" y="1560.5" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">optional) — PDF, JPG or PNG, up to 8 MB</text>
+<text x="70.0" y="1576.6" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="700" fill="#0f172a" text-anchor="start" xml:space="preserve">or tick [Use demo placeholder FICA documents]</text>
+<text x="70.0" y="1592.7" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="700" fill="#0f172a" text-anchor="start" xml:space="preserve">Tick consent → [Complete Verification]</text>
+<circle cx="61.0" cy="1490.2" r="12" fill="#2563eb" stroke="#ffffff" stroke-width="2"/>
+<text x="61.0" y="1494.4" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="700" fill="#ffffff" text-anchor="middle" xml:space="preserve">10</text>
+<rect x="520.0" y="1489.2" width="410.0" height="93.4" rx="10" fill="#ffffff" stroke="#4f46e5" stroke-width="1.6"/>
+<path d="M520.8,1523.7 L520.8,1499.5 Q520.8,1490.0 530.3,1490.0 L919.7,1490.0 Q929.2,1490.0 929.2,1499.5 L929.2,1523.7 Z" fill="#e0e7ff" stroke="none" stroke-width="0"/>
+<line x1="520.0" y1="1523.7" x2="930.0" y2="1523.7" stroke="#4f46e5" stroke-width="0.8" stroke-opacity="0.55"/>
+<text x="546.0" y="1512.0" font-family="Arial, Helvetica, sans-serif" font-size="13.5" font-weight="700" fill="#312e81" text-anchor="start" xml:space="preserve">FICA route</text>
+<text x="530.0" y="1543.4" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="10.5" font-weight="400" fill="#4338ca" text-anchor="start" xml:space="preserve">POST /api/microservices/auth/fica/verify</text>
+<text x="530.0" y="1559.1" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">Checks each file&#x27;s type and size (skipped for the placeholders), then</text>
+<text x="530.0" y="1575.2" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">consent</text>
+<circle cx="521.0" cy="1490.2" r="12" fill="#4f46e5" stroke="#ffffff" stroke-width="2"/>
+<text x="521.0" y="1494.4" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="700" fill="#ffffff" text-anchor="middle" xml:space="preserve">11</text>
+<polygon points="725.0,1635.0 860.0,1690.0 725.0,1745.0 590.0,1690.0" fill="#fefce8" stroke="#ca8a04" stroke-width="1.8"/>
+<text x="725.0" y="1686.4" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="700" fill="#713f12" text-anchor="middle" xml:space="preserve">Files right and consent</text>
+<text x="725.0" y="1700.8" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="700" fill="#713f12" text-anchor="middle" xml:space="preserve">ticked?</text>
+<rect x="60.0" y="1646.0" width="380.0" height="77.3" rx="10" fill="#ffffff" stroke="#dc2626" stroke-width="1.6"/>
+<path d="M60.8,1680.5 L60.8,1656.3 Q60.8,1646.8 70.3,1646.8 L429.7,1646.8 Q439.2,1646.8 439.2,1656.3 L439.2,1680.5 Z" fill="#fee2e2" stroke="none" stroke-width="0"/>
+<line x1="60.0" y1="1680.5" x2="440.0" y2="1680.5" stroke="#dc2626" stroke-width="0.8" stroke-opacity="0.55"/>
+<text x="70.0" y="1668.9" font-family="Arial, Helvetica, sans-serif" font-size="13.5" font-weight="700" fill="#7f1d1d" text-anchor="start" xml:space="preserve">Shown on the FICA page (400)</text>
+<text x="70.0" y="1700.7" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="700" fill="#b91c1c" text-anchor="start" xml:space="preserve">&quot;You must provide consent to complete FICA verification.&quot;</text>
+<text x="70.0" y="1716.1" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="700" fill="#b91c1c" text-anchor="start" xml:space="preserve">or e.g. &quot;Identity document must be a PDF, JPG, or PNG file.&quot;</text>
+<rect x="1010.0" y="1650.0" width="560.0" height="77.3" rx="10" fill="#ffffff" stroke="#059669" stroke-width="1.6"/>
+<path d="M1010.8,1684.5 L1010.8,1660.3 Q1010.8,1650.8 1020.3,1650.8 L1559.7,1650.8 Q1569.2,1650.8 1569.2,1660.3 L1569.2,1684.5 Z" fill="#d1fae5" stroke="none" stroke-width="0"/>
+<line x1="1010.0" y1="1684.5" x2="1570.0" y2="1684.5" stroke="#059669" stroke-width="0.8" stroke-opacity="0.55"/>
+<text x="1036.0" y="1672.9" font-family="Arial, Helvetica, sans-serif" font-size="13.5" font-weight="700" fill="#064e3b" text-anchor="start" xml:space="preserve">Mark the person verified</text>
+<text x="1020.0" y="1704.2" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="10.5" font-weight="400" fill="#047857" text-anchor="start" xml:space="preserve">POST /auth/fica/verify</text>
+<text x="1020.0" y="1720.0" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">Zod check (consent must be true), then update the person</text>
+<circle cx="1011.0" cy="1651.0" r="12" fill="#059669" stroke="#ffffff" stroke-width="2"/>
+<text x="1011.0" y="1655.2" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="700" fill="#ffffff" text-anchor="middle" xml:space="preserve">12</text>
+<rect x="1640.0" y="1650.0" width="270.0" height="105.3" rx="10" fill="#ffffff" stroke="#ea580c" stroke-width="1.6"/>
+<path d="M1640.8,1684.5 L1640.8,1660.3 Q1640.8,1650.8 1650.3,1650.8 L1899.7,1650.8 Q1909.2,1650.8 1909.2,1660.3 L1909.2,1684.5 Z" fill="#ffedd5" stroke="none" stroke-width="0"/>
+<line x1="1640.0" y1="1684.5" x2="1910.0" y2="1684.5" stroke="#ea580c" stroke-width="0.8" stroke-opacity="0.55"/>
+<text x="1650.0" y="1672.9" font-family="Arial, Helvetica, sans-serif" font-size="13.5" font-weight="700" fill="#7c2d12" text-anchor="start" xml:space="preserve">Update</text>
+<text x="1650.0" y="1704.2" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="10.5" font-weight="400" fill="#c2410c" text-anchor="start" xml:space="preserve">UPDATE Users: is_fica_verified,</text>
+<text x="1650.0" y="1718.9" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="10.5" font-weight="400" fill="#c2410c" text-anchor="start" xml:space="preserve">fica_verified_at, fica_documents_json</text>
+<text x="1650.0" y="1733.6" font-family="Arial, Helvetica, sans-serif" font-size="10.5" font-weight="400" fill="#475569" text-anchor="start" xml:space="preserve">Only file names, types and sizes are kept — never</text>
+<text x="1650.0" y="1748.3" font-family="Arial, Helvetica, sans-serif" font-size="10.5" font-weight="400" fill="#475569" text-anchor="start" xml:space="preserve">the files</text>
+<rect x="520.0" y="1805.3" width="410.0" height="62.6" rx="10" fill="#ffffff" stroke="#4f46e5" stroke-width="1.6"/>
+<path d="M520.8,1839.8 L520.8,1815.6 Q520.8,1806.1 530.3,1806.1 L919.7,1806.1 Q929.2,1806.1 929.2,1815.6 L929.2,1839.8 Z" fill="#e0e7ff" stroke="none" stroke-width="0"/>
+<line x1="520.0" y1="1839.8" x2="930.0" y2="1839.8" stroke="#4f46e5" stroke-width="0.8" stroke-opacity="0.55"/>
+<text x="546.0" y="1828.1" font-family="Arial, Helvetica, sans-serif" font-size="13.5" font-weight="700" fill="#312e81" text-anchor="start" xml:space="preserve">Set FICA-verified = 1 and FICA-required = 0</text>
+<text x="530.0" y="1860.5" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">then open the page in ?next= (the Dashboard)</text>
+<circle cx="521.0" cy="1806.3" r="12" fill="#4f46e5" stroke="#ffffff" stroke-width="2"/>
+<text x="521.0" y="1810.5" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="700" fill="#ffffff" text-anchor="middle" xml:space="preserve">13</text>
+<rect x="100.0" y="1813.3" width="300.0" height="48.0" rx="24.0" fill="#334155" stroke="#1e293b" stroke-width="1.5"/>
+<text x="250.0" y="1841.5" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="700" fill="#ffffff" text-anchor="middle" xml:space="preserve">Dashboard</text>
+<rect x="60.0" y="1927.9" width="380.0" height="40.0" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="1.6"/>
+<text x="250.0" y="1952.5" font-family="Arial, Helvetica, sans-serif" font-size="13.5" font-weight="700" fill="#1e3a8a" text-anchor="middle" xml:space="preserve">[Log out] — top right on every page</text>
+<rect x="520.0" y="1927.9" width="410.0" height="77.3" rx="10" fill="#ffffff" stroke="#4f46e5" stroke-width="1.6"/>
+<path d="M520.8,1962.4 L520.8,1938.2 Q520.8,1928.7 530.3,1928.7 L919.7,1928.7 Q929.2,1928.7 929.2,1938.2 L929.2,1962.4 Z" fill="#e0e7ff" stroke="none" stroke-width="0"/>
+<line x1="520.0" y1="1962.4" x2="930.0" y2="1962.4" stroke="#4f46e5" stroke-width="0.8" stroke-opacity="0.55"/>
+<text x="530.0" y="1950.7" font-family="Arial, Helvetica, sans-serif" font-size="13.5" font-weight="700" fill="#312e81" text-anchor="start" xml:space="preserve">Log-out route</text>
+<text x="530.0" y="1982.1" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="10.5" font-weight="400" fill="#4338ca" text-anchor="start" xml:space="preserve">POST /api/microservices/auth/logout</text>
+<text x="530.0" y="1997.8" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">Clears all three cookies — no service call</text>
+<rect x="1140.0" y="1933.9" width="300.0" height="46.0" rx="23.0" fill="#334155" stroke="#1e293b" stroke-width="1.5"/>
+<text x="1290.0" y="1961.0" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="700" fill="#ffffff" text-anchor="middle" xml:space="preserve">Back on /login</text>
+<rect x="1134.6" y="279.6" width="38.2" height="20.8" rx="5" fill="#ffffff" fill-opacity="0.97" stroke="#1e293b" stroke-opacity="0.35" stroke-width="0.8"/>
+<text x="1153.8" y="294.3" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="700" fill="#1e293b" text-anchor="middle" xml:space="preserve">login</text>
+<rect x="1416.8" y="279.6" width="31.5" height="20.8" rx="5" fill="#ffffff" fill-opacity="0.97" stroke="#1e293b" stroke-opacity="0.35" stroke-width="0.8"/>
+<text x="1432.5" y="294.3" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="700" fill="#1e293b" text-anchor="middle" xml:space="preserve">join</text>
+<rect x="677.8" y="588.4" width="62.1" height="20.8" rx="5" fill="#ffffff" fill-opacity="0.97" stroke="#dc2626" stroke-opacity="0.35" stroke-width="0.8"/>
+<text x="708.9" y="603.1" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="700" fill="#dc2626" text-anchor="middle" xml:space="preserve">No — 404</text>
+<rect x="1441.6" y="662.4" width="26.8" height="20.8" rx="5" fill="#ffffff" fill-opacity="0.97" stroke="#1e293b" stroke-opacity="0.35" stroke-width="0.8"/>
+<text x="1455.0" y="677.1" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="700" fill="#1e293b" text-anchor="middle" xml:space="preserve">No</text>
+<rect x="1121.7" y="722.7" width="31.6" height="20.8" rx="5" fill="#ffffff" fill-opacity="0.97" stroke="#15803d" stroke-opacity="0.35" stroke-width="0.8"/>
+<text x="1137.5" y="737.4" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="700" fill="#15803d" text-anchor="middle" xml:space="preserve">Yes</text>
+<rect x="1151.8" y="682.2" width="116.4" height="34.5" rx="5" fill="#ffffff" fill-opacity="0.97" stroke="#15803d" stroke-opacity="0.35" stroke-width="0.8"/>
+<text x="1210.0" y="696.9" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="700" fill="#15803d" text-anchor="middle" xml:space="preserve">Yes — joining again</text>
+<text x="1210.0" y="710.6" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="700" fill="#15803d" text-anchor="middle" xml:space="preserve">just signs in</text>
+<rect x="754.2" y="1123.9" width="125.5" height="34.5" rx="5" fill="#ffffff" fill-opacity="0.97" stroke="#334155" stroke-opacity="0.35" stroke-width="0.8"/>
+<text x="817.0" y="1138.5" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="700" fill="#334155" text-anchor="middle" xml:space="preserve">every protected page</text>
+<text x="817.0" y="1152.3" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="700" fill="#334155" text-anchor="middle" xml:space="preserve">passes middleware.ts</text>
+<rect x="504.1" y="1208.8" width="26.8" height="20.8" rx="5" fill="#ffffff" fill-opacity="0.97" stroke="#dc2626" stroke-opacity="0.35" stroke-width="0.8"/>
+<text x="517.5" y="1223.5" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="700" fill="#dc2626" text-anchor="middle" xml:space="preserve">No</text>
+<rect x="709.2" y="1284.4" width="31.6" height="20.8" rx="5" fill="#ffffff" fill-opacity="0.97" stroke="#15803d" stroke-opacity="0.35" stroke-width="0.8"/>
+<text x="725.0" y="1299.1" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="700" fill="#15803d" text-anchor="middle" xml:space="preserve">Yes</text>
+<rect x="948.7" y="1378.8" width="92.6" height="20.8" rx="5" fill="#ffffff" fill-opacity="0.97" stroke="#15803d" stroke-opacity="0.35" stroke-width="0.8"/>
+<text x="995.0" y="1393.5" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="700" fill="#15803d" text-anchor="middle" xml:space="preserve">No — logged in</text>
+<rect x="435.8" y="1458.8" width="103.5" height="20.8" rx="5" fill="#ffffff" fill-opacity="0.97" stroke="#1e293b" stroke-opacity="0.35" stroke-width="0.8"/>
+<text x="487.5" y="1473.5" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="700" fill="#1e293b" text-anchor="middle" xml:space="preserve">Yes — just joined</text>
+<rect x="501.6" y="1679.7" width="26.8" height="20.8" rx="5" fill="#ffffff" fill-opacity="0.97" stroke="#dc2626" stroke-opacity="0.35" stroke-width="0.8"/>
+<text x="515.0" y="1694.3" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="700" fill="#dc2626" text-anchor="middle" xml:space="preserve">No</text>
+<rect x="919.2" y="1679.7" width="31.6" height="20.8" rx="5" fill="#ffffff" fill-opacity="0.97" stroke="#15803d" stroke-opacity="0.35" stroke-width="0.8"/>
+<text x="935.0" y="1694.3" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="700" fill="#15803d" text-anchor="middle" xml:space="preserve">Yes</text>
+<rect x="46.0" y="2095.2" width="34.0" height="20.0" rx="10" fill="#1e40af" stroke="#1e3a8a" stroke-width="1.2"/>
+<text x="90.0" y="2109.7" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#1e293b" text-anchor="start" xml:space="preserve">Start</text>
+<rect x="419.6" y="2095.2" width="34.0" height="20.0" rx="10" fill="#334155" stroke="#1e293b" stroke-width="1.2"/>
+<text x="463.6" y="2109.7" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#1e293b" text-anchor="start" xml:space="preserve">Where it ends</text>
+<circle cx="810.2" cy="2105.2" r="12" fill="#1e293b" stroke="#ffffff" stroke-width="2"/>
+<text x="810.2" y="2109.4" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="700" fill="#ffffff" text-anchor="middle" xml:space="preserve">1</text>
+<text x="837.2" y="2109.7" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#1e293b" text-anchor="start" xml:space="preserve">Step number</text>
+<polygon points="1183.8000000000002,2095.16 1200.8000000000002,2105.16 1183.8000000000002,2115.16 1166.8000000000002,2105.16" fill="#fefce8" stroke="#ca8a04" stroke-width="1.4"/>
+<text x="1210.8" y="2109.7" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#1e293b" text-anchor="start" xml:space="preserve">Decision</text>
+<rect x="1540.4" y="2095.2" width="34.0" height="20.0" rx="5" fill="#fee2e2" stroke="#dc2626" stroke-width="1.4"/>
+<text x="1584.4" y="2109.7" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#1e293b" text-anchor="start" xml:space="preserve">What the person sees when refused</text>
+<path d="M46.0,2135.2 L80.0,2135.2" stroke="#334155" stroke-width="1.8" marker-end="url(#ah-http)"/>
+<text x="90.0" y="2139.7" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#1e293b" text-anchor="start" xml:space="preserve">Request or next step</text>
+<path d="M419.6,2135.2 L453.6,2135.2" stroke="#64748b" stroke-width="1.8" stroke-dasharray="6 4" marker-end="url(#ah-back)"/>
+<text x="463.6" y="2139.7" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#1e293b" text-anchor="start" xml:space="preserve">Answer / redirect</text>
+<path d="M793.2,2135.2 L827.2,2135.2" stroke="#15803d" stroke-width="1.8" marker-end="url(#ah-ok)"/>
+<text x="837.2" y="2139.7" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#1e293b" text-anchor="start" xml:space="preserve">Allowed / yes</text>
+<path d="M1166.8,2135.2 L1200.8,2135.2" stroke="#dc2626" stroke-width="1.8" marker-end="url(#ah-err)"/>
+<text x="1210.8" y="2139.7" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#1e293b" text-anchor="start" xml:space="preserve">Refused / no</text>
+<text x="980.0" y="2183.0" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="400" fill="#94a3b8" text-anchor="middle" xml:space="preserve">FinAware · Flow: Log In, Join and FICA Verification · drawn from the code · updated 29 September 2026</text>
+</svg>

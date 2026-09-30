@@ -1,0 +1,319 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2060" height="1617" viewBox="0 0 2060 1617">
+<title>FinAware — System Architecture</title>
+<defs><marker id="ah-back" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" markerUnits="userSpaceOnUse" orient="auto"><path d="M0,0.5 L10,5 L0,9.5 Z" fill="#64748b"/></marker><marker id="ah-back-start" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="9" markerHeight="9" markerUnits="userSpaceOnUse" orient="auto"><path d="M10,0.5 L0,5 L10,9.5 Z" fill="#64748b"/></marker><marker id="ah-data" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" markerUnits="userSpaceOnUse" orient="auto"><path d="M0,0.5 L10,5 L0,9.5 Z" fill="#c2410c"/></marker><marker id="ah-data-start" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="9" markerHeight="9" markerUnits="userSpaceOnUse" orient="auto"><path d="M10,0.5 L0,5 L10,9.5 Z" fill="#c2410c"/></marker><marker id="ah-ext" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" markerUnits="userSpaceOnUse" orient="auto"><path d="M0,0.5 L10,5 L0,9.5 Z" fill="#475569"/></marker><marker id="ah-ext-start" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="9" markerHeight="9" markerUnits="userSpaceOnUse" orient="auto"><path d="M10,0.5 L0,5 L10,9.5 Z" fill="#475569"/></marker><marker id="ah-http" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" markerUnits="userSpaceOnUse" orient="auto"><path d="M0,0.5 L10,5 L0,9.5 Z" fill="#334155"/></marker><marker id="ah-http-start" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="9" markerHeight="9" markerUnits="userSpaceOnUse" orient="auto"><path d="M10,0.5 L0,5 L10,9.5 Z" fill="#334155"/></marker><marker id="ah-ml" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" markerUnits="userSpaceOnUse" orient="auto"><path d="M0,0.5 L10,5 L0,9.5 Z" fill="#7c3aed"/></marker><marker id="ah-ml-start" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="9" markerHeight="9" markerUnits="userSpaceOnUse" orient="auto"><path d="M10,0.5 L0,5 L10,9.5 Z" fill="#7c3aed"/></marker><marker id="ah-service" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" markerUnits="userSpaceOnUse" orient="auto"><path d="M0,0.5 L10,5 L0,9.5 Z" fill="#047857"/></marker><marker id="ah-service-start" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="9" markerHeight="9" markerUnits="userSpaceOnUse" orient="auto"><path d="M10,0.5 L0,5 L10,9.5 Z" fill="#047857"/></marker><marker id="ah-web" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" markerUnits="userSpaceOnUse" orient="auto"><path d="M0,0.5 L10,5 L0,9.5 Z" fill="#4f46e5"/></marker><marker id="ah-web-start" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="9" markerHeight="9" markerUnits="userSpaceOnUse" orient="auto"><path d="M10,0.5 L0,5 L10,9.5 Z" fill="#4f46e5"/></marker></defs>
+<rect width="2060" height="1617" fill="#ffffff"/>
+<text x="1030.0" y="44.0" font-family="Arial, Helvetica, sans-serif" font-size="27" font-weight="700" fill="#0f172a" text-anchor="middle" xml:space="preserve">FinAware — System Architecture</text>
+<text x="1030.0" y="70.0" font-family="Arial, Helvetica, sans-serif" font-size="13.5" font-weight="400" fill="#475569" text-anchor="middle" xml:space="preserve">What runs where, and which part talks to which. Ports are the local defaults (npm run dev:stack:ml); in Docker and Kubernetes the same parts run as separate containers — see diagram 03.</text>
+<rect x="30.0" y="262.0" width="290.0" height="1189.4" rx="14" fill="#f5f9ff" stroke="#2563eb" stroke-width="1.6"/>
+<circle cx="60.0" cy="286.0" r="13" fill="#2563eb"/>
+<text x="60.0" y="290.5" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="700" fill="#ffffff" text-anchor="middle" xml:space="preserve">1</text>
+<text x="82.0" y="291.0" font-family="Arial, Helvetica, sans-serif" font-size="15.5" font-weight="700" fill="#1e3a8a" text-anchor="start" xml:space="preserve">User&#x27;s device</text>
+<rect x="400.0" y="262.0" width="440.0" height="1189.4" rx="14" fill="#f7f7ff" stroke="#4f46e5" stroke-width="1.6"/>
+<circle cx="430.0" cy="286.0" r="13" fill="#4f46e5"/>
+<text x="430.0" y="290.5" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="700" fill="#ffffff" text-anchor="middle" xml:space="preserve">2</text>
+<text x="452.0" y="291.0" font-family="Arial, Helvetica, sans-serif" font-size="15.5" font-weight="700" fill="#312e81" text-anchor="start" xml:space="preserve">Web app — Next.js 14</text>
+<text x="626.9" y="291.0" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="400" fill="#475569" text-anchor="start" xml:space="preserve">:30005</text>
+<rect x="930.0" y="262.0" width="540.0" height="1189.4" rx="14" fill="#f3fcf8" stroke="#059669" stroke-width="1.6"/>
+<circle cx="960.0" cy="286.0" r="13" fill="#059669"/>
+<text x="960.0" y="290.5" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="700" fill="#ffffff" text-anchor="middle" xml:space="preserve">3</text>
+<text x="982.0" y="291.0" font-family="Arial, Helvetica, sans-serif" font-size="15.5" font-weight="700" fill="#064e3b" text-anchor="start" xml:space="preserve">Services — Express on Node.js, one process each</text>
+<rect x="1560.0" y="262.0" width="470.0" height="1189.4" rx="14" fill="#fffaf5" stroke="#ea580c" stroke-width="1.6"/>
+<circle cx="1590.0" cy="286.0" r="13" fill="#ea580c"/>
+<text x="1590.0" y="290.5" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="700" fill="#ffffff" text-anchor="middle" xml:space="preserve">4</text>
+<text x="1612.0" y="291.0" font-family="Arial, Helvetica, sans-serif" font-size="15.5" font-weight="700" fill="#7c2d12" text-anchor="start" xml:space="preserve">Data and models</text>
+<rect x="30.0" y="1473.4" width="2000.0" height="100.0" rx="10" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.2"/>
+<text x="46.0" y="1497.4" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="700" fill="#0f172a" text-anchor="start" xml:space="preserve">How to read this diagram</text>
+<path d="M302.0,545.6 L420.0,545.6" fill="none" stroke="#334155" stroke-width="1.7" marker-end="url(#ah-http)" stroke-linejoin="round"/>
+<path d="M420.0,583.5 L302.0,583.5" fill="none" stroke="#64748b" stroke-width="1.7" stroke-dasharray="6 4" marker-end="url(#ah-back)" stroke-linejoin="round"/>
+<path d="M620.0,610.0 L620.0,644.0" fill="none" stroke="#4f46e5" stroke-width="1.7" marker-end="url(#ah-web)" stroke-linejoin="round"/>
+<path d="M302.0,855.5 L420.0,855.5" fill="none" stroke="#334155" stroke-width="1.7" marker-end="url(#ah-http)" stroke-linejoin="round"/>
+<path d="M175.0,921.2 L175.0,1270.0" fill="none" stroke="#475569" stroke-width="1.7" stroke-dasharray="6 4" marker-end="url(#ah-ext)" stroke-linejoin="round"/>
+<path d="M885.0,360.0 L885.0,1380.0" fill="none" stroke="#334155" stroke-width="2.6" stroke-linejoin="round"/>
+<path d="M885.0,360.0 L950.0,360.0" fill="none" stroke="#334155" stroke-width="1.7" marker-end="url(#ah-http)" stroke-linejoin="round"/>
+<circle cx="885.0" cy="360.0" r="3.5" fill="#334155"/>
+<path d="M885.0,464.0 L950.0,464.0" fill="none" stroke="#334155" stroke-width="1.7" marker-end="url(#ah-http)" stroke-linejoin="round"/>
+<circle cx="885.0" cy="464.0" r="3.5" fill="#334155"/>
+<path d="M885.0,567.9 L950.0,567.9" fill="none" stroke="#334155" stroke-width="1.7" marker-end="url(#ah-http)" stroke-linejoin="round"/>
+<circle cx="885.0" cy="567.9" r="3.5" fill="#334155"/>
+<path d="M885.0,671.9 L950.0,671.9" fill="none" stroke="#334155" stroke-width="1.7" marker-end="url(#ah-http)" stroke-linejoin="round"/>
+<circle cx="885.0" cy="671.9" r="3.5" fill="#334155"/>
+<path d="M885.0,775.9 L950.0,775.9" fill="none" stroke="#334155" stroke-width="1.7" marker-end="url(#ah-http)" stroke-linejoin="round"/>
+<circle cx="885.0" cy="775.9" r="3.5" fill="#334155"/>
+<path d="M885.0,879.8 L950.0,879.8" fill="none" stroke="#334155" stroke-width="1.7" marker-end="url(#ah-http)" stroke-linejoin="round"/>
+<circle cx="885.0" cy="879.8" r="3.5" fill="#334155"/>
+<path d="M885.0,983.8 L950.0,983.8" fill="none" stroke="#334155" stroke-width="1.7" marker-end="url(#ah-http)" stroke-linejoin="round"/>
+<circle cx="885.0" cy="983.8" r="3.5" fill="#334155"/>
+<path d="M885.0,1296.3 L950.0,1296.3" fill="none" stroke="#334155" stroke-width="1.7" marker-end="url(#ah-http)" stroke-linejoin="round"/>
+<circle cx="885.0" cy="1296.3" r="3.5" fill="#334155"/>
+<path d="M820.0,714.9 L885.0,714.9" fill="none" stroke="#334155" stroke-width="1.7" marker-end="url(#ah-http)" stroke-linejoin="round"/>
+<circle cx="885.0" cy="714.9" r="3.5" fill="#334155"/>
+<path d="M820.0,866.4 L885.0,866.4" fill="none" stroke="#334155" stroke-width="1.7" marker-end="url(#ah-http)" stroke-linejoin="round"/>
+<circle cx="885.0" cy="866.4" r="3.5" fill="#334155"/>
+<path d="M885.0,1380.0 L885.0,1417.4 L1795.0,1417.4 L1795.0,1387.4" fill="none" stroke="#7c3aed" stroke-width="1.7" marker-end="url(#ah-ml)" stroke-linejoin="round"/>
+<circle cx="885.0" cy="1380.0" r="3.5" fill="#334155"/>
+<path d="M1200.0,1234.6 L1200.0,1200.6" fill="none" stroke="#047857" stroke-width="1.7" marker-end="url(#ah-service)" stroke-linejoin="round"/>
+<path d="M1450.0,1279.6 L1580.0,1279.6" fill="none" stroke="#7c3aed" stroke-width="1.7" marker-end="url(#ah-ml)" stroke-linejoin="round"/>
+<path d="M1450.0,360.0 L1584.0,360.0" fill="none" stroke="#c2410c" stroke-width="1.5" marker-end="url(#ah-data)" stroke-linejoin="round"/>
+<path d="M1450.0,464.0 L1584.0,464.0" fill="none" stroke="#c2410c" stroke-width="1.5" marker-end="url(#ah-data)" stroke-linejoin="round"/>
+<path d="M1450.0,567.9 L1584.0,567.9" fill="none" stroke="#c2410c" stroke-width="1.5" marker-end="url(#ah-data)" stroke-linejoin="round"/>
+<path d="M1450.0,671.9 L1584.0,671.9" fill="none" stroke="#c2410c" stroke-width="1.5" marker-end="url(#ah-data)" stroke-linejoin="round"/>
+<path d="M1450.0,775.9 L1584.0,775.9" fill="none" stroke="#c2410c" stroke-width="1.5" marker-end="url(#ah-data)" stroke-linejoin="round"/>
+<path d="M1450.0,879.8 L1584.0,879.8" fill="none" stroke="#c2410c" stroke-width="1.5" marker-end="url(#ah-data)" stroke-linejoin="round"/>
+<path d="M1450.0,983.8 L1584.0,983.8" fill="none" stroke="#c2410c" stroke-width="1.5" marker-end="url(#ah-data)" stroke-linejoin="round"/>
+<path d="M1450.0,1132.2 L1584.0,1132.2" fill="none" stroke="#c2410c" stroke-width="1.5" marker-end="url(#ah-data)" stroke-linejoin="round"/>
+<path d="M780.0,314.0 L780.0,212.1" fill="none" stroke="#475569" stroke-width="1.7" stroke-dasharray="6 4" marker-end="url(#ah-ext)" stroke-linejoin="round"/>
+<path d="M1400.0,314.0 L1400.0,212.1" fill="none" stroke="#475569" stroke-width="1.7" stroke-dasharray="6 4" marker-end="url(#ah-ext)" stroke-linejoin="round"/>
+<path d="M730.0,314.0 L730.0,104.0 L1795.0,104.0 L1795.0,314.0" fill="none" stroke="#c2410c" stroke-width="1.7" marker-end="url(#ah-data)" stroke-linejoin="round"/>
+<rect x="420.0" y="314.0" width="400.0" height="175.3" rx="10" fill="#ffffff" stroke="#4f46e5" stroke-width="1.6"/>
+<path d="M420.8,348.5 L420.8,324.3 Q420.8,314.8 430.3,314.8 L809.7,314.8 Q819.2,314.8 819.2,324.3 L819.2,348.5 Z" fill="#e0e7ff" stroke="none" stroke-width="0"/>
+<line x1="420.0" y1="348.5" x2="820.0" y2="348.5" stroke="#4f46e5" stroke-width="0.8" stroke-opacity="0.55"/>
+<text x="430.0" y="336.8" font-family="Arial, Helvetica, sans-serif" font-size="13.5" font-weight="700" fill="#312e81" text-anchor="start" xml:space="preserve">Shared code inside the web app — lib/</text>
+<text x="430.0" y="369.2" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">Runs inside the pages and API routes below; not a separate service.</text>
+<text x="430.0" y="385.3" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">• Score Coach, Debt Review Check and Case Summary read the</text>
+<text x="442.0" y="401.4" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">database directly (Prisma): Users, Credit_Profile, Debts,</text>
+<text x="442.0" y="417.5" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">Payment_History, Legal_Records.</text>
+<text x="430.0" y="433.6" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">• Help triage: keywords at once; OpenAI may refine the advisor it</text>
+<text x="442.0" y="449.7" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">suggests.</text>
+<text x="430.0" y="465.8" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">• Case Summary: OpenAI may reword it — the figures stay FinAware&#x27;s</text>
+<text x="442.0" y="481.9" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">own.</text>
+<rect x="420.0" y="515.3" width="400.0" height="94.8" rx="10" fill="#ffffff" stroke="#4f46e5" stroke-width="1.6"/>
+<path d="M420.8,549.7 L420.8,525.6 Q420.8,516.1 430.3,516.1 L809.7,516.1 Q819.2,516.1 819.2,525.6 L819.2,549.7 Z" fill="#e0e7ff" stroke="none" stroke-width="0"/>
+<line x1="420.0" y1="549.7" x2="820.0" y2="549.7" stroke="#4f46e5" stroke-width="0.8" stroke-opacity="0.55"/>
+<text x="430.0" y="538.1" font-family="Arial, Helvetica, sans-serif" font-size="13.5" font-weight="700" fill="#312e81" text-anchor="start" xml:space="preserve">Route guard — middleware.ts</text>
+<text x="430.0" y="570.5" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">Runs before every protected page:</text>
+<text x="430.0" y="586.6" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">• no session cookie → /login?next=…</text>
+<text x="430.0" y="602.7" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">• FICA still required → /fica-verification</text>
+<rect x="420.0" y="644.0" width="400.0" height="141.7" rx="10" fill="#ffffff" stroke="#4f46e5" stroke-width="1.6"/>
+<path d="M420.8,678.5 L420.8,654.3 Q420.8,644.8 430.3,644.8 L809.7,644.8 Q819.2,644.8 819.2,654.3 L819.2,678.5 Z" fill="#e0e7ff" stroke="none" stroke-width="0"/>
+<line x1="420.0" y1="678.5" x2="820.0" y2="678.5" stroke="#4f46e5" stroke-width="0.8" stroke-opacity="0.55"/>
+<text x="430.0" y="666.9" font-family="Arial, Helvetica, sans-serif" font-size="13.5" font-weight="700" fill="#312e81" text-anchor="start" xml:space="preserve">Pages — rendered on the server</text>
+<text x="430.0" y="699.2" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">Dashboard · My Identity · Debts &amp; Liabilities · Financial Rehab · Risk</text>
+<text x="430.0" y="715.3" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">Assessment · Financial profile · Score Coach · Money Plan · Get Help ·</text>
+<text x="430.0" y="731.4" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">Debt Review Check · Case Summary · Check a Loan Offer · About the</text>
+<text x="430.0" y="747.5" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">models · Income &amp; expenses</text>
+<text x="430.0" y="763.6" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">Each page asks the services for its data before the HTML is sent.</text>
+<text x="430.0" y="778.7" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="10.5" font-weight="400" fill="#1e293b" text-anchor="start" xml:space="preserve">app/(protected)/*/page.tsx</text>
+<rect x="420.0" y="811.7" width="400.0" height="109.5" rx="10" fill="#ffffff" stroke="#4f46e5" stroke-width="1.6"/>
+<path d="M420.8,846.2 L420.8,822.0 Q420.8,812.5 430.3,812.5 L809.7,812.5 Q819.2,812.5 819.2,822.0 L819.2,846.2 Z" fill="#e0e7ff" stroke="none" stroke-width="0"/>
+<line x1="420.0" y1="846.2" x2="820.0" y2="846.2" stroke="#4f46e5" stroke-width="0.8" stroke-opacity="0.55"/>
+<text x="430.0" y="834.5" font-family="Arial, Helvetica, sans-serif" font-size="13.5" font-weight="700" fill="#312e81" text-anchor="start" xml:space="preserve">API routes — /api/*</text>
+<text x="430.0" y="866.9" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">Called by the browser with fetch() and JSON.</text>
+<text x="430.0" y="883.0" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">Each checks the session cookie (401 without it), then forwards the request</text>
+<text x="430.0" y="899.1" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">to one service.</text>
+<text x="430.0" y="914.2" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="10.5" font-weight="400" fill="#1e293b" text-anchor="start" xml:space="preserve">app/api/**/route.ts → lib/microservices/proxy.ts</text>
+<rect x="760.0" y="118.0" width="660.0" height="94.1" rx="10" fill="#ffffff" stroke="#475569" stroke-width="1.6" stroke-dasharray="7 4"/>
+<path d="M760.8,152.5 L760.8,128.3 Q760.8,118.8 770.3,118.8 L1409.7,118.8 Q1419.2,118.8 1419.2,128.3 L1419.2,152.5 Z" fill="#e2e8f0" stroke="none" stroke-width="0"/>
+<line x1="760.0" y1="152.5" x2="1420.0" y2="152.5" stroke="#475569" stroke-width="0.8" stroke-opacity="0.55"/>
+<text x="770.0" y="140.8" font-family="Arial, Helvetica, sans-serif" font-size="13.5" font-weight="700" fill="#1e293b" text-anchor="start" xml:space="preserve">OpenAI Responses API — outside FinAware, optional</text>
+<rect x="1365.6" y="125.0" width="44.4" height="18.0" rx="9" fill="#475569" stroke="#475569" stroke-width="0"/>
+<text x="1387.8" y="138.0" font-family="Arial, Helvetica, sans-serif" font-size="10.5" font-weight="700" fill="#ffffff" text-anchor="middle" xml:space="preserve">HTTPS</text>
+<text x="770.0" y="173.2" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">Asked only when OPENAI_API_KEY is set (model gpt-4.1-mini). Used for wording only: the rehab plan and dashboard tips,</text>
+<text x="770.0" y="189.3" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">the help-advisor suggestion and the Case Summary.</text>
+<text x="770.0" y="204.9" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="700" fill="#b45309" text-anchor="start" xml:space="preserve">After a 401 or out-of-credit reply it is not asked again for 10 minutes; the calculated text is used.</text>
+<rect x="48.0" y="314.0" width="254.0" height="65.6" rx="8" fill="#fffbeb" stroke="#d97706" stroke-width="1.2" stroke-dasharray="4 3"/>
+<text x="57.0" y="334.8" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#78350f" text-anchor="start" xml:space="preserve">Signing in needs only an SA ID or passport</text>
+<text x="57.0" y="350.7" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#78350f" text-anchor="start" xml:space="preserve">number — there is no password. The session</text>
+<text x="57.0" y="366.6" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#78350f" text-anchor="start" xml:space="preserve">is a cookie that holds the user id.</text>
+<rect x="48.0" y="505.3" width="254.0" height="415.9" rx="10" fill="#ffffff" stroke="#2563eb" stroke-width="1.6"/>
+<path d="M48.8,539.7 L48.8,515.6 Q48.8,506.1 58.3,506.1 L291.7,506.1 Q301.2,506.1 301.2,515.6 L301.2,539.7 Z" fill="#dbeafe" stroke="none" stroke-width="0"/>
+<line x1="48.0" y1="539.7" x2="302.0" y2="539.7" stroke="#2563eb" stroke-width="0.8" stroke-opacity="0.55"/>
+<text x="58.0" y="528.1" font-family="Arial, Helvetica, sans-serif" font-size="13.5" font-weight="700" fill="#1e3a8a" text-anchor="start" xml:space="preserve">Web browser</text>
+<text x="58.0" y="560.5" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">Shows the pages Next.js renders (React 18,</text>
+<text x="58.0" y="576.6" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">Tailwind CSS, Recharts charts).</text>
+<text x="58.0" y="592.7" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">Keeps three httpOnly cookies for 7 days:</text>
+<text x="58.0" y="608.8" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">session (user id), FICA-verified and</text>
+<text x="58.0" y="624.9" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">FICA-required.</text>
+<text x="58.0" y="641.0" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="700" fill="#0f172a" text-anchor="start" xml:space="preserve">Calculated in the browser — no server</text>
+<text x="58.0" y="657.1" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="700" fill="#0f172a" text-anchor="start" xml:space="preserve">call:</text>
+<text x="58.0" y="673.2" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">• Bank-statement import and spending alerts</text>
+<text x="58.0" y="689.3" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">• Goal planner</text>
+<text x="58.0" y="705.4" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">• Cash-flow forecast, next 3 months</text>
+<text x="58.0" y="721.5" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">• Loan-offer check</text>
+<text x="58.0" y="736.6" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="10.5" font-weight="400" fill="#1e293b" text-anchor="start" xml:space="preserve">http://localhost:30005</text>
+<rect x="950.0" y="314.0" width="500.0" height="92.0" rx="10" fill="#ffffff" stroke="#059669" stroke-width="1.6"/>
+<path d="M950.8,348.5 L950.8,324.3 Q950.8,314.8 960.3,314.8 L1439.7,314.8 Q1449.2,314.8 1449.2,324.3 L1449.2,348.5 Z" fill="#d1fae5" stroke="none" stroke-width="0"/>
+<line x1="950.0" y1="348.5" x2="1450.0" y2="348.5" stroke="#059669" stroke-width="0.8" stroke-opacity="0.55"/>
+<text x="960.0" y="336.8" font-family="Arial, Helvetica, sans-serif" font-size="13.5" font-weight="700" fill="#064e3b" text-anchor="start" xml:space="preserve">Rehab service</text>
+<rect x="1403.0" y="321.0" width="37.0" height="18.0" rx="9" fill="#059669" stroke="#059669" stroke-width="0"/>
+<text x="1421.5" y="334.0" font-family="Arial, Helvetica, sans-serif" font-size="10.5" font-weight="700" fill="#ffffff" text-anchor="middle" xml:space="preserve">:4105</text>
+<text x="960.0" y="368.2" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="10.5" font-weight="400" fill="#1e293b" text-anchor="start" xml:space="preserve">POST /rehab/plan/:userId</text>
+<text x="960.0" y="383.9" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">Rehab plan and the dashboard&#x27;s AI tips — OpenAI when available, otherwise calculated.</text>
+<text x="960.0" y="399.0" font-family="Arial, Helvetica, sans-serif" font-size="10.5" font-weight="400" fill="#475569" text-anchor="start" xml:space="preserve">Reads Users, Debts · writes an AI_Recommendations snapshot</text>
+<rect x="950.0" y="418.0" width="500.0" height="92.0" rx="10" fill="#ffffff" stroke="#059669" stroke-width="1.6"/>
+<path d="M950.8,452.4 L950.8,428.3 Q950.8,418.8 960.3,418.8 L1439.7,418.8 Q1449.2,418.8 1449.2,428.3 L1449.2,452.4 Z" fill="#d1fae5" stroke="none" stroke-width="0"/>
+<line x1="950.0" y1="452.4" x2="1450.0" y2="452.4" stroke="#059669" stroke-width="0.8" stroke-opacity="0.55"/>
+<text x="960.0" y="440.8" font-family="Arial, Helvetica, sans-serif" font-size="13.5" font-weight="700" fill="#064e3b" text-anchor="start" xml:space="preserve">Auth service</text>
+<rect x="1403.0" y="425.0" width="37.0" height="18.0" rx="9" fill="#059669" stroke="#059669" stroke-width="0"/>
+<text x="1421.5" y="438.0" font-family="Arial, Helvetica, sans-serif" font-size="10.5" font-weight="700" fill="#ffffff" text-anchor="middle" xml:space="preserve">:4101</text>
+<text x="960.0" y="472.2" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="10.5" font-weight="400" fill="#1e293b" text-anchor="start" xml:space="preserve">POST /auth/login · GET /auth/users/:id · POST /auth/fica/verify</text>
+<text x="960.0" y="487.9" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">Log in; Join creates a simulated person from the ID number; FICA verification.</text>
+<text x="960.0" y="503.0" font-family="Arial, Helvetica, sans-serif" font-size="10.5" font-weight="400" fill="#475569" text-anchor="start" xml:space="preserve">Reads/writes Users; Join also creates Credit_Profile, Debts, Payment_History, Legal_Records</text>
+<rect x="950.0" y="521.9" width="500.0" height="92.0" rx="10" fill="#ffffff" stroke="#059669" stroke-width="1.6"/>
+<path d="M950.8,556.4 L950.8,532.2 Q950.8,522.7 960.3,522.7 L1439.7,522.7 Q1449.2,522.7 1449.2,532.2 L1449.2,556.4 Z" fill="#d1fae5" stroke="none" stroke-width="0"/>
+<line x1="950.0" y1="556.4" x2="1450.0" y2="556.4" stroke="#059669" stroke-width="0.8" stroke-opacity="0.55"/>
+<text x="960.0" y="544.8" font-family="Arial, Helvetica, sans-serif" font-size="13.5" font-weight="700" fill="#064e3b" text-anchor="start" xml:space="preserve">Dashboard service</text>
+<rect x="1403.0" y="528.9" width="37.0" height="18.0" rx="9" fill="#059669" stroke="#059669" stroke-width="0"/>
+<text x="1421.5" y="541.9" font-family="Arial, Helvetica, sans-serif" font-size="10.5" font-weight="700" fill="#ffffff" text-anchor="middle" xml:space="preserve">:4102</text>
+<text x="960.0" y="576.1" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="10.5" font-weight="400" fill="#1e293b" text-anchor="start" xml:space="preserve">GET /dashboard/overview/:userId</text>
+<text x="960.0" y="591.8" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">Metrics, financial age, risk factors and the 6-month score projection.</text>
+<text x="960.0" y="606.9" font-family="Arial, Helvetica, sans-serif" font-size="10.5" font-weight="400" fill="#475569" text-anchor="start" xml:space="preserve">Reads Users, Credit_Profile, Debts, Payment_History</text>
+<rect x="950.0" y="625.9" width="500.0" height="92.0" rx="10" fill="#ffffff" stroke="#059669" stroke-width="1.6"/>
+<path d="M950.8,660.4 L950.8,636.2 Q950.8,626.7 960.3,626.7 L1439.7,626.7 Q1449.2,626.7 1449.2,636.2 L1449.2,660.4 Z" fill="#d1fae5" stroke="none" stroke-width="0"/>
+<line x1="950.0" y1="660.4" x2="1450.0" y2="660.4" stroke="#059669" stroke-width="0.8" stroke-opacity="0.55"/>
+<text x="960.0" y="648.7" font-family="Arial, Helvetica, sans-serif" font-size="13.5" font-weight="700" fill="#064e3b" text-anchor="start" xml:space="preserve">Identity service</text>
+<rect x="1403.0" y="632.9" width="37.0" height="18.0" rx="9" fill="#059669" stroke="#059669" stroke-width="0"/>
+<text x="1421.5" y="645.9" font-family="Arial, Helvetica, sans-serif" font-size="10.5" font-weight="700" fill="#ffffff" text-anchor="middle" xml:space="preserve">:4103</text>
+<text x="960.0" y="680.1" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="10.5" font-weight="400" fill="#1e293b" text-anchor="start" xml:space="preserve">GET · PATCH /identity/profile/:userId</text>
+<text x="960.0" y="695.8" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">Personal details and the PDF download password.</text>
+<text x="960.0" y="710.9" font-family="Arial, Helvetica, sans-serif" font-size="10.5" font-weight="400" fill="#475569" text-anchor="start" xml:space="preserve">Reads/writes Users</text>
+<rect x="950.0" y="729.9" width="500.0" height="92.0" rx="10" fill="#ffffff" stroke="#059669" stroke-width="1.6"/>
+<path d="M950.8,764.4 L950.8,740.2 Q950.8,730.7 960.3,730.7 L1439.7,730.7 Q1449.2,730.7 1449.2,740.2 L1449.2,764.4 Z" fill="#d1fae5" stroke="none" stroke-width="0"/>
+<line x1="950.0" y1="764.4" x2="1450.0" y2="764.4" stroke="#059669" stroke-width="0.8" stroke-opacity="0.55"/>
+<text x="960.0" y="752.7" font-family="Arial, Helvetica, sans-serif" font-size="13.5" font-weight="700" fill="#064e3b" text-anchor="start" xml:space="preserve">Debts service</text>
+<rect x="1403.0" y="736.9" width="37.0" height="18.0" rx="9" fill="#059669" stroke="#059669" stroke-width="0"/>
+<text x="1421.5" y="749.9" font-family="Arial, Helvetica, sans-serif" font-size="10.5" font-weight="700" fill="#ffffff" text-anchor="middle" xml:space="preserve">:4104</text>
+<text x="960.0" y="784.1" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="10.5" font-weight="400" fill="#1e293b" text-anchor="start" xml:space="preserve">GET · POST /debts/:userId · PATCH /debts/:userId/:debtId</text>
+<text x="960.0" y="799.8" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">Add and update debts; keeps credit totals current; a garnishee adds a legal record.</text>
+<text x="960.0" y="814.9" font-family="Arial, Helvetica, sans-serif" font-size="10.5" font-weight="400" fill="#475569" text-anchor="start" xml:space="preserve">Reads/writes Debts, Credit_Profile, Legal_Records</text>
+<rect x="950.0" y="833.9" width="500.0" height="92.0" rx="10" fill="#ffffff" stroke="#059669" stroke-width="1.6"/>
+<path d="M950.8,868.3 L950.8,844.2 Q950.8,834.7 960.3,834.7 L1439.7,834.7 Q1449.2,834.7 1449.2,844.2 L1449.2,868.3 Z" fill="#d1fae5" stroke="none" stroke-width="0"/>
+<line x1="950.0" y1="868.3" x2="1450.0" y2="868.3" stroke="#059669" stroke-width="0.8" stroke-opacity="0.55"/>
+<text x="960.0" y="856.7" font-family="Arial, Helvetica, sans-serif" font-size="13.5" font-weight="700" fill="#064e3b" text-anchor="start" xml:space="preserve">Help service</text>
+<rect x="1403.0" y="840.9" width="37.0" height="18.0" rx="9" fill="#059669" stroke="#059669" stroke-width="0"/>
+<text x="1421.5" y="853.9" font-family="Arial, Helvetica, sans-serif" font-size="10.5" font-weight="700" fill="#ffffff" text-anchor="middle" xml:space="preserve">:4106</text>
+<text x="960.0" y="888.0" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="10.5" font-weight="400" fill="#1e293b" text-anchor="start" xml:space="preserve">GET · POST /help/requests/:userId</text>
+<text x="960.0" y="903.8" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">Saves a help request and returns the advisor&#x27;s WhatsApp link.</text>
+<text x="960.0" y="918.8" font-family="Arial, Helvetica, sans-serif" font-size="10.5" font-weight="400" fill="#475569" text-anchor="start" xml:space="preserve">Writes Expert_Requests · reads Providers</text>
+<rect x="950.0" y="937.8" width="500.0" height="92.0" rx="10" fill="#ffffff" stroke="#059669" stroke-width="1.6"/>
+<path d="M950.8,972.3 L950.8,948.1 Q950.8,938.6 960.3,938.6 L1439.7,938.6 Q1449.2,938.6 1449.2,948.1 L1449.2,972.3 Z" fill="#d1fae5" stroke="none" stroke-width="0"/>
+<line x1="950.0" y1="972.3" x2="1450.0" y2="972.3" stroke="#059669" stroke-width="0.8" stroke-opacity="0.55"/>
+<text x="960.0" y="960.6" font-family="Arial, Helvetica, sans-serif" font-size="13.5" font-weight="700" fill="#064e3b" text-anchor="start" xml:space="preserve">PDF service</text>
+<rect x="1403.0" y="944.8" width="37.0" height="18.0" rx="9" fill="#059669" stroke="#059669" stroke-width="0"/>
+<text x="1421.5" y="957.8" font-family="Arial, Helvetica, sans-serif" font-size="10.5" font-weight="700" fill="#ffffff" text-anchor="middle" xml:space="preserve">:4107</text>
+<text x="960.0" y="992.0" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="10.5" font-weight="400" fill="#1e293b" text-anchor="start" xml:space="preserve">POST /pdf/overview/:userId</text>
+<text x="960.0" y="1007.7" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">Password-checked overview PDF (pdf-lib, watermarked).</text>
+<text x="960.0" y="1022.8" font-family="Arial, Helvetica, sans-serif" font-size="10.5" font-weight="400" fill="#475569" text-anchor="start" xml:space="preserve">Reads Users, Credit_Profile, Debts</text>
+<rect x="950.0" y="1063.8" width="500.0" height="136.8" rx="10" fill="#ffffff" stroke="#059669" stroke-width="1.6"/>
+<path d="M950.8,1098.3 L950.8,1074.1 Q950.8,1064.6 960.3,1064.6 L1439.7,1064.6 Q1449.2,1064.6 1449.2,1074.1 L1449.2,1098.3 Z" fill="#d1fae5" stroke="none" stroke-width="0"/>
+<line x1="950.0" y1="1098.3" x2="1450.0" y2="1098.3" stroke="#059669" stroke-width="0.8" stroke-opacity="0.55"/>
+<text x="960.0" y="1086.6" font-family="Arial, Helvetica, sans-serif" font-size="13.5" font-weight="700" fill="#064e3b" text-anchor="start" xml:space="preserve">Financial Data service</text>
+<rect x="1403.0" y="1070.8" width="37.0" height="18.0" rx="9" fill="#059669" stroke="#059669" stroke-width="0"/>
+<text x="1421.5" y="1083.8" font-family="Arial, Helvetica, sans-serif" font-size="10.5" font-weight="700" fill="#ffffff" text-anchor="middle" xml:space="preserve">:4109</text>
+<text x="960.0" y="1118.0" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="10.5" font-weight="400" fill="#1e293b" text-anchor="start" xml:space="preserve">/financial-profile · /budget · /financial-data · /payment-features ·</text>
+<text x="960.0" y="1132.7" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="10.5" font-weight="400" fill="#1e293b" text-anchor="start" xml:space="preserve">/risk-assessments</text>
+<text x="960.0" y="1148.4" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">The only data access for the risk and money features; turns records into model inputs.</text>
+<text x="960.0" y="1163.5" font-family="Arial, Helvetica, sans-serif" font-size="10.5" font-weight="400" fill="#475569" text-anchor="start" xml:space="preserve">Reads/writes Financial_Profile, Risk_Assessment, Risk_Driver, Recommendation, Budget_Item; reads</text>
+<text x="960.0" y="1178.2" font-family="Arial, Helvetica, sans-serif" font-size="10.5" font-weight="400" fill="#475569" text-anchor="start" xml:space="preserve">Users, Debts, Payment_History</text>
+<text x="960.0" y="1193.4" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="700" fill="#b45309" text-anchor="start" xml:space="preserve">Internal only: called by the Financial API, never by the web app</text>
+<rect x="950.0" y="1234.6" width="500.0" height="123.5" rx="10" fill="#ffffff" stroke="#059669" stroke-width="1.6"/>
+<path d="M950.8,1269.0 L950.8,1244.9 Q950.8,1235.4 960.3,1235.4 L1439.7,1235.4 Q1449.2,1235.4 1449.2,1244.9 L1449.2,1269.0 Z" fill="#d1fae5" stroke="none" stroke-width="0"/>
+<line x1="950.0" y1="1269.0" x2="1450.0" y2="1269.0" stroke="#059669" stroke-width="0.8" stroke-opacity="0.55"/>
+<text x="960.0" y="1257.4" font-family="Arial, Helvetica, sans-serif" font-size="13.5" font-weight="700" fill="#064e3b" text-anchor="start" xml:space="preserve">Financial API service</text>
+<rect x="1403.0" y="1241.6" width="37.0" height="18.0" rx="9" fill="#059669" stroke="#059669" stroke-width="0"/>
+<text x="1421.5" y="1254.6" font-family="Arial, Helvetica, sans-serif" font-size="10.5" font-weight="700" fill="#ffffff" text-anchor="middle" xml:space="preserve">:4108</text>
+<text x="960.0" y="1288.7" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="10.5" font-weight="400" fill="#1e293b" text-anchor="start" xml:space="preserve">/financial-profile · /risk-assessment (+ /simulate, /latest, /history) ·</text>
+<text x="960.0" y="1303.4" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="10.5" font-weight="400" fill="#1e293b" text-anchor="start" xml:space="preserve">/money-plan · /budget · /payment-outlook · /peer-segment</text>
+<text x="960.0" y="1319.2" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">Runs the risk and money features: checks input, calls Financial Data and the ML service, and</text>
+<text x="960.0" y="1335.3" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">applies the recommendation rules (v1.0).</text>
+<text x="960.0" y="1350.9" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="700" fill="#b45309" text-anchor="start" xml:space="preserve">No database access of its own</text>
+<path d="M1584.0,328.0 L1584.0,1186.6 A211.0,14 0 0 0 2006.0,1186.6 L2006.0,328.0" fill="#ffffff" stroke="#ea580c" stroke-width="1.8"/>
+<ellipse cx="1795.0" cy="328.0" rx="211.0" ry="14" fill="#ffedd5" stroke="#ea580c" stroke-width="1.8"/>
+<text x="1795.0" y="362.0" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="700" fill="#7c2d12" text-anchor="middle" xml:space="preserve">SQLite database — one file, through Prisma</text>
+<text x="1599.0" y="386.0" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="700" fill="#0f172a" text-anchor="start" xml:space="preserve">People and credit</text>
+<text x="1599.0" y="402.7" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">Users</text>
+<text x="1599.0" y="419.4" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">Credit_Profile</text>
+<text x="1599.0" y="436.0" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">Debts</text>
+<text x="1599.0" y="452.7" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">Payment_History</text>
+<text x="1599.0" y="469.4" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">Legal_Records</text>
+<text x="1599.0" y="486.1" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">Wealth_Assets</text>
+<text x="1599.0" y="502.7" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve"></text>
+<text x="1599.0" y="519.4" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="700" fill="#0f172a" text-anchor="start" xml:space="preserve">Help and AI</text>
+<text x="1599.0" y="536.1" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">Expert_Requests</text>
+<text x="1599.0" y="552.8" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">Providers</text>
+<text x="1599.0" y="569.4" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">AI_Recommendations</text>
+<text x="1795.0" y="386.0" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="700" fill="#0f172a" text-anchor="start" xml:space="preserve">Risk and money</text>
+<text x="1795.0" y="402.7" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">Financial_Profile</text>
+<text x="1795.0" y="419.4" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">Risk_Assessment</text>
+<text x="1795.0" y="436.0" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">Risk_Driver</text>
+<text x="1795.0" y="452.7" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">Recommendation</text>
+<text x="1795.0" y="469.4" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">Budget_Item</text>
+<text x="1795.0" y="486.1" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve"></text>
+<text x="1795.0" y="502.7" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="700" fill="#0f172a" text-anchor="start" xml:space="preserve">Where the file is</text>
+<text x="1795.0" y="519.4" font-family="Arial, Helvetica, sans-serif" font-size="10.5" font-weight="400" fill="#475569" text-anchor="start" xml:space="preserve">Local: prisma/prisma/dev.db</text>
+<text x="1795.0" y="534.6" font-family="Arial, Helvetica, sans-serif" font-size="10.5" font-weight="400" fill="#475569" text-anchor="start" xml:space="preserve">Docker: /data/dev.db</text>
+<text x="1795.0" y="549.9" font-family="Arial, Helvetica, sans-serif" font-size="10.5" font-weight="400" fill="#475569" text-anchor="start" xml:space="preserve">Kubernetes: a 2 Gi volume</text>
+<rect x="1580.0" y="1234.6" width="430.0" height="152.9" rx="10" fill="#ffffff" stroke="#7c3aed" stroke-width="1.6"/>
+<path d="M1580.8,1269.0 L1580.8,1244.9 Q1580.8,1235.4 1590.3,1235.4 L1999.7,1235.4 Q2009.2,1235.4 2009.2,1244.9 L2009.2,1269.0 Z" fill="#ede9fe" stroke="none" stroke-width="0"/>
+<line x1="1580.0" y1="1269.0" x2="2010.0" y2="1269.0" stroke="#7c3aed" stroke-width="0.8" stroke-opacity="0.55"/>
+<text x="1590.0" y="1257.4" font-family="Arial, Helvetica, sans-serif" font-size="13.5" font-weight="700" fill="#4c1d95" text-anchor="start" xml:space="preserve">ML Prediction service — Python FastAPI</text>
+<rect x="1963.0" y="1241.6" width="37.0" height="18.0" rx="9" fill="#7c3aed" stroke="#7c3aed" stroke-width="0"/>
+<text x="1981.5" y="1254.6" font-family="Arial, Helvetica, sans-serif" font-size="10.5" font-weight="700" fill="#ffffff" text-anchor="middle" xml:space="preserve">:8000</text>
+<text x="1590.0" y="1288.7" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="10.5" font-weight="400" fill="#1e293b" text-anchor="start" xml:space="preserve">POST /predict · /what-if · /segment</text>
+<text x="1590.0" y="1303.4" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="10.5" font-weight="400" fill="#1e293b" text-anchor="start" xml:space="preserve">POST /predict/payment-miss</text>
+<text x="1590.0" y="1318.1" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="10.5" font-weight="400" fill="#1e293b" text-anchor="start" xml:space="preserve">GET /model-info · /health/live · /health/ready</text>
+<text x="1590.0" y="1333.9" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">Risk tier (Gradient Boosting + SHAP drivers), missed-payment chance, six peer</text>
+<text x="1590.0" y="1350.0" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">groups (KMeans).</text>
+<text x="1590.0" y="1365.0" font-family="Arial, Helvetica, sans-serif" font-size="10.5" font-weight="400" fill="#475569" text-anchor="start" xml:space="preserve">Loads ml-service/artifacts/*.joblib at start-up; no database access.</text>
+<text x="1590.0" y="1380.3" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="700" fill="#b45309" text-anchor="start" xml:space="preserve">Internal only: no published port</text>
+<rect x="48.0" y="1270.0" width="254.0" height="94.8" rx="10" fill="#ffffff" stroke="#475569" stroke-width="1.6" stroke-dasharray="7 4"/>
+<path d="M48.8,1304.5 L48.8,1280.3 Q48.8,1270.8 58.3,1270.8 L291.7,1270.8 Q301.2,1270.8 301.2,1280.3 L301.2,1304.5 Z" fill="#e2e8f0" stroke="none" stroke-width="0"/>
+<line x1="48.0" y1="1304.5" x2="302.0" y2="1304.5" stroke="#475569" stroke-width="0.8" stroke-opacity="0.55"/>
+<text x="58.0" y="1292.9" font-family="Arial, Helvetica, sans-serif" font-size="13.5" font-weight="700" fill="#1e293b" text-anchor="start" xml:space="preserve">WhatsApp (the user&#x27;s own app)</text>
+<text x="58.0" y="1325.2" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">Opens from the wa.me click-to-chat link</text>
+<text x="58.0" y="1341.3" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">returned after a help request, with the</text>
+<text x="58.0" y="1357.4" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">message already typed.</text>
+<rect x="320.8" y="522.2" width="80.5" height="20.8" rx="5" fill="#ffffff" fill-opacity="0.97" stroke="#334155" stroke-opacity="0.35" stroke-width="0.8"/>
+<text x="361.0" y="536.9" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="700" fill="#334155" text-anchor="middle" xml:space="preserve">page request</text>
+<rect x="334.9" y="586.1" width="52.2" height="20.8" rx="5" fill="#ffffff" fill-opacity="0.97" stroke="#64748b" stroke-opacity="0.35" stroke-width="0.8"/>
+<text x="361.0" y="600.8" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="700" fill="#64748b" text-anchor="middle" xml:space="preserve">redirect</text>
+<rect x="593.9" y="616.7" width="52.2" height="20.8" rx="5" fill="#ffffff" fill-opacity="0.97" stroke="#4f46e5" stroke-opacity="0.35" stroke-width="0.8"/>
+<text x="620.0" y="631.3" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="700" fill="#4f46e5" text-anchor="middle" xml:space="preserve">allowed</text>
+<rect x="319.2" y="818.2" width="83.6" height="34.5" rx="5" fill="#ffffff" fill-opacity="0.97" stroke="#334155" stroke-opacity="0.35" stroke-width="0.8"/>
+<text x="361.0" y="832.9" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="700" fill="#334155" text-anchor="middle" xml:space="preserve">fetch(&#x27;/api/…&#x27;)</text>
+<text x="361.0" y="846.7" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="700" fill="#334155" text-anchor="middle" xml:space="preserve">JSON</text>
+<rect x="134.8" y="1078.4" width="80.4" height="34.5" rx="5" fill="#ffffff" fill-opacity="0.97" stroke="#475569" stroke-opacity="0.35" stroke-width="0.8"/>
+<text x="175.0" y="1093.0" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="700" fill="#475569" text-anchor="middle" xml:space="preserve">user taps the</text>
+<text x="175.0" y="1106.8" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="700" fill="#475569" text-anchor="middle" xml:space="preserve">wa.me link</text>
+<g transform="rotate(-90 864.0 1170.6)"><rect x="705.9" y="1160.4" width="316.2" height="20.5" rx="5" fill="#ffffff" stroke="#334155" stroke-opacity="0.4" stroke-width="0.8"/><text x="864.0" y="1174.7" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="700" fill="#334155" text-anchor="middle">Internal HTTP + JSON — callServiceJson(service, path)</text></g>
+<rect x="1154.3" y="1407.1" width="280.5" height="20.8" rx="5" fill="#ffffff" fill-opacity="0.97" stroke="#7c3aed" stroke-opacity="0.35" stroke-width="0.8"/>
+<text x="1294.5" y="1421.7" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="700" fill="#7c3aed" text-anchor="middle" xml:space="preserve">GET /model-info — the About the models page only</text>
+<rect x="1228.6" y="1200.3" width="126.8" height="34.5" rx="5" fill="#ffffff" fill-opacity="0.97" stroke="#047857" stroke-opacity="0.35" stroke-width="0.8"/>
+<text x="1292.0" y="1215.0" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="700" fill="#047857" text-anchor="middle" xml:space="preserve">HTTP: profile, budget,</text>
+<text x="1292.0" y="1228.7" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="700" fill="#047857" text-anchor="middle" xml:space="preserve">features, save results</text>
+<rect x="1465.7" y="1262.3" width="98.6" height="34.5" rx="5" fill="#ffffff" fill-opacity="0.97" stroke="#7c3aed" stroke-opacity="0.35" stroke-width="0.8"/>
+<text x="1515.0" y="1277.0" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="700" fill="#7c3aed" text-anchor="middle" xml:space="preserve">POST /predict …</text>
+<text x="1515.0" y="1290.7" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="700" fill="#7c3aed" text-anchor="middle" xml:space="preserve">15 s timeout</text>
+<rect x="1493.4" y="349.9" width="47.1" height="20.1" rx="5" fill="#ffffff" fill-opacity="0.97" stroke="#c2410c" stroke-opacity="0.35" stroke-width="0.8"/>
+<text x="1517.0" y="364.1" font-family="Arial, Helvetica, sans-serif" font-size="10.5" font-weight="700" fill="#c2410c" text-anchor="middle" xml:space="preserve">Prisma</text>
+<rect x="739.8" y="226.7" width="80.4" height="20.8" rx="5" fill="#ffffff" fill-opacity="0.97" stroke="#475569" stroke-opacity="0.35" stroke-width="0.8"/>
+<text x="780.0" y="241.3" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="700" fill="#475569" text-anchor="middle" xml:space="preserve">wording only</text>
+<rect x="1353.4" y="226.7" width="93.1" height="20.8" rx="5" fill="#ffffff" fill-opacity="0.97" stroke="#475569" stroke-opacity="0.35" stroke-width="0.8"/>
+<text x="1400.0" y="241.3" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="700" fill="#475569" text-anchor="middle" xml:space="preserve">rehab plan, tips</text>
+<rect x="1444.8" y="93.6" width="359.5" height="20.8" rx="5" fill="#ffffff" fill-opacity="0.97" stroke="#c2410c" stroke-opacity="0.35" stroke-width="0.8"/>
+<text x="1624.6" y="108.3" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="700" fill="#c2410c" text-anchor="middle" xml:space="preserve">Prisma (read) — Score Coach, Debt Review Check, Case Summary</text>
+<rect x="46.0" y="1513.4" width="34.0" height="20.0" rx="5" fill="#dbeafe" stroke="#2563eb" stroke-width="1.4"/>
+<text x="90.0" y="1527.9" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#1e293b" text-anchor="start" xml:space="preserve">Runs in the browser</text>
+<rect x="374.0" y="1513.4" width="34.0" height="20.0" rx="5" fill="#e0e7ff" stroke="#4f46e5" stroke-width="1.4"/>
+<text x="418.0" y="1527.9" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#1e293b" text-anchor="start" xml:space="preserve">Next.js web app</text>
+<rect x="702.0" y="1513.4" width="34.0" height="20.0" rx="5" fill="#d1fae5" stroke="#059669" stroke-width="1.4"/>
+<text x="746.0" y="1527.9" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#1e293b" text-anchor="start" xml:space="preserve">Node.js service</text>
+<rect x="1030.0" y="1513.4" width="34.0" height="20.0" rx="5" fill="#ede9fe" stroke="#7c3aed" stroke-width="1.4"/>
+<text x="1074.0" y="1527.9" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#1e293b" text-anchor="start" xml:space="preserve">Python ML service</text>
+<rect x="1358.0" y="1513.4" width="34.0" height="20.0" rx="5" fill="#ffedd5" stroke="#ea580c" stroke-width="1.4"/>
+<text x="1402.0" y="1527.9" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#1e293b" text-anchor="start" xml:space="preserve">Stored data</text>
+<rect x="1686.0" y="1513.4" width="34.0" height="20.0" rx="5" fill="#e2e8f0" stroke="#475569" stroke-width="1.4" stroke-dasharray="7 4"/>
+<text x="1730.0" y="1527.9" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#1e293b" text-anchor="start" xml:space="preserve">Outside FinAware</text>
+<path d="M46.0,1553.4 L80.0,1553.4" stroke="#334155" stroke-width="1.8" marker-end="url(#ah-http)"/>
+<text x="90.0" y="1557.9" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#1e293b" text-anchor="start" xml:space="preserve">HTTP request (JSON)</text>
+<path d="M374.0,1553.4 L408.0,1553.4" stroke="#7c3aed" stroke-width="1.8" marker-end="url(#ah-ml)"/>
+<text x="418.0" y="1557.9" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#1e293b" text-anchor="start" xml:space="preserve">Call to the ML service</text>
+<path d="M702.0,1553.4 L736.0,1553.4" stroke="#c2410c" stroke-width="1.8" marker-end="url(#ah-data)"/>
+<text x="746.0" y="1557.9" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#1e293b" text-anchor="start" xml:space="preserve">Database access (Prisma)</text>
+<path d="M1030.0,1553.4 L1064.0,1553.4" stroke="#475569" stroke-width="1.8" stroke-dasharray="6 4" marker-end="url(#ah-ext)"/>
+<text x="1074.0" y="1557.9" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#1e293b" text-anchor="start" xml:space="preserve">Optional / outside call</text>
+<path d="M1358.0,1553.4 L1392.0,1553.4" stroke="#64748b" stroke-width="1.8" stroke-dasharray="6 4" marker-end="url(#ah-back)"/>
+<text x="1402.0" y="1557.9" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#1e293b" text-anchor="start" xml:space="preserve">Redirect or reply</text>
+<rect x="1686.0" y="1543.4" width="34.0" height="20.0" rx="4" fill="#fffbeb" stroke="#d97706" stroke-width="1.1" stroke-dasharray="4 3"/>
+<text x="1730.0" y="1557.9" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#1e293b" text-anchor="start" xml:space="preserve">Something worth knowing</text>
+<text x="1030.0" y="1601.0" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="400" fill="#94a3b8" text-anchor="middle" xml:space="preserve">FinAware · System Architecture · drawn from the code · updated 29 September 2026</text>
+</svg>

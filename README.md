@@ -269,8 +269,11 @@ own database, which the image build can't see); everything else works the same.
 ### What's inside
 
 - **Web app:** Next.js 14 (App Router) + TypeScript, Tailwind CSS, Zod, Recharts — on port `30005`.
+- **Diagrams:** architecture, deployment, data model, ML models, the user journey and step-by-step flows
+  are in [`docs/diagrams/`](docs/diagrams/README.md).
 - **Services:** ten process-isolated services behind the web app's `/api/*` routes, which act as the
-  authenticated edge. The web layer never touches the database; all data access runs in the services.
+  authenticated edge. Nearly all data access runs in the services; the Score Coach, Debt Review Check
+  and Case Summary pages also read the database directly, on the server.
 
   | Service | Port | Does |
   |---|---|---|
@@ -286,8 +289,8 @@ own database, which the image build can't see); everything else works the same.
   | `ml-service` | 8000 | Python FastAPI: risk tier, missed-payment and peer-group models |
 
 - **Database:** Prisma + SQLite (`prisma/prisma/dev.db`). Tables: `Users`, `Credit_Profile`, `Debts`,
-  `Payment_History`, `Legal_Records`, `AI_Recommendations`, `Expert_Requests`, `Providers`,
-  `Financial_Profile`, `Risk_Assessment`, `Risk_Driver`, `Recommendation`, `Budget_Item`.
+  `Payment_History`, `Legal_Records`, `Wealth_Assets`, `AI_Recommendations`, `Expert_Requests`,
+  `Providers`, `Financial_Profile`, `Risk_Assessment`, `Risk_Driver`, `Recommendation`, `Budget_Item`.
 
 ### Features
 
@@ -347,9 +350,10 @@ the Docker build), never committed.
 - **WhatsApp:** `wa.me` click-to-chat links only — nothing is sent automatically.
 - **PDF protection:** a password gate before generation plus a watermark; true PDF encryption is not
   guaranteed.
-- **Diagrams:** `FinAware_architecture_diagram.svg`, `FinAware_diagram_README.md`,
-  `docs/architecture-diagram-ml.png`, `docs/service-communication-diagram-ml.png` (regenerate with
-  `bash docs/ml/diagrams/render.sh`) and the supplied UML in `docs/uml/`.
+- **Diagrams:** the current set, with how to rebuild it, is [`docs/diagrams/`](docs/diagrams/README.md).
+  The older ones (`FinAware_architecture_diagram.svg`, `docs/architecture-diagram-ml.png`,
+  `docs/service-communication-diagram-ml.png`, the supplied UML in `docs/uml/`) predate the Money Plan,
+  the help tools and the newer models.
 
 ---
 

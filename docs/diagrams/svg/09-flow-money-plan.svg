@@ -1,0 +1,304 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2140" height="1932" viewBox="0 0 2140 1932">
+<title>FinAware — Flow: Money Plan</title>
+<defs><marker id="ah-back" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" markerUnits="userSpaceOnUse" orient="auto"><path d="M0,0.5 L10,5 L0,9.5 Z" fill="#64748b"/></marker><marker id="ah-back-start" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="9" markerHeight="9" markerUnits="userSpaceOnUse" orient="auto"><path d="M10,0.5 L0,5 L10,9.5 Z" fill="#64748b"/></marker><marker id="ah-err" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" markerUnits="userSpaceOnUse" orient="auto"><path d="M0,0.5 L10,5 L0,9.5 Z" fill="#dc2626"/></marker><marker id="ah-err-start" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="9" markerHeight="9" markerUnits="userSpaceOnUse" orient="auto"><path d="M10,0.5 L0,5 L10,9.5 Z" fill="#dc2626"/></marker><marker id="ah-flow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" markerUnits="userSpaceOnUse" orient="auto"><path d="M0,0.5 L10,5 L0,9.5 Z" fill="#1e293b"/></marker><marker id="ah-flow-start" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="9" markerHeight="9" markerUnits="userSpaceOnUse" orient="auto"><path d="M10,0.5 L0,5 L10,9.5 Z" fill="#1e293b"/></marker><marker id="ah-http" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" markerUnits="userSpaceOnUse" orient="auto"><path d="M0,0.5 L10,5 L0,9.5 Z" fill="#334155"/></marker><marker id="ah-http-start" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="9" markerHeight="9" markerUnits="userSpaceOnUse" orient="auto"><path d="M10,0.5 L0,5 L10,9.5 Z" fill="#334155"/></marker><marker id="ah-ml" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" markerUnits="userSpaceOnUse" orient="auto"><path d="M0,0.5 L10,5 L0,9.5 Z" fill="#7c3aed"/></marker><marker id="ah-ml-start" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="9" markerHeight="9" markerUnits="userSpaceOnUse" orient="auto"><path d="M10,0.5 L0,5 L10,9.5 Z" fill="#7c3aed"/></marker><marker id="ah-ok" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" markerUnits="userSpaceOnUse" orient="auto"><path d="M0,0.5 L10,5 L0,9.5 Z" fill="#15803d"/></marker><marker id="ah-ok-start" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="9" markerHeight="9" markerUnits="userSpaceOnUse" orient="auto"><path d="M10,0.5 L0,5 L10,9.5 Z" fill="#15803d"/></marker><marker id="ah-service" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" markerUnits="userSpaceOnUse" orient="auto"><path d="M0,0.5 L10,5 L0,9.5 Z" fill="#047857"/></marker><marker id="ah-service-start" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="9" markerHeight="9" markerUnits="userSpaceOnUse" orient="auto"><path d="M10,0.5 L0,5 L10,9.5 Z" fill="#047857"/></marker></defs>
+<rect width="2140" height="1932" fill="#ffffff"/>
+<text x="1070.0" y="44.0" font-family="Arial, Helvetica, sans-serif" font-size="27" font-weight="700" fill="#0f172a" text-anchor="middle" xml:space="preserve">FinAware — Flow: Money Plan</text>
+<text x="1070.0" y="70.0" font-family="Arial, Helvetica, sans-serif" font-size="13.5" font-weight="400" fill="#475569" text-anchor="middle" xml:space="preserve">How the plan is worked out, previewed and saved (parts A and B), and the tools that run entirely in the browser (part C). The plan is rules, not a model: every rand it allocates can be traced to a rule.</text>
+<rect x="30.0" y="118.0" width="390.0" height="1282.4" rx="12" fill="#f5f9ff" stroke="#2563eb" stroke-width="1.4"/>
+<path d="M30.0,154.0 L30.0,130.0 Q30.0,118.0 42.0,118.0 L408.0,118.0 Q420.0,118.0 420.0,130.0 L420.0,154.0 Z" fill="#dbeafe" stroke="#2563eb" stroke-width="1.4"/>
+<text x="225.0" y="141.0" font-family="Arial, Helvetica, sans-serif" font-size="14.5" font-weight="700" fill="#1e3a8a" text-anchor="middle" xml:space="preserve">Person — browser</text>
+<rect x="440.0" y="118.0" width="360.0" height="1282.4" rx="12" fill="#f7f7ff" stroke="#4f46e5" stroke-width="1.4"/>
+<path d="M440.0,154.0 L440.0,130.0 Q440.0,118.0 452.0,118.0 L788.0,118.0 Q800.0,118.0 800.0,130.0 L800.0,154.0 Z" fill="#e0e7ff" stroke="#4f46e5" stroke-width="1.4"/>
+<text x="620.0" y="141.0" font-family="Arial, Helvetica, sans-serif" font-size="14.5" font-weight="700" fill="#312e81" text-anchor="middle" xml:space="preserve">Web app :30005</text>
+<rect x="820.0" y="118.0" width="440.0" height="1282.4" rx="12" fill="#f3fcf8" stroke="#059669" stroke-width="1.4"/>
+<path d="M820.0,154.0 L820.0,130.0 Q820.0,118.0 832.0,118.0 L1248.0,118.0 Q1260.0,118.0 1260.0,130.0 L1260.0,154.0 Z" fill="#d1fae5" stroke="#059669" stroke-width="1.4"/>
+<text x="1040.0" y="141.0" font-family="Arial, Helvetica, sans-serif" font-size="14.5" font-weight="700" fill="#064e3b" text-anchor="middle" xml:space="preserve">Financial API :4108</text>
+<rect x="1280.0" y="118.0" width="420.0" height="1282.4" rx="12" fill="#fffaf5" stroke="#ea580c" stroke-width="1.4"/>
+<path d="M1280.0,154.0 L1280.0,130.0 Q1280.0,118.0 1292.0,118.0 L1688.0,118.0 Q1700.0,118.0 1700.0,130.0 L1700.0,154.0 Z" fill="#ffedd5" stroke="#ea580c" stroke-width="1.4"/>
+<text x="1490.0" y="141.0" font-family="Arial, Helvetica, sans-serif" font-size="14.5" font-weight="700" fill="#7c2d12" text-anchor="middle" xml:space="preserve">Financial Data :4109 + database</text>
+<rect x="1720.0" y="118.0" width="390.0" height="1282.4" rx="12" fill="#faf8ff" stroke="#7c3aed" stroke-width="1.4"/>
+<path d="M1720.0,154.0 L1720.0,130.0 Q1720.0,118.0 1732.0,118.0 L2098.0,118.0 Q2110.0,118.0 2110.0,130.0 L2110.0,154.0 Z" fill="#ede9fe" stroke="#7c3aed" stroke-width="1.4"/>
+<text x="1915.0" y="141.0" font-family="Arial, Helvetica, sans-serif" font-size="14.5" font-weight="700" fill="#4c1d95" text-anchor="middle" xml:space="preserve">ML service :8000</text>
+<rect x="30.0" y="1440.4" width="2080.0" height="328.2" rx="14" fill="#f5f9ff" stroke="#2563eb" stroke-width="1.6"/>
+<text x="48.0" y="1469.4" font-family="Arial, Helvetica, sans-serif" font-size="15.5" font-weight="700" fill="#1e3a8a" text-anchor="start" xml:space="preserve">C · In the browser only — nothing is sent to the server</text>
+<text x="460.0" y="1469.4" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="400" fill="#475569" text-anchor="start" xml:space="preserve">lib/budget/statement · anomalies · goal · cashflow</text>
+<rect x="30.0" y="1788.7" width="2080.0" height="100.0" rx="10" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.2"/>
+<text x="46.0" y="1812.7" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="700" fill="#0f172a" text-anchor="start" xml:space="preserve">How to read this diagram</text>
+<path d="M398.0,254.0 L462.0,254.0" fill="none" stroke="#334155" stroke-width="1.7" marker-end="url(#ah-http)" stroke-linejoin="round"/>
+<path d="M778.0,254.0 L842.0,254.0" fill="none" stroke="#334155" stroke-width="1.7" marker-end="url(#ah-http)" stroke-linejoin="round"/>
+<path d="M1238.0,254.0 L1302.0,254.0" fill="none" stroke="#047857" stroke-width="1.7" marker-end="url(#ah-service)" stroke-linejoin="round"/>
+<path d="M1040.0,279.2 L1040.0,415.8" fill="none" stroke="#1e293b" stroke-width="1.7" marker-end="url(#ah-flow)" stroke-linejoin="round"/>
+<path d="M1238.0,437.8 L1390.0,437.8 L1390.0,375.8" fill="none" stroke="#047857" stroke-width="1.7" marker-end="url(#ah-service)" stroke-linejoin="round"/>
+<path d="M1238.0,473.8 L1742.0,473.8" fill="none" stroke="#7c3aed" stroke-width="1.7" marker-end="url(#ah-ml)" stroke-linejoin="round"/>
+<path d="M1040.0,523.8 L1040.0,551.8" fill="none" stroke="#1e293b" stroke-width="1.7" marker-end="url(#ah-flow)" stroke-linejoin="round"/>
+<path d="M1040.0,675.8 L1040.0,713.8" fill="none" stroke="#15803d" stroke-width="1.7" marker-end="url(#ah-ok)" stroke-linejoin="round"/>
+<path d="M1205.0,613.8 L1248.0,613.8 L1248.0,945.0 L1204.0,945.0" fill="none" stroke="#dc2626" stroke-width="1.7" marker-end="url(#ah-err)" stroke-linejoin="round"/>
+<path d="M842.0,753.8 L398.0,753.8" fill="none" stroke="#64748b" stroke-width="1.7" stroke-dasharray="6 4" marker-end="url(#ah-back)" stroke-linejoin="round"/>
+<path d="M842.0,945.0 L225.0,945.0 L225.0,807.2" fill="none" stroke="#64748b" stroke-width="1.7" stroke-dasharray="6 4" marker-end="url(#ah-back)" stroke-linejoin="round"/>
+<line x1="30.0" y1="1032.4" x2="2110.0" y2="1032.4" stroke="#64748b" stroke-width="1.4" stroke-dasharray="8 5"/>
+<path d="M398.0,1138.4 L462.0,1138.4" fill="none" stroke="#334155" stroke-width="1.7" marker-end="url(#ah-http)" stroke-linejoin="round"/>
+<path d="M778.0,1138.4 L842.0,1138.4" fill="none" stroke="#334155" stroke-width="1.7" marker-end="url(#ah-http)" stroke-linejoin="round"/>
+<path d="M398.0,1286.4 L462.0,1286.4" fill="none" stroke="#334155" stroke-width="1.7" marker-end="url(#ah-http)" stroke-linejoin="round"/>
+<path d="M778.0,1286.4 L842.0,1286.4" fill="none" stroke="#334155" stroke-width="1.7" marker-end="url(#ah-http)" stroke-linejoin="round"/>
+<path d="M1238.0,1286.4 L1302.0,1286.4" fill="none" stroke="#047857" stroke-width="1.7" marker-end="url(#ah-service)" stroke-linejoin="round"/>
+<path d="M960.8,1342.4 L960.8,1350.4 L398.0,1350.4" fill="none" stroke="#64748b" stroke-width="1.7" stroke-dasharray="6 4" marker-end="url(#ah-back)" stroke-linejoin="round"/>
+<path d="M368.0,1532.4 L394.0,1532.4" fill="none" stroke="#1e293b" stroke-width="1.7" marker-end="url(#ah-flow)" stroke-linejoin="round"/>
+<path d="M712.0,1532.4 L738.0,1532.4" fill="none" stroke="#1e293b" stroke-width="1.7" marker-end="url(#ah-flow)" stroke-linejoin="round"/>
+<path d="M1056.0,1532.4 L1082.0,1532.4" fill="none" stroke="#1e293b" stroke-width="1.7" marker-end="url(#ah-flow)" stroke-linejoin="round"/>
+<path d="M1400.0,1532.4 L1426.0,1532.4" fill="none" stroke="#1e293b" stroke-width="1.7" marker-end="url(#ah-flow)" stroke-linejoin="round"/>
+<path d="M1744.0,1532.4 L1770.0,1532.4" fill="none" stroke="#1e293b" stroke-width="1.7" marker-end="url(#ah-flow)" stroke-linejoin="round"/>
+<path d="M897.0,1591.8 L897.0,1633.2" fill="none" stroke="#1e293b" stroke-width="1.7" marker-end="url(#ah-flow)" stroke-linejoin="round"/>
+<rect x="52.0" y="218.0" width="346.0" height="61.2" rx="10" fill="#ffffff" stroke="#2563eb" stroke-width="1.6"/>
+<path d="M52.8,252.5 L52.8,228.3 Q52.8,218.8 62.3,218.8 L387.7,218.8 Q397.2,218.8 397.2,228.3 L397.2,252.5 Z" fill="#dbeafe" stroke="none" stroke-width="0"/>
+<line x1="52.0" y1="252.5" x2="398.0" y2="252.5" stroke="#2563eb" stroke-width="0.8" stroke-opacity="0.55"/>
+<text x="78.0" y="240.8" font-family="Arial, Helvetica, sans-serif" font-size="13.5" font-weight="700" fill="#1e3a8a" text-anchor="start" xml:space="preserve">Open Money Plan</text>
+<text x="62.0" y="272.2" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="10.5" font-weight="400" fill="#1e293b" text-anchor="start" xml:space="preserve">/money-plan</text>
+<circle cx="53.0" cy="219.0" r="12" fill="#2563eb" stroke="#ffffff" stroke-width="2"/>
+<text x="53.0" y="223.2" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="700" fill="#ffffff" text-anchor="middle" xml:space="preserve">1</text>
+<rect x="462.0" y="218.0" width="316.0" height="61.2" rx="10" fill="#ffffff" stroke="#4f46e5" stroke-width="1.6"/>
+<path d="M462.8,252.5 L462.8,228.3 Q462.8,218.8 472.3,218.8 L767.7,218.8 Q777.2,218.8 777.2,228.3 L777.2,252.5 Z" fill="#e0e7ff" stroke="none" stroke-width="0"/>
+<line x1="462.0" y1="252.5" x2="778.0" y2="252.5" stroke="#4f46e5" stroke-width="0.8" stroke-opacity="0.55"/>
+<text x="488.0" y="240.8" font-family="Arial, Helvetica, sans-serif" font-size="13.5" font-weight="700" fill="#312e81" text-anchor="start" xml:space="preserve">Plan route</text>
+<text x="472.0" y="272.2" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="10.5" font-weight="400" fill="#4338ca" text-anchor="start" xml:space="preserve">GET /api/money-plan</text>
+<circle cx="463.0" cy="219.0" r="12" fill="#4f46e5" stroke="#ffffff" stroke-width="2"/>
+<text x="463.0" y="223.2" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="700" fill="#ffffff" text-anchor="middle" xml:space="preserve">2</text>
+<rect x="842.0" y="218.0" width="396.0" height="61.2" rx="10" fill="#ffffff" stroke="#059669" stroke-width="1.6"/>
+<path d="M842.8,252.5 L842.8,228.3 Q842.8,218.8 852.3,218.8 L1227.7,218.8 Q1237.2,218.8 1237.2,228.3 L1237.2,252.5 Z" fill="#d1fae5" stroke="none" stroke-width="0"/>
+<line x1="842.0" y1="252.5" x2="1238.0" y2="252.5" stroke="#059669" stroke-width="0.8" stroke-opacity="0.55"/>
+<text x="868.0" y="240.8" font-family="Arial, Helvetica, sans-serif" font-size="13.5" font-weight="700" fill="#064e3b" text-anchor="start" xml:space="preserve">Build the plan</text>
+<text x="852.0" y="272.2" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="10.5" font-weight="400" fill="#047857" text-anchor="start" xml:space="preserve">GET /money-plan/:userId</text>
+<circle cx="843.0" cy="219.0" r="12" fill="#059669" stroke="#ffffff" stroke-width="2"/>
+<text x="843.0" y="223.2" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="700" fill="#ffffff" text-anchor="middle" xml:space="preserve">3</text>
+<rect x="1302.0" y="218.0" width="376.0" height="157.8" rx="10" fill="#ffffff" stroke="#ea580c" stroke-width="1.6"/>
+<path d="M1302.8,252.5 L1302.8,228.3 Q1302.8,218.8 1312.3,218.8 L1667.7,218.8 Q1677.2,218.8 1677.2,228.3 L1677.2,252.5 Z" fill="#ffedd5" stroke="none" stroke-width="0"/>
+<line x1="1302.0" y1="252.5" x2="1678.0" y2="252.5" stroke="#ea580c" stroke-width="0.8" stroke-opacity="0.55"/>
+<text x="1328.0" y="240.8" font-family="Arial, Helvetica, sans-serif" font-size="13.5" font-weight="700" fill="#7c2d12" text-anchor="start" xml:space="preserve">Load the budget</text>
+<text x="1312.0" y="272.2" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="10.5" font-weight="400" fill="#047857" text-anchor="start" xml:space="preserve">GET /budget/:userId</text>
+<text x="1312.0" y="287.9" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">• essentials — Budget_Item</text>
+<text x="1312.0" y="304.0" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">• income — Users; credit score — Credit_Profile</text>
+<text x="1312.0" y="320.1" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">• savings — Financial_Profile (left empty if never entered, not taken</text>
+<text x="1324.0" y="336.2" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">as R0)</text>
+<text x="1312.0" y="352.3" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">• open debts with their rate and usual due day — Debts,</text>
+<text x="1324.0" y="368.4" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">Payment_History</text>
+<circle cx="1303.0" cy="219.0" r="12" fill="#ea580c" stroke="#ffffff" stroke-width="2"/>
+<text x="1303.0" y="223.2" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="700" fill="#ffffff" text-anchor="middle" xml:space="preserve">4</text>
+<rect x="842.0" y="415.8" width="396.0" height="108.1" rx="10" fill="#ffffff" stroke="#059669" stroke-width="1.6"/>
+<path d="M842.8,450.2 L842.8,426.1 Q842.8,416.6 852.3,416.6 L1227.7,416.6 Q1237.2,416.6 1237.2,426.1 L1237.2,450.2 Z" fill="#d1fae5" stroke="none" stroke-width="0"/>
+<line x1="842.0" y1="450.2" x2="1238.0" y2="450.2" stroke="#059669" stroke-width="0.8" stroke-opacity="0.55"/>
+<text x="868.0" y="438.6" font-family="Arial, Helvetica, sans-serif" font-size="13.5" font-weight="700" fill="#064e3b" text-anchor="start" xml:space="preserve">Chance of a missed payment — optional</text>
+<text x="852.0" y="469.9" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="10.5" font-weight="400" fill="#047857" text-anchor="start" xml:space="preserve">GET /payment-features/:userId  (Financial Data)</text>
+<text x="852.0" y="484.6" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="10.5" font-weight="400" fill="#6d28d9" text-anchor="start" xml:space="preserve">POST /predict/payment-miss  (ML)</text>
+<text x="852.0" y="500.4" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">Only changes the wording of the credit advice, never an amount. If the</text>
+<text x="852.0" y="516.5" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">model cannot answer, the plan is still complete.</text>
+<circle cx="843.0" cy="416.8" r="12" fill="#059669" stroke="#ffffff" stroke-width="2"/>
+<text x="843.0" y="421.0" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="700" fill="#ffffff" text-anchor="middle" xml:space="preserve">5</text>
+<rect x="1742.0" y="415.8" width="346.0" height="77.3" rx="10" fill="#ffffff" stroke="#7c3aed" stroke-width="1.6"/>
+<path d="M1742.8,450.2 L1742.8,426.1 Q1742.8,416.6 1752.3,416.6 L2077.7,416.6 Q2087.2,416.6 2087.2,426.1 L2087.2,450.2 Z" fill="#ede9fe" stroke="none" stroke-width="0"/>
+<line x1="1742.0" y1="450.2" x2="2088.0" y2="450.2" stroke="#7c3aed" stroke-width="0.8" stroke-opacity="0.55"/>
+<text x="1752.0" y="438.6" font-family="Arial, Helvetica, sans-serif" font-size="13.5" font-weight="700" fill="#4c1d95" text-anchor="start" xml:space="preserve">Missed-payment model</text>
+<text x="1752.0" y="469.9" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="10.5" font-weight="400" fill="#6d28d9" text-anchor="start" xml:space="preserve">POST /predict/payment-miss</text>
+<text x="1752.0" y="485.7" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">→ the chance of missing any payment</text>
+<polygon points="1040.0,551.8 1205.0,613.8 1040.0,675.8 875.0,613.8" fill="#fefce8" stroke="#ca8a04" stroke-width="1.8"/>
+<text x="1040.0" y="603.0" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="700" fill="#713f12" text-anchor="middle" xml:space="preserve">Spare = income − essentials −</text>
+<text x="1040.0" y="617.4" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="700" fill="#713f12" text-anchor="middle" xml:space="preserve">minimum repayments. Below</text>
+<text x="1040.0" y="631.8" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="700" fill="#713f12" text-anchor="middle" xml:space="preserve">R0?</text>
+<circle cx="934.4" cy="574.2" r="12" fill="#ca8a04" stroke="#ffffff" stroke-width="2"/>
+<text x="934.4" y="578.4" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="700" fill="#ffffff" text-anchor="middle" xml:space="preserve">6</text>
+<rect x="842.0" y="713.8" width="362.0" height="157.8" rx="10" fill="#ffffff" stroke="#059669" stroke-width="1.6"/>
+<path d="M842.8,748.3 L842.8,724.1 Q842.8,714.6 852.3,714.6 L1193.7,714.6 Q1203.2,714.6 1203.2,724.1 L1203.2,748.3 Z" fill="#d1fae5" stroke="none" stroke-width="0"/>
+<line x1="842.0" y1="748.3" x2="1204.0" y2="748.3" stroke="#059669" stroke-width="0.8" stroke-opacity="0.55"/>
+<text x="868.0" y="736.7" font-family="Arial, Helvetica, sans-serif" font-size="13.5" font-weight="700" fill="#064e3b" text-anchor="start" xml:space="preserve">Give every spare rand a job — in this order</text>
+<text x="852.0" y="769.0" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="700" fill="#0f172a" text-anchor="start" xml:space="preserve">1  Breathing room: 5% of income, kept back</text>
+<text x="852.0" y="785.1" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="700" fill="#0f172a" text-anchor="start" xml:space="preserve">2  Starter safety net: up to 1 month of essentials, but at most</text>
+<text x="852.0" y="801.2" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="700" fill="#0f172a" text-anchor="start" xml:space="preserve">half of what is left</text>
+<text x="852.0" y="817.3" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="700" fill="#0f172a" text-anchor="start" xml:space="preserve">3  Everything else → the debt with the highest interest (the</text>
+<text x="852.0" y="833.4" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="700" fill="#0f172a" text-anchor="start" xml:space="preserve">avalanche); the minimum on the rest</text>
+<text x="852.0" y="849.5" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">No debts: finish a 3-month safety net, then save</text>
+<text x="852.0" y="864.6" font-family="Arial, Helvetica, sans-serif" font-size="10.5" font-weight="400" fill="#475569" text-anchor="start" xml:space="preserve">Then the debt-free date, simulated month by month, interest first</text>
+<circle cx="843.0" cy="714.8" r="12" fill="#059669" stroke="#ffffff" stroke-width="2"/>
+<text x="843.0" y="719.0" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="700" fill="#ffffff" text-anchor="middle" xml:space="preserve">7</text>
+<rect x="842.0" y="897.6" width="362.0" height="94.8" rx="10" fill="#ffffff" stroke="#d97706" stroke-width="1.6"/>
+<path d="M842.8,932.1 L842.8,907.9 Q842.8,898.4 852.3,898.4 L1193.7,898.4 Q1203.2,898.4 1203.2,907.9 L1203.2,932.1 Z" fill="#fef3c7" stroke="none" stroke-width="0"/>
+<line x1="842.0" y1="932.1" x2="1204.0" y2="932.1" stroke="#d97706" stroke-width="0.8" stroke-opacity="0.55"/>
+<text x="868.0" y="920.4" font-family="Arial, Helvetica, sans-serif" font-size="13.5" font-weight="700" fill="#78350f" text-anchor="start" xml:space="preserve">Shortfall plan</text>
+<text x="852.0" y="952.8" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">The minimum repayments are not affordable as things stand: how</text>
+<text x="852.0" y="968.9" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">many rand are missing, and what to do about the credit — no</text>
+<text x="852.0" y="985.0" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">debt-free date, because it would not be honest</text>
+<circle cx="843.0" cy="898.6" r="12" fill="#d97706" stroke="#ffffff" stroke-width="2"/>
+<text x="843.0" y="902.8" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="700" fill="#ffffff" text-anchor="middle" xml:space="preserve">7</text>
+<rect x="52.0" y="713.8" width="346.0" height="93.4" rx="10" fill="#ffffff" stroke="#2563eb" stroke-width="1.6"/>
+<path d="M52.8,748.3 L52.8,724.1 Q52.8,714.6 62.3,714.6 L387.7,714.6 Q397.2,714.6 397.2,724.1 L397.2,748.3 Z" fill="#dbeafe" stroke="none" stroke-width="0"/>
+<line x1="52.0" y1="748.3" x2="398.0" y2="748.3" stroke="#2563eb" stroke-width="0.8" stroke-opacity="0.55"/>
+<text x="78.0" y="736.7" font-family="Arial, Helvetica, sans-serif" font-size="13.5" font-weight="700" fill="#1e3a8a" text-anchor="start" xml:space="preserve">The plan on screen</text>
+<text x="62.0" y="769.0" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">What is spare, the job for every rand, the debt-free date, credit</text>
+<text x="62.0" y="785.1" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">advice</text>
+<text x="62.0" y="800.2" font-family="Arial, Helvetica, sans-serif" font-size="10.5" font-weight="400" fill="#475569" text-anchor="start" xml:space="preserve">With warnings, e.g. no essentials entered, or savings not on record</text>
+<circle cx="53.0" cy="714.8" r="12" fill="#2563eb" stroke="#ffffff" stroke-width="2"/>
+<text x="53.0" y="719.0" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="700" fill="#ffffff" text-anchor="middle" xml:space="preserve">8</text>
+<rect x="52.0" y="1102.4" width="346.0" height="62.6" rx="10" fill="#ffffff" stroke="#2563eb" stroke-width="1.6"/>
+<path d="M52.8,1136.8 L52.8,1112.7 Q52.8,1103.2 62.3,1103.2 L387.7,1103.2 Q397.2,1103.2 397.2,1112.7 L397.2,1136.8 Z" fill="#dbeafe" stroke="none" stroke-width="0"/>
+<line x1="52.0" y1="1136.8" x2="398.0" y2="1136.8" stroke="#2563eb" stroke-width="0.8" stroke-opacity="0.55"/>
+<text x="78.0" y="1125.2" font-family="Arial, Helvetica, sans-serif" font-size="13.5" font-weight="700" fill="#1e3a8a" text-anchor="start" xml:space="preserve">Type figures</text>
+<text x="62.0" y="1157.6" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">Essentials by category, and a trial income if they like</text>
+<circle cx="53.0" cy="1103.4" r="12" fill="#2563eb" stroke="#ffffff" stroke-width="2"/>
+<text x="53.0" y="1107.6" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="700" fill="#ffffff" text-anchor="middle" xml:space="preserve">9</text>
+<rect x="462.0" y="1102.4" width="316.0" height="75.9" rx="10" fill="#ffffff" stroke="#4f46e5" stroke-width="1.6"/>
+<path d="M462.8,1136.8 L462.8,1112.7 Q462.8,1103.2 472.3,1103.2 L767.7,1103.2 Q777.2,1103.2 777.2,1112.7 L777.2,1136.8 Z" fill="#e0e7ff" stroke="none" stroke-width="0"/>
+<line x1="462.0" y1="1136.8" x2="778.0" y2="1136.8" stroke="#4f46e5" stroke-width="0.8" stroke-opacity="0.55"/>
+<text x="488.0" y="1125.2" font-family="Arial, Helvetica, sans-serif" font-size="13.5" font-weight="700" fill="#312e81" text-anchor="start" xml:space="preserve">Preview route</text>
+<text x="472.0" y="1156.6" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="10.5" font-weight="400" fill="#4338ca" text-anchor="start" xml:space="preserve">POST /api/money-plan/preview</text>
+<text x="472.0" y="1171.3" font-family="Arial, Helvetica, sans-serif" font-size="10.5" font-weight="400" fill="#475569" text-anchor="start" xml:space="preserve">one request once typing settles</text>
+<circle cx="463.0" cy="1103.4" r="12" fill="#4f46e5" stroke="#ffffff" stroke-width="2"/>
+<text x="463.0" y="1107.6" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="700" fill="#ffffff" text-anchor="middle" xml:space="preserve">10</text>
+<rect x="842.0" y="1102.4" width="396.0" height="108.1" rx="10" fill="#ffffff" stroke="#059669" stroke-width="1.6"/>
+<path d="M842.8,1136.8 L842.8,1112.7 Q842.8,1103.2 852.3,1103.2 L1227.7,1103.2 Q1237.2,1103.2 1237.2,1112.7 L1237.2,1136.8 Z" fill="#d1fae5" stroke="none" stroke-width="0"/>
+<line x1="842.0" y1="1136.8" x2="1238.0" y2="1136.8" stroke="#059669" stroke-width="0.8" stroke-opacity="0.55"/>
+<text x="868.0" y="1125.2" font-family="Arial, Helvetica, sans-serif" font-size="13.5" font-weight="700" fill="#064e3b" text-anchor="start" xml:space="preserve">Same calculation, typed figures</text>
+<text x="852.0" y="1156.6" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="10.5" font-weight="400" fill="#047857" text-anchor="start" xml:space="preserve">POST /money-plan/:userId/preview</text>
+<text x="852.0" y="1172.3" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">Steps 4–7 again, with the typed essentials and income</text>
+<text x="852.0" y="1187.9" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="700" fill="#047857" text-anchor="start" xml:space="preserve">Nothing is written — the saved budget and the income on record stay</text>
+<text x="852.0" y="1203.3" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="700" fill="#047857" text-anchor="start" xml:space="preserve">as they were</text>
+<circle cx="843.0" cy="1103.4" r="12" fill="#059669" stroke="#ffffff" stroke-width="2"/>
+<text x="843.0" y="1107.6" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="700" fill="#ffffff" text-anchor="middle" xml:space="preserve">11</text>
+<rect x="52.0" y="1250.4" width="346.0" height="62.6" rx="10" fill="#ffffff" stroke="#2563eb" stroke-width="1.6"/>
+<path d="M52.8,1284.9 L52.8,1260.7 Q52.8,1251.2 62.3,1251.2 L387.7,1251.2 Q397.2,1251.2 397.2,1260.7 L397.2,1284.9 Z" fill="#dbeafe" stroke="none" stroke-width="0"/>
+<line x1="52.0" y1="1284.9" x2="398.0" y2="1284.9" stroke="#2563eb" stroke-width="0.8" stroke-opacity="0.55"/>
+<text x="78.0" y="1273.3" font-family="Arial, Helvetica, sans-serif" font-size="13.5" font-weight="700" fill="#1e3a8a" text-anchor="start" xml:space="preserve">Save</text>
+<text x="62.0" y="1305.6" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="700" fill="#0f172a" text-anchor="start" xml:space="preserve">[Save these figures]</text>
+<circle cx="53.0" cy="1251.4" r="12" fill="#2563eb" stroke="#ffffff" stroke-width="2"/>
+<text x="53.0" y="1255.6" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="700" fill="#ffffff" text-anchor="middle" xml:space="preserve">12</text>
+<rect x="462.0" y="1250.4" width="316.0" height="61.2" rx="10" fill="#ffffff" stroke="#4f46e5" stroke-width="1.6"/>
+<path d="M462.8,1284.9 L462.8,1260.7 Q462.8,1251.2 472.3,1251.2 L767.7,1251.2 Q777.2,1251.2 777.2,1260.7 L777.2,1284.9 Z" fill="#e0e7ff" stroke="none" stroke-width="0"/>
+<line x1="462.0" y1="1284.9" x2="778.0" y2="1284.9" stroke="#4f46e5" stroke-width="0.8" stroke-opacity="0.55"/>
+<text x="488.0" y="1273.3" font-family="Arial, Helvetica, sans-serif" font-size="13.5" font-weight="700" fill="#312e81" text-anchor="start" xml:space="preserve">Save route</text>
+<text x="472.0" y="1304.6" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="10.5" font-weight="400" fill="#4338ca" text-anchor="start" xml:space="preserve">PUT /api/money-plan</text>
+<circle cx="463.0" cy="1251.4" r="12" fill="#4f46e5" stroke="#ffffff" stroke-width="2"/>
+<text x="463.0" y="1255.6" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="700" fill="#ffffff" text-anchor="middle" xml:space="preserve">13</text>
+<rect x="842.0" y="1250.4" width="396.0" height="92.0" rx="10" fill="#ffffff" stroke="#059669" stroke-width="1.6"/>
+<path d="M842.8,1284.9 L842.8,1260.7 Q842.8,1251.2 852.3,1251.2 L1227.7,1251.2 Q1237.2,1251.2 1237.2,1260.7 L1237.2,1284.9 Z" fill="#d1fae5" stroke="none" stroke-width="0"/>
+<line x1="842.0" y1="1284.9" x2="1238.0" y2="1284.9" stroke="#059669" stroke-width="0.8" stroke-opacity="0.55"/>
+<text x="868.0" y="1273.3" font-family="Arial, Helvetica, sans-serif" font-size="13.5" font-weight="700" fill="#064e3b" text-anchor="start" xml:space="preserve">Check, then save</text>
+<text x="852.0" y="1304.6" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="10.5" font-weight="400" fill="#047857" text-anchor="start" xml:space="preserve">PUT /budget/:userId</text>
+<text x="852.0" y="1320.3" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">Zod: a listed category and a sensible amount for each line</text>
+<text x="852.0" y="1335.4" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="10.5" font-weight="400" fill="#047857" text-anchor="start" xml:space="preserve">then GET /money-plan/:userId — the fresh plan</text>
+<circle cx="843.0" cy="1251.4" r="12" fill="#059669" stroke="#ffffff" stroke-width="2"/>
+<text x="843.0" y="1255.6" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="700" fill="#ffffff" text-anchor="middle" xml:space="preserve">14</text>
+<rect x="1302.0" y="1250.4" width="376.0" height="90.6" rx="10" fill="#ffffff" stroke="#ea580c" stroke-width="1.6"/>
+<path d="M1302.8,1284.9 L1302.8,1260.7 Q1302.8,1251.2 1312.3,1251.2 L1667.7,1251.2 Q1677.2,1251.2 1677.2,1260.7 L1677.2,1284.9 Z" fill="#ffedd5" stroke="none" stroke-width="0"/>
+<line x1="1302.0" y1="1284.9" x2="1678.0" y2="1284.9" stroke="#ea580c" stroke-width="0.8" stroke-opacity="0.55"/>
+<text x="1328.0" y="1273.3" font-family="Arial, Helvetica, sans-serif" font-size="13.5" font-weight="700" fill="#7c2d12" text-anchor="start" xml:space="preserve">Replace the budget</text>
+<text x="1312.0" y="1304.6" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="10.5" font-weight="400" fill="#047857" text-anchor="start" xml:space="preserve">PUT /budget/:userId</text>
+<text x="1312.0" y="1319.3" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="10.5" font-weight="400" fill="#c2410c" text-anchor="start" xml:space="preserve">one transaction: upsert each category into Budget_Item;</text>
+<text x="1312.0" y="1334.0" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="10.5" font-weight="400" fill="#c2410c" text-anchor="start" xml:space="preserve">delete categories left out or at R0</text>
+<circle cx="1303.0" cy="1251.4" r="12" fill="#ea580c" stroke="#ffffff" stroke-width="2"/>
+<text x="1303.0" y="1255.6" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="700" fill="#ffffff" text-anchor="middle" xml:space="preserve">15</text>
+<rect x="52.0" y="1330.4" width="346.0" height="40.0" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="1.6"/>
+<text x="225.0" y="1355.0" font-family="Arial, Helvetica, sans-serif" font-size="13.5" font-weight="700" fill="#1e3a8a" text-anchor="middle" xml:space="preserve">&quot;Saved at …&quot; and the fresh plan</text>
+<rect x="50.0" y="1498.4" width="318.0" height="77.3" rx="10" fill="#ffffff" stroke="#2563eb" stroke-width="1.6"/>
+<path d="M50.8,1532.9 L50.8,1508.7 Q50.8,1499.2 60.3,1499.2 L357.7,1499.2 Q367.2,1499.2 367.2,1508.7 L367.2,1532.9 Z" fill="#dbeafe" stroke="none" stroke-width="0"/>
+<line x1="50.0" y1="1532.9" x2="368.0" y2="1532.9" stroke="#2563eb" stroke-width="0.8" stroke-opacity="0.55"/>
+<text x="76.0" y="1521.3" font-family="Arial, Helvetica, sans-serif" font-size="13.5" font-weight="700" fill="#1e3a8a" text-anchor="start" xml:space="preserve">Choose a file</text>
+<text x="60.0" y="1553.6" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="700" fill="#0f172a" text-anchor="start" xml:space="preserve">[Choose a CSV bank statement]</text>
+<text x="60.0" y="1568.7" font-family="Arial, Helvetica, sans-serif" font-size="10.5" font-weight="400" fill="#475569" text-anchor="start" xml:space="preserve">or the sample statement</text>
+<circle cx="51.0" cy="1499.4" r="12" fill="#2563eb" stroke="#ffffff" stroke-width="2"/>
+<text x="51.0" y="1503.6" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="700" fill="#ffffff" text-anchor="middle" xml:space="preserve">C1</text>
+<rect x="394.0" y="1498.4" width="318.0" height="94.8" rx="10" fill="#ffffff" stroke="#2563eb" stroke-width="1.6"/>
+<path d="M394.8,1532.9 L394.8,1508.7 Q394.8,1499.2 404.3,1499.2 L701.7,1499.2 Q711.2,1499.2 711.2,1508.7 L711.2,1532.9 Z" fill="#dbeafe" stroke="none" stroke-width="0"/>
+<line x1="394.0" y1="1532.9" x2="712.0" y2="1532.9" stroke="#2563eb" stroke-width="0.8" stroke-opacity="0.55"/>
+<text x="420.0" y="1521.3" font-family="Arial, Helvetica, sans-serif" font-size="13.5" font-weight="700" fill="#1e3a8a" text-anchor="start" xml:space="preserve">Read it</text>
+<text x="404.0" y="1553.6" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">Finds the header row by its column names: FNB-style,</text>
+<text x="404.0" y="1569.7" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">Capitec-style money in / money out, or semicolons with</text>
+<text x="404.0" y="1585.8" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">comma decimals</text>
+<circle cx="395.0" cy="1499.4" r="12" fill="#2563eb" stroke="#ffffff" stroke-width="2"/>
+<text x="395.0" y="1503.6" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="700" fill="#ffffff" text-anchor="middle" xml:space="preserve">C2</text>
+<rect x="738.0" y="1498.4" width="318.0" height="93.4" rx="10" fill="#ffffff" stroke="#2563eb" stroke-width="1.6"/>
+<path d="M738.8,1532.9 L738.8,1508.7 Q738.8,1499.2 748.3,1499.2 L1045.7,1499.2 Q1055.2,1499.2 1055.2,1508.7 L1055.2,1532.9 Z" fill="#dbeafe" stroke="none" stroke-width="0"/>
+<line x1="738.0" y1="1532.9" x2="1056.0" y2="1532.9" stroke="#2563eb" stroke-width="0.8" stroke-opacity="0.55"/>
+<text x="764.0" y="1521.3" font-family="Arial, Helvetica, sans-serif" font-size="13.5" font-weight="700" fill="#1e3a8a" text-anchor="start" xml:space="preserve">Sort every payment</text>
+<text x="748.0" y="1553.6" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">By keywords in the description — rent, groceries,</text>
+<text x="748.0" y="1569.7" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">transport, data … — showing the word that placed it</text>
+<text x="748.0" y="1584.8" font-family="Arial, Helvetica, sans-serif" font-size="10.5" font-weight="400" fill="#475569" text-anchor="start" xml:space="preserve">Debt repayments, transfers and cash stay out of essentials</text>
+<circle cx="739.0" cy="1499.4" r="12" fill="#2563eb" stroke="#ffffff" stroke-width="2"/>
+<text x="739.0" y="1503.6" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="700" fill="#ffffff" text-anchor="middle" xml:space="preserve">C3</text>
+<rect x="1082.0" y="1498.4" width="318.0" height="62.6" rx="10" fill="#ffffff" stroke="#2563eb" stroke-width="1.6"/>
+<path d="M1082.8,1532.9 L1082.8,1508.7 Q1082.8,1499.2 1092.3,1499.2 L1389.7,1499.2 Q1399.2,1499.2 1399.2,1508.7 L1399.2,1532.9 Z" fill="#dbeafe" stroke="none" stroke-width="0"/>
+<line x1="1082.0" y1="1532.9" x2="1400.0" y2="1532.9" stroke="#2563eb" stroke-width="0.8" stroke-opacity="0.55"/>
+<text x="1108.0" y="1521.3" font-family="Arial, Helvetica, sans-serif" font-size="13.5" font-weight="700" fill="#1e3a8a" text-anchor="start" xml:space="preserve">Person checks</text>
+<text x="1092.0" y="1553.6" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">Moves any payment that landed in the wrong category</text>
+<circle cx="1083.0" cy="1499.4" r="12" fill="#2563eb" stroke="#ffffff" stroke-width="2"/>
+<text x="1083.0" y="1503.6" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="700" fill="#ffffff" text-anchor="middle" xml:space="preserve">C4</text>
+<rect x="1426.0" y="1498.4" width="318.0" height="78.7" rx="10" fill="#ffffff" stroke="#2563eb" stroke-width="1.6"/>
+<path d="M1426.8,1532.9 L1426.8,1508.7 Q1426.8,1499.2 1436.3,1499.2 L1733.7,1499.2 Q1743.2,1499.2 1743.2,1508.7 L1743.2,1532.9 Z" fill="#dbeafe" stroke="none" stroke-width="0"/>
+<line x1="1426.0" y1="1532.9" x2="1744.0" y2="1532.9" stroke="#2563eb" stroke-width="0.8" stroke-opacity="0.55"/>
+<text x="1452.0" y="1521.3" font-family="Arial, Helvetica, sans-serif" font-size="13.5" font-weight="700" fill="#1e3a8a" text-anchor="start" xml:space="preserve">Monthly averages</text>
+<text x="1436.0" y="1553.6" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">The average per essential category across the</text>
+<text x="1436.0" y="1569.7" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">statement&#x27;s months</text>
+<circle cx="1427.0" cy="1499.4" r="12" fill="#2563eb" stroke="#ffffff" stroke-width="2"/>
+<text x="1427.0" y="1503.6" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="700" fill="#ffffff" text-anchor="middle" xml:space="preserve">C5</text>
+<rect x="1770.0" y="1498.4" width="318.0" height="78.7" rx="10" fill="#ffffff" stroke="#2563eb" stroke-width="1.6"/>
+<path d="M1770.8,1532.9 L1770.8,1508.7 Q1770.8,1499.2 1780.3,1499.2 L2077.7,1499.2 Q2087.2,1499.2 2087.2,1508.7 L2087.2,1532.9 Z" fill="#dbeafe" stroke="none" stroke-width="0"/>
+<line x1="1770.0" y1="1532.9" x2="2088.0" y2="1532.9" stroke="#2563eb" stroke-width="0.8" stroke-opacity="0.55"/>
+<text x="1796.0" y="1521.3" font-family="Arial, Helvetica, sans-serif" font-size="13.5" font-weight="700" fill="#1e3a8a" text-anchor="start" xml:space="preserve">Fill the plan</text>
+<text x="1780.0" y="1553.6" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="700" fill="#0f172a" text-anchor="start" xml:space="preserve">[Use these for my essentials]</text>
+<text x="1780.0" y="1569.7" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">→ the form, then a preview (step 10)</text>
+<circle cx="1771.0" cy="1499.4" r="12" fill="#2563eb" stroke="#ffffff" stroke-width="2"/>
+<text x="1771.0" y="1503.6" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="700" fill="#ffffff" text-anchor="middle" xml:space="preserve">C6</text>
+<rect x="738.0" y="1633.2" width="662.0" height="94.8" rx="10" fill="#ffffff" stroke="#d97706" stroke-width="1.6"/>
+<path d="M738.8,1667.7 L738.8,1643.5 Q738.8,1634.0 748.3,1634.0 L1389.7,1634.0 Q1399.2,1634.0 1399.2,1643.5 L1399.2,1667.7 Z" fill="#fef3c7" stroke="none" stroke-width="0"/>
+<line x1="738.0" y1="1667.7" x2="1400.0" y2="1667.7" stroke="#d97706" stroke-width="0.8" stroke-opacity="0.55"/>
+<text x="764.0" y="1656.0" font-family="Arial, Helvetica, sans-serif" font-size="13.5" font-weight="700" fill="#78350f" text-anchor="start" xml:space="preserve">Unusual-spending alerts for the latest month</text>
+<text x="748.0" y="1688.4" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">Compared with the person&#x27;s own earlier months — by the same day of the month, not projected to month-end</text>
+<text x="748.0" y="1704.5" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">Flags a category up by half as much again and by at least R500, and any new payee</text>
+<text x="748.0" y="1720.6" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">Weighs the extra against what the plan leaves spare</text>
+<circle cx="739.0" cy="1634.2" r="12" fill="#d97706" stroke="#ffffff" stroke-width="2"/>
+<text x="739.0" y="1638.4" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="700" fill="#ffffff" text-anchor="middle" xml:space="preserve">C7</text>
+<rect x="50.0" y="1633.2" width="662.0" height="94.8" rx="10" fill="#ffffff" stroke="#2563eb" stroke-width="1.6"/>
+<path d="M50.8,1667.7 L50.8,1643.5 Q50.8,1634.0 60.3,1634.0 L701.7,1634.0 Q711.2,1634.0 711.2,1643.5 L711.2,1667.7 Z" fill="#dbeafe" stroke="none" stroke-width="0"/>
+<line x1="50.0" y1="1667.7" x2="712.0" y2="1667.7" stroke="#2563eb" stroke-width="0.8" stroke-opacity="0.55"/>
+<text x="76.0" y="1656.0" font-family="Arial, Helvetica, sans-serif" font-size="13.5" font-weight="700" fill="#1e3a8a" text-anchor="start" xml:space="preserve">Plan a goal</text>
+<text x="60.0" y="1688.4" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">Reads a sentence — &quot;Save R10 000 by December&quot;, &quot;Build a 3-month emergency fund&quot; — and shows the words it understood</text>
+<text x="60.0" y="1704.5" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">Turns it into a monthly amount, then asks where the money comes from: the safety net or the extra debt payment — and what</text>
+<text x="60.0" y="1720.6" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">that costs (e.g. debt-free 4 months later, simulated)</text>
+<circle cx="51.0" cy="1634.2" r="12" fill="#2563eb" stroke="#ffffff" stroke-width="2"/>
+<text x="51.0" y="1638.4" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="700" fill="#ffffff" text-anchor="middle" xml:space="preserve">C8</text>
+<rect x="1426.0" y="1633.2" width="662.0" height="109.5" rx="10" fill="#ffffff" stroke="#2563eb" stroke-width="1.6"/>
+<path d="M1426.8,1667.7 L1426.8,1643.5 Q1426.8,1634.0 1436.3,1634.0 L2077.7,1634.0 Q2087.2,1634.0 2087.2,1643.5 L2087.2,1667.7 Z" fill="#dbeafe" stroke="none" stroke-width="0"/>
+<line x1="1426.0" y1="1667.7" x2="2088.0" y2="1667.7" stroke="#2563eb" stroke-width="0.8" stroke-opacity="0.55"/>
+<text x="1452.0" y="1656.0" font-family="Arial, Helvetica, sans-serif" font-size="13.5" font-weight="700" fill="#1e3a8a" text-anchor="start" xml:space="preserve">The next three months, day by day</text>
+<text x="1436.0" y="1688.4" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">Starts from the account balance the person types</text>
+<text x="1436.0" y="1704.5" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">Debit orders on each debt&#x27;s usual due day; pay on payday, moved to the Friday before a weekend</text>
+<text x="1436.0" y="1720.6" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">Shows the first day the balance would go below zero</text>
+<text x="1436.0" y="1735.7" font-family="Arial, Helvetica, sans-serif" font-size="10.5" font-weight="400" fill="#475569" text-anchor="start" xml:space="preserve">A projection that assumes this month repeats — every assumption is listed</text>
+<circle cx="1427.0" cy="1634.2" r="12" fill="#2563eb" stroke="#ffffff" stroke-width="2"/>
+<text x="1427.0" y="1638.4" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="700" fill="#ffffff" text-anchor="middle" xml:space="preserve">C9</text>
+<rect x="40.0" y="176.0" width="152.2" height="26.0" rx="6" fill="#ffffff" stroke="#94a3b8" stroke-width="0.8"/>
+<text x="48.0" y="194.0" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="700" fill="#334155" text-anchor="start" xml:space="preserve">A · Opening the plan</text>
+<rect x="1323.9" y="396.4" width="132.2" height="20.8" rx="5" fill="#ffffff" fill-opacity="0.97" stroke="#047857" stroke-opacity="0.35" stroke-width="0.8"/>
+<text x="1390.0" y="411.1" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="700" fill="#047857" text-anchor="middle" xml:space="preserve">GET /payment-features</text>
+<rect x="1469.7" y="463.4" width="161.5" height="20.8" rx="5" fill="#ffffff" fill-opacity="0.97" stroke="#7c3aed" stroke-opacity="0.35" stroke-width="0.8"/>
+<text x="1550.5" y="478.1" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="700" fill="#7c3aed" text-anchor="middle" xml:space="preserve">POST /predict/payment-miss</text>
+<rect x="956.5" y="682.6" width="167.0" height="20.8" rx="5" fill="#ffffff" fill-opacity="0.97" stroke="#15803d" stroke-opacity="0.35" stroke-width="0.8"/>
+<text x="1040.0" y="697.2" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="700" fill="#15803d" text-anchor="middle" xml:space="preserve">No — there is money to spare</text>
+<rect x="1232.2" y="669.7" width="31.6" height="20.8" rx="5" fill="#ffffff" fill-opacity="0.97" stroke="#dc2626" stroke-opacity="0.35" stroke-width="0.8"/>
+<text x="1248.0" y="684.4" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="700" fill="#dc2626" text-anchor="middle" xml:space="preserve">Yes</text>
+<rect x="592.9" y="743.5" width="54.1" height="20.8" rx="5" fill="#ffffff" fill-opacity="0.97" stroke="#64748b" stroke-opacity="0.35" stroke-width="0.8"/>
+<text x="620.0" y="758.1" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="700" fill="#64748b" text-anchor="middle" xml:space="preserve">the plan</text>
+<rect x="40.0" y="1062.4" width="253.9" height="26.0" rx="6" fill="#ffffff" stroke="#94a3b8" stroke-width="0.8"/>
+<text x="48.0" y="1080.4" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="700" fill="#334155" text-anchor="start" xml:space="preserve">B · Trying figures, then saving them</text>
+<circle cx="63.0" cy="1838.7" r="12" fill="#1e293b" stroke="#ffffff" stroke-width="2"/>
+<text x="63.0" y="1842.9" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="700" fill="#ffffff" text-anchor="middle" xml:space="preserve">1</text>
+<text x="90.0" y="1843.2" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#1e293b" text-anchor="start" xml:space="preserve">Step</text>
+<polygon points="575.0,1828.6899999999998 592.0,1838.6899999999998 575.0,1848.6899999999998 558.0,1838.6899999999998" fill="#fefce8" stroke="#ca8a04" stroke-width="1.4"/>
+<text x="602.0" y="1843.2" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#1e293b" text-anchor="start" xml:space="preserve">Check</text>
+<rect x="1070.0" y="1828.7" width="34.0" height="20.0" rx="5" fill="#fef3c7" stroke="#d97706" stroke-width="1.4"/>
+<text x="1114.0" y="1843.2" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#1e293b" text-anchor="start" xml:space="preserve">The shortfall case / worth knowing</text>
+<path d="M1582.0,1838.7 L1616.0,1838.7" stroke="#334155" stroke-width="1.8" marker-end="url(#ah-http)"/>
+<text x="1626.0" y="1843.2" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#1e293b" text-anchor="start" xml:space="preserve">Request or next step</text>
+<path d="M46.0,1868.7 L80.0,1868.7" stroke="#047857" stroke-width="1.8" marker-end="url(#ah-service)"/>
+<text x="90.0" y="1873.2" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#1e293b" text-anchor="start" xml:space="preserve">Service to service</text>
+<path d="M558.0,1868.7 L592.0,1868.7" stroke="#7c3aed" stroke-width="1.8" marker-end="url(#ah-ml)"/>
+<text x="602.0" y="1873.2" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#1e293b" text-anchor="start" xml:space="preserve">To the ML service</text>
+<path d="M1070.0,1868.7 L1104.0,1868.7" stroke="#64748b" stroke-width="1.8" stroke-dasharray="6 4" marker-end="url(#ah-back)"/>
+<text x="1114.0" y="1873.2" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#1e293b" text-anchor="start" xml:space="preserve">Answer</text>
+<text x="1070.0" y="1916.0" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="400" fill="#94a3b8" text-anchor="middle" xml:space="preserve">FinAware · Flow: Money Plan · drawn from the code · updated 29 September 2026</text>
+</svg>

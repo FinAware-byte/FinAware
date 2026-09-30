@@ -1,0 +1,361 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2240" height="1340" viewBox="0 0 2240 1340">
+<title>FinAware — Three Ways to Run It</title>
+<defs><marker id="ah-data" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" markerUnits="userSpaceOnUse" orient="auto"><path d="M0,0.5 L10,5 L0,9.5 Z" fill="#c2410c"/></marker><marker id="ah-data-start" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="9" markerHeight="9" markerUnits="userSpaceOnUse" orient="auto"><path d="M10,0.5 L0,5 L10,9.5 Z" fill="#c2410c"/></marker><marker id="ah-ext" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" markerUnits="userSpaceOnUse" orient="auto"><path d="M0,0.5 L10,5 L0,9.5 Z" fill="#475569"/></marker><marker id="ah-ext-start" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="9" markerHeight="9" markerUnits="userSpaceOnUse" orient="auto"><path d="M10,0.5 L0,5 L10,9.5 Z" fill="#475569"/></marker><marker id="ah-http" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" markerUnits="userSpaceOnUse" orient="auto"><path d="M0,0.5 L10,5 L0,9.5 Z" fill="#334155"/></marker><marker id="ah-http-start" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="9" markerHeight="9" markerUnits="userSpaceOnUse" orient="auto"><path d="M10,0.5 L0,5 L10,9.5 Z" fill="#334155"/></marker><marker id="ah-ml" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" markerUnits="userSpaceOnUse" orient="auto"><path d="M0,0.5 L10,5 L0,9.5 Z" fill="#7c3aed"/></marker><marker id="ah-ml-start" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="9" markerHeight="9" markerUnits="userSpaceOnUse" orient="auto"><path d="M10,0.5 L0,5 L10,9.5 Z" fill="#7c3aed"/></marker><marker id="ah-service" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" markerUnits="userSpaceOnUse" orient="auto"><path d="M0,0.5 L10,5 L0,9.5 Z" fill="#047857"/></marker><marker id="ah-service-start" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="9" markerHeight="9" markerUnits="userSpaceOnUse" orient="auto"><path d="M10,0.5 L0,5 L10,9.5 Z" fill="#047857"/></marker></defs>
+<rect width="2240" height="1340" fill="#ffffff"/>
+<text x="1120.0" y="44.0" font-family="Arial, Helvetica, sans-serif" font-size="27" font-weight="700" fill="#0f172a" text-anchor="middle" xml:space="preserve">FinAware — Three Ways to Run It</text>
+<text x="1120.0" y="70.0" font-family="Arial, Helvetica, sans-serif" font-size="13.5" font-weight="400" fill="#475569" text-anchor="middle" xml:space="preserve">The same parts (the web app, nine Node.js services and the Python ML service) run as processes on one computer, as containers with Docker Compose, or as pods on Kubernetes. Only the packaging and the addresses change.</text>
+<rect x="50.0" y="250.0" width="560.0" height="627.7" rx="12" fill="#ffffff" stroke="#94a3b8" stroke-width="1.3" stroke-dasharray="5 4"/>
+<text x="64.0" y="276.0" font-family="Arial, Helvetica, sans-serif" font-size="12.5" font-weight="700" fill="#334155" text-anchor="start" xml:space="preserve">One computer — 11 processes, started together by concurrently</text>
+<rect x="680.0" y="270.0" width="720.0" height="693.2" rx="12" fill="#ffffff" stroke="#94a3b8" stroke-width="1.3" stroke-dasharray="5 4"/>
+<text x="694.0" y="296.0" font-family="Arial, Helvetica, sans-serif" font-size="12.5" font-weight="700" fill="#334155" text-anchor="start" xml:space="preserve">Compose network — containers reach each other by name (http://auth:4101 …)</text>
+<rect x="1470.0" y="270.0" width="720.0" height="677.7" rx="12" fill="#ffffff" stroke="#94a3b8" stroke-width="1.3" stroke-dasharray="5 4"/>
+<text x="1484.0" y="296.0" font-family="Arial, Helvetica, sans-serif" font-size="12.5" font-weight="700" fill="#334155" text-anchor="start" xml:space="preserve">Namespace finaware — one Deployment and one Service per part</text>
+<rect x="30.0" y="118.0" width="600.0" height="977.8" rx="14" fill="#f5f9ff" stroke="#2563eb" stroke-width="1.6"/>
+<circle cx="60.0" cy="142.0" r="13" fill="#2563eb"/>
+<text x="60.0" y="146.5" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="700" fill="#ffffff" text-anchor="middle" xml:space="preserve">1</text>
+<text x="82.0" y="147.0" font-family="Arial, Helvetica, sans-serif" font-size="15.5" font-weight="700" fill="#1e3a8a" text-anchor="start" xml:space="preserve">Local development</text>
+<text x="236.4" y="147.0" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="400" fill="#475569" text-anchor="start" xml:space="preserve">one computer</text>
+<rect x="660.0" y="118.0" width="760.0" height="977.8" rx="14" fill="#f3fcf8" stroke="#059669" stroke-width="1.6"/>
+<circle cx="690.0" cy="142.0" r="13" fill="#059669"/>
+<text x="690.0" y="146.5" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="700" fill="#ffffff" text-anchor="middle" xml:space="preserve">2</text>
+<text x="712.0" y="147.0" font-family="Arial, Helvetica, sans-serif" font-size="15.5" font-weight="700" fill="#064e3b" text-anchor="start" xml:space="preserve">Docker Compose</text>
+<text x="853.6" y="147.0" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="400" fill="#475569" text-anchor="start" xml:space="preserve">containers</text>
+<rect x="1450.0" y="118.0" width="760.0" height="977.8" rx="14" fill="#faf8ff" stroke="#7c3aed" stroke-width="1.6"/>
+<circle cx="1480.0" cy="142.0" r="13" fill="#7c3aed"/>
+<text x="1480.0" y="146.5" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="700" fill="#ffffff" text-anchor="middle" xml:space="preserve">3</text>
+<text x="1502.0" y="147.0" font-family="Arial, Helvetica, sans-serif" font-size="15.5" font-weight="700" fill="#4c1d95" text-anchor="start" xml:space="preserve">Kubernetes</text>
+<text x="1601.4" y="147.0" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="400" fill="#475569" text-anchor="start" xml:space="preserve">Helm chart deploy/helm/finaware</text>
+<rect x="30.0" y="1197.0" width="2180.0" height="100.0" rx="10" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.2"/>
+<text x="46.0" y="1221.0" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="700" fill="#0f172a" text-anchor="start" xml:space="preserve">How to read this diagram</text>
+<path d="M330.0,235.2 L330.0,296.0" fill="none" stroke="#334155" stroke-width="1.7" marker-end="url(#ah-http)" stroke-linejoin="round"/>
+<path d="M330.0,371.9 L330.0,415.9" fill="none" stroke="#334155" stroke-width="1.7" marker-end="url(#ah-http)" stroke-linejoin="round"/>
+<path d="M330.0,555.9 L330.0,611.9" fill="none" stroke="#7c3aed" stroke-width="1.7" marker-end="url(#ah-ml)" stroke-linejoin="round"/>
+<path d="M462.5,687.7 L462.5,757.7" fill="none" stroke="#7c3aed" stroke-width="1.7" marker-end="url(#ah-ml)" stroke-linejoin="round"/>
+<path d="M70.0,435.9 L60.0,435.9 L60.0,723.7 L197.5,723.7 L197.5,749.7" fill="none" stroke="#c2410c" stroke-width="1.7" marker-end="url(#ah-data)" stroke-linejoin="round"/>
+<path d="M1098.6,893.2 L1088.6,893.2" fill="none" stroke="#c2410c" stroke-width="1.7" marker-end="url(#ah-data)" stroke-linejoin="round"/>
+<path d="M855.0,235.2 L855.0,322.0" fill="none" stroke="#334155" stroke-width="1.7" marker-end="url(#ah-http)" stroke-linejoin="round"/>
+<path d="M1225.0,249.9 L1225.0,322.0" fill="none" stroke="#475569" stroke-width="1.7" stroke-dasharray="6 4" marker-end="url(#ah-ext)" stroke-linejoin="round"/>
+<path d="M953.8,397.9 L953.8,441.9" fill="none" stroke="#334155" stroke-width="1.7" marker-end="url(#ah-http)" stroke-linejoin="round"/>
+<path d="M700.0,359.9 L689.0,359.9 L689.0,602.5 L700.0,602.5" fill="none" stroke="#334155" stroke-width="1.7" marker-end="url(#ah-http)" stroke-linejoin="round"/>
+<path d="M1035.0,602.5 L1045.0,602.5" fill="none" stroke="#047857" stroke-width="1.7" marker-end="url(#ah-service)" stroke-linejoin="round"/>
+<path d="M867.5,633.0 L867.5,673.0" fill="none" stroke="#7c3aed" stroke-width="1.7" marker-end="url(#ah-ml)" stroke-linejoin="round"/>
+<path d="M1830.0,235.2 L1830.0,316.0" fill="none" stroke="#334155" stroke-width="1.7" marker-end="url(#ah-http)" stroke-linejoin="round"/>
+<path d="M1830.0,393.3 L1830.0,423.3" fill="none" stroke="#334155" stroke-width="1.7" marker-end="url(#ah-http)" stroke-linejoin="round"/>
+<path d="M1830.0,484.4 L1830.0,528.4" fill="none" stroke="#334155" stroke-width="1.7" marker-end="url(#ah-http)" stroke-linejoin="round"/>
+<path d="M1830.0,668.4 L1830.0,712.4" fill="none" stroke="#7c3aed" stroke-width="1.7" marker-end="url(#ah-ml)" stroke-linejoin="round"/>
+<rect x="50.0" y="174.0" width="560.0" height="61.2" rx="10" fill="#ffffff" stroke="#2563eb" stroke-width="1.6"/>
+<path d="M50.8,208.5 L50.8,184.3 Q50.8,174.8 60.3,174.8 L599.7,174.8 Q609.2,174.8 609.2,184.3 L609.2,208.5 Z" fill="#dbeafe" stroke="none" stroke-width="0"/>
+<line x1="50.0" y1="208.5" x2="610.0" y2="208.5" stroke="#2563eb" stroke-width="0.8" stroke-opacity="0.55"/>
+<text x="60.0" y="196.8" font-family="Arial, Helvetica, sans-serif" font-size="13.5" font-weight="700" fill="#1e3a8a" text-anchor="start" xml:space="preserve">Browser</text>
+<text x="60.0" y="228.2" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="10.5" font-weight="400" fill="#1e293b" text-anchor="start" xml:space="preserve">http://localhost:30005</text>
+<rect x="70.0" y="296.0" width="520.0" height="75.9" rx="10" fill="#ffffff" stroke="#4f46e5" stroke-width="1.6"/>
+<path d="M70.8,330.5 L70.8,306.3 Q70.8,296.8 80.3,296.8 L579.7,296.8 Q589.2,296.8 589.2,306.3 L589.2,330.5 Z" fill="#e0e7ff" stroke="none" stroke-width="0"/>
+<line x1="70.0" y1="330.5" x2="590.0" y2="330.5" stroke="#4f46e5" stroke-width="0.8" stroke-opacity="0.55"/>
+<text x="80.0" y="318.8" font-family="Arial, Helvetica, sans-serif" font-size="13.5" font-weight="700" fill="#312e81" text-anchor="start" xml:space="preserve">web — Next.js dev server</text>
+<rect x="537.1" y="303.0" width="42.9" height="18.0" rx="9" fill="#4f46e5" stroke="#4f46e5" stroke-width="0"/>
+<text x="558.6" y="316.0" font-family="Arial, Helvetica, sans-serif" font-size="10.5" font-weight="700" fill="#ffffff" text-anchor="middle" xml:space="preserve">:30005</text>
+<text x="80.0" y="350.2" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="10.5" font-weight="400" fill="#1e293b" text-anchor="start" xml:space="preserve">next dev --port 30005</text>
+<text x="80.0" y="364.9" font-family="Arial, Helvetica, sans-serif" font-size="10.5" font-weight="400" fill="#475569" text-anchor="start" xml:space="preserve">Hot reload: page and component edits show at once.</text>
+<rect x="70.0" y="415.9" width="166.7" height="40.0" rx="10" fill="#ecfdf5" stroke="#059669" stroke-width="1.6"/>
+<text x="80.0" y="439.9" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="700" fill="#064e3b" text-anchor="start" xml:space="preserve">auth</text>
+<rect x="189.7" y="422.9" width="37.0" height="18.0" rx="9" fill="#059669" stroke="#059669" stroke-width="0"/>
+<text x="208.2" y="435.9" font-family="Arial, Helvetica, sans-serif" font-size="10.5" font-weight="700" fill="#ffffff" text-anchor="middle" xml:space="preserve">:4101</text>
+<rect x="246.7" y="415.9" width="166.7" height="40.0" rx="10" fill="#ecfdf5" stroke="#059669" stroke-width="1.6"/>
+<text x="256.7" y="439.9" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="700" fill="#064e3b" text-anchor="start" xml:space="preserve">dashboard</text>
+<rect x="366.3" y="422.9" width="37.0" height="18.0" rx="9" fill="#059669" stroke="#059669" stroke-width="0"/>
+<text x="384.8" y="435.9" font-family="Arial, Helvetica, sans-serif" font-size="10.5" font-weight="700" fill="#ffffff" text-anchor="middle" xml:space="preserve">:4102</text>
+<rect x="423.3" y="415.9" width="166.7" height="40.0" rx="10" fill="#ecfdf5" stroke="#059669" stroke-width="1.6"/>
+<text x="433.3" y="439.9" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="700" fill="#064e3b" text-anchor="start" xml:space="preserve">identity</text>
+<rect x="543.0" y="422.9" width="37.0" height="18.0" rx="9" fill="#059669" stroke="#059669" stroke-width="0"/>
+<text x="561.5" y="435.9" font-family="Arial, Helvetica, sans-serif" font-size="10.5" font-weight="700" fill="#ffffff" text-anchor="middle" xml:space="preserve">:4103</text>
+<rect x="70.0" y="465.9" width="166.7" height="40.0" rx="10" fill="#ecfdf5" stroke="#059669" stroke-width="1.6"/>
+<text x="80.0" y="489.9" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="700" fill="#064e3b" text-anchor="start" xml:space="preserve">debts</text>
+<rect x="189.7" y="472.9" width="37.0" height="18.0" rx="9" fill="#059669" stroke="#059669" stroke-width="0"/>
+<text x="208.2" y="485.9" font-family="Arial, Helvetica, sans-serif" font-size="10.5" font-weight="700" fill="#ffffff" text-anchor="middle" xml:space="preserve">:4104</text>
+<rect x="246.7" y="465.9" width="166.7" height="40.0" rx="10" fill="#ecfdf5" stroke="#059669" stroke-width="1.6"/>
+<text x="256.7" y="489.9" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="700" fill="#064e3b" text-anchor="start" xml:space="preserve">rehab</text>
+<rect x="366.3" y="472.9" width="37.0" height="18.0" rx="9" fill="#059669" stroke="#059669" stroke-width="0"/>
+<text x="384.8" y="485.9" font-family="Arial, Helvetica, sans-serif" font-size="10.5" font-weight="700" fill="#ffffff" text-anchor="middle" xml:space="preserve">:4105</text>
+<rect x="423.3" y="465.9" width="166.7" height="40.0" rx="10" fill="#ecfdf5" stroke="#059669" stroke-width="1.6"/>
+<text x="433.3" y="489.9" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="700" fill="#064e3b" text-anchor="start" xml:space="preserve">help</text>
+<rect x="543.0" y="472.9" width="37.0" height="18.0" rx="9" fill="#059669" stroke="#059669" stroke-width="0"/>
+<text x="561.5" y="485.9" font-family="Arial, Helvetica, sans-serif" font-size="10.5" font-weight="700" fill="#ffffff" text-anchor="middle" xml:space="preserve">:4106</text>
+<rect x="70.0" y="515.9" width="166.7" height="40.0" rx="10" fill="#ecfdf5" stroke="#059669" stroke-width="1.6"/>
+<text x="80.0" y="539.9" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="700" fill="#064e3b" text-anchor="start" xml:space="preserve">pdf</text>
+<rect x="189.7" y="522.9" width="37.0" height="18.0" rx="9" fill="#059669" stroke="#059669" stroke-width="0"/>
+<text x="208.2" y="535.9" font-family="Arial, Helvetica, sans-serif" font-size="10.5" font-weight="700" fill="#ffffff" text-anchor="middle" xml:space="preserve">:4107</text>
+<rect x="246.7" y="515.9" width="166.7" height="40.0" rx="10" fill="#ecfdf5" stroke="#059669" stroke-width="1.6"/>
+<text x="256.7" y="539.9" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="700" fill="#064e3b" text-anchor="start" xml:space="preserve">financial-api</text>
+<rect x="366.3" y="522.9" width="37.0" height="18.0" rx="9" fill="#059669" stroke="#059669" stroke-width="0"/>
+<text x="384.8" y="535.9" font-family="Arial, Helvetica, sans-serif" font-size="10.5" font-weight="700" fill="#ffffff" text-anchor="middle" xml:space="preserve">:4108</text>
+<rect x="423.3" y="515.9" width="166.7" height="40.0" rx="10" fill="#ecfdf5" stroke="#059669" stroke-width="1.6"/>
+<text x="433.3" y="539.9" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="700" fill="#064e3b" text-anchor="start" xml:space="preserve">financial-data</text>
+<rect x="543.0" y="522.9" width="37.0" height="18.0" rx="9" fill="#059669" stroke="#059669" stroke-width="0"/>
+<text x="561.5" y="535.9" font-family="Arial, Helvetica, sans-serif" font-size="10.5" font-weight="700" fill="#ffffff" text-anchor="middle" xml:space="preserve">:4109</text>
+<rect x="70.0" y="611.9" width="520.0" height="75.9" rx="10" fill="#ffffff" stroke="#7c3aed" stroke-width="1.6"/>
+<path d="M70.8,646.3 L70.8,622.2 Q70.8,612.7 80.3,612.7 L579.7,612.7 Q589.2,612.7 589.2,622.2 L589.2,646.3 Z" fill="#ede9fe" stroke="none" stroke-width="0"/>
+<line x1="70.0" y1="646.3" x2="590.0" y2="646.3" stroke="#7c3aed" stroke-width="0.8" stroke-opacity="0.55"/>
+<text x="80.0" y="634.7" font-family="Arial, Helvetica, sans-serif" font-size="13.5" font-weight="700" fill="#4c1d95" text-anchor="start" xml:space="preserve">ml — Python FastAPI (uvicorn)</text>
+<rect x="543.0" y="618.9" width="37.0" height="18.0" rx="9" fill="#7c3aed" stroke="#7c3aed" stroke-width="0"/>
+<text x="561.5" y="631.9" font-family="Arial, Helvetica, sans-serif" font-size="10.5" font-weight="700" fill="#ffffff" text-anchor="middle" xml:space="preserve">:8000</text>
+<text x="80.0" y="666.1" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="10.5" font-weight="400" fill="#1e293b" text-anchor="start" xml:space="preserve">ml-service/.venv/bin/uvicorn api.main:app --port 8000</text>
+<text x="80.0" y="680.8" font-family="Arial, Helvetica, sans-serif" font-size="10.5" font-weight="400" fill="#475569" text-anchor="start" xml:space="preserve">Python 3.12 or newer; set up with npm run ml:setup</text>
+<path d="M70.0,763.7 L70.0,845.7 A127.5,14 0 0 0 325.0,845.7 L325.0,763.7" fill="#ffffff" stroke="#ea580c" stroke-width="1.8"/>
+<ellipse cx="197.5" cy="763.7" rx="127.5" ry="14" fill="#ffedd5" stroke="#ea580c" stroke-width="1.8"/>
+<text x="197.5" y="797.7" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="700" fill="#7c2d12" text-anchor="middle" xml:space="preserve">SQLite file</text>
+<text x="85.0" y="821.7" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="10.5" font-weight="400" fill="#1e293b" text-anchor="start" xml:space="preserve">prisma/prisma/dev.db</text>
+<rect x="335.0" y="757.7" width="255.0" height="75.9" rx="10" fill="#ffffff" stroke="#7c3aed" stroke-width="1.6"/>
+<path d="M335.8,792.2 L335.8,768.0 Q335.8,758.5 345.3,758.5 L579.7,758.5 Q589.2,758.5 589.2,768.0 L589.2,792.2 Z" fill="#ede9fe" stroke="none" stroke-width="0"/>
+<line x1="335.0" y1="792.2" x2="590.0" y2="792.2" stroke="#7c3aed" stroke-width="0.8" stroke-opacity="0.55"/>
+<text x="345.0" y="780.6" font-family="Arial, Helvetica, sans-serif" font-size="13.5" font-weight="700" fill="#4c1d95" text-anchor="start" xml:space="preserve">Model files</text>
+<text x="345.0" y="811.9" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="10.5" font-weight="400" fill="#1e293b" text-anchor="start" xml:space="preserve">ml-service/artifacts/</text>
+<text x="345.0" y="826.6" font-family="Arial, Helvetica, sans-serif" font-size="10.5" font-weight="400" fill="#475569" text-anchor="start" xml:space="preserve">*.joblib + metadata</text>
+<rect x="50.0" y="899.7" width="560.0" height="105.3" rx="10" fill="#ffffff" stroke="#64748b" stroke-width="1.6"/>
+<path d="M50.8,934.2 L50.8,910.0 Q50.8,900.5 60.3,900.5 L599.7,900.5 Q609.2,900.5 609.2,910.0 L609.2,934.2 Z" fill="#f1f5f9" stroke="none" stroke-width="0"/>
+<line x1="50.0" y1="934.2" x2="610.0" y2="934.2" stroke="#64748b" stroke-width="0.8" stroke-opacity="0.55"/>
+<text x="60.0" y="922.6" font-family="Arial, Helvetica, sans-serif" font-size="13.5" font-weight="700" fill="#0f172a" text-anchor="start" xml:space="preserve">Start it</text>
+<text x="60.0" y="953.9" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="10.5" font-weight="400" fill="#1e293b" text-anchor="start" xml:space="preserve">npm run dev:stack:ml</text>
+<text x="60.0" y="968.6" font-family="Arial, Helvetica, sans-serif" font-size="10.5" font-weight="400" fill="#475569" text-anchor="start" xml:space="preserve">Node 20 (.nvmrc). The README walks through the whole setup, step by step.</text>
+<text x="60.0" y="983.3" font-family="Arial, Helvetica, sans-serif" font-size="10.5" font-weight="400" fill="#475569" text-anchor="start" xml:space="preserve">Services run with tsx services/&lt;name&gt;/src/server.ts and have no hot reload: restart the stack after editing services/</text>
+<text x="60.0" y="998.0" font-family="Arial, Helvetica, sans-serif" font-size="10.5" font-weight="400" fill="#475569" text-anchor="start" xml:space="preserve">or lib/microservices/.</text>
+<rect x="680.0" y="174.0" width="350.0" height="61.2" rx="10" fill="#ffffff" stroke="#2563eb" stroke-width="1.6"/>
+<path d="M680.8,208.5 L680.8,184.3 Q680.8,174.8 690.3,174.8 L1019.7,174.8 Q1029.2,174.8 1029.2,184.3 L1029.2,208.5 Z" fill="#dbeafe" stroke="none" stroke-width="0"/>
+<line x1="680.0" y1="208.5" x2="1030.0" y2="208.5" stroke="#2563eb" stroke-width="0.8" stroke-opacity="0.55"/>
+<text x="690.0" y="196.8" font-family="Arial, Helvetica, sans-serif" font-size="13.5" font-weight="700" fill="#1e3a8a" text-anchor="start" xml:space="preserve">Browser</text>
+<text x="690.0" y="228.2" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="10.5" font-weight="400" fill="#1e293b" text-anchor="start" xml:space="preserve">http://localhost:30005</text>
+<rect x="1050.0" y="174.0" width="350.0" height="75.9" rx="10" fill="#ffffff" stroke="#475569" stroke-width="1.6" stroke-dasharray="7 4"/>
+<path d="M1050.8,208.5 L1050.8,184.3 Q1050.8,174.8 1060.3,174.8 L1389.7,174.8 Q1399.2,174.8 1399.2,184.3 L1399.2,208.5 Z" fill="#e2e8f0" stroke="none" stroke-width="0"/>
+<line x1="1050.0" y1="208.5" x2="1400.0" y2="208.5" stroke="#475569" stroke-width="0.8" stroke-opacity="0.55"/>
+<text x="1060.0" y="196.8" font-family="Arial, Helvetica, sans-serif" font-size="13.5" font-weight="700" fill="#1e293b" text-anchor="start" xml:space="preserve">edge — Caddy 2.8, optional TLS</text>
+<text x="1060.0" y="228.2" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="10.5" font-weight="400" fill="#1e293b" text-anchor="start" xml:space="preserve">docker-compose.tls.yml</text>
+<text x="1060.0" y="242.9" font-family="Arial, Helvetica, sans-serif" font-size="10.5" font-weight="400" fill="#475569" text-anchor="start" xml:space="preserve">ports 80 / 443 → web:30005</text>
+<rect x="700.0" y="322.0" width="680.0" height="75.9" rx="10" fill="#ffffff" stroke="#4f46e5" stroke-width="1.6"/>
+<path d="M700.8,356.5 L700.8,332.3 Q700.8,322.8 710.3,322.8 L1369.7,322.8 Q1379.2,322.8 1379.2,332.3 L1379.2,356.5 Z" fill="#e0e7ff" stroke="none" stroke-width="0"/>
+<line x1="700.0" y1="356.5" x2="1380.0" y2="356.5" stroke="#4f46e5" stroke-width="0.8" stroke-opacity="0.55"/>
+<text x="710.0" y="344.8" font-family="Arial, Helvetica, sans-serif" font-size="13.5" font-weight="700" fill="#312e81" text-anchor="start" xml:space="preserve">web</text>
+<rect x="1327.1" y="329.0" width="42.9" height="18.0" rx="9" fill="#4f46e5" stroke="#4f46e5" stroke-width="0"/>
+<text x="1348.6" y="342.0" font-family="Arial, Helvetica, sans-serif" font-size="10.5" font-weight="700" fill="#ffffff" text-anchor="middle" xml:space="preserve">:30005</text>
+<text x="710.0" y="376.2" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="10.5" font-weight="400" fill="#1e293b" text-anchor="start" xml:space="preserve">npm run start   (production build)</text>
+<text x="710.0" y="390.9" font-family="Arial, Helvetica, sans-serif" font-size="10.5" font-weight="400" fill="#475569" text-anchor="start" xml:space="preserve">published on the host: 30005</text>
+<rect x="700.0" y="441.9" width="162.5" height="40.0" rx="10" fill="#ecfdf5" stroke="#059669" stroke-width="1.6"/>
+<text x="710.0" y="465.9" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="700" fill="#064e3b" text-anchor="start" xml:space="preserve">auth</text>
+<rect x="815.5" y="448.9" width="37.0" height="18.0" rx="9" fill="#059669" stroke="#059669" stroke-width="0"/>
+<text x="834.0" y="461.9" font-family="Arial, Helvetica, sans-serif" font-size="10.5" font-weight="700" fill="#ffffff" text-anchor="middle" xml:space="preserve">:4101</text>
+<rect x="872.5" y="441.9" width="162.5" height="40.0" rx="10" fill="#ecfdf5" stroke="#059669" stroke-width="1.6"/>
+<text x="882.5" y="465.9" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="700" fill="#064e3b" text-anchor="start" xml:space="preserve">dashboard</text>
+<rect x="988.0" y="448.9" width="37.0" height="18.0" rx="9" fill="#059669" stroke="#059669" stroke-width="0"/>
+<text x="1006.5" y="461.9" font-family="Arial, Helvetica, sans-serif" font-size="10.5" font-weight="700" fill="#ffffff" text-anchor="middle" xml:space="preserve">:4102</text>
+<rect x="1045.0" y="441.9" width="162.5" height="40.0" rx="10" fill="#ecfdf5" stroke="#059669" stroke-width="1.6"/>
+<text x="1055.0" y="465.9" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="700" fill="#064e3b" text-anchor="start" xml:space="preserve">identity</text>
+<rect x="1160.5" y="448.9" width="37.0" height="18.0" rx="9" fill="#059669" stroke="#059669" stroke-width="0"/>
+<text x="1179.0" y="461.9" font-family="Arial, Helvetica, sans-serif" font-size="10.5" font-weight="700" fill="#ffffff" text-anchor="middle" xml:space="preserve">:4103</text>
+<rect x="1217.5" y="441.9" width="162.5" height="40.0" rx="10" fill="#ecfdf5" stroke="#059669" stroke-width="1.6"/>
+<text x="1227.5" y="465.9" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="700" fill="#064e3b" text-anchor="start" xml:space="preserve">debts</text>
+<rect x="1333.0" y="448.9" width="37.0" height="18.0" rx="9" fill="#059669" stroke="#059669" stroke-width="0"/>
+<text x="1351.5" y="461.9" font-family="Arial, Helvetica, sans-serif" font-size="10.5" font-weight="700" fill="#ffffff" text-anchor="middle" xml:space="preserve">:4104</text>
+<rect x="700.0" y="491.9" width="162.5" height="40.0" rx="10" fill="#ecfdf5" stroke="#059669" stroke-width="1.6"/>
+<text x="710.0" y="516.0" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="700" fill="#064e3b" text-anchor="start" xml:space="preserve">rehab</text>
+<rect x="815.5" y="498.9" width="37.0" height="18.0" rx="9" fill="#059669" stroke="#059669" stroke-width="0"/>
+<text x="834.0" y="511.9" font-family="Arial, Helvetica, sans-serif" font-size="10.5" font-weight="700" fill="#ffffff" text-anchor="middle" xml:space="preserve">:4105</text>
+<rect x="872.5" y="491.9" width="162.5" height="40.0" rx="10" fill="#ecfdf5" stroke="#059669" stroke-width="1.6"/>
+<text x="882.5" y="516.0" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="700" fill="#064e3b" text-anchor="start" xml:space="preserve">help</text>
+<rect x="988.0" y="498.9" width="37.0" height="18.0" rx="9" fill="#059669" stroke="#059669" stroke-width="0"/>
+<text x="1006.5" y="511.9" font-family="Arial, Helvetica, sans-serif" font-size="10.5" font-weight="700" fill="#ffffff" text-anchor="middle" xml:space="preserve">:4106</text>
+<rect x="1045.0" y="491.9" width="162.5" height="40.0" rx="10" fill="#ecfdf5" stroke="#059669" stroke-width="1.6"/>
+<text x="1055.0" y="516.0" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="700" fill="#064e3b" text-anchor="start" xml:space="preserve">pdf</text>
+<rect x="1160.5" y="498.9" width="37.0" height="18.0" rx="9" fill="#059669" stroke="#059669" stroke-width="0"/>
+<text x="1179.0" y="511.9" font-family="Arial, Helvetica, sans-serif" font-size="10.5" font-weight="700" fill="#ffffff" text-anchor="middle" xml:space="preserve">:4107</text>
+<rect x="1217.5" y="491.9" width="162.5" height="40.0" rx="8" fill="#fffbeb" stroke="#d97706" stroke-width="1.2" stroke-dasharray="4 3"/>
+<text x="1226.5" y="511.7" font-family="Arial, Helvetica, sans-serif" font-size="10.5" font-weight="400" fill="#78350f" text-anchor="start" xml:space="preserve">These seven are also</text>
+<text x="1226.5" y="526.2" font-family="Arial, Helvetica, sans-serif" font-size="10.5" font-weight="400" fill="#78350f" text-anchor="start" xml:space="preserve">published on the host.</text>
+<rect x="700.0" y="571.9" width="335.0" height="61.2" rx="10" fill="#ffffff" stroke="#059669" stroke-width="1.6"/>
+<path d="M700.8,606.3 L700.8,582.2 Q700.8,572.7 710.3,572.7 L1024.7,572.7 Q1034.2,572.7 1034.2,582.2 L1034.2,606.3 Z" fill="#d1fae5" stroke="none" stroke-width="0"/>
+<line x1="700.0" y1="606.3" x2="1035.0" y2="606.3" stroke="#059669" stroke-width="0.8" stroke-opacity="0.55"/>
+<text x="710.0" y="594.7" font-family="Arial, Helvetica, sans-serif" font-size="13.5" font-weight="700" fill="#064e3b" text-anchor="start" xml:space="preserve">financial-api</text>
+<rect x="988.0" y="578.9" width="37.0" height="18.0" rx="9" fill="#059669" stroke="#059669" stroke-width="0"/>
+<text x="1006.5" y="591.9" font-family="Arial, Helvetica, sans-serif" font-size="10.5" font-weight="700" fill="#ffffff" text-anchor="middle" xml:space="preserve">:4108</text>
+<text x="710.0" y="626.1" font-family="Arial, Helvetica, sans-serif" font-size="10.5" font-weight="400" fill="#475569" text-anchor="start" xml:space="preserve">internal only — no published port</text>
+<rect x="1045.0" y="571.9" width="335.0" height="61.2" rx="10" fill="#ffffff" stroke="#059669" stroke-width="1.6"/>
+<path d="M1045.8,606.3 L1045.8,582.2 Q1045.8,572.7 1055.3,572.7 L1369.7,572.7 Q1379.2,572.7 1379.2,582.2 L1379.2,606.3 Z" fill="#d1fae5" stroke="none" stroke-width="0"/>
+<line x1="1045.0" y1="606.3" x2="1380.0" y2="606.3" stroke="#059669" stroke-width="0.8" stroke-opacity="0.55"/>
+<text x="1055.0" y="594.7" font-family="Arial, Helvetica, sans-serif" font-size="13.5" font-weight="700" fill="#064e3b" text-anchor="start" xml:space="preserve">financial-data</text>
+<rect x="1333.0" y="578.9" width="37.0" height="18.0" rx="9" fill="#059669" stroke="#059669" stroke-width="0"/>
+<text x="1351.5" y="591.9" font-family="Arial, Helvetica, sans-serif" font-size="10.5" font-weight="700" fill="#ffffff" text-anchor="middle" xml:space="preserve">:4109</text>
+<text x="1055.0" y="626.1" font-family="Arial, Helvetica, sans-serif" font-size="10.5" font-weight="400" fill="#475569" text-anchor="start" xml:space="preserve">internal only — no published port</text>
+<rect x="700.0" y="673.0" width="680.0" height="124.2" rx="10" fill="#ffffff" stroke="#7c3aed" stroke-width="1.6"/>
+<path d="M700.8,707.5 L700.8,683.3 Q700.8,673.8 710.3,673.8 L1369.7,673.8 Q1379.2,673.8 1379.2,683.3 L1379.2,707.5 Z" fill="#ede9fe" stroke="none" stroke-width="0"/>
+<line x1="700.0" y1="707.5" x2="1380.0" y2="707.5" stroke="#7c3aed" stroke-width="0.8" stroke-opacity="0.55"/>
+<text x="710.0" y="695.9" font-family="Arial, Helvetica, sans-serif" font-size="13.5" font-weight="700" fill="#4c1d95" text-anchor="start" xml:space="preserve">ml-service — its own image</text>
+<rect x="1333.0" y="680.0" width="37.0" height="18.0" rx="9" fill="#7c3aed" stroke="#7c3aed" stroke-width="0"/>
+<text x="1351.5" y="693.0" font-family="Arial, Helvetica, sans-serif" font-size="10.5" font-weight="700" fill="#ffffff" text-anchor="middle" xml:space="preserve">:8000</text>
+<text x="710.0" y="727.2" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="10.5" font-weight="400" fill="#1e293b" text-anchor="start" xml:space="preserve">ml-service/Dockerfile · python:3.12-slim</text>
+<text x="710.0" y="742.9" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">Trains the risk model and the peer groups while the image is built (ALLOW_PROPOSED_TARGET=1 until the supervisor</text>
+<text x="710.0" y="759.0" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">approves the risk target); runs as a non-root user; health check /health/ready.</text>
+<text x="710.0" y="774.6" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="700" fill="#b45309" text-anchor="start" xml:space="preserve">The missed-payment model needs the app database to train, so this image has none: POST /predict/payment-miss answers</text>
+<text x="710.0" y="790.0" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="700" fill="#b45309" text-anchor="start" xml:space="preserve">503 and everything else works.</text>
+<path d="M700.0,841.2 L700.0,931.2 A194.3,14 0 0 0 1088.6,931.2 L1088.6,841.2" fill="#ffffff" stroke="#ea580c" stroke-width="1.8"/>
+<ellipse cx="894.3" cy="841.2" rx="194.3" ry="14" fill="#ffedd5" stroke="#ea580c" stroke-width="1.8"/>
+<text x="894.3" y="875.2" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="700" fill="#7c2d12" text-anchor="middle" xml:space="preserve">Volume sqlite_data</text>
+<text x="715.0" y="899.2" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="10.5" font-weight="400" fill="#1e293b" text-anchor="start" xml:space="preserve">/data/dev.db</text>
+<text x="715.0" y="914.4" font-family="Arial, Helvetica, sans-serif" font-size="10.5" font-weight="400" fill="#475569" text-anchor="start" xml:space="preserve">Mounted in db-init, web and every</text>
+<text x="715.0" y="929.7" font-family="Arial, Helvetica, sans-serif" font-size="10.5" font-weight="400" fill="#475569" text-anchor="start" xml:space="preserve">Node service (DATABASE_URL)</text>
+<rect x="1098.6" y="835.2" width="281.4" height="90.6" rx="10" fill="#ffffff" stroke="#ea580c" stroke-width="1.6"/>
+<path d="M1099.4,869.7 L1099.4,845.5 Q1099.4,836.0 1108.9,836.0 L1369.7,836.0 Q1379.2,836.0 1379.2,845.5 L1379.2,869.7 Z" fill="#ffedd5" stroke="none" stroke-width="0"/>
+<line x1="1098.6" y1="869.7" x2="1380.0" y2="869.7" stroke="#ea580c" stroke-width="0.8" stroke-opacity="0.55"/>
+<text x="1108.6" y="858.0" font-family="Arial, Helvetica, sans-serif" font-size="13.5" font-weight="700" fill="#7c2d12" text-anchor="start" xml:space="preserve">db-init — runs once, then exits</text>
+<text x="1108.6" y="889.4" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="10.5" font-weight="400" fill="#1e293b" text-anchor="start" xml:space="preserve">npx prisma db push</text>
+<text x="1108.6" y="904.1" font-family="Arial, Helvetica, sans-serif" font-size="10.5" font-weight="400" fill="#475569" text-anchor="start" xml:space="preserve">Creates the tables in the volume. Every Node container</text>
+<text x="1108.6" y="918.8" font-family="Arial, Helvetica, sans-serif" font-size="10.5" font-weight="400" fill="#475569" text-anchor="start" xml:space="preserve">waits for it to finish first.</text>
+<rect x="680.0" y="985.2" width="350.0" height="75.9" rx="10" fill="#ffffff" stroke="#64748b" stroke-width="1.6"/>
+<path d="M680.8,1019.7 L680.8,995.5 Q680.8,986.0 690.3,986.0 L1019.7,986.0 Q1029.2,986.0 1029.2,995.5 L1029.2,1019.7 Z" fill="#f1f5f9" stroke="none" stroke-width="0"/>
+<line x1="680.0" y1="1019.7" x2="1030.0" y2="1019.7" stroke="#64748b" stroke-width="0.8" stroke-opacity="0.55"/>
+<text x="690.0" y="1008.0" font-family="Arial, Helvetica, sans-serif" font-size="13.5" font-weight="700" fill="#0f172a" text-anchor="start" xml:space="preserve">Start it</text>
+<text x="690.0" y="1039.4" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="10.5" font-weight="400" fill="#1e293b" text-anchor="start" xml:space="preserve">docker compose up --build</text>
+<text x="690.0" y="1054.1" font-family="Arial, Helvetica, sans-serif" font-size="10.5" font-weight="400" fill="#475569" text-anchor="start" xml:space="preserve">Settings come from the .env file (OPENAI_API_KEY is optional).</text>
+<rect x="1050.0" y="985.2" width="350.0" height="90.6" rx="10" fill="#ffffff" stroke="#64748b" stroke-width="1.6"/>
+<path d="M1050.8,1019.7 L1050.8,995.5 Q1050.8,986.0 1060.3,986.0 L1389.7,986.0 Q1399.2,986.0 1399.2,995.5 L1399.2,1019.7 Z" fill="#f1f5f9" stroke="none" stroke-width="0"/>
+<line x1="1050.0" y1="1019.7" x2="1400.0" y2="1019.7" stroke="#64748b" stroke-width="0.8" stroke-opacity="0.55"/>
+<text x="1060.0" y="1008.0" font-family="Arial, Helvetica, sans-serif" font-size="13.5" font-weight="700" fill="#0f172a" text-anchor="start" xml:space="preserve">Two images</text>
+<text x="1060.0" y="1039.4" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="10.5" font-weight="400" fill="#1e293b" text-anchor="start" xml:space="preserve">Dockerfile → node:20-bookworm-slim</text>
+<text x="1060.0" y="1054.1" font-family="Arial, Helvetica, sans-serif" font-size="10.5" font-weight="400" fill="#475569" text-anchor="start" xml:space="preserve">the web app and all nine Node services</text>
+<text x="1060.0" y="1068.8" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="10.5" font-weight="400" fill="#1e293b" text-anchor="start" xml:space="preserve">ml-service/Dockerfile → python:3.12-slim</text>
+<rect x="1470.0" y="174.0" width="720.0" height="61.2" rx="10" fill="#ffffff" stroke="#2563eb" stroke-width="1.6"/>
+<path d="M1470.8,208.5 L1470.8,184.3 Q1470.8,174.8 1480.3,174.8 L2179.7,174.8 Q2189.2,174.8 2189.2,184.3 L2189.2,208.5 Z" fill="#dbeafe" stroke="none" stroke-width="0"/>
+<line x1="1470.0" y1="208.5" x2="2190.0" y2="208.5" stroke="#2563eb" stroke-width="0.8" stroke-opacity="0.55"/>
+<text x="1480.0" y="196.8" font-family="Arial, Helvetica, sans-serif" font-size="13.5" font-weight="700" fill="#1e3a8a" text-anchor="start" xml:space="preserve">Internet</text>
+<text x="1480.0" y="228.2" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="10.5" font-weight="400" fill="#1e293b" text-anchor="start" xml:space="preserve">https://dev.finaware.io · stag.finaware.io · prod.finaware.io</text>
+<rect x="1490.0" y="316.0" width="680.0" height="77.3" rx="10" fill="#ffffff" stroke="#475569" stroke-width="1.6" stroke-dasharray="7 4"/>
+<path d="M1490.8,350.5 L1490.8,326.3 Q1490.8,316.8 1500.3,316.8 L2159.7,316.8 Q2169.2,316.8 2169.2,326.3 L2169.2,350.5 Z" fill="#e2e8f0" stroke="none" stroke-width="0"/>
+<line x1="1490.0" y1="350.5" x2="2170.0" y2="350.5" stroke="#475569" stroke-width="0.8" stroke-opacity="0.55"/>
+<text x="1500.0" y="338.8" font-family="Arial, Helvetica, sans-serif" font-size="13.5" font-weight="700" fill="#1e293b" text-anchor="start" xml:space="preserve">Ingress (nginx) → Service web</text>
+<text x="1500.0" y="371.2" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#334155" text-anchor="start" xml:space="preserve">TLS certificate from cert-manager: Let&#x27;s Encrypt staging for dev, production for stag and prod.</text>
+<text x="1500.0" y="386.3" font-family="Arial, Helvetica, sans-serif" font-size="10.5" font-weight="400" fill="#475569" text-anchor="start" xml:space="preserve">Only the web app is exposed; every other part is an internal ClusterIP Service.</text>
+<rect x="1490.0" y="423.3" width="680.0" height="61.2" rx="10" fill="#ffffff" stroke="#4f46e5" stroke-width="1.6"/>
+<path d="M1490.8,457.7 L1490.8,433.6 Q1490.8,424.1 1500.3,424.1 L2159.7,424.1 Q2169.2,424.1 2169.2,433.6 L2169.2,457.7 Z" fill="#e0e7ff" stroke="none" stroke-width="0"/>
+<line x1="1490.0" y1="457.7" x2="2170.0" y2="457.7" stroke="#4f46e5" stroke-width="0.8" stroke-opacity="0.55"/>
+<text x="1500.0" y="446.1" font-family="Arial, Helvetica, sans-serif" font-size="13.5" font-weight="700" fill="#312e81" text-anchor="start" xml:space="preserve">Deployment web</text>
+<rect x="2117.1" y="430.3" width="42.9" height="18.0" rx="9" fill="#4f46e5" stroke="#4f46e5" stroke-width="0"/>
+<text x="2138.6" y="443.3" font-family="Arial, Helvetica, sans-serif" font-size="10.5" font-weight="700" fill="#ffffff" text-anchor="middle" xml:space="preserve">:30005</text>
+<text x="1500.0" y="477.4" font-family="Arial, Helvetica, sans-serif" font-size="10.5" font-weight="400" fill="#475569" text-anchor="start" xml:space="preserve">2 replicas; in prod a HorizontalPodAutoscaler keeps 2–5 pods at 70% CPU</text>
+<rect x="1490.0" y="528.4" width="220.0" height="40.0" rx="10" fill="#ecfdf5" stroke="#059669" stroke-width="1.6"/>
+<text x="1500.0" y="552.5" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="700" fill="#064e3b" text-anchor="start" xml:space="preserve">auth</text>
+<rect x="1663.0" y="535.4" width="37.0" height="18.0" rx="9" fill="#059669" stroke="#059669" stroke-width="0"/>
+<text x="1681.5" y="548.4" font-family="Arial, Helvetica, sans-serif" font-size="10.5" font-weight="700" fill="#ffffff" text-anchor="middle" xml:space="preserve">:4101</text>
+<rect x="1720.0" y="528.4" width="220.0" height="40.0" rx="10" fill="#ecfdf5" stroke="#059669" stroke-width="1.6"/>
+<text x="1730.0" y="552.5" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="700" fill="#064e3b" text-anchor="start" xml:space="preserve">dashboard</text>
+<rect x="1893.0" y="535.4" width="37.0" height="18.0" rx="9" fill="#059669" stroke="#059669" stroke-width="0"/>
+<text x="1911.5" y="548.4" font-family="Arial, Helvetica, sans-serif" font-size="10.5" font-weight="700" fill="#ffffff" text-anchor="middle" xml:space="preserve">:4102</text>
+<rect x="1950.0" y="528.4" width="220.0" height="40.0" rx="10" fill="#ecfdf5" stroke="#059669" stroke-width="1.6"/>
+<text x="1960.0" y="552.5" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="700" fill="#064e3b" text-anchor="start" xml:space="preserve">identity</text>
+<rect x="2123.0" y="535.4" width="37.0" height="18.0" rx="9" fill="#059669" stroke="#059669" stroke-width="0"/>
+<text x="2141.5" y="548.4" font-family="Arial, Helvetica, sans-serif" font-size="10.5" font-weight="700" fill="#ffffff" text-anchor="middle" xml:space="preserve">:4103</text>
+<rect x="1490.0" y="578.4" width="220.0" height="40.0" rx="10" fill="#ecfdf5" stroke="#059669" stroke-width="1.6"/>
+<text x="1500.0" y="602.5" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="700" fill="#064e3b" text-anchor="start" xml:space="preserve">debts</text>
+<rect x="1663.0" y="585.4" width="37.0" height="18.0" rx="9" fill="#059669" stroke="#059669" stroke-width="0"/>
+<text x="1681.5" y="598.4" font-family="Arial, Helvetica, sans-serif" font-size="10.5" font-weight="700" fill="#ffffff" text-anchor="middle" xml:space="preserve">:4104</text>
+<rect x="1720.0" y="578.4" width="220.0" height="40.0" rx="10" fill="#ecfdf5" stroke="#059669" stroke-width="1.6"/>
+<text x="1730.0" y="602.5" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="700" fill="#064e3b" text-anchor="start" xml:space="preserve">rehab</text>
+<rect x="1893.0" y="585.4" width="37.0" height="18.0" rx="9" fill="#059669" stroke="#059669" stroke-width="0"/>
+<text x="1911.5" y="598.4" font-family="Arial, Helvetica, sans-serif" font-size="10.5" font-weight="700" fill="#ffffff" text-anchor="middle" xml:space="preserve">:4105</text>
+<rect x="1950.0" y="578.4" width="220.0" height="40.0" rx="10" fill="#ecfdf5" stroke="#059669" stroke-width="1.6"/>
+<text x="1960.0" y="602.5" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="700" fill="#064e3b" text-anchor="start" xml:space="preserve">help</text>
+<rect x="2123.0" y="585.4" width="37.0" height="18.0" rx="9" fill="#059669" stroke="#059669" stroke-width="0"/>
+<text x="2141.5" y="598.4" font-family="Arial, Helvetica, sans-serif" font-size="10.5" font-weight="700" fill="#ffffff" text-anchor="middle" xml:space="preserve">:4106</text>
+<rect x="1490.0" y="628.4" width="220.0" height="40.0" rx="10" fill="#ecfdf5" stroke="#059669" stroke-width="1.6"/>
+<text x="1500.0" y="652.5" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="700" fill="#064e3b" text-anchor="start" xml:space="preserve">pdf</text>
+<rect x="1663.0" y="635.4" width="37.0" height="18.0" rx="9" fill="#059669" stroke="#059669" stroke-width="0"/>
+<text x="1681.5" y="648.4" font-family="Arial, Helvetica, sans-serif" font-size="10.5" font-weight="700" fill="#ffffff" text-anchor="middle" xml:space="preserve">:4107</text>
+<rect x="1720.0" y="628.4" width="220.0" height="40.0" rx="10" fill="#ecfdf5" stroke="#059669" stroke-width="1.6"/>
+<text x="1730.0" y="652.5" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="700" fill="#064e3b" text-anchor="start" xml:space="preserve">financial-api</text>
+<rect x="1893.0" y="635.4" width="37.0" height="18.0" rx="9" fill="#059669" stroke="#059669" stroke-width="0"/>
+<text x="1911.5" y="648.4" font-family="Arial, Helvetica, sans-serif" font-size="10.5" font-weight="700" fill="#ffffff" text-anchor="middle" xml:space="preserve">:4108</text>
+<rect x="1950.0" y="628.4" width="220.0" height="40.0" rx="10" fill="#ecfdf5" stroke="#059669" stroke-width="1.6"/>
+<text x="1960.0" y="652.5" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="700" fill="#064e3b" text-anchor="start" xml:space="preserve">financial-data</text>
+<rect x="2123.0" y="635.4" width="37.0" height="18.0" rx="9" fill="#059669" stroke="#059669" stroke-width="0"/>
+<text x="2141.5" y="648.4" font-family="Arial, Helvetica, sans-serif" font-size="10.5" font-weight="700" fill="#ffffff" text-anchor="middle" xml:space="preserve">:4109</text>
+<rect x="1490.0" y="712.4" width="680.0" height="77.3" rx="10" fill="#ffffff" stroke="#7c3aed" stroke-width="1.6"/>
+<path d="M1490.8,746.9 L1490.8,722.7 Q1490.8,713.2 1500.3,713.2 L2159.7,713.2 Q2169.2,713.2 2169.2,722.7 L2169.2,746.9 Z" fill="#ede9fe" stroke="none" stroke-width="0"/>
+<line x1="1490.0" y1="746.9" x2="2170.0" y2="746.9" stroke="#7c3aed" stroke-width="0.8" stroke-opacity="0.55"/>
+<text x="1500.0" y="735.3" font-family="Arial, Helvetica, sans-serif" font-size="13.5" font-weight="700" fill="#4c1d95" text-anchor="start" xml:space="preserve">Deployment ml-service — image finaware-ml</text>
+<rect x="2123.0" y="719.4" width="37.0" height="18.0" rx="9" fill="#7c3aed" stroke="#7c3aed" stroke-width="0"/>
+<text x="2141.5" y="732.4" font-family="Arial, Helvetica, sans-serif" font-size="10.5" font-weight="700" fill="#ffffff" text-anchor="middle" xml:space="preserve">:8000</text>
+<text x="1500.0" y="767.6" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="700" fill="#0f172a" text-anchor="start" xml:space="preserve">NetworkPolicy: only financial-api pods may connect to it.</text>
+<text x="1500.0" y="782.7" font-family="Arial, Helvetica, sans-serif" font-size="10.5" font-weight="400" fill="#475569" text-anchor="start" xml:space="preserve">Readiness probe /health/ready; no data volume.</text>
+<path d="M1490.0,827.7 L1490.0,915.7 A167.5,14 0 0 0 1825.0,915.7 L1825.0,827.7" fill="#ffffff" stroke="#ea580c" stroke-width="1.8"/>
+<ellipse cx="1657.5" cy="827.7" rx="167.5" ry="14" fill="#ffedd5" stroke="#ea580c" stroke-width="1.8"/>
+<text x="1657.5" y="861.7" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="700" fill="#7c2d12" text-anchor="middle" xml:space="preserve">PersistentVolumeClaim</text>
+<text x="1505.0" y="885.7" font-family="Arial, Helvetica, sans-serif" font-size="10.5" font-weight="400" fill="#475569" text-anchor="start" xml:space="preserve">2 Gi, ReadWriteOnce</text>
+<text x="1505.0" y="900.9" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="10.5" font-weight="400" fill="#1e293b" text-anchor="start" xml:space="preserve">/app/prisma/data/dev.db</text>
+<rect x="1835.0" y="813.7" width="335.0" height="90.6" rx="10" fill="#ffffff" stroke="#64748b" stroke-width="1.6"/>
+<path d="M1835.8,848.2 L1835.8,824.0 Q1835.8,814.5 1845.3,814.5 L2159.7,814.5 Q2169.2,814.5 2169.2,824.0 L2169.2,848.2 Z" fill="#f1f5f9" stroke="none" stroke-width="0"/>
+<line x1="1835.0" y1="848.2" x2="2170.0" y2="848.2" stroke="#64748b" stroke-width="0.8" stroke-opacity="0.55"/>
+<text x="1845.0" y="836.5" font-family="Arial, Helvetica, sans-serif" font-size="13.5" font-weight="700" fill="#0f172a" text-anchor="start" xml:space="preserve">ConfigMap + Secret</text>
+<text x="1845.0" y="867.9" font-family="Arial, Helvetica, sans-serif" font-size="10.5" font-weight="400" fill="#475569" text-anchor="start" xml:space="preserve">ConfigMap: environment, model name, WhatsApp numbers, cookie</text>
+<text x="1845.0" y="882.6" font-family="Arial, Helvetica, sans-serif" font-size="10.5" font-weight="400" fill="#475569" text-anchor="start" xml:space="preserve">names</text>
+<text x="1845.0" y="897.3" font-family="Arial, Helvetica, sans-serif" font-size="10.5" font-weight="400" fill="#475569" text-anchor="start" xml:space="preserve">Secret: DATABASE_URL, OPENAI_API_KEY</text>
+<rect x="1470.0" y="969.7" width="350.0" height="75.9" rx="10" fill="#ffffff" stroke="#64748b" stroke-width="1.6"/>
+<path d="M1470.8,1004.2 L1470.8,980.0 Q1470.8,970.5 1480.3,970.5 L1809.7,970.5 Q1819.2,970.5 1819.2,980.0 L1819.2,1004.2 Z" fill="#f1f5f9" stroke="none" stroke-width="0"/>
+<line x1="1470.0" y1="1004.2" x2="1820.0" y2="1004.2" stroke="#64748b" stroke-width="0.8" stroke-opacity="0.55"/>
+<text x="1480.0" y="992.5" font-family="Arial, Helvetica, sans-serif" font-size="13.5" font-weight="700" fill="#0f172a" text-anchor="start" xml:space="preserve">Start it</text>
+<text x="1480.0" y="1023.9" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="10.5" font-weight="400" fill="#1e293b" text-anchor="start" xml:space="preserve">npm run helm:install:dev</text>
+<text x="1480.0" y="1038.6" font-family="Arial, Helvetica, sans-serif" font-size="10.5" font-weight="400" fill="#475569" text-anchor="start" xml:space="preserve">…:stag and …:prod use values-stag.yaml and values-prod.yaml</text>
+<rect x="1840.0" y="969.7" width="350.0" height="63.5" rx="8" fill="#fffbeb" stroke="#d97706" stroke-width="1.2" stroke-dasharray="4 3"/>
+<text x="1849.0" y="990.0" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="400" fill="#78350f" text-anchor="start" xml:space="preserve">values-prod.yaml points DATABASE_URL at Postgres so several</text>
+<text x="1849.0" y="1005.2" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="400" fill="#78350f" text-anchor="start" xml:space="preserve">pods can share it, but prisma/schema.prisma is still SQLite:</text>
+<text x="1849.0" y="1020.4" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="400" fill="#78350f" text-anchor="start" xml:space="preserve">production needs the Prisma provider switched and a migration first.</text>
+<rect x="30.0" y="1115.8" width="2180.0" height="61.2" rx="10" fill="#ffffff" stroke="#d97706" stroke-width="1.6"/>
+<path d="M30.8,1150.2 L30.8,1126.1 Q30.8,1116.6 40.3,1116.6 L2199.7,1116.6 Q2209.2,1116.6 2209.2,1126.1 L2209.2,1150.2 Z" fill="#fef3c7" stroke="none" stroke-width="0"/>
+<line x1="30.0" y1="1150.2" x2="2210.0" y2="1150.2" stroke="#d97706" stroke-width="0.8" stroke-opacity="0.55"/>
+<text x="40.0" y="1138.6" font-family="Arial, Helvetica, sans-serif" font-size="13.5" font-weight="700" fill="#78350f" text-anchor="start" xml:space="preserve">Checks before a push — run them locally (the GitHub Actions CI workflow is paused)</text>
+<text x="40.0" y="1170.0" font-family="Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="10.5" font-weight="400" fill="#1e293b" text-anchor="start" xml:space="preserve">npm test   ·   npm run lint   ·   npm run typecheck   ·   npm run ml:test</text>
+<rect x="267.6" y="255.2" width="124.9" height="20.8" rx="5" fill="#ffffff" fill-opacity="0.97" stroke="#334155" stroke-opacity="0.35" stroke-width="0.8"/>
+<text x="330.0" y="269.9" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="700" fill="#334155" text-anchor="middle" xml:space="preserve">http://localhost:30005</text>
+<rect x="271.9" y="383.5" width="116.2" height="20.8" rx="5" fill="#ffffff" fill-opacity="0.97" stroke="#334155" stroke-opacity="0.35" stroke-width="0.8"/>
+<text x="330.0" y="398.2" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="700" fill="#334155" text-anchor="middle" xml:space="preserve">http://127.0.0.1:41xx</text>
+<rect x="235.1" y="589.2" width="85.9" height="20.8" rx="5" fill="#ffffff" fill-opacity="0.97" stroke="#7c3aed" stroke-opacity="0.35" stroke-width="0.8"/>
+<text x="278.0" y="603.8" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="700" fill="#7c3aed" text-anchor="middle" xml:space="preserve">127.0.0.1:8000</text>
+<rect x="413.8" y="712.4" width="97.4" height="20.8" rx="5" fill="#ffffff" fill-opacity="0.97" stroke="#7c3aed" stroke-opacity="0.35" stroke-width="0.8"/>
+<text x="462.5" y="727.0" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="700" fill="#7c3aed" text-anchor="middle" xml:space="preserve">loads at start-up</text>
+<rect x="60.2" y="706.5" width="137.0" height="34.5" rx="5" fill="#ffffff" fill-opacity="0.97" stroke="#c2410c" stroke-opacity="0.35" stroke-width="0.8"/>
+<text x="128.8" y="721.2" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="700" fill="#c2410c" text-anchor="middle" xml:space="preserve">Prisma — every Node</text>
+<text x="128.8" y="734.9" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="700" fill="#c2410c" text-anchor="middle" xml:space="preserve">service but financial-api</text>
+<rect x="807.8" y="240.4" width="94.5" height="20.8" rx="5" fill="#ffffff" fill-opacity="0.97" stroke="#334155" stroke-opacity="0.35" stroke-width="0.8"/>
+<text x="855.0" y="255.1" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="700" fill="#334155" text-anchor="middle" xml:space="preserve">localhost:30005</text>
+<rect x="1191.2" y="252.5" width="67.6" height="20.8" rx="5" fill="#ffffff" fill-opacity="0.97" stroke="#475569" stroke-opacity="0.35" stroke-width="0.8"/>
+<text x="1225.0" y="267.1" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="700" fill="#475569" text-anchor="middle" xml:space="preserve">web:30005</text>
+<rect x="893.2" y="409.5" width="121.1" height="20.8" rx="5" fill="#ffffff" fill-opacity="0.97" stroke="#334155" stroke-opacity="0.35" stroke-width="0.8"/>
+<text x="953.8" y="424.2" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="700" fill="#334155" text-anchor="middle" xml:space="preserve">http://&lt;service&gt;:41xx</text>
+<rect x="805.1" y="642.7" width="124.8" height="20.8" rx="5" fill="#ffffff" fill-opacity="0.97" stroke="#7c3aed" stroke-opacity="0.35" stroke-width="0.8"/>
+<text x="867.5" y="657.3" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="700" fill="#7c3aed" text-anchor="middle" xml:space="preserve">http://ml-service:8000</text>
+<rect x="1805.9" y="265.2" width="48.2" height="20.8" rx="5" fill="#ffffff" fill-opacity="0.97" stroke="#334155" stroke-opacity="0.35" stroke-width="0.8"/>
+<text x="1830.0" y="279.9" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="700" fill="#334155" text-anchor="middle" xml:space="preserve">HTTPS</text>
+<rect x="1769.4" y="496.1" width="121.1" height="20.8" rx="5" fill="#ffffff" fill-opacity="0.97" stroke="#334155" stroke-opacity="0.35" stroke-width="0.8"/>
+<text x="1830.0" y="510.7" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="700" fill="#334155" text-anchor="middle" xml:space="preserve">http://&lt;service&gt;:41xx</text>
+<rect x="1784.7" y="680.1" width="90.6" height="20.8" rx="5" fill="#ffffff" fill-opacity="0.97" stroke="#7c3aed" stroke-opacity="0.35" stroke-width="0.8"/>
+<text x="1830.0" y="694.7" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="700" fill="#7c3aed" text-anchor="middle" xml:space="preserve">the only way in</text>
+<rect x="46.0" y="1237.0" width="34.0" height="20.0" rx="5" fill="#dbeafe" stroke="#2563eb" stroke-width="1.4"/>
+<text x="90.0" y="1251.5" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#1e293b" text-anchor="start" xml:space="preserve">Browser / internet</text>
+<rect x="404.0" y="1237.0" width="34.0" height="20.0" rx="5" fill="#e0e7ff" stroke="#4f46e5" stroke-width="1.4"/>
+<text x="448.0" y="1251.5" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#1e293b" text-anchor="start" xml:space="preserve">Web app</text>
+<rect x="762.0" y="1237.0" width="34.0" height="20.0" rx="5" fill="#d1fae5" stroke="#059669" stroke-width="1.4"/>
+<text x="806.0" y="1251.5" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#1e293b" text-anchor="start" xml:space="preserve">Node.js service</text>
+<rect x="1120.0" y="1237.0" width="34.0" height="20.0" rx="5" fill="#ede9fe" stroke="#7c3aed" stroke-width="1.4"/>
+<text x="1164.0" y="1251.5" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#1e293b" text-anchor="start" xml:space="preserve">ML service and model files</text>
+<rect x="1478.0" y="1237.0" width="34.0" height="20.0" rx="5" fill="#ffedd5" stroke="#ea580c" stroke-width="1.4"/>
+<text x="1522.0" y="1251.5" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#1e293b" text-anchor="start" xml:space="preserve">Database or volume</text>
+<rect x="1836.0" y="1237.0" width="34.0" height="20.0" rx="5" fill="#e2e8f0" stroke="#475569" stroke-width="1.4" stroke-dasharray="7 4"/>
+<text x="1880.0" y="1251.5" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#1e293b" text-anchor="start" xml:space="preserve">Entry point / optional</text>
+<path d="M46.0,1277.0 L80.0,1277.0" stroke="#334155" stroke-width="1.8" marker-end="url(#ah-http)"/>
+<text x="90.0" y="1281.5" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#1e293b" text-anchor="start" xml:space="preserve">HTTP</text>
+<path d="M404.0,1277.0 L438.0,1277.0" stroke="#047857" stroke-width="1.8" marker-end="url(#ah-service)"/>
+<text x="448.0" y="1281.5" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#1e293b" text-anchor="start" xml:space="preserve">Service to service</text>
+<path d="M762.0,1277.0 L796.0,1277.0" stroke="#7c3aed" stroke-width="1.8" marker-end="url(#ah-ml)"/>
+<text x="806.0" y="1281.5" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#1e293b" text-anchor="start" xml:space="preserve">Call to the ML service</text>
+<path d="M1120.0,1277.0 L1154.0,1277.0" stroke="#c2410c" stroke-width="1.8" marker-end="url(#ah-data)"/>
+<text x="1164.0" y="1281.5" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#1e293b" text-anchor="start" xml:space="preserve">Database access</text>
+<path d="M1478.0,1277.0 L1512.0,1277.0" stroke="#475569" stroke-width="1.8" stroke-dasharray="6 4" marker-end="url(#ah-ext)"/>
+<text x="1522.0" y="1281.5" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#1e293b" text-anchor="start" xml:space="preserve">Optional path</text>
+<rect x="1836.0" y="1267.0" width="34.0" height="20.0" rx="4" fill="#fffbeb" stroke="#d97706" stroke-width="1.1" stroke-dasharray="4 3"/>
+<text x="1880.0" y="1281.5" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" fill="#1e293b" text-anchor="start" xml:space="preserve">Worth knowing</text>
+<text x="1120.0" y="1324.0" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="400" fill="#94a3b8" text-anchor="middle" xml:space="preserve">FinAware · Three Ways to Run It · drawn from the code · updated 29 September 2026</text>
+</svg>
