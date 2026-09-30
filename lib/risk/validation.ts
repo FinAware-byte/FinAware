@@ -14,7 +14,8 @@ export const CREDIT_SCORE_MIN = 300;
 export const CREDIT_SCORE_MAX = 850;
 
 export function clampCreditScore(score: number | null | undefined): number {
-  if (typeof score !== "number" || Number.isNaN(score)) return 600;
+  // No credit profile means no calculated score. Never invent a model input for a new user.
+  if (typeof score !== "number" || Number.isNaN(score) || score <= 0) return 0;
   return Math.min(CREDIT_SCORE_MAX, Math.max(CREDIT_SCORE_MIN, Math.round(score)));
 }
 
