@@ -59,6 +59,29 @@ export function isValidSouthAfricanId(value: string): boolean {
   return luhnCheck(value);
 }
 
+/**
+ * Resolve the date of birth encoded in a South African ID using the current date to choose the
+ * correct century, then return the person's completed age. This is used only to validate the
+ * age entered in the identity profile; the ID itself remains read-only in the form.
+ */
+export function expectedAgeFromSouthAfricanId(value: string, today = new Date()): number | null {
+  if (!/^[0-9]{13}$/.test(value)) return null;
+
+  const yy = Number(value.slice(0, 2));
+  const month = Number(value.slice(2, 4));
+  const day = Number(value.slice(4, 6));
+  const currentYear = today.getFullYear();
+  const candidateThisCentury = 2000 + yy;
+  const year = candidateThisCentury <= currentYear ? candidateThisCentury : 1900 + yy;
+  if (!validCalendarDate(year, month, day)) return null;
+
+  let age = currentYear - year;
+  const birthdayPassed =
+    today.getMonth() + 1 > month || (today.getMonth() + 1 === month && today.getDate() >= day);
+  if (!birthdayPassed) age -= 1;
+  return age;
+}
+
 export function isValidPassportForCountry(value: string, countryCode: PassportCountry): boolean {
   const normalized = value.trim().toUpperCase();
   const rule = passportCountryRules[countryCode];
