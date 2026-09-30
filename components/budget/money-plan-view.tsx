@@ -1,15 +1,12 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { CashflowForecast } from "@/components/budget/cashflow-forecast";
 import { GoalPlanner } from "@/components/budget/goal-planner";
 import { StatementImport } from "@/components/budget/statement-import";
 import { formatZAR } from "@/lib/format";
 import type { MoneyPlan, EssentialCategory, EssentialItem } from "@/lib/budget/plan";
 import { cn } from "@/lib/utils";
-
-// The money plan recalculates as the figures change, so the advice always describes the numbers
-// on screen rather than the ones last saved. Typing previews; only "Save" writes anything.
 
 type PlanResponse = MoneyPlan & { essentials: EssentialItem[]; savingsKnown: boolean };
 
@@ -47,20 +44,9 @@ function monthsLabel(months: number | null): string {
   return rest === 0 ? `${years} year${years === 1 ? "" : "s"}` : `${years} yr ${rest} mo`;
 }
 
-const fieldClass =
-  "glass-outline mt-1 w-full rounded-lg px-3 py-2 text-sm tabular-nums text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand-500";
-
 export function MoneyPlanView({ initialGoal = "" }: { initialGoal?: string }) {
   const [plan, setPlan] = useState<PlanResponse | null>(null);
-  const [amounts, setAmounts] = useState<Record<string, string>>({});
-  const [income, setIncome] = useState("");
-  const [savedIncome, setSavedIncome] = useState<number | null>(null);
-  const [saving, setSaving] = useState(false);
-  const [recalculating, setRecalculating] = useState(false);
-  const [dirty, setDirty] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [savedAt, setSavedAt] = useState<string | null>(null);
-  const latestPreview = useRef(0);
 
   useEffect(() => {
     let active = true;
@@ -69,9 +55,6 @@ export function MoneyPlanView({ initialGoal = "" }: { initialGoal?: string }) {
       .then((data: PlanResponse) => {
         if (!active) return;
         setPlan(data);
-        setAmounts(Object.fromEntries(data.essentials.map((item) => [item.category, String(item.amount)])));
-        setIncome(String(data.monthlyIncome));
-        setSavedIncome(data.monthlyIncome);
       })
       .catch(() => active && setError("Your money plan could not be loaded right now."));
     return () => {
@@ -79,171 +62,46 @@ export function MoneyPlanView({ initialGoal = "" }: { initialGoal?: string }) {
     };
   }, []);
 
-  const essentialsPayload = useCallback(
-    () =>
-      categories
-        .map((category) => ({ category: category.key, amount: Number(amounts[category.key] ?? 0) }))
-        .filter((item) => Number.isFinite(item.amount) && item.amount > 0),
-    [amounts]
-  );
-
-  // Debounced preview: one request when typing settles, and a slow reply can never overwrite a
-  // newer one.
-  useEffect(() => {
-    if (!dirty) return;
-    const requestId = ++latestPreview.current;
-    setRecalculating(true);
-
-    const timer = setTimeout(async () => {
-      try {
-        const trialIncome = Number(income);
-        const response = await fetch("/api/money-plan/preview", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            essentials: essentialsPayload(),
-            ...(Number.isFinite(trialIncome) && trialIncome > 0 ? { monthlyIncome: trialIncome } : {})
-          })
-        });
-        const data = await response.json();
-        if (requestId !== latestPreview.current) return;
-        if (!response.ok) {
-          setError(data.message ?? "Those figures could not be used.");
-          return;
-        }
-        setPlan(data as PlanResponse);
-        setError(null);
-      } catch {
-        if (requestId === latestPreview.current) setError("Those figures could not be used.");
-      } finally {
-        if (requestId === latestPreview.current) setRecalculating(false);
-      }
-    }, 400);
-
-    return () => clearTimeout(timer);
-  }, [amounts, income, dirty, essentialsPayload]);
-
-  async function save() {
-    setSaving(true);
-    setError(null);
-    try {
-      const response = await fetch("/api/money-plan", {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ essentials: essentialsPayload() })
-      });
-      const data = await response.json();
-      if (!response.ok) {
-        setError(data.message ?? "Those amounts could not be saved.");
-        return;
-      }
-      setPlan(data as PlanResponse);
-      setDirty(false);
-      setSavedAt(new Date().toLocaleTimeString("en-ZA", { hour: "2-digit", minute: "2-digit" }));
-    } catch {
-      setError("Those amounts could not be saved.");
-    } finally {
-      setSaving(false);
-    }
-  }
-
-  const enteredTotal = useMemo(
-    () => categories.reduce((sum, category) => sum + (Number(amounts[category.key]) || 0), 0),
-    [amounts]
-  );
-
   const allocated = plan ? plan.allocations.reduce((sum, item) => sum + item.amount, 0) : 0;
-  const trialIncome = Number(income);
-  const incomeChanged = savedIncome !== null && Number.isFinite(trialIncome) && trialIncome !== savedIncome;
 
   return (
     <div className="space-y-4">
       <section className="glass-panel rounded-2xl border border-white/60 p-6">
-        <h2 className="text-lg font-semibold text-slate-900">What do you have to pay every month?</h2>
-        <p className="mt-1 max-w-2xl text-sm text-slate-600">
-          Change any figure and the recommendation below updates as you type. Nothing is stored until you save.
-        </p>
-
-        <div className="mt-5 max-w-sm">
-          <label htmlFor="budget-income" className="text-sm font-medium text-slate-800">
-            Monthly income
-          </label>
-          <input
-            id="budget-income"
-            type="number"
-            inputMode="decimal"
-            min={0}
-            step={100}
-            value={income}
-            onChange={(event) => {
-              setIncome(event.target.value);
-              setDirty(true);
-            }}
-            className={fieldClass}
-            aria-describedby="budget-income-hint"
-          />
-          <p id="budget-income-hint" className="mt-1 text-xs text-slate-600">
-            {incomeChanged
-              ? `Trying ${formatZAR(trialIncome)} in place of the ${formatZAR(savedIncome ?? 0)} on your profile. This is not saved.`
-              : "What you take home each month"}
-          </p>
-        </div>
-
-        <StatementImport
-          plan={plan}
-          onApply={(essentials) => {
-            setAmounts(
-              Object.fromEntries(categories.map((category) => [category.key, essentials[category.key] > 0 ? String(essentials[category.key]) : ""]))
-            );
-            setDirty(true);
-          }}
-        />
-
-        <div className="mt-5 grid gap-3 sm:grid-cols-2">
-          {categories.map((category) => (
-            <div key={category.key}>
-              <label htmlFor={`budget-${category.key}`} className="text-sm font-medium text-slate-800">
-                {category.label}
-              </label>
-              <input
-                id={`budget-${category.key}`}
-                type="number"
-                inputMode="decimal"
-                min={0}
-                step={50}
-                value={amounts[category.key] ?? ""}
-                onChange={(event) => {
-                  setAmounts((current) => ({ ...current, [category.key]: event.target.value }));
-                  setDirty(true);
-                }}
-                placeholder="0"
-                className={fieldClass}
-                aria-describedby={`budget-${category.key}-hint`}
-              />
-              <p id={`budget-${category.key}-hint`} className="mt-1 text-xs text-slate-600">
-                {category.hint}
-              </p>
-            </div>
-          ))}
-        </div>
-
-        <div className="mt-5 flex flex-wrap items-center justify-between gap-3">
-          <p className="text-sm text-slate-700">
-            Essentials entered: <span className="font-semibold tabular-nums">{formatZAR(enteredTotal)}</span>
-            {recalculating && <span className="ml-2 text-xs text-slate-500">updating…</span>}
-          </p>
-          <div className="flex items-center gap-3">
-            {savedAt && !dirty && <span className="text-xs text-slate-500">Saved at {savedAt}</span>}
-            <button
-              type="button"
-              onClick={() => void save()}
-              disabled={saving || !dirty}
-              className="glass-button rounded-lg bg-slate-900 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-slate-700 disabled:opacity-50"
-            >
-              {saving ? "Saving…" : dirty ? "Save these figures" : "Saved"}
-            </button>
+        <div className="flex flex-wrap items-start justify-between gap-3">
+          <div>
+            <h2 className="text-lg font-semibold text-slate-900">Your monthly essentials</h2>
+            <p className="mt-1 max-w-2xl text-sm text-slate-600">
+              These figures are now maintained in your Financial Profile and are used by the Money Coach to build your plan.
+            </p>
           </div>
+          <a
+            href="/financial-profile"
+            className="rounded-lg bg-brand-600 px-4 py-2 text-sm font-semibold text-white hover:bg-brand-700"
+          >
+            Edit Financial Profile →
+          </a>
         </div>
+
+        {plan ? (
+          <div className="mt-5 grid gap-3 sm:grid-cols-2">
+            {categories.map((category) => {
+              const item = plan.essentials.find((entry) => entry.category === category.key);
+              return (
+                <div key={category.key} className="rounded-lg border border-slate-200 bg-white p-3">
+                  <div className="flex items-center justify-between gap-2">
+                    <span className="text-sm font-medium text-slate-700">{category.label}</span>
+                    <span className="text-sm font-semibold tabular-nums text-slate-900">
+                      {formatZAR(item?.amount ?? 0)}
+                    </span>
+                  </div>
+                  <p className="mt-1 text-xs text-slate-500">{category.hint}</p>
+                </div>
+              );
+            })}
+          </div>
+        ) : (
+          <p className="mt-4 text-sm text-slate-500">Loading your saved financial profile...</p>
+        )}
 
         {error && <p className="mt-3 text-sm text-rose-700">{error}</p>}
       </section>
