@@ -41,6 +41,13 @@ export async function assessFinancialRisk(userId: string, callJson: CallJson): P
   if (!profile || !features) {
     return fail(409, "PROFILE_REQUIRED", "Please complete your financial profile before requesting a risk assessment.");
   }
+  if (features.has_loan !== "Yes") {
+    return fail(
+      409,
+      "DEBT_DATA_REQUIRED",
+      "Please add your debts and liabilities before requesting a comprehensive Financial Risk Assessment."
+    );
+  }
 
   // 12–16. Send financial features → ML Prediction Service (preprocessing, features, prediction).
   const ml = await callJson("ml", "/predict", {
