@@ -41,10 +41,13 @@ export const authLoginSchema = z
   }));
 
 const identityMoney = z.preprocess(
-  (value) =>
-    typeof value === "string"
-      ? value.replace(/R/gi, "").replace(/[\s,]/g, "")
-      : value,
+  (value) => {
+    if (typeof value !== "string") return value;
+    const cleaned = value.replace(/R/gi, "").replace(/[\s,]/g, "");
+    if (cleaned === "") return undefined;
+    const numeric = Number(cleaned);
+    return Number.isFinite(numeric) ? numeric : value;
+  },
   z.number({
     required_error: "Monthly income is required",
     invalid_type_error: "Monthly income must be a valid number"
