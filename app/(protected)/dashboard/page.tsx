@@ -87,6 +87,47 @@ export default async function DashboardPage() {
   }
 
   const overview = result.payload as DashboardOverviewPayload;
+
+  // A new account has no real financial assessment yet. Do not turn neutral database
+  // placeholders into a fabricated dashboard (for example a 300 score or 18-year
+  // financial age from the projection helpers). The user must complete their profile
+  // and run an assessment before the dashboard displays financial metrics.
+  const hasRealFinancialData =
+    overview.user.fullName.trim().length > 0 &&
+    overview.user.monthlyIncome > 0 &&
+    overview.metrics.activeAccounts > 0 &&
+    overview.user.creditScore > 0;
+
+  if (!hasRealFinancialData) {
+    return (
+      <div className="mx-auto max-w-3xl space-y-6 py-8">
+        <Card>
+          <div className="space-y-3">
+            <span className="inline-flex rounded-full bg-amber-100 px-3 py-1 text-xs font-semibold text-amber-800">
+              Assessment not available yet
+            </span>
+            <h1 className="text-2xl font-semibold text-slate-900">Your FinAware dashboard is ready for your information.</h1>
+            <p className="text-sm leading-6 text-slate-600">
+              No financial figures have been generated for this account. Complete your identity and financial
+              information, add your real debt accounts if applicable, and then run the ML Financial Risk Assessment.
+              Your dashboard will use those recorded values rather than simulated data.
+            </p>
+            <div className="flex flex-wrap gap-3 pt-2">
+              <a href="/identity" className="rounded-lg bg-brand-600 px-4 py-2 text-sm font-semibold text-white hover:bg-brand-700">
+                Complete My Identity
+              </a>
+              <a href="/financial-profile" className="rounded-lg border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50">
+                Financial Profile
+              </a>
+              <a href="/risk-assessment" className="rounded-lg border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50">
+                Run Risk Assessment
+              </a>
+            </div>
+          </div>
+        </Card>
+      </div>
+    );
+  }
   const projection = overview.scoreProjection;
   const current3 = projection.currentDelta3 >= 0 ? `+${projection.currentDelta3}` : `${projection.currentDelta3}`;
   const current6 = projection.currentDelta6 >= 0 ? `+${projection.currentDelta6}` : `${projection.currentDelta6}`;
