@@ -59,6 +59,30 @@ export default async function RiskAssessmentPage() {
     );
   }
 
+  const financialProfile = profile.payload as FinancialProfileView;
+  const activeDebts = financialProfile.debts.filter((debt) => debt.status === "ACTIVE");
+  if (activeDebts.length === 0) {
+    return (
+      <div className="space-y-4">
+        {header}
+        <div className="rounded-xl border border-amber-200 bg-amber-50 p-6 shadow-card">
+          <h2 className="text-lg font-semibold text-amber-900">Add your debts before assessing risk</h2>
+          <p className="mt-2 text-sm text-amber-800">
+            FinAware needs your recorded debts and liabilities to calculate repayment pressure and produce a
+            comprehensive Financial Risk Assessment.
+          </p>
+          <Link
+            href="/debts"
+            className="mt-4 inline-block rounded-lg bg-brand-600 px-4 py-2 text-sm font-semibold text-white hover:bg-brand-700"
+          >
+            Add Debts &amp; Liabilities →
+          </Link>
+        </div>
+        <PaymentOutlook />
+      </div>
+    );
+  }
+
   const assessment = latest.status === 200 ? (latest.payload as { assessment: RiskAssessmentRecord | null }).assessment : null;
   const rows = history.status === 200 ? (history.payload as { history: RiskAssessmentSummary[] }).history : [];
 
