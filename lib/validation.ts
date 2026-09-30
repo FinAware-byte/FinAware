@@ -1,5 +1,4 @@
 import { z } from "zod";
-import { expectedAgeFromSouthAfricanId } from "@/lib/identification/rules";
 import {
   assistanceTypeValues,
   debtStatusValues,
@@ -70,12 +69,6 @@ export const identityUpdateSchema = z
       .int("Real age must be a whole number")
       .min(16, "Real age must be at least 16")
       .max(100, "Real age cannot be greater than 100")
-  })
-  .superRefine((value, context) => {
-    const sessionId = context.path;
-    void sessionId;
-    // The ID is not posted with the editable form, so the service performs the ID-age comparison
-    // after loading the user's immutable identifier.
   });
 // No creditScore: it is calculated from the accounts on record (lib/finance/credit-score),
 // so accepting one here would let the form overwrite the calculation.
