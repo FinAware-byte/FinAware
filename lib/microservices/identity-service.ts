@@ -2,6 +2,7 @@ import { z } from "zod";
 import { prisma } from "@/lib/db/prisma";
 import { getUserById, refreshCreditProfileTotals } from "@/lib/db/users";
 import type { EmploymentStatus, RiskStatus } from "@/lib/domain";
+import { expectedAgeFromSouthAfricanId } from "@/lib/identification/rules";
 import { hashPassword } from "@/lib/auth/password";
 import { identityUpdateSchema } from "@/lib/validation";
 
@@ -49,6 +50,20 @@ export async function updateIdentityProfile(userId: string, input: IdentityUpdat
   const parsedUserId = Number(userId);
   if (!Number.isInteger(parsedUserId) || parsedUserId <= 0) {
     throw new Error("Invalid user id");
+  }
+
+  const user = await prisma.users.findUnique({
+    where: { user_id: parsedUserId },
+    select: { id_number: true, document_type: true }
+  });
+  if (!user) throw new Error("User not found");
+
+  if (user.document_type === "SA_ID") {
+    const expectedAge = expectedAgeFromSouthAfricanId(user.id_number);
+    if (expectedAge === null) throw new Error("The South African ID number is invalid.");
+    if (input.realAge !== expectedAge) {
+      throw new Error(`Real age does not match the date of birth on your ID. Based on the ID, the age should be ${expectedAge}.`);
+    }
   }
 
   const { name, surname } = splitName(input.fullName);
