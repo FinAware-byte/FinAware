@@ -92,6 +92,7 @@ export type FinancialProfileView = {
   profile: FinancialProfile | null;
   // Values from the existing records used to prefill a new profile (read-only source).
   defaults: { monthlyIncome: number; creditScore: number };
+  essentials: Array<{ category: string; amount: number }>;
   debts: Array<{ creditorName: string; debtType: string; balance: number; interestRate: number; status: string }>;
   monthlyObligations: number;
 };
