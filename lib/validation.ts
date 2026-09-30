@@ -43,7 +43,7 @@ export const authLoginSchema = z
 const identityMoney = z.preprocess(
   (value) =>
     typeof value === "string"
-      ? value.replace(/R/gi, "").replace(/[\\s,]/g, "")
+      ? value.replace(/R/gi, "").replace(/[\s,]/g, "")
       : value,
   z.number({
     required_error: "Monthly income is required",
