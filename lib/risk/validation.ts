@@ -3,7 +3,23 @@ import { z } from "zod";
 // Why: z.coerce.number() turns "" into 0, which would let a blank field pass silently. Blank = required error.
 function amount(label: string, rules: (base: z.ZodNumber) => z.ZodNumber) {
   return z.preprocess(
-    (value) => (value === "" || value === null || value === undefined ? undefined : typeof value === "string" ? Number(value.replace(/R/gi, "").replace(/,/g, "").trim()) : value),
+    (value) => {
+      if (value === "" || value === null || value === undefined) return undefined;
+      if (typeof value === "number") return Number.isFinite(value) ? value : undefined;
+      if (typeof value !== "string") return value;
+
+      // Accept rand amounts entered or displayed as R35000, R35,000, 35000 or 35,000.
+      // The form may send either the raw value or the formatted display value.
+      const cleaned = value
+        .trim()
+        .replace(/^R\s*/i, "")
+        .replace(/[\s,]/g, "");
+
+      if (cleaned === "") return undefined;
+
+      const numeric = Number(cleaned);
+      return Number.isFinite(numeric) ? numeric : value;
+    },
     rules(z.number({ required_error: `${label} is required`, invalid_type_error: `${label} must be a number` }))
   );
 }
