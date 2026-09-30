@@ -84,9 +84,12 @@ async function refreshCreditProfileTotalsInternal(userId: number): Promise<void>
     0
   );
 
-  const creditScore = creditScoreFor({
-    monthlyIncome: user?.monthly_income ?? 0,
-    debts: allDebts.map((debt) => ({
+  const creditScore =
+    allDebts.length === 0
+      ? 0
+      : creditScoreFor({
+          monthlyIncome: user?.monthly_income ?? 0,
+          debts: allDebts.map((debt) => ({
       debtTypeStored: debt.debt_type,
       status: toDebtStatus(debt.status),
       balance: debt.balance,
@@ -100,7 +103,7 @@ async function refreshCreditProfileTotalsInternal(userId: number): Promise<void>
       missedPaymentsCount: debt.payment_history.filter((entry) => entry.missed).length,
       hasLegalJudgment: hasJudgment
     }))
-  });
+        });
 
   // Create the calculated credit profile when the user first records an account.
   // A new user must never receive a placeholder score simply because the Credit_Profile row is absent.
