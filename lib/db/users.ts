@@ -102,9 +102,17 @@ async function refreshCreditProfileTotalsInternal(userId: number): Promise<void>
     }))
   });
 
-  await prisma.creditProfile.updateMany({
+  // Create the calculated credit profile when the user first records an account.
+  // A new user must never receive a placeholder score simply because the Credit_Profile row is absent.
+  await prisma.creditProfile.upsert({
     where: { user_id: userId },
-    data: {
+    create: {
+      user_id: userId,
+      total_debt: Number(totalDebt.toFixed(2)),
+      monthly_obligations: Number(monthlyObligations.toFixed(2)),
+      credit_score: creditScore
+    },
+    update: {
       total_debt: Number(totalDebt.toFixed(2)),
       monthly_obligations: Number(monthlyObligations.toFixed(2)),
       credit_score: creditScore
