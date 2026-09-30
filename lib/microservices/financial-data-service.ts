@@ -2,6 +2,7 @@ import { prisma } from "@/lib/db/prisma";
 import { toDebtStatus } from "@/lib/domain";
 import { monthlyPaymentFor } from "@/lib/finance/repayment";
 import { clampCreditScore, type FinancialProfileInput } from "@/lib/risk/validation";
+import type { EssentialCategory, EssentialItem } from "@/lib/budget/plan";
 import type {
   FinancialProfile,
   FinancialProfileView,
@@ -52,7 +53,7 @@ export async function getFinancialProfileView(userId: string): Promise<Financial
 
   const user = await prisma.users.findUnique({
     where: { user_id: id },
-    include: { credit_profile: true, financial_profile: true, debts: { orderBy: { created_at: "desc" } } }
+    include: { credit_profile: true, financial_profile: true, budget_items: { orderBy: { category: "asc" } }, debts: { orderBy: { created_at: "desc" } } }
   });
   if (!user) return null;
 
@@ -60,9 +61,14 @@ export async function getFinancialProfileView(userId: string): Promise<Financial
     profile: user.financial_profile ? toProfile(user.financial_profile) : null,
     defaults: {
       monthlyIncome: user.monthly_income,
-      // The model was trained on 300–850; a score on record may go higher, so clamp for the model.
-      creditScore: clampCreditScore(user.credit_profile?.credit_score)
+      // A calculated credit score is meaningful only once the user has recorded debt/account
+      // information. A shell profile must not display a fabricated score.
+      creditScore: user.debts.length > 0 ? clampCreditScore(user.credit_profile?.credit_score) : 0
     },
+    essentials: user.budget_items.map((item) => ({
+      category: item.category as EssentialCategory,
+      amount: item.amount
+    })) as EssentialItem[],
     debts: user.debts.map((debt) => ({
       creditorName: debt.creditor_name,
       debtType: debt.debt_type,
@@ -90,7 +96,7 @@ export async function upsertFinancialProfile(userId: string, input: FinancialPro
     savings: input.savings,
     // Read from Credit_Profile, not from the request. The score is a consequence of how the
     // accounts are running, so the one the model scores on is the one the dashboard displays.
-    credit_score: clampCreditScore(user.credit_profile?.credit_score),
+    credit_score: user.debts.length > 0 ? clampCreditScore(user.credit_profile?.credit_score) : 0,
     financial_goal: input.financialGoal
   };
   const row = await prisma.financialProfile.upsert({
