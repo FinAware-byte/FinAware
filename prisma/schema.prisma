@@ -27,7 +27,6 @@ model Users {
   download_password_hash String?
   created_at             DateTime  @default(now())
   updated_at             DateTime  @updatedAt
-
   credit_profile    CreditProfile?
   debts             Debts[]
   legal_records     LegalRecords[]
@@ -35,7 +34,6 @@ model Users {
   wealth_assets     WealthAssets[]
   financial_profile FinancialProfile?
   budget_items      BudgetItem[]
-
   @@map("Users")
 }
 
@@ -48,9 +46,7 @@ model WealthAssets {
   ownership_percentage Float    @default(100)
   created_at           DateTime @default(now())
   updated_at           DateTime @updatedAt
-
   user Users @relation(fields: [user_id], references: [user_id], onDelete: Cascade)
-
   @@index([user_id])
   @@map("Wealth_Assets")
 }
@@ -61,26 +57,23 @@ model CreditProfile {
   credit_score        Int
   total_debt          Float
   monthly_obligations Float
-
   user Users @relation(fields: [user_id], references: [user_id], onDelete: Cascade)
-
   @@map("Credit_Profile")
 }
 
 model Debts {
-  debt_id       Int      @id @default(autoincrement())
-  user_id       Int
-  creditor_name String
-  debt_type     String
-  interest_rate Float
-  balance       Float
-  status        String
-  created_at    DateTime @default(now())
-  updated_at    DateTime @updatedAt
-
+  debt_id           Int      @id @default(autoincrement())
+  user_id           Int
+  creditor_name     String
+  debt_type         String
+  interest_rate     Float
+  balance           Float
+  monthly_repayment Float    @default(0)
+  status            String
+  created_at        DateTime @default(now())
+  updated_at        DateTime @updatedAt
   user            Users            @relation(fields: [user_id], references: [user_id], onDelete: Cascade)
   payment_history PaymentHistory[]
-
   @@index([user_id])
   @@map("Debts")
 }
@@ -91,9 +84,7 @@ model PaymentHistory {
   due_date   DateTime
   paid       Boolean
   missed     Boolean
-
   debt Debts @relation(fields: [debt_id], references: [debt_id], onDelete: Cascade)
-
   @@index([debt_id])
   @@map("Payment_History")
 }
@@ -103,9 +94,7 @@ model LegalRecords {
   user_id     Int
   record_type String
   description String
-
   user Users @relation(fields: [user_id], references: [user_id], onDelete: Cascade)
-
   @@index([user_id])
   @@map("Legal_Records")
 }
@@ -114,7 +103,6 @@ model AiRecommendations {
   recommendation_id   Int    @id @default(autoincrement())
   risk_level          String
   recommendation_text String
-
   @@map("AI_Recommendations")
 }
 
@@ -124,9 +112,7 @@ model ExpertRequests {
   advisor_type String
   message      String
   request_date DateTime
-
   user Users @relation(fields: [user_id], references: [user_id], onDelete: Cascade)
-
   @@index([user_id])
   @@map("Expert_Requests")
 }
@@ -135,13 +121,8 @@ model Providers {
   provider_id     Int    @id @default(autoincrement())
   provider_type   String @unique
   whatsapp_number String
-
   @@map("Providers")
 }
-
-// ---------------------------------------------------------------------------
-// ML Financial Risk Assessment (additive). Names follow the supplied UML class diagram.
-// ---------------------------------------------------------------------------
 
 model FinancialProfile {
   profile_id       String   @id @default(uuid())
@@ -153,10 +134,8 @@ model FinancialProfile {
   financial_goal   String?
   created_at       DateTime @default(now())
   updated_at       DateTime @updatedAt
-
   user             Users            @relation(fields: [user_id], references: [user_id], onDelete: Cascade)
   risk_assessments RiskAssessment[]
-
   @@map("Financial_Profile")
 }
 
@@ -174,16 +153,12 @@ model RiskAssessment {
   target_version      String
   target_status       String
   explanation_method  String
-  // Why: the exact model inputs and derived indicators are kept so every prediction can be traced and reproduced.
   input_snapshot_json String
   indicators_json     String
-  // Inputs outside the training data range or unknown categories (prediction less reliable).
   warnings_json       String   @default("[]")
-
   profile         FinancialProfile @relation(fields: [profile_id], references: [profile_id], onDelete: Cascade)
   drivers         RiskDriver[]
   recommendations Recommendation[]
-
   @@index([profile_id, prediction_date])
   @@map("Risk_Assessment")
 }
@@ -198,9 +173,7 @@ model RiskDriver {
   influence     String
   direction     String
   feature_value String
-
   assessment RiskAssessment @relation(fields: [assessment_id], references: [assessment_id], onDelete: Cascade)
-
   @@index([assessment_id])
   @@map("Risk_Driver")
 }
@@ -218,15 +191,11 @@ model Recommendation {
   trace_json          String
   rules_version       String
   created_date        DateTime @default(now())
-
   assessment RiskAssessment @relation(fields: [assessment_id], references: [assessment_id], onDelete: Cascade)
-
   @@index([assessment_id])
   @@map("Recommendation")
 }
 
-// Essential monthly expenses, entered by the user, used by the money plan (budget rules v1.0).
-// Additive: no existing table or column changes. One row per category per user.
 model BudgetItem {
   budget_item_id Int      @id @default(autoincrement())
   user_id        Int
@@ -234,9 +203,7 @@ model BudgetItem {
   amount         Float
   created_at     DateTime @default(now())
   updated_at     DateTime @updatedAt
-
   user Users @relation(fields: [user_id], references: [user_id], onDelete: Cascade)
-
   @@unique([user_id, category])
   @@index([user_id])
   @@map("Budget_Item")
