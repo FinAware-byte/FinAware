@@ -3,7 +3,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { CashflowForecast } from "@/components/budget/cashflow-forecast";
 import { GoalPlanner } from "@/components/budget/goal-planner";
-import { StatementImport } from "@/components/budget/statement-import";
 import { formatZAR } from "@/lib/format";
 import type { MoneyPlan, EssentialCategory, EssentialItem } from "@/lib/budget/plan";
 import { cn } from "@/lib/utils";
