@@ -3,7 +3,7 @@ import { z } from "zod";
 // Why: z.coerce.number() turns "" into 0, which would let a blank field pass silently. Blank = required error.
 function amount(label: string, rules: (base: z.ZodNumber) => z.ZodNumber) {
   return z.preprocess(
-    (value) => (value === "" || value === null || value === undefined ? undefined : typeof value === "string" ? Number(value) : value),
+    (value) => (value === "" || value === null || value === undefined ? undefined : typeof value === "string" ? Number(value.replace(/R/gi, "").replace(/,/g, "").trim()) : value),
     rules(z.number({ required_error: `${label} is required`, invalid_type_error: `${label} must be a number` }))
   );
 }
