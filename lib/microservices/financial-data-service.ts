@@ -86,7 +86,11 @@ export async function upsertFinancialProfile(userId: string, input: FinancialPro
   if (!id) return null;
   const user = await prisma.users.findUnique({
     where: { user_id: id },
-    select: { user_id: true, credit_profile: { select: { credit_score: true } } }
+    select: {
+      user_id: true,
+      credit_profile: { select: { credit_score: true } },
+      debts: { select: { debt_id: true } }
+    }
   });
   if (!user) return null;
 
