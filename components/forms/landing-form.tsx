@@ -159,7 +159,7 @@ export function LandingForm({
       <div className="rounded-xl border border-white/40 bg-white/58 px-3 py-2 text-xs text-slate-600">
         {isLogin
           ? "Sign in with your existing demo profile. Use Join Now if you need a new profile."
-          : "Joining creates a demo profile instantly and opens your financial dashboard."}
+          : "Joining creates your secure FinAware profile. You will enter your own financial information before an assessment is run."}
       </div>
 
       {error ? <p className="text-sm font-medium text-red-600">{error}</p> : null}
