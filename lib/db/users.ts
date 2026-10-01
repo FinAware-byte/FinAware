@@ -80,7 +80,9 @@ async function refreshCreditProfileTotalsInternal(userId: number): Promise<void>
   const totalDebt = activeDebts.reduce((sum, debt) => sum + debt.balance, 0);
   const monthlyObligations = activeDebts.reduce(
     (sum, debt) =>
-      sum + monthlyPaymentFor({ balance: debt.balance, interestRate: debt.interest_rate, debtType: debt.debt_type }),
+      sum + (debt.monthly_repayment > 0
+        ? debt.monthly_repayment
+        : monthlyPaymentFor({ balance: debt.balance, interestRate: debt.interest_rate, debtType: debt.debt_type })),
     0
   );
 
@@ -93,11 +95,14 @@ async function refreshCreditProfileTotalsInternal(userId: number): Promise<void>
       debtTypeStored: debt.debt_type,
       status: toDebtStatus(debt.status),
       balance: debt.balance,
-      monthlyObligation: monthlyPaymentFor({
-        balance: debt.balance,
-        interestRate: debt.interest_rate,
-        debtType: debt.debt_type
-      }),
+      monthlyObligation:
+        debt.monthly_repayment > 0
+          ? debt.monthly_repayment
+          : monthlyPaymentFor({
+              balance: debt.balance,
+              interestRate: debt.interest_rate,
+              debtType: debt.debt_type
+            }),
       paymentsMadeCount: debt.payment_history.filter((entry) => entry.paid).length,
       totalPaymentsCount: debt.payment_history.length,
       missedPaymentsCount: debt.payment_history.filter((entry) => entry.missed).length,
