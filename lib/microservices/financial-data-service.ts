@@ -118,17 +118,19 @@ const EMPLOYMENT_TO_DATASET: Record<string, string> = {
   UNEMPLOYED: "Unemployed"
 };
 
-// Why: Debts has no repayment column. The dashboard's "Monthly Obligations" and this share one
-// calculation (lib/finance/repayment), so the model and the interface never disagree. The stored
-// Credit_Profile.monthly_obligations can be stale, which is why it is recomputed here.
+// Why: use the user's recorded monthly repayment when available. Legacy debts with no recorded
+// repayment still fall back to the existing repayment estimate. This keeps the ML input aligned
+// with the debt information the user actually entered.
 function activeMonthlyRepayment(
-  debts: Array<{ balance: number; interest_rate: number; status: string; debt_type: string }>
+  debts: Array<{ balance: number; interest_rate: number; monthly_repayment: number; status: string; debt_type: string }>
 ): number {
   const total = debts
     .filter((debt) => toDebtStatus(debt.status) === "ACTIVE")
     .reduce(
       (sum, debt) =>
-        sum + monthlyPaymentFor({ balance: debt.balance, interestRate: debt.interest_rate, debtType: debt.debt_type }),
+        sum + (debt.monthly_repayment > 0
+          ? debt.monthly_repayment
+          : monthlyPaymentFor({ balance: debt.balance, interestRate: debt.interest_rate, debtType: debt.debt_type })),
       0
     );
   return Number(total.toFixed(2));
@@ -179,7 +181,7 @@ export async function getFinancialData(
       credit_score: clampCreditScore(user.credit_profile?.credit_score),
       has_loan: hasLoan ? "Yes" : "No",
       loan_amount_zar: hasLoan ? Number(totalBalance.toFixed(2)) : 0,
-      // Decision D-4: the same per-debt repayment estimate the dashboard shows ("Monthly Obligations").
+      // Use the actual monthly repayments entered by the user; only legacy zero-value rows are estimated.
       monthly_emi_zar: hasLoan ? activeMonthlyRepayment(activeDebts) : 0,
       loan_interest_rate_pct: Number(weightedRate.toFixed(2)),
       age: user.real_age,
