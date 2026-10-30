@@ -1,6 +1,6 @@
 import {
   ensureUserByIdentifier,
-  findUserByIdentifier,
+  findUserForAuthentication,
   getUserById,
   markUserAsFicaVerified
 } from "@/lib/db/users";
@@ -86,9 +86,9 @@ export async function loginOrCreateUser(input: {
       (value, index, arr) => arr.indexOf(value) === index
     );
     for (const candidate of candidates) {
-      const user = await findUserByIdentifier(candidate);
-      if (user && user.authPasswordHash && verifyPassword(parsed.password, user.authPasswordHash)) {
-        return toSessionResponse(user);
+      const record = await findUserForAuthentication(candidate);
+      if (record && record.authPasswordHash && verifyPassword(parsed.password, record.authPasswordHash)) {
+        return toSessionResponse(record.user);
       }
     }
     throw new AuthFlowError("Invalid ID/Passport or password.", 401);
