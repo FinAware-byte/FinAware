@@ -5,7 +5,8 @@ import {
   SESSION_COOKIE_NAME,
   buildFicaRequiredCookieOptions,
   buildFicaCookieOptions,
-  buildSessionCookieOptions
+  buildSessionCookieOptions,
+  createSessionCookieValue
 } from "@/lib/auth/session";
 import { callServiceJson } from "@/lib/microservices/proxy";
 
@@ -39,7 +40,7 @@ export async function POST(request: Request) {
   }
 
   const response = NextResponse.json(result.payload);
-  response.cookies.set(SESSION_COOKIE_NAME, payload.userId, buildSessionCookieOptions(60 * 60 * 24 * 7));
+  response.cookies.set(SESSION_COOKIE_NAME, createSessionCookieValue(payload.userId), buildSessionCookieOptions(60 * 60 * 24 * 7));
   response.cookies.set(
     FICA_VERIFIED_COOKIE_NAME,
     payload.isFicaVerified ? "1" : "0",
