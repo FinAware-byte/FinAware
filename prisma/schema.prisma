@@ -25,6 +25,7 @@ model Users {
   fica_verified_at       DateTime?
   fica_documents_json    String?
   download_password_hash String?
+  auth_password_hash    String?
   created_at             DateTime  @default(now())
   updated_at             DateTime  @updatedAt
   credit_profile    CreditProfile?
