@@ -56,6 +56,7 @@ export function LandingForm({
           idNumberOrPassport,
           documentType,
           passportCountry: documentType === "PASSPORT" ? passportCountry : null,
+          password: String(formData.get("password") ?? ""),
           authIntent: isLogin ? "login" : "join"
         })
       });
@@ -156,10 +157,28 @@ export function LandingForm({
         />
       </div>
 
+      <div>
+        <label className="block text-sm font-medium text-slate-700" htmlFor="password">
+          Password
+        </label>
+        <input
+          id="password"
+          name="password"
+          type="password"
+          autoComplete={isLogin ? "current-password" : "new-password"}
+          minLength={12}
+          maxLength={128}
+          required
+          className="mt-1 w-full rounded-xl border border-white/45 bg-white/75 px-3 py-2 text-sm text-slate-900 outline-none ring-brand-500 transition focus:ring-2"
+          placeholder="At least 12 characters"
+        />
+        <p className="mt-1 text-xs text-slate-500">Use at least 12 characters. Your password is stored as a one-way hash.</p>
+      </div>
+
       <div className="rounded-xl border border-white/40 bg-white/58 px-3 py-2 text-xs text-slate-600">
         {isLogin
-          ? "Sign in with your existing demo profile. Use Join Now if you need a new profile."
-          : "Joining creates your secure FinAware profile. You will enter your own financial information before an assessment is run."}
+          ? "Sign in with your ID or passport and your password."
+          : "Create your account with a password. You will complete verification and enter your financial information before an assessment is run."}
       </div>
 
       {error ? <p className="text-sm font-medium text-red-600">{error}</p> : null}

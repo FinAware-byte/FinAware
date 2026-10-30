@@ -34,6 +34,7 @@ function mapDbUserToAppUser(user: {
   fica_verified_at: Date | null;
   fica_documents_json: string | null;
   download_password_hash: string | null;
+  auth_password_hash: string | null;
   credit_profile: {
     credit_score: number;
     total_debt: number;
@@ -134,6 +135,22 @@ export async function refreshCreditProfileTotals(userId: string): Promise<void> 
   await refreshCreditProfileTotalsInternal(parsed);
 }
 
+export async function findUserForAuthentication(idNumberOrPassport: string): Promise<{
+  user: AppUser;
+  authPasswordHash: string | null;
+} | null> {
+  const row = await prisma.users.findUnique({
+    where: { id_number: idNumberOrPassport },
+    include: { credit_profile: true }
+  });
+
+  if (!row) return null;
+  return {
+    user: mapDbUserToAppUser(row),
+    authPasswordHash: row.auth_password_hash
+  };
+}
+
 export async function findUserByIdentifier(idNumberOrPassport: string): Promise<AppUser | null> {
   const row = await prisma.users.findUnique({
     where: { id_number: idNumberOrPassport },
@@ -148,6 +165,7 @@ type EnsureUserInput = {
   idNumberOrPassport: string;
   documentType: IdentificationType;
   passportCountry: PassportCountry | null;
+  authPasswordHash: string;
 };
 
 export async function ensureUserByIdentifier(input: EnsureUserInput): Promise<AppUser> {
@@ -174,7 +192,8 @@ export async function ensureUserByIdentifier(input: EnsureUserInput): Promise<Ap
       is_fica_verified: false,
       fica_verified_at: null,
       fica_documents_json: null,
-      download_password_hash: null
+      download_password_hash: null,
+      auth_password_hash: input.authPasswordHash
     },
     include: { credit_profile: true }
   });

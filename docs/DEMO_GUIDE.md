@@ -17,9 +17,9 @@ and documents here are **fictional demo data**.
    cd ~/Developer/finaware_main_project && npm run dev:stack
    ```
 
-3. Open <http://localhost:30005>. Signing in needs **only an SA ID or passport number** — there is no
-   password. Choose **South African ID**, type the number and press **Login** for the people below;
-   **Join Now** creates a new user (see "Demo sign-ups").
+3. Open <http://localhost:30005>. Choose **South African ID** or **Passport**, then enter the identifier
+   and password. Seeded fictional demo users use **FinAwareDemo!2026** by default (unless
+   `FINAWARE_DEMO_PASSWORD` was changed before seeding). **Join Now** creates a new user.
 
 ## Who to sign in as
 
@@ -57,13 +57,15 @@ The seed has 54 people in total; the other 42 work too but have no profile, plan
 
 ## Demo sign-ups
 
-**Join Now** (then **Get Started Now**) with an unused ID creates a new person whose whole profile is
-simulated from the number. The last three digits choose the risk band: **999** → high, **555** →
-medium, anything else → low. After joining, the FICA page appears: tick **"Use demo placeholder FICA
-documents"**, tick the consent box, and submit — no real documents are needed.
+**Join Now** with an unused, valid identifier and a password of at least 12 characters creates a new,
+initially blank account. The user must complete FICA verification and then provide their own identity
+and financial information; the sign-up flow does not invent a complete financial profile. The last
+three digits choose the risk band for this prototype simulation: **999** → high, **555** → medium,
+anything else → low. On the FICA page, use the demo placeholder option and accept both the terms and
+conditions and privacy consent — no real documents are needed for a local demo.
 
-The app currently accepts any number here (SA ID validation exists in the code but is not yet applied
-to sign-up), so use a realistic one like those below to keep the demo believable.
+South African ID numbers are validated for length, date of birth and check digit. Passport numbers are
+validated against the configured format for the selected country.
 
 These are valid and unused (checked 2026-09-29). Each creates the same person every time:
 
@@ -79,8 +81,8 @@ These are valid and unused (checked 2026-09-29). Each creates the same person ev
 Passports work too: choose *Passport*, then the country — e.g. Zimbabwe `FN204999` (high) or
 Botswana `RB1204555` (medium).
 
-Once an ID has joined it exists, so it signs in with **Login** afterwards; `npm run seed` removes
-joined users. (`9308084100088`, Lerato Ndlovu, was used to test this flow and already exists.)
+Once an ID has joined it exists, so it signs in with **Login** afterwards using the same
+password. Running `npm run seed` removes joined users and recreates the seeded demo accounts. (`9308084100088`, Lerato Ndlovu, was used to test this flow and already exists.)
 
 ## Bank statements and payslips
 

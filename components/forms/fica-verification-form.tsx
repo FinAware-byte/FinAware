@@ -108,15 +108,28 @@ export function FicaVerificationForm({ nextPath }: FicaVerificationFormProps) {
 
       <label className="flex items-start gap-3 rounded-xl border border-white/40 bg-white/70 p-3 text-sm text-slate-700">
         <input
-          id="consentAccepted"
-          name="consentAccepted"
+          id="termsAccepted"
+          name="termsAccepted"
           type="checkbox"
           className="mt-1 h-4 w-4 rounded border-slate-300"
           required
         />
         <span>
-          I consent to FinAware processing these demo FICA documents for verification and
-          simulation purposes.
+          I have read and agree to the FinAware terms and conditions governing use of this prototype.
+        </span>
+      </label>
+
+      <label className="flex items-start gap-3 rounded-xl border border-white/40 bg-white/70 p-3 text-sm text-slate-700">
+        <input
+          id="privacyAccepted"
+          name="privacyAccepted"
+          type="checkbox"
+          className="mt-1 h-4 w-4 rounded border-slate-300"
+          required
+        />
+        <span>
+          I acknowledge the privacy notice and consent to the processing of my personal information
+          for the stated verification and prototype purposes.
         </span>
       </label>
 

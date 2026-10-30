@@ -175,9 +175,14 @@ Without it, the page has a **Request risk assessment** button that does the same
 
 ## Logging in: what you need
 
-FinAware signs people in with **an ID number only — there are no passwords, emails or codes.** On the
-login page choose **South African ID** (or **Passport**, then the country), type the number into
-**Enter SA ID Number**, and press **Login**.
+FinAware signs users in with their **South African ID or passport number and password**. Choose
+**South African ID** (or **Passport**, then the country), enter the identifier and password, and
+press **Login**. South African IDs are checked for 13-digit format, a real date of birth and a valid
+check digit; passport numbers are checked against the selected country's configured format.
+
+Seeded fictional demo accounts use the local demo password **FinAwareDemo!2026** by default. You can
+override it by setting `FINAWARE_DEMO_PASSWORD` in `.env` before running `npm run seed`. Do not
+use the shared demo password for real accounts or production deployments.
 
 **Use these demo people** — each already has a full financial picture:
 
@@ -192,17 +197,17 @@ login page choose **South African ID** (or **Passport**, then the country), type
 Twelve demo people are ready to use; [docs/DEMO_GUIDE.md](docs/DEMO_GUIDE.md) lists them all, with what
 to show for each, a ten-minute demo, and matching bank statements and payslips to upload.
 
-**Creating a new account:** on the login page click **Join Now**, enter an ID number that hasn't been
-used, and press **Get Started Now**. FinAware invents a whole financial profile for that person. Then:
+**Creating a new account:** on the login page click **Join Now**, choose the document type, enter a
+valid ID/passport number and create a password of at least 12 characters. The account starts with a
+blank financial profile; the user must complete FICA verification and enter their own financial
+information before requesting an assessment.
 
-- **Use a realistic ID number.** FinAware currently accepts any number here, but a real-format South
-  African ID (13 digits, the first six a date of birth as YYMMDD, and a correct check digit) makes the
-  demo believable. These are valid and unused: `9506151200083`, `9107042105555`, `8709113408999`.
-- The **last three digits choose the situation**: `999` → high risk, `555` → medium risk, anything
-  else → low risk.
-- You'll be asked for FICA documents. Tick **"Use demo placeholder FICA documents"**, tick the consent
-  box, and submit — no real documents are needed.
-- Next time, sign in to that account on the login page with **Login** and the same number.
+- The **last three digits choose the demo risk band** for generated demo sign-ups: `999` → high,
+  `555` → medium, anything else → low. This is a prototype simulation rule, not an identity check.
+- You'll be asked for FICA documents. For a local demonstration, tick **"Use demo placeholder FICA
+  documents"**, accept both the terms and conditions and privacy consent, and submit — no real
+  documents are needed.
+- Next time, sign in with the same ID/passport number and the password created during registration.
 
 To switch person, press **Log out** (left sidebar, or top right on a phone).
 
