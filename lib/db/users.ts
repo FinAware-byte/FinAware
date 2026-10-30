@@ -65,8 +65,7 @@ function mapDbUserToAppUser(user: {
     isFicaVerified: user.is_fica_verified,
     ficaVerifiedAt: user.fica_verified_at,
     ficaDocumentsJson: user.fica_documents_json,
-    downloadPasswordHash: user.download_password_hash,
-    authPasswordHash: user.auth_password_hash
+    downloadPasswordHash: user.download_password_hash
   };
 }
 
@@ -134,6 +133,22 @@ export async function refreshCreditProfileTotals(userId: string): Promise<void> 
   const parsed = parseUserId(userId);
   if (!parsed) return;
   await refreshCreditProfileTotalsInternal(parsed);
+}
+
+export async function findUserForAuthentication(idNumberOrPassport: string): Promise<{
+  user: AppUser;
+  authPasswordHash: string | null;
+} | null> {
+  const row = await prisma.users.findUnique({
+    where: { id_number: idNumberOrPassport },
+    include: { credit_profile: true }
+  });
+
+  if (!row) return null;
+  return {
+    user: mapDbUserToAppUser(row),
+    authPasswordHash: row.auth_password_hash
+  };
 }
 
 export async function findUserByIdentifier(idNumberOrPassport: string): Promise<AppUser | null> {
