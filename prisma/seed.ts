@@ -1,10 +1,13 @@
+import "dotenv/config";
 import { PrismaClient } from "@prisma/client";
 import { calculateCreditScore, isJudgmentRecord } from "../lib/finance/credit-score";
 import { applyDemoProfiles } from "./demo/apply";
 import { monthlyPaymentFor } from "../lib/finance/repayment";
+import { hashPassword } from "../lib/auth/password";
 
 const prisma = new PrismaClient();
 const PROVIDER_WHATSAPP_NUMBER = "27670298265";
+const DEMO_ACCOUNT_PASSWORD = process.env.FINAWARE_DEMO_PASSWORD ?? (process.env.NODE_ENV === "production" ? "" : "FinAwareDemo!2026");
 
 type RiskLevel = "High" | "Medium" | "Low";
 type DebtStatus = "Active" | "Re-considered" | "Garnished";
@@ -1475,6 +1478,7 @@ async function seedUsersAndRelations() {
     const user = await prisma.users.create({
       data: {
         id_number: idNumber,
+        auth_password_hash: hashPassword(DEMO_ACCOUNT_PASSWORD),
         name: scenario.name,
         surname: scenario.surname,
         employment_status: scenario.employmentStatus,
@@ -1698,6 +1702,9 @@ async function seedUsersAndRelations() {
 }
 
 async function main() {
+  if (!DEMO_ACCOUNT_PASSWORD) {
+    throw new Error("Set FINAWARE_DEMO_PASSWORD before seeding demo users in production.");
+  }
   await clearDemoData();
   await seedProviders();
   await seedAiRecommendations();
