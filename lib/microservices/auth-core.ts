@@ -94,6 +94,11 @@ export async function loginOrCreateUser(input: {
     throw new AuthFlowError("Invalid ID/Passport or password.", 401);
   }
 
+  const existing = await findUserForAuthentication(parsed.idNumberOrPassport);
+  if (existing) {
+    throw new AuthFlowError("An account already exists for this ID/Passport. Please sign in instead.", 409);
+  }
+
   const user = await ensureUserByIdentifier({
     idNumberOrPassport: parsed.idNumberOrPassport,
     documentType: parsed.documentType,
