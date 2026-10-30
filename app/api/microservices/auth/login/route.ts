@@ -14,6 +14,7 @@ export async function POST(request: Request) {
     idNumberOrPassport?: string;
     documentType?: "SA_ID" | "PASSPORT";
     passportCountry?: string | null;
+    password?: string;
     authIntent?: "join" | "login";
   };
   const authIntent = body.authIntent === "login" ? "login" : "join";
@@ -23,6 +24,7 @@ export async function POST(request: Request) {
       idNumberOrPassport: body.idNumberOrPassport,
       documentType: body.documentType,
       passportCountry: body.passportCountry,
+      password: body.password,
       authIntent
     })
   });
