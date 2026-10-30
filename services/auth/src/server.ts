@@ -16,6 +16,7 @@ app.post("/auth/login", async (request, response) => {
     idNumberOrPassport?: string;
     documentType?: "SA_ID" | "PASSPORT";
     passportCountry?: string | null;
+    password?: string;
     authIntent?: "join" | "login";
   };
 
@@ -24,6 +25,7 @@ app.post("/auth/login", async (request, response) => {
       idNumberOrPassport: String(body.idNumberOrPassport ?? ""),
       documentType: body.documentType,
       passportCountry: body.passportCountry,
+      password: body.password,
       authIntent: body.authIntent
     });
     response.json(session);
