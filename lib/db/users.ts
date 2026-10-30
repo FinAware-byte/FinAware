@@ -34,6 +34,7 @@ function mapDbUserToAppUser(user: {
   fica_verified_at: Date | null;
   fica_documents_json: string | null;
   download_password_hash: string | null;
+  auth_password_hash: string | null;
   credit_profile: {
     credit_score: number;
     total_debt: number;
@@ -64,7 +65,8 @@ function mapDbUserToAppUser(user: {
     isFicaVerified: user.is_fica_verified,
     ficaVerifiedAt: user.fica_verified_at,
     ficaDocumentsJson: user.fica_documents_json,
-    downloadPasswordHash: user.download_password_hash
+    downloadPasswordHash: user.download_password_hash,
+    authPasswordHash: user.auth_password_hash
   };
 }
 
@@ -148,6 +150,7 @@ type EnsureUserInput = {
   idNumberOrPassport: string;
   documentType: IdentificationType;
   passportCountry: PassportCountry | null;
+  authPasswordHash: string;
 };
 
 export async function ensureUserByIdentifier(input: EnsureUserInput): Promise<AppUser> {
@@ -174,7 +177,8 @@ export async function ensureUserByIdentifier(input: EnsureUserInput): Promise<Ap
       is_fica_verified: false,
       fica_verified_at: null,
       fica_documents_json: null,
-      download_password_hash: null
+      download_password_hash: null,
+      auth_password_hash: input.authPasswordHash
     },
     include: { credit_profile: true }
   });
