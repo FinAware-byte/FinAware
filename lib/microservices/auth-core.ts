@@ -7,6 +7,7 @@ import {
 import { authLoginSchema, ficaVerificationSchema } from "@/lib/validation";
 import type { PassportCountry, RiskStatus } from "@/lib/domain";
 import { z } from "zod";
+import { hashPassword, verifyPassword } from "@/lib/auth/password";
 
 export type FicaFileMeta = {
   fileName: string;
@@ -15,7 +16,8 @@ export type FicaFileMeta = {
 };
 
 export type FicaVerificationInput = {
-  consentAccepted: boolean;
+  termsAccepted: boolean;
+  privacyAccepted: boolean;
   useDemoPlaceholder?: boolean;
   identityDocument: FicaFileMeta;
   proofOfAddress: FicaFileMeta;
@@ -68,31 +70,36 @@ export async function loginOrCreateUser(input: {
   idNumberOrPassport: string;
   documentType?: "SA_ID" | "PASSPORT";
   passportCountry?: string | null;
+  password?: string;
   authIntent?: AuthIntent;
 }): Promise<AuthSessionResponse> {
+  const parsed = authLoginSchema.parse({
+    idNumberOrPassport: input.idNumberOrPassport,
+    documentType: input.documentType,
+    passportCountry: input.passportCountry,
+    password: input.password
+  });
   const authIntent = input.authIntent === "login" ? "login" : "join";
 
   if (authIntent === "login") {
-    const identifier = String(input.idNumberOrPassport ?? "").trim();
-    if (!identifier) {
-      throw new AuthFlowError("ID/Passport is required.", 400);
-    }
-
-    const candidates = [identifier, identifier.toUpperCase()].filter(
+    const candidates = [parsed.idNumberOrPassport, parsed.idNumberOrPassport.toUpperCase()].filter(
       (value, index, arr) => arr.indexOf(value) === index
     );
     for (const candidate of candidates) {
       const user = await findUserByIdentifier(candidate);
-      if (user) {
+      if (user && user.authPasswordHash && verifyPassword(parsed.password, user.authPasswordHash)) {
         return toSessionResponse(user);
       }
     }
-
-    throw new AuthFlowError("No account found for this ID/Passport. Use Join Now to create one.", 404);
+    throw new AuthFlowError("Invalid ID/Passport or password.", 401);
   }
 
-  const parsed = authLoginSchema.parse(input);
-  const user = await ensureUserByIdentifier(parsed);
+  const user = await ensureUserByIdentifier({
+    idNumberOrPassport: parsed.idNumberOrPassport,
+    documentType: parsed.documentType,
+    passportCountry: parsed.passportCountry,
+    authPasswordHash: hashPassword(parsed.password)
+  });
   return toSessionResponse(user);
 }
 
