@@ -57,7 +57,8 @@ app.get("/auth/users/:userId", async (request, response) => {
 app.post("/auth/fica/verify", async (request, response) => {
   const body = (request.body ?? {}) as {
     userId?: string;
-    consentAccepted?: boolean;
+    termsAccepted?: boolean;
+    privacyAccepted?: boolean;
     useDemoPlaceholder?: boolean;
     identityDocument?: { fileName?: string; mimeType?: string; sizeBytes?: number };
     proofOfAddress?: { fileName?: string; mimeType?: string; sizeBytes?: number };
@@ -67,7 +68,8 @@ app.post("/auth/fica/verify", async (request, response) => {
   try {
     const userId = String(body.userId ?? "");
     const session = await verifyFicaForUser(userId, {
-      consentAccepted: Boolean(body.consentAccepted),
+      termsAccepted: Boolean(body.termsAccepted),
+      privacyAccepted: Boolean(body.privacyAccepted),
       useDemoPlaceholder: Boolean(body.useDemoPlaceholder),
       identityDocument: {
         fileName: String(body.identityDocument?.fileName ?? ""),
