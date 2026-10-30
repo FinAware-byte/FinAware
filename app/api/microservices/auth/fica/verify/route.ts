@@ -70,7 +70,8 @@ export async function POST(request: Request) {
   const bankStatement = useDemoPlaceholder
     ? null
     : parseFileEntry(formData.get("bankStatement"));
-  const consentAccepted = String(formData.get("consentAccepted") ?? "") === "on";
+  const termsAccepted = String(formData.get("termsAccepted") ?? "") === "on";
+  const privacyAccepted = String(formData.get("privacyAccepted") ?? "") === "on";
 
   if (!useDemoPlaceholder) {
     const identityError = validateFile(identityDocument, "Identity document");
@@ -91,9 +92,9 @@ export async function POST(request: Request) {
     }
   }
 
-  if (!consentAccepted) {
+  if (!termsAccepted || !privacyAccepted) {
     return NextResponse.json(
-      { message: "You must provide consent to complete FICA verification." },
+      { message: "You must accept both the terms and conditions and the privacy consent to complete verification." },
       { status: 400 }
     );
   }
@@ -102,7 +103,8 @@ export async function POST(request: Request) {
     method: "POST",
     body: JSON.stringify({
       userId: sessionUserId,
-      consentAccepted,
+      termsAccepted,
+      privacyAccepted,
       useDemoPlaceholder,
       identityDocument,
       proofOfAddress,
