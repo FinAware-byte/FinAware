@@ -2,6 +2,7 @@ import { PDFDocument, StandardFonts, degrees, rgb } from "pdf-lib";
 import { verifyPassword } from "@/lib/auth/password";
 import { listDebtsForUser } from "@/lib/db/debts";
 import { getUserById } from "@/lib/db/users";
+import { getLatestAssessment } from "@/lib/microservices/financial-data-service";
 import { formatDate, formatZAR } from "@/lib/format";
 
 async function createOverviewPdf(input: {
@@ -80,7 +81,10 @@ export async function generateOverviewPdfForUser(input: {
     return { ok: false, status: 403, message: "Password is incorrect." };
   }
 
-  const debts = await listDebtsForUser(input.userId);
+  const [debts, latestAssessment] = await Promise.all([
+    listDebtsForUser(input.userId),
+    getLatestAssessment(input.userId)
+  ]);
   const activeDebts = debts.filter((debt) => debt.status === "ACTIVE");
   const totalDebt = activeDebts.reduce((sum, debt) => sum + debt.balance, 0);
   const monthlyObligation = activeDebts.reduce((sum, debt) => sum + debt.monthlyObligation, 0);
@@ -88,7 +92,8 @@ export async function generateOverviewPdfForUser(input: {
   const bytes = await createOverviewPdf({
     fullName: user.fullName,
     idNumberOrPassport: user.idNumberOrPassport,
-    riskStatus: user.riskStatus,
+    // The Users.risk_level column is a legacy onboarding default; the latest ML assessment is authoritative.
+    riskStatus: latestAssessment?.riskLevel.toUpperCase() ?? user.riskStatus,
     creditScore: user.creditScore,
     monthlyIncome: user.monthlyIncome,
     totalDebt,

@@ -2,6 +2,7 @@ import { calculateDashboardMetrics, getFinancialAgeDetails, getRiskFactors } fro
 import { buildScoreProjection, type ScoreProjection } from "@/lib/dashboard/score-projection";
 import { listDebtsForUser } from "@/lib/db/debts";
 import { getUserById } from "@/lib/db/users";
+import { getLatestAssessment } from "@/lib/microservices/financial-data-service";
 import type { RiskStatus } from "@/lib/domain";
 
 export type DashboardOverview = {
@@ -38,13 +39,18 @@ export async function getDashboardOverview(userId: string): Promise<DashboardOve
   const user = await getUserById(userId);
   if (!user) return null;
 
-  const debts = await listDebtsForUser(userId);
+  const [debts, latestAssessment] = await Promise.all([
+    listDebtsForUser(userId),
+    getLatestAssessment(userId)
+  ]);
+  // The latest saved ML assessment is authoritative; Users.risk_level may still contain its LOW signup default.
+  const riskStatus = (latestAssessment?.riskLevel.toUpperCase() ?? user.riskStatus) as RiskStatus;
   const metrics = calculateDashboardMetrics(debts);
   const financialAge = getFinancialAgeDetails(user, debts);
-  const riskFactors = getRiskFactors(user.riskStatus, debts);
+  const riskFactors = getRiskFactors(riskStatus, debts);
   const scoreProjection = buildScoreProjection({
     creditScore: user.creditScore,
-    riskStatus: user.riskStatus,
+    riskStatus,
     monthlyIncome: user.monthlyIncome,
     debts
   });
@@ -61,7 +67,7 @@ export async function getDashboardOverview(userId: string): Promise<DashboardOve
       id: user.id,
       fullName: user.fullName,
       creditScore: user.creditScore,
-      riskStatus: user.riskStatus,
+      riskStatus,
       monthlyIncome: user.monthlyIncome
     },
     metrics: {
